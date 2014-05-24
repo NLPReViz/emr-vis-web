@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "description": "A starter project for AngularJS",
-  "repository": "https://github.com/angular/angular-seed",
+  "repository": "https://github.com/trivedigaurav/emr-vis-web",
   "license": "MIT",
   "devDependencies": {
     "karma": "~0.10",
