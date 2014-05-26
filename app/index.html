@@ -188,31 +188,29 @@
           </div>
         </div>
         <div class="main">
-          <h1 class="page-header">Dashboard</h1>
+          <!-- <h1 class="page-header">Dashboard</h1>   -->
 
-          <div class="row placeholders">
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img  class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img  class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
+          <div ng-controller="TabsDemoCtrl">
+
+            <tabset>
+              <tab heading="Document View">
+                <h4>Document Title</h4>
+                <p>Static content</p>
+              </tab>
+              <tab ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active" disabled="tab.disabled">
+                {{tab.content}}
+              </tab>
+              <tab select="alertMe()">
+                <tab-heading>
+                  <i class="glyphicon glyphicon-bell"></i> Alert!
+                </tab-heading>
+                I've got an HTML heading, and a select callback. Pretty cool!
+              </tab>
+            </tabset>
+
           </div>
-        </div>
+
+
       </div>
     </div>
 
