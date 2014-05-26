@@ -3,12 +3,12 @@
 /* Controllers */
 
 angular.module('myApp.controllers', [])
-  .controller('MyCtrl1', ['$scope', function($scope) {
+  // .controller('MyCtrl1', ['$scope', function($scope) {
 
-  }])
-  .controller('MyCtrl2', ['$scope', function($scope) {
+  // }])
+  // .controller('MyCtrl2', ['$scope', function($scope) {
 
-  }])
+  // }])
   .controller('TabsDemoCtrl', ['$scope', function($scope) {
       $scope.tabs = [
         { title:'Dynamic Title 1', content:'Dynamic content 1' },

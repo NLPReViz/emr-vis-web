@@ -87,3 +87,7 @@ th.rotate {
   border-bottom: 1px solid #ccc;
   padding: 5px 10px;
 }
+
+.navbar-form .form-control{
+  margin-right: 10px;
+}
