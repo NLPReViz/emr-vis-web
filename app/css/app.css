@@ -83,17 +83,27 @@ body {
     color: #888;
 }
 
-/*#sidebar-separator {
-    top: 4px;
+#sidebar-separator {
+    top: 0;
     height: 8px;
     width: 560px;
-    position:absolute;
-    background-color: black;
+    position:relative;
     cursor: row-resize;
-}*/
+    z-index: 1020;
+}
+
+#sidebar-separator .handle{
+    position:relative;
+    top: 0px;
+    left: 290px;
+    width: 20px;
+    margin: 3px;
+    height: 5px;
+    background-color: #888;
+    border-radius: 2px;
+}
 
 #sidebar-bottom {
-    margin-top: 8px;
     height: 42%;
 }
 
