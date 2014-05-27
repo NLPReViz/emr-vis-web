@@ -258,7 +258,8 @@ body {
     text-align: center;
     font-size: 8pt;
     cursor: pointer;
-    padding: 4px;
+    padding-top: 4px;
+    padding-bottom: 4px;
 }
 
 #sidebar-top .positive {
