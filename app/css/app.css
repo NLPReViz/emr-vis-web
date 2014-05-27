@@ -168,6 +168,8 @@ body {
     cursor: help;
 }
 
+
+
 table#grid-view .rotate {
     white-space: nowrap;
     overflow: hidden;
@@ -179,7 +181,7 @@ table#grid-view .rotate > div {
     -ms-transform: rotate(-90deg);
     -o-transform: rotate(-90deg);
     filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
-    width: 18px;
+    width: 19px;
 }
 
 
@@ -204,7 +206,7 @@ table#grid-view  .negative{
 }
 
 table#grid-view tbody td:first-of-type{
-    font-size: 8.5pt;
+    font-size: 7.5pt;
 }
 
 table#grid-view tr:hover td:first-of-type{
