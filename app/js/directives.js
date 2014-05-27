@@ -28,16 +28,11 @@ angular.module('myApp.directives', []).
         y = event.pageY - startY;
         startY = event.pageY;
 
-        console.log("y: " + y); 
-
         //revise height for prev div
         var topHeight = $(element).prev().height() + y;
 
         //revised height for next div 
         var bottomHeight = $(element).next().height() - y; 
-
-        console.log("prevOldH: " + $(element).prev().height());
-        console.log("nextOldH: " + $(element).next().height());
 
         if(topHeight > topMin && bottomHeight > bottomMin){
             $(element).prev().height(topHeight); 
