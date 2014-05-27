@@ -173,72 +173,6 @@ body {
  */
 
 /* Data grid */
-
-
-
-
-table#grid-view .rotate {
-    white-space: nowrap;
-    overflow: hidden;
-}
-
-table#grid-view .rotate > div {
-    -webkit-transform: rotate(-90deg);
-    -moz-transform: rotate(-90deg);
-    -ms-transform: rotate(-90deg);
-    -o-transform: rotate(-90deg);
-    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
-    width: 19px;
-}
-
-
-table#grid-view td, table th {
-    border: 1px solid #ccc;
-}
-
-table#grid-view td {
-    text-align: center;
-    font-size: 7pt;
-    cursor: pointer;
-}
-
-table#grid-view  .positive {
-    background-color: #DFF0D8;
-    color: #468847;
-}
-
-table#grid-view  .negative {
-    background-color: #F9F2F4;
-    color: #C7254E;
-}
-
-table#grid-view tbody td:first-of-type {
-    font-size: 7.5pt;
-    cursor: default;
-}
-
-table#grid-view tr:hover td:first-of-type {
-    background-color: #eee;
-}
-
-table#grid-view .positive:hover {
-    background-color: #468847;
-    color: #DFF0D8;
-}
-
-table#grid-view .negative:hover {
-    background-color: #C7254E;
-    color: #F9F2F4;
-}
-
-table#grid-view thead {
-    /*TODO: Make header fixed;*/
-    /*position:fixed;
-    top: 200px;*/
-    background-color: white;
-    height: 130px;
-}
-
 #sidebar-top #expandtable, #sidebar-top #tablecontainer 
 {
     height:100%;
@@ -305,42 +239,48 @@ table#grid-view thead {
 #sidebar-top .divcell { float:left; border: 1px solid #ccc; /*box-sizing: border-box; height: 100%;*/}
 #sidebar-top #topbar  { height: 80px; overflow: hidden; display: block;}
 
-#sidebar-top .colname { float:left; border: 1px solid #e5e5e5; height: 100%;}
+#sidebar-top .colname { 
+    float:left; 
+    border: 1px solid #e5e5e5; 
+    height: 100%;
+    font-weight: bold;
+}
 
-#sidebar-top .cellwidth_id { width: 9%; background-color: white;}
+#sidebar-top .cellwidth_id { 
+    width: 9%; 
+    background-color: white; 
+    cursor: default!important; 
+}
+
 #sidebar-top .cellwidth_var { width: 6.5%; }
 
-/*table#grid-view td {
+#sidebar-top .divcell {
     text-align: center;
-    font-size: 7pt;
+    font-size: 8pt;
     cursor: pointer;
+    padding: 4px;
 }
-*/
-#sidebar .positive {
+
+#sidebar-top .positive {
     background-color: #DFF0D8;
     color: #468847;
 }
 
-#sidebar .negative {
+#sidebar-top .negative {
     background-color: #F9F2F4;
     color: #C7254E;
 }
 
-/*#sidebar tbody td:first-of-type {
-    font-size: 7.5pt;
-    cursor: default;
-}
-
-#sidebar tr:hover td:first-of-type {
-    background-color: #eee;
-}*/
-
-#sidebar .positive:hover {
+#sidebar-top .positive:hover {
     background-color: #468847;
     color: #DFF0D8;
 }
 
-#sidebar .negative:hover {
+#sidebar-top .negative:hover {
     background-color: #C7254E;
     color: #F9F2F4;
+}
+
+#sidebar-top .divrow:hover .divcell:first-of-type{
+    background-color: #eee;
 }
