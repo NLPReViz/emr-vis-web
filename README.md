@@ -19,7 +19,7 @@ its package manager (npm) installed.  You can get them from [http://nodejs.org/]
 Clone the emr-vis-web repository using [git][git]:
 
 ```
-git clone https://github.com/angular/emr-vis-web.git
+git clone https://github.com/trivedigaurav/emr-vis-web.git
 cd emr-vis-web
 ```
 
