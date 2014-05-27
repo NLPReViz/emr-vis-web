@@ -14,6 +14,17 @@
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
   <link rel="stylesheet" href="css/app.css"/>
+
+  <script type="text/javascript">
+     // jQuery(document).ready(function() {
+     //    $("#MySplitter").splitter({
+     //      type: "h", 
+     //      sizeTop: true,  /* use height set in stylesheet */
+     //      accessKey: "P"
+     //    });
+     //  });
+  </script>
+
   <script src="bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
 </head>
 
@@ -59,7 +70,7 @@
 
   <div class="container-fluid">
       <div class="row">
-        <div class="sidebar">
+        <div class="sidebar" id="MySplitter">
 
           <div id="sidebar-top">
             <div class="table-responsive">
@@ -1786,9 +1797,7 @@
               </table>
             </div>
           </div>  
-
-          <div class="vertical-seperator"></div>
-
+          <!-- <div id="sidebar-separator" horizontal-splitter></div> -->
           <div id="sidebar-bottom">
             
             <div id="sidebar-bottom-left">
@@ -1816,7 +1825,7 @@
               </tab>
               <tab>
                 <tab-heading>
-                  Feedback Review &nbsp;<span class="badge alert-info pull-right"> {{numFeedback}} </span>
+                  Feedback Review &nbsp;<span ng-if="numFeedback > 0" class="badge alert-info pull-right"> {{numFeedback}} </span>
                 </tab-heading>
                 <h4>Feedback List</h4>
 
@@ -1846,7 +1855,7 @@
   <script src="js/controllers.js"></script>
   <script src="js/filters.js"></script>
   <script src="js/directives.js"></script>
+  <script src="js/jquery-modules.js"></script>
   <script src="js/jquery-routines.js"></script>
-
 </body>
 </html>
