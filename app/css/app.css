@@ -63,7 +63,8 @@ body {
     content: "Grid View";
     font-size: 12px;
     height: 50%;
-    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 .about {
@@ -83,7 +84,7 @@ body {
     color: #888;
 }
 
-#sidebar-separator {
+.sidebar-separator {
     top: 0;
     height: 8px;
     width: 560px;
@@ -92,7 +93,7 @@ body {
     z-index: 1020;
 }
 
-#sidebar-separator .handle{
+.sidebar-separator .handle{
     position:relative;
     top: 0px;
     left: 290px;
@@ -215,36 +216,36 @@ table#grid-view td {
     cursor: pointer;
 }
 
-table#grid-view  .positive{
+table#grid-view  .positive {
     background-color: #DFF0D8;
     color: #468847;
 }
 
-table#grid-view  .negative{
+table#grid-view  .negative {
     background-color: #F9F2F4;
     color: #C7254E;
 }
 
-table#grid-view tbody td:first-of-type{
+table#grid-view tbody td:first-of-type {
     font-size: 7.5pt;
     cursor: default;
 }
 
-table#grid-view tr:hover td:first-of-type{
+table#grid-view tr:hover td:first-of-type {
     background-color: #eee;
 }
 
-table#grid-view .positive:hover{
+table#grid-view .positive:hover {
     background-color: #468847;
     color: #DFF0D8;
 }
 
-table#grid-view .negative:hover{
+table#grid-view .negative:hover {
     background-color: #C7254E;
     color: #F9F2F4;
 }
 
-table#grid-view thead tr{
+table#grid-view thead {
     /*TODO: Make header fixed;*/
     /*position:fixed;
     top: 200px;*/

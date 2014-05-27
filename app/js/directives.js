@@ -3,8 +3,8 @@
 /* Directives */
 
 
-angular.module('myApp.directives', []).
-  directive('horizontalSplitter', ['$document', function($document) {
+angular.module('myApp.directives', [])
+  .directive('horizontalSplitter', ['$document', function($document) {
     return function(scope, element, attr) {
       var startY = 0, y = 0;
 
