@@ -20,7 +20,7 @@ angular.module('myApp.controllers', [])
       $scope.alertMe = function() {
         $scope.numFeedback = 0;
         setTimeout(function() {
-          alert('You\'ve selected the alert tab!');
+          alert('Re-training!');
         });
       };
    }]);
