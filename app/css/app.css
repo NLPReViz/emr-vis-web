@@ -203,6 +203,10 @@ table#grid-view  .negative{
     color: #C7254E;
 }
 
+table#grid-view tbody td:first-of-type{
+    font-size: 8.5pt;
+}
+
 table#grid-view tr:hover td:first-of-type{
     background-color: #eee;
 }
@@ -217,12 +221,10 @@ table#grid-view .negative:hover{
     color: #F9F2F4;
 }
 
-table#grid-view  thead{
+table#grid-view thead tr{
     /*TODO: Make header fixed;*/
     /*position:fixed;
     top: 200px;*/
-
-    height: 10px;
     background-color: white;
     height: 130px;
 }
