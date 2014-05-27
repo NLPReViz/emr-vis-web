@@ -36,7 +36,8 @@ angular.module('myApp.directives', [])
 
         if(topHeight > topMin && bottomHeight > bottomMin){
             $(element).prev().height(topHeight); 
-            $(element).next().height(bottomHeight); 
+            $(element).next().height(bottomHeight);
+            $("#sidebar-top").trigger('heightChange'); 
         }
       }
 

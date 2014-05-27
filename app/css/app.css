@@ -174,20 +174,6 @@ body {
 
 /* Data grid */
 
-#grid-view {
-    margin-bottom: 0;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
-
-#grid-view a:hover{
-    text-decoration: none;
-    cursor: help;
-}
 
 
 
@@ -251,4 +237,110 @@ table#grid-view thead {
     top: 200px;*/
     background-color: white;
     height: 130px;
+}
+
+#sidebar-top #expandtable, #sidebar-top #tablecontainer 
+{
+    height:100%;
+    margin: 0;
+    padding: 0;
+    border: none;
+    overflow: hidden;
+
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#sidebar-top a:hover{
+    text-decoration: none;
+    cursor: help;
+}
+
+#sidebar-top .rotate {
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+#sidebar-top .rotate > div {
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+    margin-top: 40%;
+}
+
+#sidebar-top .cellwidth_id .rotate > div {
+    margin-top: 45%;
+}
+
+#sidebar-top #tablecontainer 
+{
+    width: 100%;
+    margin: 0 auto;
+}
+
+#sidebar-top #expandtable
+{
+    margin-top: 80px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    height: 100%;
+    border-bottom: 0;
+    background-color: #eee;
+    margin: 0 auto;
+}
+
+#sidebar-top .breakline { clear:both;}
+
+#sidebar-top .divrow
+{
+
+}
+
+#sidebar-top .divcell { float:left; border: 1px solid #ccc; /*box-sizing: border-box; height: 100%;*/}
+#sidebar-top #topbar  { height: 80px; overflow: hidden; display: block;}
+
+#sidebar-top .colname { float:left; border: 1px solid #e5e5e5; height: 100%;}
+
+#sidebar-top .cellwidth_id { width: 9%; background-color: white;}
+#sidebar-top .cellwidth_var { width: 6.5%; }
+
+/*table#grid-view td {
+    text-align: center;
+    font-size: 7pt;
+    cursor: pointer;
+}
+*/
+#sidebar .positive {
+    background-color: #DFF0D8;
+    color: #468847;
+}
+
+#sidebar .negative {
+    background-color: #F9F2F4;
+    color: #C7254E;
+}
+
+/*#sidebar tbody td:first-of-type {
+    font-size: 7.5pt;
+    cursor: default;
+}
+
+#sidebar tr:hover td:first-of-type {
+    background-color: #eee;
+}*/
+
+#sidebar .positive:hover {
+    background-color: #468847;
+    color: #DFF0D8;
+}
+
+#sidebar .negative:hover {
+    background-color: #C7254E;
+    color: #F9F2F4;
 }
