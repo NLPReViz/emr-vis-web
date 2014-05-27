@@ -183,12 +183,13 @@ body {
 }
 
 
-table td, table th{
+table td, table th {
     border: 1px solid #ccc;
 }
 
-table td{
+table td {
     text-align: center;
+    font-size: 8pt;
 }
 
 table thead{
