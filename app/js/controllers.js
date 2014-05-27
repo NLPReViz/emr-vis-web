@@ -10,12 +10,15 @@ angular.module('myApp.controllers', [])
 
   // }])
   .controller('TabsDemoCtrl', ['$scope', function($scope) {
-      $scope.tabs = [
-        { title:'WordTree View', content:'Dynamic content 1' },
-        { title:'Review Feedback <span class="badge pull-right">42</span>', content:'Dynamic content 2', disabled: true }
-      ];
+      // $scope.tabs = [
+      //   { title:'WordTree View', content:'Dynamic content 1' },
+      //   { title:'Review Feedback <span class="badge pull-right">42</span>', content:'Dynamic content 2', disabled: true }
+      // ];
+
+      $scope.numFeedback = 42;
 
       $scope.alertMe = function() {
+        $scope.numFeedback = 0;
         setTimeout(function() {
           alert('You\'ve selected the alert tab!');
         });

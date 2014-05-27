@@ -168,12 +168,12 @@ body {
     cursor: help;
 }
 
-.rotate {
+table#grid-view .rotate {
     white-space: nowrap;
     overflow: hidden;
 }
 
-.rotate > div {
+table#grid-view .rotate > div {
     -webkit-transform: rotate(-90deg);
     -moz-transform: rotate(-90deg);
     -ms-transform: rotate(-90deg);
@@ -183,16 +183,41 @@ body {
 }
 
 
-table td, table th {
+table#grid-view td, table th {
     border: 1px solid #ccc;
 }
 
-table td {
+table#grid-view td {
     text-align: center;
-    font-size: 8pt;
+    font-size: 7pt;
+    cursor: pointer;
 }
 
-table thead{
+table#grid-view  .positive{
+    background-color: #DFF0D8;
+    color: #468847;
+}
+
+table#grid-view  .negative{
+    background-color: #F9F2F4;
+    color: #C7254E;
+}
+
+table#grid-view tr:hover td:first-of-type{
+    background-color: #eee;
+}
+
+table#grid-view .positive:hover{
+    background-color: #468847;
+    color: #DFF0D8;
+}
+
+table#grid-view .negative:hover{
+    background-color: #C7254E;
+    color: #F9F2F4;
+}
+
+table#grid-view  thead{
     /*TODO: Make header fixed;*/
     /*position:fixed;
     top: 200px;*/
@@ -200,3 +225,4 @@ table thead{
     height: 10px;
     background-color: white;
     height: 130px;
+}
