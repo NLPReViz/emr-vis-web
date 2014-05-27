@@ -83,14 +83,18 @@ body {
     color: #888;
 }
 
-.vertical-separator {
+/*#sidebar-separator {
+    top: 4px;
     height: 8px;
+    width: 560px;
+    position:absolute;
     background-color: black;
-}
+    cursor: row-resize;
+}*/
 
 #sidebar-bottom {
-    padding-top:14px;
-    height: 43%;
+    margin-top: 8px;
+    height: 42%;
 }
 
 #sidebar-bottom-left {
@@ -213,6 +217,7 @@ table#grid-view  .negative{
 
 table#grid-view tbody td:first-of-type{
     font-size: 7.5pt;
+    cursor: default;
 }
 
 table#grid-view tr:hover td:first-of-type{
