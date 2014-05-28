@@ -125,6 +125,10 @@ body {
     border-radius: 2px;
 }
 
+.sidebar-separator:hover .handle {
+    background-color: #666;
+}
+
 #sidebar-bottom {
     height: 42%;
 }
@@ -302,7 +306,7 @@ body {
     color: #F9F2F4;
 }
 
-#sidebar-top .divrow:hover .divcell:first-of-type{
+#sidebar-top .divrow:hover .divcell:first-of-type {
     background-color: #eee;
 }
 
@@ -310,7 +314,7 @@ body {
 * Document View
 */
 
-.report{
+.report {
     width: 100%;
     height: 100%;
     border: 1px solid #ddd;
@@ -320,34 +324,23 @@ body {
     font-size: 10pt; 
 }
 
-.report .info{
+.report .info {
     border-bottom: 1px solid #ddd;
     height: 33px;
     padding: 4px;
     background-color: #eee;
 }
 
-.report pre{
+.report pre {
     border: 0;
     background-color: white;
 }
 
 /*
-.report .file-data .line-highlight {
-    border-left: 3ex solid #eee;
-    position: relative;
-}
- 
-.report .file-data .line-highlight pre {
-    counter-reset: linenumbers;
-}*/
- 
-/*.report .data pre div:before {
+ * Report highlighting
+ *
+ */
+
+ .report pre .dim {
     color: #aaa;
-    content: counter(linenumbers);
-    counter-increment: linenumbers;
-    left: -3ex;
-    position: absolute;
-    text-align: right;
-    width: 2.5ex;
-}*/
+ }

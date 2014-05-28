@@ -14,6 +14,14 @@ jQuery(document).ready(function(){
    $("#sidebar-top").bind('heightChange', fixGrid);
    $(window).resize(fixGrid);
 
-   $(".report pre").highlight("ascending", "positive");
-   $(".report pre").highlight("colonoscopy", "negative");
+   var report = $(".report pre");
+   report.highlight(/ascending/gi, "positive")
+         .highlight(/colonoscopy/gi, "negative")
+         .highlight(/.*\:/gi, "dim")
+         .highlight(/S_O_H\s\SE_O_H/gi, "dim")
+         .highlight(/De-ID.*S_O_H/gi, "dim")
+         .highlight(/.*E_O_H/gi, "dim")
+         .highlight(/\[Report de-identified.*/gi, "dim")
+         .highlight(/\*\*.*/gi, "dim")
+         .highlight(/E_O_R/gi, "dim");
 });

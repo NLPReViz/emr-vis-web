@@ -1,5 +1,4 @@
-jQuery.fn.highlight = function (str, className) {
-    var regex = new RegExp(str, "gi");
+jQuery.fn.highlight = function (regex, className) {
     return this.each(function () {
         $(this).contents().filter(function() {
             return this.nodeType == 3 && regex.test(this.nodeValue);
