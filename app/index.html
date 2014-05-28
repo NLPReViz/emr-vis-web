@@ -64,7 +64,7 @@
   <div class="container-fluid">
       <div class="row">
         <div class="sidebar">
-          <div id="sidebar-top">
+          <div id="sidebar-top" class="unselectable">
             <div id="tablecontainer">
               <div id="topbar">
                 <div class="colname cellwidth_id"><a href="#" class="rotate" tooltip-placement="right" tooltip="document identifier"><div>doc #</div></a></div>
@@ -77,9 +77,9 @@
                 <div class="colname cellwidth_var"><a class="rotate" tooltip-placement="right" tooltip="indication type"><div>indication-type</div></a></div>
                 <div class="colname cellwidth_var"><a class="rotate" tooltip-placement="right" tooltip="infomed consent"><div>infomed-consent</div></a></div>
                 <div class="colname cellwidth_var"><a class="rotate" tooltip-placement="left" tooltip="nursing report"><div>nursing-report</div></a></div>
-                <div class="colname cellwidth_var"><a class="rotate" tooltip-placement="left" tooltip="no mention about preparation"><div>prep-adequate-no</div></a></div>
-                <div class="colname cellwidth_var"><a class="rotate" tooltip-placement="left" tooltip="preparation not adequate"><div>prep-adequate-not</div></a></div>
-                <div class="colname cellwidth_var"><a class="rotate" tooltip-placement="left" tooltip="preparation adequate"><div>prep-adequate-yes</div></a></div>
+                <div class="colname cellwidth_var"><a class="rotate" tooltip-placement="left" tooltip="no mention about preparation"><div>no-prep-adequate</div></a></div>
+                <div class="colname cellwidth_var"><a class="rotate" tooltip-placement="left" tooltip="preparation not adequate"><div>not-prep-adequate</div></a></div>
+                <div class="colname cellwidth_var"><a class="rotate" tooltip-placement="left" tooltip="preparation adequate"><div>yes-prep-adequate</div></a></div>
                 <div class="colname cellwidth_var"><a class="rotate" tooltip-placement="left" tooltip="procedure aborted"><div>proc-aborted</div></a></div>
                 <div class="colname cellwidth_var"><a class="rotate" tooltip-placement="left" tooltip="withdraw time"><div>widthdraw-time</div></a></div>
               </div>
@@ -1782,11 +1782,11 @@
           <div id="sidebar-bottom">
             
             <div id="sidebar-bottom-left">
-              <div class="about">Variable details</div>
+              <div class="about unselectable">Variable details</div>
             </div>
 
             <div id="sidebar-bottom-right">
-              <div class="about">Document keywords</div>
+              <div class="about unselectable">Document keywords</div>
             </div>
           
           </div>

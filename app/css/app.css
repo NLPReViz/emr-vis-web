@@ -38,6 +38,21 @@ body {
 
 .nav-tabs {
     cursor: pointer;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.unselectable{
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 /*
@@ -176,6 +191,21 @@ body {
  * Other vis-spec9fic stuff
  */
 
+
+/*
+ * Classes
+ */
+
+.positive {
+    background-color: #DFF0D8;
+    color: #468847;
+}
+
+.negative {
+    background-color: #F9F2F4;
+    color: #C7254E;
+}
+
 /* Data grid */
 #sidebar-top #expandtable, #sidebar-top #tablecontainer 
 {
@@ -184,13 +214,6 @@ body {
     padding: 0;
     border: none;
     overflow: hidden;
-
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
 }
 
 #sidebar-top a:hover{
@@ -266,15 +289,6 @@ body {
     padding-bottom: 4px;
 }
 
-#sidebar-top .positive {
-    background-color: #DFF0D8;
-    color: #468847;
-}
-
-#sidebar-top .negative {
-    background-color: #F9F2F4;
-    color: #C7254E;
-}
 
 #sidebar-top .positive:hover {
     background-color: #468847;
@@ -326,7 +340,7 @@ body {
     counter-reset: linenumbers;
 }*/
  
-.report .data pre div:before {
+/*.report .data pre div:before {
     color: #aaa;
     content: counter(linenumbers);
     counter-increment: linenumbers;
@@ -334,4 +348,4 @@ body {
     position: absolute;
     text-align: right;
     width: 2.5ex;
-}
+}*/
