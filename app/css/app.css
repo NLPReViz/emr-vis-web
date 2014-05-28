@@ -101,6 +101,8 @@ body {
     background-color: #eee;
     border-radius: 0px 0px 4px;
     color: #888;
+
+    cursor: default;
 }
 
 .sidebar-separator {
