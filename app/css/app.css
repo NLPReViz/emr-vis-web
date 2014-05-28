@@ -36,6 +36,10 @@ body {
     color:#ccc;
 }
 
+.nav-tabs {
+    cursor: pointer;
+}
+
 /*
  * Sidebar
  */
@@ -113,7 +117,7 @@ body {
     background-color: white;
     border: 1px solid #DDDDDD;
     border-radius: 4px;
-    content: "Variable Keywords";
+    content: "Variable details";
     font-size: 12px;
     width: 375px;
     overflow: auto;
@@ -126,7 +130,7 @@ body {
     background-color: white;
     border: 1px solid #DDDDDD;
     border-radius: 4px;
-    content: "Document Keywords";
+    content: "Document keywords";
     font-size: 12px;
     width: 180px;
     height: 100%;
@@ -284,4 +288,50 @@ body {
 
 #sidebar-top .divrow:hover .divcell:first-of-type{
     background-color: #eee;
+}
+
+/*
+* Document View
+*/
+
+.report{
+    width: 100%;
+    height: 100%;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin: 10px 0px 10px 0px;
+    padding: 0;
+    font-size: 10pt; 
+}
+
+.report .info{
+    border-bottom: 1px solid #ddd;
+    height: 33px;
+    padding: 4px;
+    background-color: #eee;
+}
+
+.report pre{
+    border: 0;
+    background-color: white;
+}
+
+/*
+.report .file-data .line-highlight {
+    border-left: 3ex solid #eee;
+    position: relative;
+}
+ 
+.report .file-data .line-highlight pre {
+    counter-reset: linenumbers;
+}*/
+ 
+.report .data pre div:before {
+    color: #aaa;
+    content: counter(linenumbers);
+    counter-increment: linenumbers;
+    left: -3ex;
+    position: absolute;
+    text-align: right;
+    width: 2.5ex;
 }
