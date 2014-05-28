@@ -13,4 +13,7 @@ jQuery(document).ready(function(){
    fixGrid();
    $("#sidebar-top").bind('heightChange', fixGrid);
    $(window).resize(fixGrid);
+
+   $(".report pre").highlight("ascending", "positive");
+   $(".report pre").highlight("colonoscopy", "negative");
 });
