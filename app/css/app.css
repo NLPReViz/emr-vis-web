@@ -203,21 +203,21 @@ body {
  */
 
 .positive {
-    background-color: #e0f3db;
+    background-color: #DFF0D8;
     color: #468847;
 }
 
 .negative {
-    background-color: #deebf7; 
-    color: #2b8cbe;
+    background-color: #F9F2F4;
+    color: #C7254E;
 }
 
 /* From http://colorbrewer2.org/ */
-.cert0-neg{background-color: #f7fcf0; color: #468847;}
-.cert1-neg{background-color: #e0f3db; color: #468847;}
+.cert0-neg{background-color: #F9F2F4; color: #C7254E;}
+.cert1-neg{background-color: #f1e1e5; color: #C7254E;}
 /*.cert4-neu{background-color: #7bccc4; color: #252525;}*/
-.cert0-pos{background-color: #4eb3d3; color: #deebf7;}
-.cert1-pos{background-color: #2b8cbe; color: #deebf7;}
+.cert0-pos{background-color: #eef7ea; color: #468847;}
+.cert1-pos{background-color: #d0e9c5; color: #468847;}
 
 /* Data grid */
 #sidebar-top #expandtable, #sidebar-top #tablecontainer 
@@ -303,14 +303,8 @@ body {
 }
 
 
-#sidebar-top .positive:hover {
-    background-color: #468847;
-    color: #DFF0D8;
-}
-
-#sidebar-top .negative:hover {
-    background-color: #C7254E;
-    color: #F9F2F4;
+#sidebar-top .divcell:hover {
+    border-color: #444;
 }
 
 #sidebar-top .divrow:hover .divcell:first-of-type {
