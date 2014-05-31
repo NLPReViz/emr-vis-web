@@ -15,8 +15,8 @@ jQuery(document).ready(function(){
    $(window).resize(fixGrid);
 
    var report = $(".report pre");
-   report.highlight(/ascending/gi, "positive")
-         .highlight(/colonoscopy/gi, "negative")
+   report.highlight(/ascending/gi, "highlight positive")
+         .highlight(/colonoscopy/gi, "highlight negative")
          .highlight(/.*\:/gi, "dim")
          .highlight(/S_O_H\s\SE_O_H/gi, "dim")
          .highlight(/De-ID.*S_O_H/gi, "dim")
