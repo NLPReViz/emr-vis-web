@@ -212,6 +212,13 @@ body {
     color: #C7254E;
 }
 
+/* From http://colorbrewer2.org/ */
+.cert0-neg{background-color: #f7fcf0; color: #252525;}
+.cert1-neg{background-color: #e0f3db; color: #252525;}
+/*.cert4-neu{background-color: #7bccc4; color: #252525;}*/
+.cert0-pos{background-color: #4eb3d3; color: #ffffff;}
+.cert1-pos{background-color: #2b8cbe; color: #ffffff;}
+
 /* Data grid */
 #sidebar-top #expandtable, #sidebar-top #tablecontainer 
 {
