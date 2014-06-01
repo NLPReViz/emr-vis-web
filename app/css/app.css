@@ -2,7 +2,7 @@
  * Base structure
  */
 
-/* Move down content because we have a fixed navbar that is 50px tall */
+ /* Move down content because we have a fixed navbar that is 50px tall */
 body {
   padding-top: 50px;
 }
@@ -13,17 +13,18 @@ body {
  */
 
 .sub-header {
-  padding-bottom: 10px;
-  border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
 }
-
 
 .navbar-form {
-  padding-right: 23px;
+    padding-right: 23px;
 }
+
 .searchinput {
     width: 200px;
 }
+
 .searchclear {
     position:absolute;
     right:13px;
@@ -59,7 +60,7 @@ body {
  * Sidebar
  */
 
-.sidebar {
+ .sidebar {
     position: fixed;
     top: 51px;
     bottom: 0;
@@ -163,7 +164,7 @@ body {
  * Main content
  */
 
-.main {
+ .main {
   padding: 20px;
   margin-left: 600px;
 }
@@ -178,23 +179,23 @@ body {
  */
 
 .placeholders {
-  margin-bottom: 30px;
-  text-align: center;
+    margin-bottom: 30px;
+    text-align: center;
 }
 .placeholders h4 {
-  margin-bottom: 0;
+    margin-bottom: 0;
 }
 .placeholder {
-  margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 .placeholder img {
-  display: inline-block;
-  border-radius: 50%;
+    display: inline-block;
+    border-radius: 50%;
 }
 
 
 /*
- * Other vis-spec9fic stuff
+ * Other vis-specific stuff
  */
 
 
@@ -202,7 +203,7 @@ body {
  * Classes
  */
 
-.positive {
+ .positive {
     background-color: #DFF0D8;
     color: #468847;
 }
@@ -302,20 +303,41 @@ body {
     padding-bottom: 4px;
 }
 
-
 #sidebar-top .divcell:hover {
-    border-color: #444;
+    border-color: #000;
 }
 
 #sidebar-top .divrow:hover .divcell:first-of-type {
     background-color: #eee;
 }
 
-/*
-* Document View
-*/
 
-.report {
+/*
+ * Side-bar charts
+ */
+
+#sidebar-bottom-right ol {
+    list-style: none;
+    padding: 2px;
+}
+
+#sidebar-bottom-right li {
+    height: 15px;
+    text-align: left;
+    line-height: 15px;
+    padding: 0px 4px;
+    margin-bottom: 3px;
+    -moz-box-shadow:    1px 1px #ccc;
+    -webkit-box-shadow: 1px 1px #ccc;
+    box-shadow:         1px 1px #ccc;
+}
+
+
+/*
+ * Document View
+ */
+
+ .report {
     width: 100%;
     height: 100%;
     border: 1px solid #ddd;
@@ -344,8 +366,8 @@ body {
 
  .report pre .dim {
     color: #aaa;
- }
+}
 
- .report pre .highlight {
+.report pre .highlight {
     font-weight: bolder;
- }
+}
