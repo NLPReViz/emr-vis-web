@@ -316,20 +316,60 @@ body {
  * Side-bar charts
  */
 
-#sidebar-bottom-right ol {
+#sidebar-bottom .content{
+    width: 100%;
+    height: 100%;
+}
+
+#sidebar-bottom ol {
     list-style: none;
     padding: 2px;
 }
 
-#sidebar-bottom-right li {
+#sidebar-bottom li {
     height: 15px;
     text-align: left;
     line-height: 15px;
     padding: 0px 4px;
     margin-bottom: 3px;
-    -moz-box-shadow:    1px 1px #ccc;
-    -webkit-box-shadow: 1px 1px #ccc;
-    box-shadow:         1px 1px #ccc;
+    -moz-box-shadow:    1px 1px 0.5px #ccc;
+    -webkit-box-shadow: 1px 1px 0.5px #ccc;
+    box-shadow:         1px 1px 0.5px #ccc;
+    overflow: visible;
+}
+
+#sidebar-bottom-left #distribution{
+    float: right;
+    height: 100%;
+    width: 180px;
+    margin: 0 auto;
+}
+
+#sidebar-bottom-left #keywords{
+    float: left;
+    height: 100%;
+    width: 175px;
+}
+
+.pieContainer {
+    height: 100px;
+    margin-top: 30px;
+    margin-left: 25px;
+}
+
+.pieBackground {
+    background-color: #ccc;
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    -o-border-radius: 50px;
+    border-radius: 50px;
+    -moz-box-shadow: -1px 1px 3px #000;
+    -webkit-box-shadow: -1px 1px 3px #000;
+    -o-box-shadow: -1px 1px 3px #000;
+    box-shadow: -1px 1px 3px #000;
 }
 
 

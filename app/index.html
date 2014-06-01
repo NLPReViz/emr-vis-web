@@ -1783,15 +1783,40 @@
           <div id="sidebar-bottom">
             
             <div id="sidebar-bottom-left">
-              <div class="about unselectable">Variable details</div>
+              <div class="about unselectable">Variable details: <strong>asa</strong></div>
               <div class="content">
-                <p><strong>Top positive terms</strong></p>
-                <p><strong>Top negative terms</strong></p>
+                <div id="keywords">
+                  <h6>Top positive terms</h6>
+                  <ol>
+                    <li tooltip-placement="right" tooltip="Weight 1.23" class="positive" style="width:50%;">withdrawal</li>
+                    <li tooltip-placement="right" tooltip="Weight 1.00" class="positive" style="width:45%;">pathology</li>
+                    <li tooltip-placement="right" tooltip="Weight 0.63" class="positive" style="width:38%;">appendicitis</li>
+                    <li tooltip-placement="right" tooltip="Weight 0.23" class="positive" style="width:22%;">mother</li>
+                    <li tooltip-placement="right" tooltip="Weight 0.03" class="positive" style="width:14%;">carefully</li>
+                  </ol>
+
+                  <h6>Top negative terms</h6>
+                  <ol>
+                    <li tooltip-placement="right" tooltip="Weight 1.23" class="negative" style="width:80%;">repeat</li>
+                    <li tooltip-placement="right" tooltip="Weight 1.23" class="negative" style="width:70%;">impression</li>
+                    <li tooltip-placement="right" tooltip="Weight 1.23" class="negative" style="width:52%;">small</li>
+                    <li tooltip-placement="right" tooltip="Weight 1.23" class="negative" style="width:31%;">mg</li>
+                    <li tooltip-placement="right" tooltip="Weight 1.23" class="negative" style="width:19%;">right</li>
+                  </ol>
+                </div>
+                <div id="distribution">
+                  <h6>Distribution</h6>
+                  <div class="pieContainer">
+                    <div class="pieBackground"></div>
+                    <div id="pieSliceNegative" class="hold"><div class="pie"></div></div>
+                    <div id="pieSlicePositive" class="hold"><div class="pie"></div></div>
+                  </div>
+                </div>
               </div>
             </div>
 
             <div id="sidebar-bottom-right">
-              <div class="about unselectable">Document keywords</div>
+              <div class="about unselectable">Document: <strong>#1,001</strong></div>
               
               <div class="content">
                 <h6>Top positive terms</h6>
@@ -1923,6 +1948,7 @@ E_O_R
   <script src="bower_components/angular-route/angular-route.js"></script>
   <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
   <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="bower_components/d3/d3.min.js"></script>
   <script src="js/app.js"></script>
   <script src="js/services.js"></script>
   <script src="js/controllers.js"></script>
