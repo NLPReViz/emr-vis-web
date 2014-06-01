@@ -359,7 +359,6 @@ body {
 
 .pieBackground {
     background-color: #ccc;
-    position: absolute;
     width: 100px;
     height: 100px;
     -moz-border-radius: 50px;
