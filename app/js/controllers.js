@@ -24,7 +24,7 @@ angular.module('myApp.controllers', [])
     })
     .error(function(data, status, headers, config) {
         $scope.reportText = "Status " + status
-        alert("docs/0001/report.txt not accessible. Put the docs/ folder in app/ directory.");
+        alert($scope.docPath + " is not accessible. Make sure you have the docs/ folder in the app/ directory.");
     });
 
   }])
