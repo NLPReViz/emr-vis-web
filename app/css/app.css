@@ -330,7 +330,6 @@ body {
 #sidebar-bottom .content{
     width: 100%;
     height: 100%;
-    overflow: hidden;
 }
 
 #sidebar-bottom ol {
@@ -352,9 +351,9 @@ body {
 
 #distribution{
     float: right;
-    height: 100%;
     width: 180px;
-    margin: 00px 0px 0px 0px;
+    margin: 0;
+    overflow-x: hidden;
 }
 
 #distribution .arc path {
