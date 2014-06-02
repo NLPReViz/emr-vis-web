@@ -1856,7 +1856,7 @@
                     <a href="#" tooltip-placement="bottom"tooltip="{{docPath}}"> 
                       <strong class="file-name js-selectable-text">Report: #{{docName}}</strong>
                     </a>
-                    <button type="button" class="btn btn-xs btn-default pull-right"><strong>File info</strong></button>
+                    <a class="btn btn-xs btn-default pull-right" ng-href="{{docPath}}" target="_blank"><strong>View Raw</strong></a>
                   </div>
                   <div ng-if="reportLoaded" class="data">
                     <pre highlight-report></pre>
