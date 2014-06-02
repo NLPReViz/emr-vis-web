@@ -46,4 +46,26 @@ angular.module('myApp.directives', [])
         $document.off('mouseup', mouseup);
       }
     };
+  }])
+ 
+  .directive('highlightReport', ['$document', function($document) {
+
+    function link(scope, element, attr) {
+        console.log("I was called");
+        element.text(scope.reportText);
+        $(element).highlight(/ascending/gi, "highlight positive")
+                .highlight(/colonoscopy/gi, "highlight negative")
+                .highlight(/.*\:/gi, "dim")
+                .highlight(/S_O_H\s\SE_O_H/gi, "dim")
+                .highlight(/De-ID.*S_O_H/gi, "dim")
+                .highlight(/.*E_O_H/gi, "dim")
+                .highlight(/\[Report de-identified.*/gi, "dim")
+                .highlight(/\*\*.*/gi, "dim")
+                .highlight(/E_O_R/gi, "dim");
+    }
+
+    return {
+      link: link
+    };
   }]);
+

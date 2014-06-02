@@ -3,10 +3,31 @@
 /* Controllers */
 
 angular.module('myApp.controllers', [])
-  // .controller('MyCtrl1', ['$scope', function($scope) {
+  .controller('MainCtrl', ['$scope', '$http', function($scope, $http) {
 
-  // }])
-  // .controller('MyCtrl2', ['$scope', function($scope) {
+    var MainCtrl = this;
+    
+    $scope.docPath = "docs/0001/report.txt";
+    $scope.docName = "report-0001.txt";
+
+    $scope.reportText = null;
+    // $scope.reportLoaded = false;
+
+    // $scope.reportText = "colonoscopy ascending";
+    // $scope.reportLoaded = true;
+
+
+    $http.get($scope.docPath)
+    .success(function(data, status, headers, config) {
+        $scope.reportText = data;
+        $scope.reportLoaded = true;
+    })
+    .error(function(data, status, headers, config) {
+        $scope.reportText = "Status " + status
+        alert("docs/0001/report.txt not accessible. Put the docs/ folder in app/ directory.");
+    });
+
+  }])
 
   // }])
   .controller('TabsDemoCtrl', ['$scope', function($scope) {

@@ -21,7 +21,7 @@
   <script src="bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
 </head>
 
-<body class="ng-cloak">
+<body class="ng-cloak" ng-controller="MainCtrl">
 
   <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -1853,65 +1853,13 @@
                 <div id="emr-report" class="report">
                   <div class="info">
                     <i class="glyphicon glyphicon-list-alt"></i>&nbsp;
-                    <a href="#" tooltip-placement="bottom"tooltip="/data/0001/report.txt"> 
-                      <strong class="file-name js-selectable-text">Report-1001.txt</strong>
+                    <a href="#" tooltip-placement="bottom"tooltip="{{docPath}}"> 
+                      <strong class="file-name js-selectable-text">{{docName}}</strong>
                     </a>
                     <button type="button" class="btn btn-xs btn-default pull-right"><strong>File info</strong></button>
                   </div>
-                  <div class="data">
-                    <pre highlight-report>
-                      De-ID copyright (c) 1999-2009 University of Pittsburgh.  All rights reserved.S_O_H
-Report ID Patient ID  Principal Date  Record Type
-1,lGOCGBrZJw6P  lGOCGBrZJw6P  20080327 1003 OP
-E_O_H
-[Report de-identified (Limited dataset compliant) by De-ID v.6.22.08.0]
-
-
-COLONOSCOPY REPORT
-
-ID#:  **ID-NUM  PROCEDURE:   Colonoscopy, diagnostic
-NAME:  **NAME[AAA, BBB]  **NAME[CCC:   YYY ZZZ], MD
-SEX:  female  FELLOW:
-ASSISTANT:    **NAME[XXX WWW], RN and **NAME[VVV UUU], RN
-DOB:  05/17/1951  WARD:   outpatient
-AGE:  56  DATE:   03/27/2008
-
-ASA CLASS:  Class II
-INDICATIONS:  1) change in bowel habits
-MEDICATION:  200 micrograms Fentanyl IV, 6 milligrams Versed IV, 50 milligrams
-Benadryl IV
-PREPARATION OF COLON:  good
-
-FINDINGS: After the risks benefits and alternatives of the procedure were
-thoroughly explained, informed consent was obtained.  Digital rectal exam was
-performed and revealed no abnormalities.   The Pentax EC-3870LK endoscope was
-introduced through the anus and advanced to the ascending colon.  The quality
-of the prep was good.  The instrument was then slowly withdrawn as the colon
-was fully examined. It was not possible to reach the cecum.
-
-The ascending, transverse, descending, sigmoid colon, and rectum appeared
-unremarkable.   Retroflexed views in the rectum revealed no abnormalities.
-The scope was then completely withdrawn from the patient and the procedure
-terminated.
-
-COMPLICATIONS:  None
-ENDOSCOPIC IMPRESSION:  1) Normal colon
-
-RECOMMENDATIONS:
-REPEAT EXAM:  No
-INSTRUCTIONS:
-
-______________________________
-**NAME[YYY ZZZ], MD
-
-CC:
-
-**NAME[AAA, BBB], **ID-NUM
-
-
-
-E_O_R
-                    </pre>
+                  <div ng-if="reportLoaded" class="data">
+                    <pre highlight-report></pre>
                   </div>
                 </div>
                 <!-- div id="pathology-report" class>
