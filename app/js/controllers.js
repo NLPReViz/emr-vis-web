@@ -7,8 +7,8 @@ angular.module('myApp.controllers', [])
 
     var MainCtrl = this;
     
-    $scope.docPath = "docs/0001/report.txt";
-    $scope.docName = "report-0001.txt";
+    $scope.docName = "0001";
+    $scope.docPath = "docs/"+ $scope.docName +"/report.txt";
 
     $scope.reportText = null;
     // $scope.reportLoaded = false;
