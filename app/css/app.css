@@ -164,7 +164,7 @@ body {
  * Main content
  */
 
- .main {
+.main {
   padding: 20px;
   margin-left: 600px;
 }
@@ -205,12 +205,23 @@ body {
 
 .positive {
     background-color: #DFF0D8;
+    fill: #DFF0D8;
     color: #468847;
+}
+
+.positive-label {
+    fill: #468847;
+    width: 10px;
 }
 
 .negative {
     background-color: #F9F2F4;
+    fill: #F9F2F4;
     color: #C7254E;
+}
+
+.negative-label {
+    fill: #C7254E;
 }
 
 /* From http://colorbrewer2.org/ */
@@ -319,6 +330,7 @@ body {
 #sidebar-bottom .content{
     width: 100%;
     height: 100%;
+    overflow: hidden;
 }
 
 #sidebar-bottom ol {
@@ -338,39 +350,28 @@ body {
     overflow: visible;
 }
 
-#sidebar-bottom-left #distribution{
+#distribution{
     float: right;
     height: 100%;
     width: 180px;
-    margin: 0 auto;
+    margin: 00px 0px 0px 0px;
 }
 
-#sidebar-bottom-left #keywords{
+#distribution .arc path {
+    stroke: #ccc;
+    stroke-width: 0.5;
+}
+
+#distribution g:hover path {
+    stroke: #aaa;
+}
+
+
+#keywords{
     float: left;
     height: 100%;
     width: 175px;
 }
-
-.pieContainer {
-    height: 100px;
-    margin-top: 30px;
-    margin-left: 25px;
-}
-
-.pieBackground {
-    background-color: #ccc;
-    width: 100px;
-    height: 100px;
-    -moz-border-radius: 50px;
-    -webkit-border-radius: 50px;
-    -o-border-radius: 50px;
-    border-radius: 50px;
-    -moz-box-shadow: -1px 1px 3px #000;
-    -webkit-box-shadow: -1px 1px 3px #000;
-    -o-box-shadow: -1px 1px 3px #000;
-    box-shadow: -1px 1px 3px #000;
-}
-
 
 /*
  * Document View
@@ -409,4 +410,8 @@ body {
 
 .report pre .highlight {
     font-weight: bolder;
+}
+
+.d3-tip{
+    opacity: 0;
 }

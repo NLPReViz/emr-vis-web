@@ -3,7 +3,7 @@
 /* Controllers */
 
 angular.module('myApp.controllers', [])
-  .controller('MainCtrl', ['$scope', '$http', function($scope, $http) {
+  .controller('MainCtrl', ['$scope', '$http', '$timeout', function($scope, $http, $timeout) {
 
     var MainCtrl = this;
     
@@ -26,6 +26,26 @@ angular.module('myApp.controllers', [])
         $scope.reportText = "Status " + status
         alert($scope.docPath + " is not accessible. Make sure you have the docs/ folder in the app/ directory.");
     });
+
+    $scope.pieData = [
+      {name: 'True', count: 150, classification: "positive"},
+      {name: 'False', count: 150, classification: "negative"},
+    ];
+
+    var changeData = function() {
+      console.log($scope.pieData);
+
+      console.log("I was called!");
+
+      $scope.pieData = [
+          {name: 'True', count: 350, classification: "positive"},
+          {name: 'False', count: 150, classification: "negative"},
+        ];   
+
+      console.log($scope.pieData);
+    }
+    
+    $timeout(changeData, 1000);
 
   }])
 
