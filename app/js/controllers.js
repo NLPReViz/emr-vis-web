@@ -11,16 +11,10 @@ angular.module('myApp.controllers', [])
     $scope.docPath = "docs/"+ $scope.docName +"/report.txt";
 
     $scope.reportText = null;
-    // $scope.reportLoaded = false;
-
-    // $scope.reportText = "colonoscopy ascending";
-    // $scope.reportLoaded = true;
-
 
     $http.get($scope.docPath)
     .success(function(data, status, headers, config) {
         $scope.reportText = data;
-        $scope.reportLoaded = true;
     })
     .error(function(data, status, headers, config) {
         $scope.reportText = "Status " + status

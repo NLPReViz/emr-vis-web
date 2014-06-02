@@ -48,24 +48,33 @@ angular.module('myApp.directives', [])
 };
 }])
 
-.directive('highlightReport', [ function() {
-    function link(scope, element, attr) {
-        element.text(scope.reportText);
-      
-        $(element).highlight(/ascending/gi, "highlight positive")
-            .highlight(/colonoscopy/gi, "highlight negative")
-            .highlight(/.*\:/gi, "dim")
-            .highlight(/S_O_H\s\SE_O_H/gi, "dim")
-            .highlight(/De-ID.*S_O_H/gi, "dim")
-            .highlight(/.*E_O_H/gi, "dim")
-            .highlight(/\[Report de-identified.*/gi, "dim")
-            .highlight(/\*\*.*/gi, "dim")
-            .highlight(/E_O_R/gi, "dim");
-  }
+.directive('highlightedReport', [ function() {
+    return {
+        restrict: 'E',
+        scope: {
+            data: '='
+        },
+        link: function (scope, element) {
 
-  return {
-      link: link
-  };
+            scope.highlight = function(data) {
+                element.text(data);
+
+                $(element).highlight(/ascending/gi, "highlight positive")
+                .highlight(/colonoscopy/gi, "highlight negative")
+                .highlight(/.*\:/gi, "dim")
+                .highlight(/S_O_H\s\SE_O_H/gi, "dim")
+                .highlight(/De-ID.*S_O_H/gi, "dim")
+                .highlight(/.*E_O_H/gi, "dim")
+                .highlight(/\[Report de-identified.*/gi, "dim")
+                .highlight(/\*\*.*/gi, "dim")
+                .highlight(/E_O_R/gi, "dim");
+            };
+
+            scope.$watch('data', function(){
+                    scope.highlight(scope.data);
+            }, true);
+        }
+    };
 }])
 
 .directive( 'd3Piechart', [  function () {
