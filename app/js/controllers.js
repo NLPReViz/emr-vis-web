@@ -41,17 +41,13 @@ angular.module('myApp.controllers', [])
       {name: 'False', count: 150, classification: "negative"},
     ];
 
+    //test pie chart
     var changeData = function() {
-      console.log($scope.pieData);
-
-      console.log("I was called!");
 
       $scope.pieData = [
           {name: 'True', count: 350, classification: "positive"},
           {name: 'False', count: 150, classification: "negative"},
         ];   
-
-      console.log($scope.pieData);
     }
     
     $timeout(changeData, 1000);
