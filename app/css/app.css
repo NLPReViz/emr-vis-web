@@ -314,7 +314,7 @@ body {
     padding-bottom: 4px;
 }
 
-#sidebar-top .divcell:hover {
+#sidebar-top .divrow .cellwidth_var:hover {
     border-color: #aaa;
     text-decoration: underline;
 }
@@ -415,3 +415,9 @@ body {
 .d3-tip{
     opacity: 0;
 }
+
+
+
+
+
+

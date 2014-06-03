@@ -128,7 +128,7 @@ angular.module('myApp.directives', [])
                         .attr("dy", "0em")
                         .style("text-anchor", "middle")
                         .attr("class", function(d) { return d.data.classification+"-label"; })
-                        .text(function(d) { return d.data.name; });
+                        .text(function(d) { if (d.data.count > 0) return d.data.name; });
 
                     g.append("text")
                      .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
@@ -153,5 +153,5 @@ angular.module('myApp.directives', [])
                 }, true);
             }
     };
-}]);
+}])
 
