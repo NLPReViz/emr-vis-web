@@ -5,21 +5,36 @@
 angular.module('myApp.controllers', [])
   .controller('MainCtrl', ['$scope', '$http', '$timeout', function($scope, $http, $timeout) {
 
-    var MainCtrl = this;
+    /*
+     * Load reports
+     */
     
     $scope.docName = "0001";
-    $scope.docPath = "docs/"+ $scope.docName +"/report.txt";
+    $scope.reportPath = "docs/"+ $scope.docName +"/report.txt";
+    $scope.pathologyPath = "docs/"+ $scope.docName +"/pathology.txt";
 
     $scope.reportText = null;
 
-    $http.get($scope.docPath)
+    //report
+    $http.get($scope.reportPath)
     .success(function(data, status, headers, config) {
         $scope.reportText = data;
     })
     .error(function(data, status, headers, config) {
         $scope.reportText = "Status " + status
-        alert($scope.docPath + " is not accessible. Make sure you have the docs/ folder in the app/ directory.");
+        alert($scope.reportPath + " is not accessible. Make sure you have the docs/ folder in the app/ directory.");
     });
+
+    // pathology
+    $http.get($scope.pathologyPath)
+    .success(function(data, status, headers, config) {
+        $scope.pathologyText = data;
+        $scope.pathologyExists = true;
+    })
+    
+    /*
+     * Pie chart
+     */
 
     $scope.pieData = [
       {name: 'True', count: 150, classification: "positive"},
