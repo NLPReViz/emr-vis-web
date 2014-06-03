@@ -315,7 +315,8 @@ body {
 }
 
 #sidebar-top .divcell:hover {
-    border-color: #000;
+    border-color: #aaa;
+    text-decoration: underline;
 }
 
 #sidebar-top .divrow:hover .divcell:first-of-type {
