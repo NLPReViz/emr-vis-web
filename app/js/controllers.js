@@ -8,29 +8,33 @@ angular.module('myApp.controllers', [])
     /*
      * Load reports
      */
-    
-    $scope.docName = "0001";
-    $scope.reportPath = "docs/"+ $scope.docName +"/report.txt";
-    $scope.pathologyPath = "docs/"+ $scope.docName +"/pathology.txt";
 
-    $scope.reportText = null;
+    $scope.loadReport = function(docName){
+        $scope.docName = docName;
+        $scope.reportPath = "docs/"+ $scope.docName +"/report.txt";
+        $scope.pathologyPath = "docs/"+ $scope.docName +"/pathology.txt";
 
-    //report
-    $http.get($scope.reportPath)
-    .success(function(data, status, headers, config) {
-        $scope.reportText = data;
-    })
-    .error(function(data, status, headers, config) {
-        $scope.reportText = "Status " + status
-        alert($scope.reportPath + " is not accessible. Make sure you have the docs/ folder in the app/ directory.");
-    });
+        $scope.reportText = null;
 
-    // pathology
-    $http.get($scope.pathologyPath)
-    .success(function(data, status, headers, config) {
-        $scope.pathologyText = data;
-        $scope.pathologyExists = true;
-    })
+        //report
+        $http.get($scope.reportPath)
+        .success(function(data, status, headers, config) {
+            $scope.reportText = data;
+        })
+        .error(function(data, status, headers, config) {
+            $scope.reportText = "Status " + status
+            alert($scope.reportPath + " is not accessible. Make sure you have the docs/ folder in the app/ directory.");
+        });
+
+        // pathology
+        $http.get($scope.pathologyPath)
+        .success(function(data, status, headers, config) {
+            $scope.pathologyText = data;
+            $scope.pathologyExists = true;
+        });
+    };
+
+    $scope.loadReport("0001");
     
     /*
      * Pie chart
