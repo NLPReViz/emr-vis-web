@@ -8,6 +8,7 @@ angular.module('myApp.controllers', [])
      * App config
      */
 
+    //TODO: Move them to configs - affects perf
     $scope.classificationName = {"positive": "True", "negative": "False"};
 
     $scope.variables = ["any-adenoma", "appendiceal-orifice", "asa", "biopsy", "cecum",
@@ -15,16 +16,25 @@ angular.module('myApp.controllers', [])
               "nursing-report", "no-prep-adequate", "not-prep-adequate",
               "yes-prep-adequate", "proc-aborted", "widthdraw-time"]
 
-
     /*
      * Main grid
      */
     
+    $scope.activeVariable = "asa";
+
     $http.get("dummy-grid.json")
         .success(function(data, status) {
             $scope.gridData = data;
+            $scope.loadReport("0001");
         })
         .error(function() { alert("Could not load grid data!"); });
+
+    $http.get("dummy-variable.json")
+        .success(function(data, status) {
+            $scope.variableData = data;
+            $scope.loadDistribution($scope.activeVariable);
+        })
+        .error(function() { alert("Could not load variable data!"); });
 
     $scope.styleGridCell = function(classification, confidence) {
         if (classification == "positive") {
@@ -45,12 +55,14 @@ angular.module('myApp.controllers', [])
         // console.log(variable, docName);
         $scope.activeVariable = variable;
         $scope.loadReport(docName);
+        $scope.loadDistribution(variable);
     }
 
     /*
      * Load reports
      */
 
+    //TODO: Load reports not as variables but as docs
     $scope.loadReport = function(docName) {
         $scope.docName = docName;
         $scope.reportPath = "docs/"+ $scope.docName +"/report.txt";
@@ -77,28 +89,20 @@ angular.module('myApp.controllers', [])
             .error(function(){ $scope.pathologyExists = false; });
     };
 
-    $scope.activeVariable = "asa";
-    $scope.loadReport("0001");
-    
     /*
      * Pie chart
      */
 
     $scope.pieData = [
-      {name: $scope.classificationName["positive"], count: 150, classification: "positive"},
-      {name: $scope.classificationName["negative"], count: 150, classification: "negative"},
-    ];
+        {name: "!#def", count: 1, classification: "positive"},
+     ]; 
 
-    //test pie chart
-    var changeData = function() {
-
-      $scope.pieData = [
-          {name: $scope.classificationName["positive"], count: 350, classification: "positive"},
-          {name: $scope.classificationName["negative"], count: 150, classification: "negative"},
-        ];   
+    $scope.loadDistribution = function(variable) {
+        $scope.pieData = [
+          {name: $scope.classificationName["positive"], count: $scope.variableData[variable]["numPositive"], classification: "positive"},
+          {name: $scope.classificationName["negative"], count: $scope.variableData[variable]["numNegative"], classification: "negative"},
+        ];
     }
-    
-    $timeout(changeData, 1000);
 
   }])
 
