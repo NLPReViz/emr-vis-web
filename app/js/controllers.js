@@ -20,8 +20,8 @@ angular.module('myApp.controllers', [])
      * Main grid
      */
     
-    $http.get("dummy-data.json")
-        .success(function(data, status, headers, config) {
+    $http.get("dummy-grid.json")
+        .success(function(data, status) {
             $scope.gridData = data;
         })
         .error(function() { alert("Could not load grid data!"); });
