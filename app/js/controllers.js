@@ -42,7 +42,7 @@ angular.module('myApp.controllers', [])
     }
 
     $scope.updateGrid = function(variable, docName) {
-        console.log(variable, docName);
+        // console.log(variable, docName);
         $scope.activeVariable = variable;
         $scope.loadReport(docName);
     }
@@ -60,7 +60,7 @@ angular.module('myApp.controllers', [])
 
         //report
         $http.get($scope.reportPath)
-            .success(function(data, status, headers, config) {
+            .success(function(data, status) {
                 $scope.reportText = data;
             })
             .error(function(data, status, headers, config) {
@@ -70,7 +70,7 @@ angular.module('myApp.controllers', [])
 
         // pathology
         $http.get($scope.pathologyPath)
-            .success(function(data, status, headers, config) {
+            .success(function(data, status) {
                 $scope.pathologyText = data;
                 $scope.pathologyExists = true;
             })
