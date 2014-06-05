@@ -85,8 +85,8 @@ angular.module('myApp.directives', [])
         },
         link: function (scope, element) {
                 var margin = {top: 20, right: 20, bottom: 30, left: 40},
-                width = 200 - margin.left - margin.right,
-                height = 200 - margin.top - margin.bottom,
+                width = 170 - margin.left - margin.right,
+                height = 170 - margin.top - margin.bottom,
                 radius = Math.min(width, height) / 2;
 
                 var svg = d3.select(element[0])
