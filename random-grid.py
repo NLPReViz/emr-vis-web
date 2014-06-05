@@ -27,9 +27,6 @@ for doc in docIds:
 
         attributes['confidence'] = round(random.random(), 2)
 
-        attributes['posKeywords'] = ["pathology", "difficulty", "followup", "introduce"]
-        attributes['negKeywords'] = ["indication","impression","small","rectal","mg"]
-
         weights = list()
         for i in range(0, 5):
             weights.append(random.randrange(100))
