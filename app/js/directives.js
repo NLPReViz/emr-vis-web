@@ -55,9 +55,7 @@ angular.module('myApp.directives', [])
             data: '='
         },
         link: function (scope, element) {
-
-            scope.highlight = function(data) {
-                element.text(data);
+                element.text(scope.data);
 
                 $(element).highlight(/ascending/gi, "highlight positive")
                 .highlight(/colonoscopy/gi, "highlight negative")
@@ -68,11 +66,6 @@ angular.module('myApp.directives', [])
                 .highlight(/\[Report de-identified.*/gi, "dim")
                 .highlight(/\*\*.*/gi, "dim")
                 .highlight(/E_O_R/gi, "dim");
-            };
-
-            scope.$watch('data', function(){
-                    scope.highlight(scope.data);
-            }, true);
         }
     };
 }])

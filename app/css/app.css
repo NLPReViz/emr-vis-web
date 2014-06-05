@@ -156,10 +156,9 @@ body {
     border-radius: 4px;
     content: "Document keywords";
     font-size: 12px;
-    width: 26%;
+    width: 29%;
     height: 100%;
     padding: 1%;
-    margin: 0;
     overflow: auto;
 }
 

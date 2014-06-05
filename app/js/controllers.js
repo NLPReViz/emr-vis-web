@@ -70,10 +70,14 @@ angular.module('myApp.controllers', [])
 
         $scope.reportText = null;
 
+        $scope.reportExists = false;
+        $scope.pathologyExists = false;
+
         //report
         $http.get($scope.reportPath)
             .success(function(data, status) {
                 $scope.reportText = data;
+                $scope.reportExists = true;
             })
             .error(function(data, status, headers, config) {
                 $scope.reportText = "Status " + status
@@ -86,7 +90,6 @@ angular.module('myApp.controllers', [])
                 $scope.pathologyText = data;
                 $scope.pathologyExists = true;
             })
-            .error(function(){ $scope.pathologyExists = false; });
     };
 
     /*

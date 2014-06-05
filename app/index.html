@@ -77,7 +77,7 @@
               <div id="expandtable">
                 <div class="divrow ng-cloak" ng-repeat="doc in gridData | filter:searchQuery">
                   <div class="divcell cellwidth_id">{{doc.id}}</div>
-                    <div ng-repeat="var in variables" extra-data-tooltip="Confidence: {{doc[var].confidence}}" class="divcell cellwidth_var {{styleGridCell(doc[var].classification, doc[var].confidence)}}" ng-click="updateGrid(var, doc.id)">
+                   <div ng-repeat="var in variables" extra-data-tooltip="Confidence: {{doc[var].confidence}}" class="divcell cellwidth_var {{styleGridCell(doc[var].classification, doc[var].confidence)}}" ng-click="updateGrid(var, doc.id)">
                       {{classificationName[ doc[var].classification ]}}
                     </div>
                 </div>
@@ -151,7 +151,7 @@
           <div ng-controller="TabsDemoCtrl">
             <tabset>
               <tab heading="Document View">
-                <div id="emr-report" class="report">
+                <div ng-if="reportExists" id="emr-report" class="report">
                   <div class="info">
                     <i class="glyphicon glyphicon-list-alt"></i>&nbsp;
                     <a href="#" tooltip-placement="bottom" tooltip="{{reportPath}}"> 
@@ -207,9 +207,9 @@
   <script src="bower_components/jquery/dist/jquery.min.js"></script>
   <script src="bower_components/d3/d3.min.js"></script>
   <script src="js/app.js"></script>
-  <script src="js/services.js"></script>
+  <!-- <script src="js/services.js"></script> -->
   <script src="js/controllers.js"></script>
-  <script src="js/filters.js"></script>
+  <!-- <script src="js/filters.js"></script> -->
   <script src="js/directives.js"></script>
   <script src="js/report-highlight.js"></script>
   <script src="js/jquery-routines.js"></script>
