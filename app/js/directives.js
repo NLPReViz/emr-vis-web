@@ -57,15 +57,16 @@ angular.module('myApp.directives', [])
         link: function (scope, element) {
                 element.text(scope.data);
 
-                $(element).highlight(/ascending/gi, "highlight positive")
-                .highlight(/colonoscopy/gi, "highlight negative")
-                .highlight(/.*\:/gi, "dim")
-                .highlight(/S_O_H\s\SE_O_H/gi, "dim")
-                .highlight(/De-ID.*S_O_H/gi, "dim")
-                .highlight(/.*E_O_H/gi, "dim")
-                .highlight(/\[Report de-identified.*/gi, "dim")
-                .highlight(/\*\*.*/gi, "dim")
-                .highlight(/E_O_R/gi, "dim");
+                $(element).highlight(/ascending/gi, "highlight positive") //sample positive term
+                        .highlight(/colonoscopy/gi, "highlight negative") //sample negative term
+                        .highlight(/S_O_H[\s\S]*E_O_H/, "dim") // header
+                        .highlight(/De-ID.*reserved./i, "dim") //copright
+                        .highlight(/\[Report de-identified.*/i, "dim") //De-ID
+                        .highlight(/\*\* Report Electronically Signed Out \*\*/, "dim") //Pathology template
+                        .highlight(/My signature is attestation[\s\S]*reflects that evaluation./, "dim") //Pathology template
+                        .highlight(/E_O_R/, "dim") //End of report
+                        .highlight(/\*\*[A-Z\ ,-\[\]\.]*/g, "dim") //DE-IDed Names
+                        .highlight(/[A-Z\-\ #]*\:/g, "dim"); //Colon fields
         }
     };
 }])
