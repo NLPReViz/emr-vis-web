@@ -75,6 +75,7 @@
                 <div class="handle"></div>
               </div>
               <div id="expandtable">
+                <p ng-hide="gridData" class="loading">Loading</p>
                 <div class="divrow ng-cloak" ng-repeat="doc in gridData | filter: { id: searchQuery }">
                   <div class="divcell cellwidth_id">{{doc.id}}</div>
                    <div ng-repeat="var in variables" extra-data-tooltip="Confidence: {{doc[var].confidence}}" class="divcell cellwidth_var {{styleGridCell(doc[var].classification, doc[var].confidence)}}" ng-click="updateGrid(var, doc.id)">
@@ -96,21 +97,20 @@
               <div class="content">
                 <div id="keywords">
                   <h6>{{classificationName["positive"]}} indicators</h6>
-
-<p ng-hide="variableData" class="clear">Loading</                  <ol>
+                  <p ng-hide="variableData" class="loading">Loading</p>
+                  <ol>
                     <li ng-repeat="keyword in variableData[activeVariable].topPositive" tooltip-placement="right" tooltip="Weight {{keyword.weight/100}}" class="positive" style="width:{{keyword.weight}}%;">{{keyword.term}}</li>
                   </ol>
-p>
 
                   <h6>{{classificationName["negative"]}} indicators</h6>
-
-<p ng-hide="variableData" class="clear">Loading</                  <ol>
+                  <p ng-hide="variableData" class="loading">Loading</p>
+                  <ol>
                     <li ng-repeat="keyword in variableData[activeVariable].topNegative" tooltip-placement="right" tooltip="Weight {{keyword.weight/100}}" class="negative" style="width:{{keyword.weight}}%;">{{keyword.term}}</li>
                   </ol>
-p>
                 </div>
                 <div id="distribution">
                   <h6>Distribution</h6>
+                  <p ng-hide="variableData" class="loading">Loading</p>
                   <d3-piechart data='pieData'></d3-piechart>
                 </div>
               </div>
@@ -121,13 +121,13 @@ p>
               
               <div class="content">
                 <h6>{{classificationName["positive"]}} indicators</h6>
-                <p ng-hide="gridData" class="clear">Loading</p>
+                <p ng-hide="gridData" class="loading">Loading</p>
                 <ol>
                   <li ng-repeat="keyword in gridData[activeDoc][activeVariable].topPositive" tooltip-placement="left" tooltip="Weight {{keyword.weight/100}}" class="positive" style="width:{{keyword.weight}}%;">{{keyword.term}}</li>
                 </ol>
 
                 <h6>{{classificationName["negative"]}} indicators</h6>
-                <p ng-hide="gridData" class="clear">Loading</p>
+                <p ng-hide="gridData" class="loading">Loading</p>
                 <ol>
                   <li ng-repeat="keyword in gridData[activeDoc][activeVariable].topNegative" tooltip-placement="left" tooltip="Weight {{keyword.weight/100}}" class="negative" style="width:{{keyword.weight}}%;">{{keyword.term}}</li>
                 </ol>
