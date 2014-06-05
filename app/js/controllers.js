@@ -3,7 +3,7 @@
 /* Controllers */
 
 angular.module('myApp.controllers', [])
-  .controller('MainCtrl', ['$scope', '$http', '$timeout', function($scope, $http, $timeout) {
+  .controller('MainCtrl', ['$scope', '$http', function($scope, $http, constant) {
     /*
      * App config
      */
@@ -15,6 +15,8 @@ angular.module('myApp.controllers', [])
               "ileo-cecal-valve", "indication-type", "infomed-consent", 
               "nursing-report", "no-prep-adequate", "not-prep-adequate",
               "yes-prep-adequate", "proc-aborted", "widthdraw-time"]
+
+    console.log(constant);
 
     /*
      * Main grid
