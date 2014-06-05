@@ -406,8 +406,13 @@ body {
  *
  */
 
- .report pre .dim {
+.report pre .dim {
     color: #aaa;
+}
+
+.report pre .bold {
+    font-weight: bold;
+    color: #555;
 }
 
 .report pre .highlight {
