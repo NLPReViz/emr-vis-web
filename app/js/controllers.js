@@ -105,6 +105,11 @@ angular.module('myApp.controllers', [])
           {name: $scope.classificationName["positive"], count: $scope.variableData[variable]["numPositive"], classification: "positive"},
           {name: $scope.classificationName["negative"], count: $scope.variableData[variable]["numNegative"], classification: "negative"},
         ];
+
+        $scope.pieData.sort(function(first, second) {
+          return second.count - first.count;
+        });
+
     }
 
   }])
