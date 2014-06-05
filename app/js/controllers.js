@@ -21,6 +21,7 @@ angular.module('myApp.controllers', [])
      */
     
     $scope.activeVariable = "asa";
+    $scope.activeDoc = null;
 
     $http.get("dummy-grid.json")
         .success(function(data, status) {
@@ -51,11 +52,12 @@ angular.module('myApp.controllers', [])
         }
     }
 
-    $scope.updateGrid = function(variable, docName) {
-        // console.log(variable, docName);
+    $scope.updateGrid = function(variable, activeDoc) {
+        // console.log(variable, activeDoc);
         $scope.activeVariable = variable;
-        $scope.loadReport(docName);
         $scope.loadDistribution(variable);
+        $scope.loadReport(activeDoc);
+        $scope.setActiveDoc(activeDoc);
     }
 
     /*
@@ -63,10 +65,10 @@ angular.module('myApp.controllers', [])
      */
 
     //TODO: Load reports not as variables but as docs
-    $scope.loadReport = function(docName) {
-        $scope.docName = docName;
-        $scope.reportPath = "docs/"+ $scope.docName +"/report.txt";
-        $scope.pathologyPath = "docs/"+ $scope.docName +"/pathology.txt";
+    $scope.loadReport = function(activeDoc) {
+        $scope.activeDoc = activeDoc;
+        $scope.reportPath = "docs/"+ $scope.activeDoc +"/report.txt";
+        $scope.pathologyPath = "docs/"+ $scope.activeDoc +"/pathology.txt";
 
         $scope.reportText = null;
 
@@ -78,6 +80,8 @@ angular.module('myApp.controllers', [])
             .success(function(data, status) {
                 $scope.reportText = data;
                 $scope.reportExists = true;
+
+                //Find in gridData
             })
             .error(function(data, status, headers, config) {
                 $scope.reportText = "Status " + status

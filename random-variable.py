@@ -20,7 +20,7 @@ for var in variables:
     weights = list()
     for i in range(0, 5):
         weights.append(random.randrange(100))
-    weights.sort()
+    weights.sort(reverse=True)
 
     # print weights
 
@@ -35,7 +35,7 @@ for var in variables:
     weights = list()
     for i in range(0, 5):
         weights.append(random.randrange(100))
-    weights.sort()
+    weights.sort(reverse=True)
 
     # print weights
 

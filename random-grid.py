@@ -8,7 +8,7 @@ variables = ["any-adenoma", "appendiceal-orifice", "asa", "biopsy", "cecum",
               "nursing-report", "no-prep-adequate", "not-prep-adequate",
               "yes-prep-adequate", "proc-aborted", "widthdraw-time"]
 
-data = []
+data = {}
 
 for doc in docIds:
     
@@ -33,7 +33,7 @@ for doc in docIds:
         weights = list()
         for i in range(0, 5):
             weights.append(random.randrange(100))
-        weights.sort()
+        weights.sort(reverse=True)
 
         # print weights
 
@@ -48,7 +48,7 @@ for doc in docIds:
         weights = list()
         for i in range(0, 5):
             weights.append(random.randrange(100))
-        weights.sort()
+        weights.sort(reverse=True)
 
         # print weights
 
@@ -63,7 +63,8 @@ for doc in docIds:
 
         document[var] = attributes
 
-    data.append(document)
+    # data.append(document)
+    data[doc] = document
 
 print json.dumps(data)
 # print json.dumps(data, indent=4, sort_keys=True)

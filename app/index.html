@@ -96,22 +96,18 @@
               <div class="content">
                 <div id="keywords">
                   <h6>{{classificationName["positive"]}} indicators</h6>
-                  <ol>
-                    <li tooltip-placement="right" tooltip="Weight 1.23" class="positive" style="width:50%;">withdrawal</li>
-                    <li tooltip-placement="right" tooltip="Weight 1.00" class="positive" style="width:45%;">pathology</li>
-                    <li tooltip-placement="right" tooltip="Weight 0.63" class="positive" style="width:38%;">appendicitis</li>
-                    <li tooltip-placement="right" tooltip="Weight 0.23" class="positive" style="width:22%;">mother</li>
-                    <li tooltip-placement="right" tooltip="Weight 0.03" class="positive" style="width:14%;">carefully</li>
+
+<p ng-hide="variableData" class="clear">Loading</                  <ol>
+                    <li ng-repeat="keyword in variableData[activeVariable].topPositive" tooltip-placement="right" tooltip="Weight {{keyword.weight/100}}" class="positive" style="width:{{keyword.weight}}%;">{{keyword.term}}</li>
                   </ol>
+p>
 
                   <h6>{{classificationName["negative"]}} indicators</h6>
-                  <ol>
-                    <li tooltip-placement="right" tooltip="Weight 1.23" class="negative" style="width:80%;">repeat</li>
-                    <li tooltip-placement="right" tooltip="Weight 1.23" class="negative" style="width:70%;">impression</li>
-                    <li tooltip-placement="right" tooltip="Weight 1.23" class="negative" style="width:52%;">small</li>
-                    <li tooltip-placement="right" tooltip="Weight 1.23" class="negative" style="width:31%;">mg</li>
-                    <li tooltip-placement="right" tooltip="Weight 1.23" class="negative" style="width:19%;">right</li>
+
+<p ng-hide="variableData" class="clear">Loading</                  <ol>
+                    <li ng-repeat="keyword in variableData[activeVariable].topNegative" tooltip-placement="right" tooltip="Weight {{keyword.weight/100}}" class="negative" style="width:{{keyword.weight}}%;">{{keyword.term}}</li>
                   </ol>
+p>
                 </div>
                 <div id="distribution">
                   <h6>Distribution</h6>
@@ -121,25 +117,19 @@
             </div>
 
             <div id="sidebar-bottom-right">
-              <div class="about unselectable">Report: <strong>#{{docName}}</strong></div>
+              <div class="about unselectable">Report: <strong>#{{activeDoc}}</strong></div>
               
               <div class="content">
                 <h6>{{classificationName["positive"]}} indicators</h6>
+                <p ng-hide="gridData" class="clear">Loading</p>
                 <ol>
-                  <li tooltip-placement="left" tooltip="Weight 1.23" class="positive" style="width:80%;">pathology</li>
-                  <li tooltip-placement="left" tooltip="Weight 1.23" class="positive" style="width:60%;">difficulty</li>
-                  <li tooltip-placement="left" tooltip="Weight 1.23" class="positive" style="width:40%;">followup</li>
-                  <li tooltip-placement="left" tooltip="Weight 1.23" class="positive" style="width:40%;">introduce</li>
-                  <li tooltip-placement="left" tooltip="Weight 1.23" class="positive" style="width:10%;">prior</li>
+                  <li ng-repeat="keyword in gridData[activeDoc][activeVariable].topPositive" tooltip-placement="left" tooltip="Weight {{keyword.weight/100}}" class="positive" style="width:{{keyword.weight}}%;">{{keyword.term}}</li>
                 </ol>
 
                 <h6>{{classificationName["negative"]}} indicators</h6>
+                <p ng-hide="gridData" class="clear">Loading</p>
                 <ol>
-                  <li tooltip-placement="left" tooltip="Weight 1.23" class="negative" style="width:100%;">indication</li>
-                  <li tooltip-placement="left" tooltip="Weight 1.23" class="negative" style="width:70%;">impression</li>
-                  <li tooltip-placement="left" tooltip="Weight 1.23" class="negative" style="width:65%;">small</li>
-                  <li tooltip-placement="left" tooltip="Weight 1.23" class="negative" style="width:40%;">rectal</li>
-                  <li tooltip-placement="left" tooltip="Weight 1.23" class="negative" style="width:20%;">mg</li>
+                  <li ng-repeat="keyword in gridData[activeDoc][activeVariable].topNegative" tooltip-placement="left" tooltip="Weight {{keyword.weight/100}}" class="negative" style="width:{{keyword.weight}}%;">{{keyword.term}}</li>
                 </ol>
               </div>
 
@@ -155,7 +145,7 @@
                   <div class="info">
                     <i class="glyphicon glyphicon-list-alt"></i>&nbsp;
                     <a href="#" tooltip-placement="bottom" tooltip="{{reportPath}}"> 
-                      <strong class="file-name js-selectable-text">Report: #{{docName}}</strong>
+                      <strong class="file-name js-selectable-text">Report: #{{activeDoc}}</strong>
                     </a>
                     <a class="btn btn-xs btn-default pull-right" ng-href="{{reportPath}}" target="_blank"><strong>View Raw</strong></a>
                   </div>
@@ -165,7 +155,7 @@
                   <div class="info">
                     <i class="glyphicon glyphicon-list-alt"></i>&nbsp;
                     <a href="#" tooltip-placement="bottom" tooltip="{{pathologyPath}}"> 
-                      <strong class="file-name js-selectable-text">Pathology: #{{docName}}</strong>
+                      <strong class="file-name js-selectable-text">Pathology: #{{activeDoc}}</strong>
                     </a>
                     <a class="btn btn-xs btn-default pull-right" ng-href="{{pathologyPath}}" target="_blank"><strong>View Raw</strong></a>
                   </div>
