@@ -136,7 +136,6 @@ angular.module('myApp.directives', [])
                      .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
                      .attr("dy", "1.15em")
                      .style("text-anchor", "middle")
-                     .style("font-size", "90%")
                      .attr("class", function(d) { return d.data.classification+"-label" + " d3-tip"; })
                      .text(function(d) { return "(" + d.data.count + ")"; });
 
