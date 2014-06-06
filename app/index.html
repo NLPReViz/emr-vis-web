@@ -23,6 +23,12 @@
 
 <body class="ng-cloak" ng-controller="MainCtrl">
 
+  <div ng-show="appDisabled" id="coverall">
+  </div>
+  <div ng-show="appLoading" id="appLoading" class="alert alert-warning">
+    <strong>Loading!</strong> Please wait.
+  </div>
+  
   <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
@@ -41,7 +47,8 @@
       </ul>
       <form class="navbar-form navbar-right" role="search">
         <div class="form-group">
-          <input class="form-control" type="search" ng-model="searchQuery" placeholder="Filter doc #" /><span id="searchclear" class="searchclear glyphicon glyphicon-remove-circle" ng-click="searchQuery = ''"></span>
+          <span class="add-on">Doc #</span>
+          <input class="form-control" type="search" ng-model="searchQuery" /><span id="searchclear" class="searchclear glyphicon glyphicon-remove-circle" ng-click="searchQuery = ''"></span>
         </div>
       </form>
     </nav>

@@ -19,9 +19,9 @@ angular.module('myApp.directives', [])
 
     element.on('mousedown', function(event) {
         // Prevent default dragging of selected content
-        event.preventDefault();     
+        event.preventDefault();
         
-        cursor_offset = event.pageY - $(element).position().top + 4;
+        cursor_offset = event.pageY - $(element).position().top;
         start = event.pageY;
 
         topHeight = $(element).prev().height();
@@ -29,7 +29,6 @@ angular.module('myApp.directives', [])
 
         $document.on('mouseup', mouseup);
         $document.on('mousemove', mousemove);
-
     });
 
     function mousemove(event) {

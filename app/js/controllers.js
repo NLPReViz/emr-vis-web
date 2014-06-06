@@ -25,6 +25,9 @@ angular.module('myApp.controllers', [])
     $scope.activeDocIndex = null;
     $scope.showGrid = true;
 
+    $scope.appLoading = true;
+    $scope.appDisabled = false;
+
     $http.get("dummy-grid.json")
         .success(function(data, status) {
             $scope.gridData = data;
@@ -88,6 +91,8 @@ angular.module('myApp.controllers', [])
         $scope.reportExists = false;
         $scope.pathologyExists = false;
 
+        $scope.appLoading = true;
+
         //report
         $http.get($scope.reportPath)
             .success(function(data, status) {
@@ -97,10 +102,14 @@ angular.module('myApp.controllers', [])
                 //Find in gridData
                 $("#cell-"+$scope.activeVariable+"-"+$scope.activeDoc)
                 .addClass("selected")
+
+                $scope.appLoading = false;
             })
             .error(function(data, status, headers, config) {
                 $scope.reportText = "Status " + status
                 alert($scope.reportPath + " is not accessible. Make sure you have the docs/ folder in the app/ directory.");
+
+                $scope.appLoading = false;
             });
 
         // pathology
