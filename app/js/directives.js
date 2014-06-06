@@ -6,42 +6,50 @@
 angular.module('myApp.directives', [])
 .directive('horizontalSplitter', ['$document', function($document) {
     return function(scope, element, attr) {
-      var startY = 0, y = 0;
+      var start = 0, cursor_offset = 0
 
       if(!angular.isFunction($(element).offset)) {
         throw new Error('Need jquery!');
     }
 
-    var topMin = 0.1*$(element).prev().height();
-    var bottomMin = 0.1*$(element).next().height();
+    var topHeight = 0, bottomHeight = 0, y = 0;
+
+    var minTop = 0.1*$(element).prev().height();
+    var minBottom = 0.1*$(element).next().height();
 
     element.on('mousedown', function(event) {
         // Prevent default dragging of selected content
-        event.preventDefault();
-        startY = event.pageY;
+        event.preventDefault();     
+        
+        cursor_offset = event.pageY - $(element).position().top + 4;
+        start = event.pageY;
 
-        $document.on('mousemove', mousemove);
+        topHeight = $(element).prev().height();
+        bottomHeight = $(element).next().height();
+
         $document.on('mouseup', mouseup);
+        $document.on('mousemove', mousemove);
+
     });
 
     function mousemove(event) {
-        y = event.pageY - startY;
-        startY = event.pageY;
+        var delta = event.pageY - start;
 
-        //revise height for prev div
-        var topHeight = $(element).prev().height() + y;
-
-        //revised height for next div 
-        var bottomHeight = $(element).next().height() - y; 
-
-        if(topHeight > topMin && bottomHeight > bottomMin){
-            $(element).prev().height(topHeight); 
-            $(element).next().height(bottomHeight);
-            $("#sidebar-top").trigger('heightChange'); 
+        if( (topHeight + delta) > minTop && 
+                (bottomHeight - delta) > minBottom)
+        {
+            $("#sidebar-resize-indicator").css({ top: event.pageY - cursor_offset });
+            y = delta
         }
     }
 
     function mouseup() {
+        $(element).prev().height(topHeight + y); 
+        $(element).next().height(bottomHeight - y);
+        $("#sidebar-top").trigger('heightChange'); 
+        
+        $("#sidebar-resize-indicator").css({ top: "-9999px" });
+
         $document.off('mousemove', mousemove);
         $document.off('mouseup', mouseup);
     }
@@ -147,5 +155,4 @@ angular.module('myApp.directives', [])
                 }, true);
             }
     };
-}])
-
+}]);

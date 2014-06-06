@@ -127,6 +127,18 @@ body {
     z-index: 1020;
 }
 
+#sidebar-resize-indicator {
+    position: absolute;
+    top: -9999px;
+    left: 0px;
+    width: 600px;
+    height: 8px;
+    background-color: black;
+    cursor: row-resize;
+    z-index: 1030;
+    opacity: 0.2;
+}
+
 .sidebar-separator .handle{
     position:relative;
     top: 0px;

@@ -22,6 +22,7 @@ angular.module('myApp.controllers', [])
     
     $scope.activeVariable = "asa";
     $scope.activeDoc = null;
+    $scope.showGrid = true;
 
     $http.get("dummy-grid.json")
         .success(function(data, status) {
