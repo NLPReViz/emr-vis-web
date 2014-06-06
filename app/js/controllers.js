@@ -62,7 +62,7 @@ angular.module('myApp.controllers', [])
         $scope.activeVariable = variable;
         $scope.loadDistribution(variable);
         $scope.loadReport(activeDoc);
-        $scope.setActiveDoc(activeDoc);
+        // $scope.setActiveDoc(activeDoc);
     }
 
     /*
@@ -72,9 +72,6 @@ angular.module('myApp.controllers', [])
     //TODO: Load reports not as variables but as docs
     $scope.loadReport = function(activeDoc) {
         $scope.activeDoc = activeDoc;
-
-        $("#cell-"+$scope.activeVariable+"-"+$scope.activeDoc)
-                .addClass("selected")
 
         $scope.reportPath = "docs/"+ $scope.activeDoc +"/report.txt";
         $scope.pathologyPath = "docs/"+ $scope.activeDoc +"/pathology.txt";
@@ -91,6 +88,8 @@ angular.module('myApp.controllers', [])
                 $scope.reportExists = true;
 
                 //Find in gridData
+                $("#cell-"+$scope.activeVariable+"-"+$scope.activeDoc)
+                .addClass("selected")
             })
             .error(function(data, status, headers, config) {
                 $scope.reportText = "Status " + status
