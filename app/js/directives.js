@@ -45,6 +45,8 @@ angular.module('myApp.directives', [])
     function mouseup() {
         $(element).prev().height(topHeight + y); 
         $(element).next().height(bottomHeight - y);
+        y = 0;
+
         $("#sidebar-top").trigger('heightChange'); 
         
         $("#sidebar-resize-indicator").css({ top: "-9999px" });
