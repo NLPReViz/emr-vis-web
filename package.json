@@ -16,7 +16,7 @@
   "scripts": {
     "postinstall": "bower install",
 
-    "prestart": "npm install",
+    "prestart": "npm install; python random-grid.py > app/dummy-grid.json; python random-variable.py > app/dummy-variable.json",
     "start": "http-server -p 8000",
 
     "pretest": "npm install",
