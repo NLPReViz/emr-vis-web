@@ -22,12 +22,18 @@ angular.module('myApp.controllers', [])
     
     $scope.activeVariable = "asa";
     $scope.activeDoc = null;
+    $scope.activeDocIndex = null;
     $scope.showGrid = true;
 
     $http.get("dummy-grid.json")
         .success(function(data, status) {
             $scope.gridData = data;
-            $scope.loadReport("0001");
+            
+            //Show first report in the set
+            $scope.activeDocIndex = 0;
+            $scope.activeDoc = $scope.gridData[0].id;
+            $scope.loadReport($scope.activeDoc);
+            
         })
         .error(function() { alert("Could not load grid data!"); });
 
@@ -53,14 +59,17 @@ angular.module('myApp.controllers', [])
         }
     }
 
-    $scope.updateGrid = function(variable, activeDoc) {
+    $scope.updateGrid = function(variable, activeDoc, activeDocIndex) {
         // console.log(variable, activeDoc);
-        
+
         $("#cell-"+$scope.activeVariable+"-"+$scope.activeDoc)
                         .removeClass("selected")
 
         $scope.activeVariable = variable;
         $scope.loadDistribution(variable);
+
+        $scope.activeDoc = activeDoc;
+        $scope.activeDocIndex = activeDocIndex;
         $scope.loadReport(activeDoc);
         // $scope.setActiveDoc(activeDoc);
     }
@@ -71,8 +80,6 @@ angular.module('myApp.controllers', [])
 
     //TODO: Load reports not as variables but as docs
     $scope.loadReport = function(activeDoc) {
-        $scope.activeDoc = activeDoc;
-
         $scope.reportPath = "docs/"+ $scope.activeDoc +"/report.txt";
         $scope.pathologyPath = "docs/"+ $scope.activeDoc +"/pathology.txt";
 

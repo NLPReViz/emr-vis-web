@@ -79,7 +79,7 @@
                 <!-- <p ng-hide="gridData" class="loading">Loading</p> -->
                 <div class="divrow ng-cloak" ng-repeat="doc in gridData | filter: { id: searchQuery }">
                   <div class="divcell cellwidth_id">{{doc.id}}</div>
-                   <div ng-repeat="var in variables" extra-data-tooltip="Confidence: {{doc[var].confidence}}" id="cell-{{var}}-{{doc.id}}" class="divcell cellwidth_var {{styleGridCell(doc[var].classification, doc[var].confidence)}}" ng-click="updateGrid(var, doc.id)">
+                   <div ng-repeat="var in variables" extra-data-tooltip="Confidence: {{doc[var].confidence}}" id="cell-{{var}}-{{doc.id}}" class="divcell cellwidth_var {{styleGridCell(doc[var].classification, doc[var].confidence)}}" ng-click="updateGrid(var, doc.id, $parent.$index)">
                       {{classificationName[ doc[var].classification ]}}
                     </div>
                 </div>
@@ -124,13 +124,13 @@
                 <h6>{{classificationName["positive"]}} indicators</h6>
                 <p ng-hide="gridData" class="loading">Loading</p>
                 <ol>
-                  <li ng-repeat="keyword in gridData[activeDoc][activeVariable].topPositive"  class="positive" style="width:{{keyword.weight}}%;">{{keyword.term}}&nbsp;&nbsp;<span class="d3-tip">({{keyword.weight/100}})</span></li>
+                  <li ng-repeat="keyword in gridData[activeDocIndex][activeVariable].topPositive"  class="positive" style="width:{{keyword.weight}}%;">{{keyword.term}}&nbsp;&nbsp;<span class="d3-tip">({{keyword.weight/100}})</span></li>
                 </ol>
 
                 <h6>{{classificationName["negative"]}} indicators</h6>
                 <p ng-hide="gridData" class="loading">Loading</p>
                 <ol>
-                  <li ng-repeat="keyword in gridData[activeDoc][activeVariable].topNegative" class="negative" style="width:{{keyword.weight}}%;">{{keyword.term}}&nbsp;&nbsp;<span class="d3-tip">({{keyword.weight/100}})</span></li>
+                  <li ng-repeat="keyword in gridData[activeDocIndex][activeVariable].topNegative" class="negative" style="width:{{keyword.weight}}%;">{{keyword.term}}&nbsp;&nbsp;<span class="d3-tip">({{keyword.weight/100}})</span></li>
                 </ol>
               </div>
 

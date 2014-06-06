@@ -9,7 +9,8 @@ variables = ["any-adenoma", "appendiceal-orifice", "asa", "biopsy", "cecum",
               "nursing-report", "no-prep-adequate", "not-prep-adequate",
               "yes-prep-adequate", "proc-aborted", "widthdraw-time"]
 
-data = {}
+# data = {}
+data = []
 
 for doc in docIds:
     
@@ -64,8 +65,8 @@ for doc in docIds:
 
         document[var] = attributes
 
-    # data.append(document)
-    data[doc] = document
+    data.append(document)
+    # data[doc] = document
 
 print json.dumps(data)
 # print json.dumps(data, indent=4, sort_keys=True)

@@ -4,6 +4,7 @@
 angular.module('myApp', [
   'myApp.directives',
   'myApp.controllers',
+  // 'myApp.filters',
   'ui.bootstrap'
 ]);
 
