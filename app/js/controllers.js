@@ -55,6 +55,10 @@ angular.module('myApp.controllers', [])
 
     $scope.updateGrid = function(variable, activeDoc) {
         // console.log(variable, activeDoc);
+        
+        $("#cell-"+$scope.activeVariable+"-"+$scope.activeDoc)
+                        .removeClass("selected")
+
         $scope.activeVariable = variable;
         $scope.loadDistribution(variable);
         $scope.loadReport(activeDoc);
@@ -68,6 +72,10 @@ angular.module('myApp.controllers', [])
     //TODO: Load reports not as variables but as docs
     $scope.loadReport = function(activeDoc) {
         $scope.activeDoc = activeDoc;
+
+        $("#cell-"+$scope.activeVariable+"-"+$scope.activeDoc)
+                .addClass("selected")
+
         $scope.reportPath = "docs/"+ $scope.activeDoc +"/report.txt";
         $scope.pathologyPath = "docs/"+ $scope.activeDoc +"/pathology.txt";
 

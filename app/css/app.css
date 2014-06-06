@@ -340,14 +340,17 @@ body {
 }
 
 #sidebar-top .divrow .cellwidth_var:hover {
-    border-color: #aaa;
+    border-color: #666;
     text-decoration: underline;
+}
+
+#sidebar-top .divrow .selected {
+    box-shadow: inset 1px 1px 1px #000;
 }
 
 #sidebar-top .divrow:hover .divcell:first-of-type {
     background-color: #eee;
 }
-
 
 /*
  * Side-bar charts
