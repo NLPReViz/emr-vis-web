@@ -100,13 +100,13 @@
                   <h6>{{classificationName["positive"]}} indicators</h6>
                   <p ng-hide="variableData" class="loading">Loading</p>
                   <ol>
-                    <li ng-repeat="keyword in variableData[activeVariable].topPositive" tooltip-placement="right" tooltip="Weight {{keyword.weight/100}}" class="positive" style="width:{{keyword.weight}}%;">{{keyword.term}}</li>
+                    <li ng-repeat="keyword in variableData[activeVariable].topPositive" class="positive" style="width:{{keyword.weight}}%;">{{keyword.term}}&nbsp;&nbsp;<span>({{keyword.weight/100}})</span></li>
                   </ol>
 
                   <h6>{{classificationName["negative"]}} indicators</h6>
                   <p ng-hide="variableData" class="loading">Loading</p>
                   <ol>
-                    <li ng-repeat="keyword in variableData[activeVariable].topNegative" tooltip-placement="right" tooltip="Weight {{keyword.weight/100}}" class="negative" style="width:{{keyword.weight}}%;">{{keyword.term}}</li>
+                    <li ng-repeat="keyword in variableData[activeVariable].topNegative" class="negative" style="width:{{keyword.weight}}%;">{{keyword.term}}&nbsp;&nbsp;<span>({{keyword.weight/100}})</span></li>
                   </ol>
                 </div>
                 <div id="distribution">
@@ -124,13 +124,13 @@
                 <h6>{{classificationName["positive"]}} indicators</h6>
                 <p ng-hide="gridData" class="loading">Loading</p>
                 <ol>
-                  <li ng-repeat="keyword in gridData[activeDoc][activeVariable].topPositive" tooltip-placement="left" tooltip="Weight {{keyword.weight/100}}" class="positive" style="width:{{keyword.weight}}%;">{{keyword.term}}</li>
+                  <li ng-repeat="keyword in gridData[activeDoc][activeVariable].topPositive"  class="positive" style="width:{{keyword.weight}}%;">{{keyword.term}}&nbsp;&nbsp;<span>({{keyword.weight/100}})</span></li>
                 </ol>
 
                 <h6>{{classificationName["negative"]}} indicators</h6>
                 <p ng-hide="gridData" class="loading">Loading</p>
                 <ol>
-                  <li ng-repeat="keyword in gridData[activeDoc][activeVariable].topNegative" tooltip-placement="left" tooltip="Weight {{keyword.weight/100}}" class="negative" style="width:{{keyword.weight}}%;">{{keyword.term}}</li>
+                  <li ng-repeat="keyword in gridData[activeDoc][activeVariable].topNegative" class="negative" style="width:{{keyword.weight}}%;">{{keyword.term}}&nbsp;&nbsp;<span>({{keyword.weight/100}})</span></li>
                 </ol>
               </div>
 

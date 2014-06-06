@@ -363,6 +363,10 @@ body {
     padding: 2px;
 }
 
+#sidebar-bottom ol:hover li span {
+    opacity: 1;
+}
+
 #sidebar-bottom li {
     height: 15px;
     text-align: left;
@@ -373,6 +377,12 @@ body {
     -webkit-box-shadow: 1px 1px 0.5px #ccc;
     box-shadow:         1px 1px 0.5px #ccc;
     overflow: visible;
+    white-space: nowrap;
+}
+
+#sidebar-bottom li span{
+    opacity: 0;
+    font-size: 90%;
 }
 
 #distribution{
@@ -445,9 +455,3 @@ body {
 .d3-tip{
     opacity: 0;
 }
-
-
-
-
-
-
