@@ -68,13 +68,17 @@ angular.module('myApp.controllers', [])
         $("#cell-"+$scope.activeVariable+"-"+$scope.activeDoc)
                         .removeClass("selected")
 
-        $scope.activeVariable = variable;
-        $scope.loadDistribution(variable);
+        if(variable != $scope.variable) {
+          $scope.activeVariable = variable;
+          $scope.loadDistribution(variable);
+        }
 
-        $scope.activeDoc = activeDoc;
-        $scope.activeDocIndex = activeDocIndex;
-        $scope.loadReport(activeDoc);
-        // $scope.setActiveDoc(activeDoc);
+        if(activeDocIndex != $scope.activeDocIndex) {
+          $scope.activeDoc = activeDoc;
+          $scope.activeDocIndex = activeDocIndex;
+          $scope.loadReport(activeDoc);
+          $scope.setActiveDoc(activeDoc);
+        }
     }
 
     /*
@@ -83,8 +87,8 @@ angular.module('myApp.controllers', [])
 
     //TODO: Load reports not as variables but as docs
     $scope.loadReport = function(activeDoc) {
-        $scope.reportPath = "docs/"+ $scope.activeDoc +"/report.txt";
-        $scope.pathologyPath = "docs/"+ $scope.activeDoc +"/pathology.txt";
+        $scope.reportPath = "docs/"+ activeDoc +"/report.txt";
+        $scope.pathologyPath = "docs/"+ activeDoc +"/pathology.txt";
 
         $scope.reportText = null;
 
