@@ -17,8 +17,8 @@ for doc in docIds:
 
     document['id'] = doc
 
-    with open ("app/docs/" + doc + "/report.txt" , "r") as report:
-        document['report'] = report.readlines()
+    # with open ("app/docs/" + doc + "/report.txt" , "r") as report:
+    #     document['report'] = report.readlines()
 
     for var in variables:
 
@@ -67,5 +67,5 @@ for doc in docIds:
     # data.append(document)
     data[doc] = document
 
-# print json.dumps(data)
-print json.dumps(data, indent=4, sort_keys=True)
+print json.dumps(data)
+# print json.dumps(data, indent=4, sort_keys=True)
