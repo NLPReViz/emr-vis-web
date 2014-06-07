@@ -466,6 +466,11 @@ body {
     color: #468847;
 }
 
+.progress .positive {
+    background-image: none;
+    background-color: #468847;
+}
+
 .positive-label {
     fill: #468847;
     width: 10px;
@@ -479,7 +484,14 @@ body {
 
 .negative-label {
     fill: #C7254E;
+    width: 10px;
 }
+
+.progress .negative {
+    background-image: none;
+    background-color: #C7254E;
+}
+
 
 /* From http://colorbrewer2.org/ */
 .cert0-neg{background-color: #F9F2F4; color: #C7254E;}
@@ -489,6 +501,13 @@ body {
 .cert1-pos{background-color: #d0e9c5; color: #468847;}
 
 /* Data grid */
+
+#sidebar-top .progress{
+    border-radius: 0;
+    height: 6px;
+    margin-bottom: 0;
+}
+
 #sidebar-top #expandtable, #sidebar-top #tablecontainer 
 {
     height:100%;
@@ -500,7 +519,6 @@ body {
 
 #sidebar-top a:hover{
     text-decoration: none;
-    cursor: help;
 }
 
 #sidebar-top .rotate {
@@ -553,6 +571,7 @@ body {
     border: 1px solid #e5e5e5; 
     height: 100%;
     font-weight: bold;
+    cursor: help;
 }
 
 #sidebar-top .cellwidth_id { 

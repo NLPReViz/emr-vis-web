@@ -35,7 +35,7 @@
   
   <header class="navbar navbar-default navbar-fixed-top">
     <div class="navbar-header">
-      <a class="navbar-brand visible-xs" href="#">EMR VisWeb</a>
+      <a class="navbar-brand visible-xs">EMR VisWeb</a>
     </div>
     <nav class="hidden-xs">
       <ul class="nav navbar-nav">
@@ -63,27 +63,121 @@
           <div id="sidebar-top" class="unselectable">
             <div id="tablecontainer">
               <div id="topbar">
-                <div class="colname cellwidth_id"><a href="#" class="rotate" tooltip-placement="right" tooltip-animation="false" tooltip="document identifier"><div>doc #</div></a></div>
-                <div class="colname cellwidth_var"><a class="rotate" tooltip-placement="right" tooltip-animation="false" tooltip="any adenoma"><div>any-adenoma</div></a></div>
-                <div class="colname cellwidth_var"><a class="rotate" tooltip-placement="right" tooltip-animation="false" tooltip="appendiceal orifice"><div>appendiceal-orifice</div></a></div>
-                <div class="colname cellwidth_var"><a class="rotate" tooltip-placement="right" tooltip-animation="false" tooltip="asa"><div>asa</div></a></div>
-                <div class="colname cellwidth_var"><a class="rotate" tooltip-placement="right" tooltip-animation="false" tooltip="biopsy"><div>biopsy</div></a></div>
-                <div class="colname cellwidth_var"><a class="rotate" tooltip-placement="right" tooltip-animation="false" tooltip="cecum"><div>cecum</div></a></div>
-                <div class="colname cellwidth_var"><a class="rotate" tooltip-placement="right" tooltip-animation="false" tooltip="ileo cecal valve"><div>ileo-cecal-valve</div></a></div>
-                <div class="colname cellwidth_var"><a class="rotate" tooltip-placement="right" tooltip-animation="false" tooltip="indication type"><div>indication-type</div></a></div>
-                <div class="colname cellwidth_var"><a class="rotate" tooltip-placement="right" tooltip-animation="false" tooltip="infomed consent"><div>infomed-consent</div></a></div>
-                <div class="colname cellwidth_var"><a class="rotate" tooltip-placement="left" tooltip-animation="false" tooltip="nursing report"><div>nursing-report</div></a></div>
-                <div class="colname cellwidth_var"><a class="rotate" tooltip-placement="left" tooltip-animation="false" tooltip="no mention about preparation"><div>no-prep-adequate</div></a></div>
-                <div class="colname cellwidth_var"><a class="rotate" tooltip-placement="left" tooltip-animation="false" tooltip="preparation not adequate"><div>not-prep-adequate</div></a></div>
-                <div class="colname cellwidth_var"><a class="rotate" tooltip-placement="left" tooltip-animation="false" tooltip="preparation adequate"><div>yes-prep-adequate</div></a></div>
-                <div class="colname cellwidth_var"><a class="rotate" tooltip-placement="left" tooltip-animation="false" tooltip="procedure aborted"><div>proc-aborted</div></a></div>
-                <div class="colname cellwidth_var"><a class="rotate" tooltip-placement="left" tooltip-animation="false" tooltip="withdraw time"><div>widthdraw-time</div></a></div>
+                <div tooltip-placement="right" tooltip-animation="false" tooltip="document identifier" class="colname cellwidth_id">
+                  <div class="progress">
+                  </div>
+                  <a class="rotate"><div>doc #</div></a>
+                </div>
+                <div class="colname cellwidth_var" ng-repeat="var in variables" tooltip="{{variableData[var]['percPositive']}}% {{classificationName['positive']}}" tooltip-placement="{{$index > 6 ? 'left' : 'right'}}">
+                  <div class="progress">
+                    <div class="progress-bar positive" style="width: {{variableData[var]['percPositive']}}%"></div>
+                    <div class="progress-bar negative" style="width: {{variableData[var]['percNegative']}}%"></div>
+                  </div>
+                  <a class="rotate"><div>{{var}}</div></a>
+                </div>
+                <!-- <div class="colname cellwidth_var">
+                  <div class="progress">
+                    <div class="progress-bar positive" style="width: {{getPositivePercentage('any-adenoma')}}%"></div>
+                    <div class="progress-bar negative" style="width: {{getNegativePercentage('any-adenoma')}}%"></div>
+                  </div>
+                  <a class="rotate" tooltip-placement="right" tooltip-animation="false" tooltip="any adenoma"><div>any-adenoma</div></a>
+                </div>
+                <div class="colname cellwidth_var">
+                  <div class="progress">
+                    <div class="progress-bar positive" style="width: {{getPositivePercentage('appendiceal-orifice')}}%"></div>
+                    <div class="progress-bar negative" style="width: {{getNegativePercentage('appendiceal-orifice')}}%"></div>
+                  </div>
+                  <a class="rotate" tooltip-placement="right" tooltip-animation="false" tooltip="appendiceal orifice"><div>appendiceal-orifice</div></a>
+                </div>
+                <div class="colname cellwidth_var">
+                  <div class="progress">
+                    <div class="progress-bar positive" style="width: {{getPositivePercentage('asa')}}%"></div>
+                    <div class="progress-bar negative" style="width: {{getNegativePercentage('asa')}}%"></div>
+                  </div>
+                  <a class="rotate" tooltip-placement="right" tooltip-animation="false" tooltip="asa"><div>asa</div></a>
+                </div>
+                <div class="colname cellwidth_var">
+                  <div class="progress">
+                    <div class="progress-bar positive" style="width: {{getPositivePercentage('biopsy')}}%"></div>
+                    <div class="progress-bar negative" style="width: {{getNegativePercentage('biopsy')}}%"></div>
+                  </div>
+                  <a class="rotate" tooltip-placement="right" tooltip-animation="false" tooltip="biopsy"><div>biopsy</div></a>
+                </div>
+                <div class="colname cellwidth_var">
+                  <div class="progress">
+                    <div class="progress-bar positive" style="width: {{getPositivePercentage('cecum')}}%"></div>
+                    <div class="progress-bar negative" style="width: {{getNegativePercentage('cecum')}}%"></div>
+                  </div>
+                  <a class="rotate" tooltip-placement="right" tooltip-animation="false" tooltip="cecum"><div>cecum</div></a>
+                </div>
+                <div class="colname cellwidth_var">
+                  <div class="progress">
+                    <div class="progress-bar positive" style="width: {{getPositivePercentage('ileo-cecal-valve')}}%"></div>
+                    <div class="progress-bar negative" style="width: {{getNegativePercentage('ileo-cecal-valve')}}%"></div>
+                  </div>
+                  <a class="rotate" tooltip-placement="right" tooltip-animation="false" tooltip="ileo cecal valve"><div>ileo-cecal-valve</div></a>
+                </div>
+                <div class="colname cellwidth_var">
+                  <div class="progress">
+                    <div class="progress-bar positive" style="width: {{getPositivePercentage('indication-type')}}%"></div>
+                    <div class="progress-bar negative" style="width: {{getNegativePercentage('indication-type')}}%"></div>
+                  </div>
+                  <a class="rotate" tooltip-placement="right" tooltip-animation="false" tooltip="indication type"><div>indication-type</div></a>
+                </div>
+                <div class="colname cellwidth_var">
+                  <div class="progress">
+                    <div class="progress-bar positive" style="width: {{getPositivePercentage('infomed-consent')}}%"></div>
+                    <div class="progress-bar negative" style="width: {{getNegativePercentage('infomed-consent')}}%"></div>
+                  </div>
+                  <a class="rotate" tooltip-placement="right" tooltip-animation="false" tooltip="infomed consent"><div>infomed-consent</div></a>
+                </div>
+                <div class="colname cellwidth_var">
+                  <div class="progress">
+                    <div class="progress-bar positive" style="width: {{getPositivePercentage('nursing-report')}}%"></div>
+                    <div class="progress-bar negative" style="width: {{getNegativePercentage('nursing-report')}}%"></div>
+                  </div>
+                  <a class="rotate" tooltip-placement="left" tooltip-animation="false" tooltip="nursing report"><div>nursing-report</div></a>
+                </div>
+                <div class="colname cellwidth_var">
+                  <div class="progress">
+                    <div class="progress-bar positive" style="width: {{getPositivePercentage('no-prep-adequate')}}%"></div>
+                    <div class="progress-bar negative" style="width: {{getNegativePercentage('no-prep-adequate')}}%"></div>
+                  </div>
+                  <a class="rotate" tooltip-placement="left" tooltip-animation="false" tooltip="no mention about preparation"><div>no-prep-adequate</div></a>
+                </div>
+                <div class="colname cellwidth_var">
+                  <div class="progress">
+                    <div class="progress-bar positive" style="width: {{getPositivePercentage('')}}%"></div>
+                    <div class="progress-bar negative" style="width: {{getNegativePercentage('not-prep-adequate')}}%"></div>
+                  </div>
+                  <a class="rotate" tooltip-placement="left" tooltip-animation="false" tooltip="preparation not adequate"><div>not-prep-adequate</div></a>
+                </div>
+                <div class="colname cellwidth_var">
+                  <div class="progress">
+                    <div class="progress-bar positive" style="width: {{getPositivePercentage('yes-prep-adequate')}}%"></div>
+                    <div class="progress-bar negative" style="width: {{getNegativePercentage('yes-prep-adequate')}}%"></div>
+                  </div>
+                  <a class="rotate" tooltip-placement="left" tooltip-animation="false" tooltip="preparation adequate"><div>yes-prep-adequate</div></a>
+                </div>
+                <div class="colname cellwidth_var">
+                  <div class="progress">
+                    <div class="progress-bar positive" style="width: {{getPositivePercentage('proc-aborted')}}%"></div>
+                    <div class="progress-bar negative" style="width: {{getNegativePercentage('proc-aborted')}}%"></div>
+                  </div>
+                  <a class="rotate" tooltip-placement="left" tooltip-animation="false" tooltip="procedure aborted"><div>proc-aborted</div></a>
+                </div>
+                <div class="colname cellwidth_var">
+                  <div class="progress">
+                    <div class="progress-bar positive" style="width: {{getPositivePercentage('widthdraw-time')}}%"></div>
+                    <div class="progress-bar negative" style="width: {{getNegativePercentage('widthdraw-time')}}%"></div>
+                  </div>
+                  <a class="rotate" tooltip-placement="left" tooltip-animation="false" tooltip="withdraw time"><div>widthdraw-time</div></a>
+                </div> -->
               </div>
               <div class="sidebar-separator breakline" horizontal-splitter>
                 <div class="handle"></div>
               </div>
               <div id="expandtable">
-                <!-- <p ng-hide="gridData" class="empty-list">None</p> -->
                 <div class="divrow ng-cloak" ng-repeat="doc in gridData | filter: { id: searchQuery }">
                   <div class="divcell cellwidth_id">{{doc.id}}</div>
                   <div ng-repeat="var in variables" class="divcell cellwidth_var {{styleGridCell(doc[var].classification, doc[var].confidence)}} custom-tooltip-bottom" ng-click="updateGrid(var, $parent.$index)" ng-class="{selected: $parent.$index==activeDocIndex && var==activeVariable}" data-custom-tooltip="{{doc[var].confidence}}">
@@ -153,9 +247,9 @@
                 <div ng-if="reportExists" id="emr-report" class="report">
                   <div class="info">
                     <i class="glyphicon glyphicon-list-alt"></i>&nbsp;
-                    <span tooltip-placement="bottom" tooltip-animation="false" tooltip="docs/{{gridData[activeDocIndex].id}}/report.txt">
+                    <a tooltip-placement="bottom" tooltip-animation="false" tooltip="docs/{{gridData[activeDocIndex].id}}/report.txt">
                       <strong class="file-name js-selectable-text">Report: #{{gridData[activeDocIndex].id}}</strong>
-                    </span>
+                    </a>
                     <a class="btn btn-xs btn-default pull-right" ng-href="docs/{{gridData[activeDocIndex].id}}/report.txt" target="_blank"><strong>View Raw</strong></a>
                   </div>
                   <pre><highlighted-report data='reportText'></highlighted-report></pre>

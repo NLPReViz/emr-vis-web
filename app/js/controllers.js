@@ -40,6 +40,18 @@ angular.module('myApp.controllers', [])
     $http.get("dummy-variable.json")
         .success(function(data, status) {
             $scope.variableData = data;
+
+            $scope.variables.forEach(function(variable) {
+              // console.log(data[variable]["numPositive"]);
+              $scope.variableData[variable]["percPositive"] = 
+                                      Math.round(100.0 * data[variable]["numPositive"] / 
+                                      (data[variable]["numPositive"] + data[variable]["numNegative"]));
+              $scope.variableData[variable]['percNegative'] = 100.0 - $scope.variableData[variable]['percPositive'];
+
+              console.log($scope.variableData[variable]["percPositive"] + " - " + $scope.variableData[variable]["percNegative"]);
+                                      
+            });
+
             $scope.activeVariable = "asa";
             $scope.loadDistribution("asa");
         })
