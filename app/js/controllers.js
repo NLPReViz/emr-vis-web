@@ -62,16 +62,22 @@ angular.module('myApp.controllers', [])
 
     $scope.updateGrid = function(variable, activeDocIndex) {
         // console.log(variable, activeDoc);
-
-        $("#cell-"+$scope.activeVariable+"-"+$scope.activeDocIndex)
-                        .removeClass("selected")
-
         if(variable != $scope.variable) {
+          $("#cell-"+$scope.activeVariable+"-"+$scope.activeDocIndex)
+                        .removeClass("selected");
+
           $scope.activeVariable = variable;
           $scope.loadDistribution(variable);
+
+          $("#cell-"+variable+"-"+$scope.activeDocIndex)
+                .addClass("selected")
         }
 
         if(activeDocIndex != $scope.activeDocIndex) {
+
+          $("#cell-"+$scope.activeVariable+"-"+$scope.activeDocIndex)
+                        .removeClass("selected");
+          
           // $scope.activeDoc = $scope.gridData[activeDocIndex].id
           $scope.activeDocIndex = activeDocIndex;
           $scope.loadReport(activeDocIndex);
