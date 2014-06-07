@@ -56,7 +56,7 @@ body {
     user-select: none;
 }
 
-.loading { 
+.empty-list { 
     padding: 2px;
     font-weight: bold;
     font-family: "Courier New", Courier, monospace;

@@ -83,7 +83,7 @@
                 <div class="handle"></div>
               </div>
               <div id="expandtable">
-                <!-- <p ng-hide="gridData" class="loading">Loading</p> -->
+                <!-- <p ng-hide="gridData" class="empty-list">None</p> -->
                 <div class="divrow ng-cloak" ng-repeat="doc in gridData | filter: { id: searchQuery }">
                   <div class="divcell cellwidth_id">{{doc.id}}</div>
                   <div ng-repeat="var in variables" class="divcell cellwidth_var {{styleGridCell(doc[var].classification, doc[var].confidence)}} custom-tooltip-bottom" ng-click="updateGrid(var, $parent.$index)" ng-class="{selected: $parent.$index==activeDocIndex && var==activeVariable}" data-custom-tooltip="{{doc[var].confidence}}">
@@ -105,20 +105,20 @@
               <div class="content">
                 <div id="keywords">
                   <h6>{{classificationName["positive"]}} indicators</h6>
-                  <p ng-hide="variableData" class="loading">Loading</p>
+                  <p ng-hide="variableData" class="empty-list">None</p>
                   <ol>
                     <li ng-repeat="keyword in variableData[activeVariable].topPositive" class="positive" style="width:{{keyword.weight}}%;">{{keyword.term}}&nbsp;<span class="d3-tip">({{keyword.weight/100}})</span></li>
                   </ol>
 
                   <h6>{{classificationName["negative"]}} indicators</h6>
-                  <p ng-hide="variableData" class="loading">Loading</p>
+                  <p ng-hide="variableData" class="empty-list">None</p>
                   <ol>
                     <li ng-repeat="keyword in variableData[activeVariable].topNegative" class="negative" style="width:{{keyword.weight}}%;">{{keyword.term}}&nbsp;<span class="d3-tip">({{keyword.weight/100}})</span></li>
                   </ol>
                 </div>
                 <div id="distribution">
                   <h6>Distribution</h6>
-                  <p ng-hide="variableData" class="loading">Loading</p>
+                  <p ng-hide="variableData" class="empty-list">None</p>
                   <d3-piechart data='pieData'></d3-piechart>
                 </div>
               </div>
@@ -129,13 +129,13 @@
               
               <div class="content">
                 <h6>{{classificationName["positive"]}} indicators</h6>
-                <p ng-hide="gridData" class="loading">Loading</p>
+                <p ng-hide="gridData" class="empty-list">None</p>
                 <ol>
                   <li ng-repeat="keyword in gridData[activeDocIndex][activeVariable].topPositive"  class="positive" style="width:{{keyword.weight}}%;">{{keyword.term}}&nbsp;<span class="d3-tip">({{keyword.weight/100}})</span></li>
                 </ol>
 
                 <h6>{{classificationName["negative"]}} indicators</h6>
-                <p ng-hide="gridData" class="loading">Loading</p>
+                <p ng-hide="gridData" class="empty-list">None</p>
                 <ol>
                   <li ng-repeat="keyword in gridData[activeDocIndex][activeVariable].topNegative" class="negative" style="width:{{keyword.weight}}%;">{{keyword.term}}&nbsp;<span class="d3-tip">({{keyword.weight/100}})</span></li>
                 </ol>
