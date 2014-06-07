@@ -86,7 +86,7 @@
                 <!-- <p ng-hide="gridData" class="loading">Loading</p> -->
                 <div class="divrow ng-cloak" ng-repeat="doc in gridData | filter: { id: searchQuery }">
                   <div class="divcell cellwidth_id">{{doc.id}}</div>
-                   <div ng-repeat="var in variables" extra-data-tooltip="Confidence: {{doc[var].confidence}}" id="cell-{{var}}-{{doc.id}}" class="divcell cellwidth_var {{styleGridCell(doc[var].classification, doc[var].confidence)}}" ng-click="updateGrid(var, doc.id, $parent.$index)">
+                   <div ng-repeat="var in variables" extra-data-tooltip="Confidence: {{doc[var].confidence}}" id="cell-{{var}}-{{$parent.$index}}" class="divcell cellwidth_var {{styleGridCell(doc[var].classification, doc[var].confidence)}}" ng-click="updateGrid(var, $parent.$index)">
                       {{classificationName[ doc[var].classification ]}}
                     </div>
                 </div>
@@ -125,7 +125,7 @@
             </div>
 
             <div id="sidebar-bottom-right">
-              <div class="about unselectable">Report: <strong>#{{activeDoc}}</strong></div>
+              <div class="about unselectable">Report: <strong>#{{gridData[activeDocIndex].id}}</strong></div>
               
               <div class="content">
                 <h6>{{classificationName["positive"]}} indicators</h6>
@@ -153,20 +153,20 @@
                 <div ng-if="reportExists" id="emr-report" class="report">
                   <div class="info">
                     <i class="glyphicon glyphicon-list-alt"></i>&nbsp;
-                    <a href="#" tooltip-placement="bottom" tooltip="{{reportPath}}"> 
-                      <strong class="file-name js-selectable-text">Report: #{{activeDoc}}</strong>
-                    </a>
-                    <a class="btn btn-xs btn-default pull-right" ng-href="{{reportPath}}" target="_blank"><strong>View Raw</strong></a>
+                    <span tooltip-placement="bottom" tooltip="docs/{{gridData[activeDocIndex].id}}/report.txt">
+                      <strong class="file-name js-selectable-text">Report: #{{gridData[activeDocIndex].id}}</strong>
+                    </span>
+                    <a class="btn btn-xs btn-default pull-right" ng-href="docs/{{gridData[activeDocIndex].id}}/report.txt" target="_blank"><strong>View Raw</strong></a>
                   </div>
                   <pre><highlighted-report data='reportText'></highlighted-report></pre>
                 </div>
                 <div ng-if="pathologyExists" id="emr-pathology" class="report">
                   <div class="info">
                     <i class="glyphicon glyphicon-list-alt"></i>&nbsp;
-                    <a href="#" tooltip-placement="bottom" tooltip="{{pathologyPath}}"> 
-                      <strong class="file-name js-selectable-text">Pathology: #{{activeDoc}}</strong>
-                    </a>
-                    <a class="btn btn-xs btn-default pull-right" ng-href="{{pathologyPath}}" target="_blank"><strong>View Raw</strong></a>
+                    <span href="#" tooltip-placement="bottom" tooltip="docs/{{gridData[activeDocIndex].id}}/pathology.txt"> 
+                      <strong class="file-name js-selectable-text">Pathology: #{{gridData[activeDocIndex].id}}</strong>
+                    </span>
+                    <a class="btn btn-xs btn-default pull-right" ng-href="docs/{{gridData[activeDocIndex].id}}/pathology.txt" target="_blank"><strong>View Raw</strong></a>
                   </div>
                   <pre><highlighted-report data='pathologyText'></highlighted-report></pre>
                 </div>

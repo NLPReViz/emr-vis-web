@@ -19,9 +19,7 @@ angular.module('myApp.controllers', [])
     /*
      * Main grid
      */
-    
-    $scope.activeVariable = "asa";
-    $scope.activeDoc = null;
+
     $scope.activeDocIndex = null;
     $scope.showGrid = true;
 
@@ -34,8 +32,7 @@ angular.module('myApp.controllers', [])
             
             //Show first report in the set
             $scope.activeDocIndex = 0;
-            $scope.activeDoc = $scope.gridData[0].id;
-            $scope.loadReport($scope.activeDoc);
+            $scope.loadReport(0);
             
         })
         .error(function() { alert("Could not load grid data!"); });
@@ -43,7 +40,8 @@ angular.module('myApp.controllers', [])
     $http.get("dummy-variable.json")
         .success(function(data, status) {
             $scope.variableData = data;
-            $scope.loadDistribution($scope.activeVariable);
+            $scope.activeVariable = "asa";
+            $scope.loadDistribution("asa");
         })
         .error(function() { alert("Could not load variable data!"); });
 
@@ -62,10 +60,10 @@ angular.module('myApp.controllers', [])
         }
     }
 
-    $scope.updateGrid = function(variable, activeDoc, activeDocIndex) {
+    $scope.updateGrid = function(variable, activeDocIndex) {
         // console.log(variable, activeDoc);
 
-        $("#cell-"+$scope.activeVariable+"-"+$scope.activeDoc)
+        $("#cell-"+$scope.activeVariable+"-"+$scope.activeDocIndex)
                         .removeClass("selected")
 
         if(variable != $scope.variable) {
@@ -74,10 +72,9 @@ angular.module('myApp.controllers', [])
         }
 
         if(activeDocIndex != $scope.activeDocIndex) {
-          $scope.activeDoc = activeDoc;
+          // $scope.activeDoc = $scope.gridData[activeDocIndex].id
           $scope.activeDocIndex = activeDocIndex;
-          $scope.loadReport(activeDoc);
-          $scope.setActiveDoc(activeDoc);
+          $scope.loadReport(activeDocIndex);
         }
     }
 
@@ -86,11 +83,12 @@ angular.module('myApp.controllers', [])
      */
 
     //TODO: Load reports not as variables but as docs
-    $scope.loadReport = function(activeDoc) {
-        $scope.reportPath = "docs/"+ activeDoc +"/report.txt";
-        $scope.pathologyPath = "docs/"+ activeDoc +"/pathology.txt";
+    $scope.loadReport = function(activeDocIndex) {
 
-        $scope.reportText = null;
+        var activeDoc = $scope.gridData[activeDocIndex].id;
+
+        // $scope.reportPath = "docs/"+ activeDoc +"/report.txt";
+        // $scope.pathologyPath = "docs/"+ activeDoc +"/pathology.txt";
 
         $scope.reportExists = false;
         $scope.pathologyExists = false;
@@ -98,13 +96,13 @@ angular.module('myApp.controllers', [])
         $scope.appLoading = true;
 
         //report
-        $http.get($scope.reportPath)
+        $http.get("docs/"+activeDoc+"/report.txt")
             .success(function(data, status) {
                 $scope.reportText = data;
                 $scope.reportExists = true;
 
                 //Find in gridData
-                $("#cell-"+$scope.activeVariable+"-"+$scope.activeDoc)
+                $("#cell-"+$scope.activeVariable+"-"+$scope.activeDocIndex)
                 .addClass("selected")
 
                 $scope.appLoading = false;
@@ -117,7 +115,7 @@ angular.module('myApp.controllers', [])
             });
 
         // pathology
-        $http.get($scope.pathologyPath)
+        $http.get("docs/"+activeDoc+"/pathology.txt")
             .success(function(data, status) {
                 $scope.pathologyText = data;
                 $scope.pathologyExists = true;
