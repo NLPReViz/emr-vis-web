@@ -63,21 +63,21 @@
           <div id="sidebar-top" class="unselectable">
             <div id="tablecontainer">
               <div id="topbar">
-                <div class="colname cellwidth_id"><a href="#" class="rotate" tooltip-placement="right" tooltip="document identifier"><div>doc #</div></a></div>
-                <div class="colname cellwidth_var"><a class="rotate" tooltip-placement="right" tooltip="any adenoma"><div>any-adenoma</div></a></div>
-                <div class="colname cellwidth_var"><a class="rotate" tooltip-placement="right" tooltip="appendiceal orifice"><div>appendiceal-orifice</div></a></div>
-                <div class="colname cellwidth_var"><a class="rotate" tooltip-placement="right" tooltip="asa"><div>asa</div></a></div>
-                <div class="colname cellwidth_var"><a class="rotate" tooltip-placement="right" tooltip="biopsy"><div>biopsy</div></a></div>
-                <div class="colname cellwidth_var"><a class="rotate" tooltip-placement="right" tooltip="cecum"><div>cecum</div></a></div>
-                <div class="colname cellwidth_var"><a class="rotate" tooltip-placement="right" tooltip="ileo cecal valve"><div>ileo-cecal-valve</div></a></div>
-                <div class="colname cellwidth_var"><a class="rotate" tooltip-placement="right" tooltip="indication type"><div>indication-type</div></a></div>
-                <div class="colname cellwidth_var"><a class="rotate" tooltip-placement="right" tooltip="infomed consent"><div>infomed-consent</div></a></div>
-                <div class="colname cellwidth_var"><a class="rotate" tooltip-placement="left" tooltip="nursing report"><div>nursing-report</div></a></div>
-                <div class="colname cellwidth_var"><a class="rotate" tooltip-placement="left" tooltip="no mention about preparation"><div>no-prep-adequate</div></a></div>
-                <div class="colname cellwidth_var"><a class="rotate" tooltip-placement="left" tooltip="preparation not adequate"><div>not-prep-adequate</div></a></div>
-                <div class="colname cellwidth_var"><a class="rotate" tooltip-placement="left" tooltip="preparation adequate"><div>yes-prep-adequate</div></a></div>
-                <div class="colname cellwidth_var"><a class="rotate" tooltip-placement="left" tooltip="procedure aborted"><div>proc-aborted</div></a></div>
-                <div class="colname cellwidth_var"><a class="rotate" tooltip-placement="left" tooltip="withdraw time"><div>widthdraw-time</div></a></div>
+                <div class="colname cellwidth_id"><a href="#" class="rotate" tooltip-placement="right" tooltip-animation="false" tooltip="document identifier"><div>doc #</div></a></div>
+                <div class="colname cellwidth_var"><a class="rotate" tooltip-placement="right" tooltip-animation="false" tooltip="any adenoma"><div>any-adenoma</div></a></div>
+                <div class="colname cellwidth_var"><a class="rotate" tooltip-placement="right" tooltip-animation="false" tooltip="appendiceal orifice"><div>appendiceal-orifice</div></a></div>
+                <div class="colname cellwidth_var"><a class="rotate" tooltip-placement="right" tooltip-animation="false" tooltip="asa"><div>asa</div></a></div>
+                <div class="colname cellwidth_var"><a class="rotate" tooltip-placement="right" tooltip-animation="false" tooltip="biopsy"><div>biopsy</div></a></div>
+                <div class="colname cellwidth_var"><a class="rotate" tooltip-placement="right" tooltip-animation="false" tooltip="cecum"><div>cecum</div></a></div>
+                <div class="colname cellwidth_var"><a class="rotate" tooltip-placement="right" tooltip-animation="false" tooltip="ileo cecal valve"><div>ileo-cecal-valve</div></a></div>
+                <div class="colname cellwidth_var"><a class="rotate" tooltip-placement="right" tooltip-animation="false" tooltip="indication type"><div>indication-type</div></a></div>
+                <div class="colname cellwidth_var"><a class="rotate" tooltip-placement="right" tooltip-animation="false" tooltip="infomed consent"><div>infomed-consent</div></a></div>
+                <div class="colname cellwidth_var"><a class="rotate" tooltip-placement="left" tooltip-animation="false" tooltip="nursing report"><div>nursing-report</div></a></div>
+                <div class="colname cellwidth_var"><a class="rotate" tooltip-placement="left" tooltip-animation="false" tooltip="no mention about preparation"><div>no-prep-adequate</div></a></div>
+                <div class="colname cellwidth_var"><a class="rotate" tooltip-placement="left" tooltip-animation="false" tooltip="preparation not adequate"><div>not-prep-adequate</div></a></div>
+                <div class="colname cellwidth_var"><a class="rotate" tooltip-placement="left" tooltip-animation="false" tooltip="preparation adequate"><div>yes-prep-adequate</div></a></div>
+                <div class="colname cellwidth_var"><a class="rotate" tooltip-placement="left" tooltip-animation="false" tooltip="procedure aborted"><div>proc-aborted</div></a></div>
+                <div class="colname cellwidth_var"><a class="rotate" tooltip-placement="left" tooltip-animation="false" tooltip="withdraw time"><div>widthdraw-time</div></a></div>
               </div>
               <div class="sidebar-separator breakline" horizontal-splitter>
                 <div class="handle"></div>
@@ -86,9 +86,9 @@
                 <!-- <p ng-hide="gridData" class="loading">Loading</p> -->
                 <div class="divrow ng-cloak" ng-repeat="doc in gridData | filter: { id: searchQuery }">
                   <div class="divcell cellwidth_id">{{doc.id}}</div>
-                   <div ng-repeat="var in variables" extra-data-tooltip="Confidence: {{doc[var].confidence}}" class="divcell cellwidth_var {{styleGridCell(doc[var].classification, doc[var].confidence)}}" ng-click="updateGrid(var, $parent.$index)" ng-class="{selected: $parent.$index==activeDocIndex && var==activeVariable}">
-                      {{classificationName[ doc[var].classification ]}}
-                    </div>
+                  <div ng-repeat="var in variables" class="divcell cellwidth_var {{styleGridCell(doc[var].classification, doc[var].confidence)}} custom-tooltip-bottom" ng-click="updateGrid(var, $parent.$index)" ng-class="{selected: $parent.$index==activeDocIndex && var==activeVariable}" data-custom-tooltip="{{doc[var].confidence}}">
+                    {{classificationName[ doc[var].classification ]}}
+                  </div>
                 </div>
               </div>
             </div>
@@ -153,7 +153,7 @@
                 <div ng-if="reportExists" id="emr-report" class="report">
                   <div class="info">
                     <i class="glyphicon glyphicon-list-alt"></i>&nbsp;
-                    <span tooltip-placement="bottom" tooltip="docs/{{gridData[activeDocIndex].id}}/report.txt">
+                    <span tooltip-placement="bottom" tooltip-animation="false" tooltip="docs/{{gridData[activeDocIndex].id}}/report.txt">
                       <strong class="file-name js-selectable-text">Report: #{{gridData[activeDocIndex].id}}</strong>
                     </span>
                     <a class="btn btn-xs btn-default pull-right" ng-href="docs/{{gridData[activeDocIndex].id}}/report.txt" target="_blank"><strong>View Raw</strong></a>
@@ -163,7 +163,7 @@
                 <div ng-if="pathologyExists" id="emr-pathology" class="report">
                   <div class="info">
                     <i class="glyphicon glyphicon-list-alt"></i>&nbsp;
-                    <span href="#" tooltip-placement="bottom" tooltip="docs/{{gridData[activeDocIndex].id}}/pathology.txt"> 
+                    <span href="#" tooltip-placement="bottom" tooltip-animation="false" tooltip="docs/{{gridData[activeDocIndex].id}}/pathology.txt"> 
                       <strong class="file-name js-selectable-text">Pathology: #{{gridData[activeDocIndex].id}}</strong>
                     </span>
                     <a class="btn btn-xs btn-default pull-right" ng-href="docs/{{gridData[activeDocIndex].id}}/pathology.txt" target="_blank"><strong>View Raw</strong></a>
