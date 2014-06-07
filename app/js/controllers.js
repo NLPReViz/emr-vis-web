@@ -81,6 +81,9 @@ angular.module('myApp.controllers', [])
           // $scope.activeDoc = $scope.gridData[activeDocIndex].id
           $scope.activeDocIndex = activeDocIndex;
           $scope.loadReport(activeDocIndex);
+
+          $("#cell-"+variable+"-"+$scope.activeDocIndex)
+                .addClass("selected")
         }
     }
 
@@ -106,10 +109,6 @@ angular.module('myApp.controllers', [])
             .success(function(data, status) {
                 $scope.reportText = data;
                 $scope.reportExists = true;
-
-                //Find in gridData
-                $("#cell-"+$scope.activeVariable+"-"+$scope.activeDocIndex)
-                .addClass("selected")
 
                 $scope.appLoading = false;
             })
