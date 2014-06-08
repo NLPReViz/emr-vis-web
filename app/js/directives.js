@@ -6,55 +6,55 @@
 angular.module('myApp.directives', [])
 .directive('horizontalSplitter', ['$document', function($document) {
     return function(scope, element, attr) {
-      var start = 0, cursor_offset = 0
+        var start = 0, cursor_offset = 0
 
-      if(!angular.isFunction($(element).offset)) {
-        throw new Error('Need jquery!');
-    }
-
-    var topHeight = 0, bottomHeight = 0, y = 0;
-
-    var minTop = 0.1*$(element).prev().height();
-    var minBottom = 0.1*$(element).next().height();
-
-    element.on('mousedown', function(event) {
-        // Prevent default dragging of selected content
-        event.preventDefault();
-        
-        cursor_offset = event.pageY - $(element).position().top;
-        start = event.pageY;
-
-        topHeight = $(element).prev().height();
-        bottomHeight = $(element).next().height();
-
-        $document.on('mouseup', mouseup);
-        $document.on('mousemove', mousemove);
-    });
-
-    function mousemove(event) {
-        var delta = event.pageY - start;
-
-        if( (topHeight + delta) > minTop && 
-                (bottomHeight - delta) > minBottom)
-        {
-            $("#sidebar-resize-indicator").css({ top: event.pageY - cursor_offset });
-            y = delta
+        if(!angular.isFunction($(element).offset)) {
+            throw new Error('Need jquery!');
         }
-    }
 
-    function mouseup() {
-        $(element).prev().height(topHeight + y); 
-        $(element).next().height(bottomHeight - y);
-        y = 0;
+        var topHeight = 0, bottomHeight = 0, y = 0;
 
-        $("#sidebar-top").trigger('heightChange'); 
-        
-        $("#sidebar-resize-indicator").css({ top: "-9999px" });
+        var minTop = 0.1*$(element).prev().height();
+        var minBottom = 0.1*$(element).next().height();
 
-        $document.off('mousemove', mousemove);
-        $document.off('mouseup', mouseup);
-    }
-};
+        element.on('mousedown', function(event) {
+            // Prevent default dragging of selected content
+            event.preventDefault();
+            
+            cursor_offset = event.pageY - $(element).position().top;
+            start = event.pageY;
+
+            topHeight = $(element).prev().height();
+            bottomHeight = $(element).next().height();
+
+            $document.on('mouseup', mouseup);
+            $document.on('mousemove', mousemove);
+        });
+
+        function mousemove(event) {
+            var delta = event.pageY - start;
+
+            if( (topHeight + delta) > minTop && 
+                    (bottomHeight - delta) > minBottom)
+            {
+                $("#sidebar-resize-indicator").css({ top: event.pageY - cursor_offset });
+                y = delta
+            }
+        }
+
+        function mouseup() {
+            $(element).prev().height(topHeight + y); 
+            $(element).next().height(bottomHeight - y);
+            y = 0;
+
+            $("#sidebar-top").trigger('heightChange'); 
+            
+            $("#sidebar-resize-indicator").css({ top: "-9999px" });
+
+            $document.off('mousemove', mousemove);
+            $document.off('mouseup', mouseup);
+        }
+    };
 }])
 
 .directive('highlightedReport', [ function() {
@@ -64,6 +64,17 @@ angular.module('myApp.directives', [])
             data: '='
         },
         link: function (scope, element) {
+                
+                $(element).mouseup(function(){
+                        var text = '';
+                        if (window.getSelection) {
+                            text = window.getSelection().toString();
+                        } else if (document.selection) {
+                            text = document.selection.createRange().text;
+                        }
+                        if (text!='') alert(text);
+                });
+
                 element.text(scope.data);
 
                 $(element).highlight(/ascending/gi, "highlight positive") //sample positive term

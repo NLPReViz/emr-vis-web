@@ -48,7 +48,7 @@ angular.module('myApp.controllers', [])
                                       (data[variable]["numPositive"] + data[variable]["numNegative"]));
               $scope.variableData[variable]['percNegative'] = 100.0 - $scope.variableData[variable]['percPositive'];
 
-              console.log($scope.variableData[variable]["percPositive"] + " - " + $scope.variableData[variable]["percNegative"]);
+              // console.log($scope.variableData[variable]["percPositive"] + " - " + $scope.variableData[variable]["percNegative"]);
                                       
             });
 
