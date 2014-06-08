@@ -145,7 +145,8 @@
         <div class="main">
           <div ng-controller="TabsDemoCtrl">
             <div ng-show="reportExists && bDocView" id="reportFeedback" class="alert alert-warning">
-              <p ng-show="feedbackText"><em>"{{feedbackText|truncate:20}}"</em> indicates <strong>{{activeVariable}}</strong> to be: <a href="#">{{classificationName['positive']}}</a> | <a href="#">{{classificationName['negative']}}</a></p><p ng-hide="feedbackText" ><strong>{{activeVariable}}</strong> is marked as <strong>{{classificationName[ gridData[activeDocIndex][activeVariable].classification ] | lowercase}}</strong> for this report. <a href="#">Accept</a> | <a href="#">Change</a></p>
+              <p ng-show="feedbackText"><em>"{{feedbackText|truncate:20}}"</em> indicates <strong>{{activeVariable}}</strong> to be: <a href="#">{{classificationName['positive']}}</a> | <a href="#">{{classificationName['negative']}}</a></p>
+              <p ng-hide="feedbackText" ><strong>{{activeVariable}}</strong> is marked as <strong>{{classificationName[ gridData[activeDocIndex][activeVariable].classification ] | lowercase}}</strong> for this report. <a href="#">Accept</a> | <a href="#">Change</a></p>
             </div>
             <tabset>
               <tab select="toggleDocView(true)" deselect="toggleDocView(false)" heading="Document View">

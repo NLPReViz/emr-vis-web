@@ -3,7 +3,7 @@
 /* Controllers */
 
 angular.module('myApp.controllers', [])
-  .controller('MainCtrl', ['$scope', '$http', function($scope, $http) {
+  .controller('MainCtrl', ['$scope', '$http', '$window', '$document', function($scope, $http, $window, $document) {
     /*
      * App config
      */
@@ -156,16 +156,16 @@ angular.module('myApp.controllers', [])
         var text = '';
 
         // Adapted from http://stackoverflow.com/questions/4652734/return-html-from-a-user-selected-text/4652824#4652824
-        if (typeof window.getSelection != "undefined") {
-            var sel = window.getSelection();
+        if (typeof $window.getSelection != "undefined") {
+            var sel = $window.getSelection();
             if (sel.rangeCount) {
                 for (var i = 0, len = sel.rangeCount; i < len; ++i) {
                     text = " " + sel.getRangeAt(i).toString();
                 }
             }
-        } else if (typeof document.selection != "undefined") {
-            if (document.selection.type == "Text") {
-                text = document.selection.createRange().text;
+        } else if (typeof $document.selection != "undefined") {
+            if ($document.selection.type == "Text") {
+                text = $document.selection.createRange().text;
             }
         }
 
