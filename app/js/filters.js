@@ -3,16 +3,25 @@
 /* Filters */
 
 angular.module('myApp.filters', [])
-  .filter('docFilter', function(){
+  .filter('truncate', function () {
+        // jsfiddle.net/tUyyx/
+        return function (string, length, end) {
 
-    return function(input, query){
-      if(!query) return input;
-      var result = [];
+            if(!string)
+                return;
 
-      angular.forEach(input, function(doc){
-        if(doc.id.indexOf(query) !== -1)
-          result.push(doc);          
-      });
-      return result;
-    };
-  });
+            if (isNaN(length))
+                length = 10;
+
+            if (end === undefined)
+                end = "...";
+
+            if (string.length <= length || string.length - end.length <= length) {
+                return string;
+            }
+            else {
+                return String(string).substring(0, length-end.length) + end;
+            }
+
+        };
+    });

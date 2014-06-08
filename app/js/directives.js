@@ -61,20 +61,9 @@ angular.module('myApp.directives', [])
     return {
         restrict: 'E',
         scope: {
-            data: '='
+            data: '=',
         },
-        link: function (scope, element) {
-                
-                $(element).mouseup(function(){
-                        var text = '';
-                        if (window.getSelection) {
-                            text = window.getSelection().toString();
-                        } else if (document.selection) {
-                            text = document.selection.createRange().text;
-                        }
-                        if (text!='') alert(text);
-                });
-
+        link: function (scope, element, attrs) {
                 element.text(scope.data);
 
                 $(element).highlight(/ascending/gi, "highlight positive") //sample positive term

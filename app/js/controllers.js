@@ -70,7 +70,7 @@ angular.module('myApp.controllers', [])
             else
                 return "cert0-neg";
         }
-    }
+    };
 
     $scope.updateGrid = function(variable, activeDocIndex) {
         // console.log(variable, activeDoc);
@@ -83,7 +83,7 @@ angular.module('myApp.controllers', [])
           $scope.activeDocIndex = activeDocIndex;
           $scope.loadReport(activeDocIndex);
         }
-    }
+    };
 
     /*
      * Load reports
@@ -109,6 +109,7 @@ angular.module('myApp.controllers', [])
                 $scope.reportExists = true;
 
                 $scope.appLoading = false;
+                $scope.feedbackText = null;
             })
             .error(function(data, status, headers, config) {
                 $scope.reportText = "Status " + status
@@ -142,8 +143,42 @@ angular.module('myApp.controllers', [])
         $scope.pieData.sort(function(first, second) {
           return second.count - first.count;
         });
+    };
 
-    }
+    /*
+     * Feedback
+     */
+
+    $scope.numFeedback = 42;
+    $scope.feedbackText = false;
+
+    $scope.setFeedbackText = function(){
+        var text = '';
+
+        // Adapted from http://stackoverflow.com/questions/4652734/return-html-from-a-user-selected-text/4652824#4652824
+        if (typeof window.getSelection != "undefined") {
+            var sel = window.getSelection();
+            if (sel.rangeCount) {
+                for (var i = 0, len = sel.rangeCount; i < len; ++i) {
+                    text = " " + sel.getRangeAt(i).toString();
+                }
+            }
+        } else if (typeof document.selection != "undefined") {
+            if (document.selection.type == "Text") {
+                text = document.selection.createRange().text;
+            }
+        }
+
+        text = text.trim();
+        // console.log("setFeedbackText: " + text);
+
+        if (text) {
+            $scope.feedbackText = text;
+        }
+        else{
+            $scope.feedbackText = false;
+        }
+    };
 
   }])
 
@@ -154,7 +189,6 @@ angular.module('myApp.controllers', [])
       //   { title:'Review Feedback <span class="badge pull-right">42</span>', content:'Dynamic content 2', disabled: true }
       // ];
 
-      $scope.numFeedback = 42;
       $scope.bDocView = true;
 
       $scope.alertMe = function() {

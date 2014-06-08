@@ -145,11 +145,11 @@
         <div class="main">
           <div ng-controller="TabsDemoCtrl">
             <div ng-show="reportExists && bDocView" id="reportFeedback" class="alert alert-warning">
-              <strong>{{activeVariable}}</strong> is marked as <strong>{{classificationName[ gridData[activeDocIndex][activeVariable].classification ] | lowercase}}</strong> for this report. <a href="#">Change</a> | <a href="#">Confirm</a>
+              <p ng-show="feedbackText"><em>"{{feedbackText|truncate:20}}"</em> indicates <strong>{{activeVariable}}</strong> to be: <a href="#">{{classificationName['positive']}}</a> | <a href="#">{{classificationName['negative']}}</a></p><p ng-hide="feedbackText" ><strong>{{activeVariable}}</strong> is marked as <strong>{{classificationName[ gridData[activeDocIndex][activeVariable].classification ] | lowercase}}</strong> for this report. <a href="#">Accept</a> | <a href="#">Change</a></p>
             </div>
             <tabset>
               <tab select="toggleDocView(true)" deselect="toggleDocView(false)" heading="Document View">
-                <div ng-if="reportExists" id="emr-report" class="report">
+                <div ng-mouseup="setFeedbackText()" ng-if="reportExists" id="emr-report" class="report">
                   <div class="info">
                     <i class="glyphicon glyphicon-list-alt"></i>&nbsp;
                     <a tooltip-placement="bottom" tooltip-animation="false" tooltip="docs/{{gridData[activeDocIndex].id}}/report.txt">
@@ -159,7 +159,7 @@
                   </div>
                   <pre><highlighted-report data='reportText'></highlighted-report></pre>
                 </div>
-                <div ng-if="pathologyExists" id="emr-pathology" class="report">
+                <div ng-mouseup="setFeedbackText()" ng-if="pathologyExists" id="emr-pathology" class="report">
                   <div class="info">
                     <i class="glyphicon glyphicon-list-alt"></i>&nbsp;
                     <span href="#" tooltip-placement="bottom" tooltip-animation="false" tooltip="docs/{{gridData[activeDocIndex].id}}/pathology.txt"> 
@@ -207,7 +207,7 @@
   <script src="js/app.js"></script>
   <!-- <script src="js/services.js"></script> -->
   <script src="js/controllers.js"></script>
-  <!-- <script src="js/filters.js"></script> -->
+  <script src="js/filters.js"></script>
   <script src="js/directives.js"></script>
   <script src="js/report-highlight.js"></script>
   <script src="js/jquery-routines.js"></script>
