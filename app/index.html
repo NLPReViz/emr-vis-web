@@ -25,8 +25,13 @@
 
   <div ng-show="appDisabled" id="coverall">
   </div>
+  
   <div ng-show="appLoading" id="appLoading" class="alert alert-warning">
     <strong>Loading!</strong> Please wait.
+  </div>
+
+  <div ng-show="reportExists" id="reportFeedback" class="alert alert-warning">
+    <strong>{{activeVariable}}</strong> is marked as <strong>{{classificationName[ gridData[activeDocIndex][activeVariable].classification ] | lowercase}}</strong> for this report. <a href="#">Change</a> | <a href="#">Confirm</a>
   </div>
   
   <!--[if lt IE 7]>
@@ -103,7 +108,7 @@
                   <h6>{{classificationName["positive"]}} indicators</h6>
                   <p ng-hide="variableData" class="empty-list">None</p>
                   <ol>
-                    <li ng-repeat="keyword in variableData[activeVariable].topPositive" class="positive" style="width:{{keyword.weight}}%;">{{keyword.term}}&nbsp;<span class="d3-tip">({{keyword.weight/100}})</span></li>
+                    <li ng-repeat="keyword in variableData[activeVariable].topPositive" class="positive" style="width:{{keyword.weight}}%;" >{{keyword.term}}&nbsp;<span class="d3-tip">({{keyword.weight/100}})</span></li>
                   </ol>
 
                   <h6>{{classificationName["negative"]}} indicators</h6>
@@ -145,7 +150,6 @@
           <div ng-controller="TabsDemoCtrl">
             <tabset>
               <tab heading="Document View">
-                
                 <div ng-if="reportExists" id="emr-report" class="report">
                   <div class="info">
                     <i class="glyphicon glyphicon-list-alt"></i>&nbsp;

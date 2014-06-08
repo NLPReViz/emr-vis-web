@@ -90,6 +90,21 @@ body {
     margin: 10px;
 }
 
+#reportFeedback {
+    z-index: 1510;
+    
+    display: block;
+    position: fixed;
+
+    top: -8px;
+    left: 620px;
+
+    padding: 5px;
+    padding-top: 15px;
+    margin-top: 4px;
+}
+
+
 /* Taken from http://cbracco.me/a-simple-css-tooltip/ */
 /* Base styles for the element that has a tooltip */
 [data-custom-tooltip],
