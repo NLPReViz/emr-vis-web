@@ -29,10 +29,6 @@
   <div ng-show="appLoading" id="appLoading" class="alert alert-warning">
     <strong>Loading!</strong> Please wait.
   </div>
-
-  <div ng-show="reportExists" id="reportFeedback" class="alert alert-warning">
-    <strong>{{activeVariable}}</strong> is marked as <strong>{{classificationName[ gridData[activeDocIndex][activeVariable].classification ] | lowercase}}</strong> for this report. <a href="#">Change</a> | <a href="#">Confirm</a>
-  </div>
   
   <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -148,8 +144,11 @@
         </div>
         <div class="main">
           <div ng-controller="TabsDemoCtrl">
+            <div ng-show="reportExists && bDocView" id="reportFeedback" class="alert alert-warning">
+              <strong>{{activeVariable}}</strong> is marked as <strong>{{classificationName[ gridData[activeDocIndex][activeVariable].classification ] | lowercase}}</strong> for this report. <a href="#">Change</a> | <a href="#">Confirm</a>
+            </div>
             <tabset>
-              <tab heading="Document View">
+              <tab select="toggleDocView(true)" deselect="toggleDocView(false)" heading="Document View">
                 <div ng-if="reportExists" id="emr-report" class="report">
                   <div class="info">
                     <i class="glyphicon glyphicon-list-alt"></i>&nbsp;

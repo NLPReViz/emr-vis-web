@@ -155,6 +155,7 @@ angular.module('myApp.controllers', [])
       // ];
 
       $scope.numFeedback = 42;
+      $scope.bDocView = true;
 
       $scope.alertMe = function() {
         $scope.numFeedback = 0;
@@ -162,4 +163,8 @@ angular.module('myApp.controllers', [])
           alert('Re-training!');
         });
       };
+
+      $scope.toggleDocView = function(state){
+        $scope.bDocView = state;
+      }
    }]);
