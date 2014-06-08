@@ -23,10 +23,10 @@
 
 <body class="ng-cloak" ng-controller="MainCtrl">
 
-  <div ng-show="appDisabled" id="coverall">
+  <div ng-if="appDisabled" id="coverall">
   </div>
   
-  <div ng-show="appLoading" id="appLoading" class="alert alert-warning">
+  <div ng-if="appLoading" id="appLoading" class="alert alert-warning">
     <strong>Loading!</strong> Please wait.
   </div>
   
@@ -102,20 +102,20 @@
               <div class="content">
                 <div id="keywords">
                   <h6>{{classificationName["positive"]}} indicators</h6>
-                  <p ng-hide="variableData" class="empty-list">None</p>
+                  <p ng-if="!variableData" class="empty-list">None</p>
                   <ol>
                     <li ng-repeat="keyword in variableData[activeVariable].topPositive" class="positive" style="width:{{keyword.weight}}%;" >{{keyword.term}}&nbsp;<span class="d3-tip">({{keyword.weight/100}})</span></li>
                   </ol>
 
                   <h6>{{classificationName["negative"]}} indicators</h6>
-                  <p ng-hide="variableData" class="empty-list">None</p>
+                  <p ng-if="!variableData" class="empty-list">None</p>
                   <ol>
                     <li ng-repeat="keyword in variableData[activeVariable].topNegative" class="negative" style="width:{{keyword.weight}}%;">{{keyword.term}}&nbsp;<span class="d3-tip">({{keyword.weight/100}})</span></li>
                   </ol>
                 </div>
                 <div id="distribution">
                   <h6>Distribution</h6>
-                  <p ng-hide="variableData" class="empty-list">None</p>
+                  <p ng-if="!variableData" class="empty-list">None</p>
                   <d3-piechart data='pieData'></d3-piechart>
                 </div>
               </div>
@@ -126,13 +126,13 @@
               
               <div class="content">
                 <h6>{{classificationName["positive"]}} indicators</h6>
-                <p ng-hide="gridData" class="empty-list">None</p>
+                <p ng-if="!gridData" class="empty-list">None</p>
                 <ol>
                   <li ng-repeat="keyword in gridData[activeDocIndex][activeVariable].topPositive"  class="positive" style="width:{{keyword.weight}}%;">{{keyword.term}}&nbsp;<span class="d3-tip">({{keyword.weight/100}})</span></li>
                 </ol>
 
                 <h6>{{classificationName["negative"]}} indicators</h6>
-                <p ng-hide="gridData" class="empty-list">None</p>
+                <p ng-if="!gridData" class="empty-list">None</p>
                 <ol>
                   <li ng-repeat="keyword in gridData[activeDocIndex][activeVariable].topNegative" class="negative" style="width:{{keyword.weight}}%;">{{keyword.term}}&nbsp;<span class="d3-tip">({{keyword.weight/100}})</span></li>
                 </ol>
@@ -144,9 +144,9 @@
         </div>
         <div class="main">
           <div ng-controller="TabsDemoCtrl">
-            <div ng-show="reportExists && bDocView" id="reportFeedback" class="alert alert-warning">
-              <p ng-show="feedbackText"><em>"{{feedbackText|truncate:20}}"</em> indicates <strong>{{activeVariable}}</strong> to be: <a href="#">{{classificationName['positive']}}</a> | <a href="#">{{classificationName['negative']}}</a></p>
-              <p ng-hide="feedbackText" ><strong>{{activeVariable}}</strong> is marked as <strong>{{classificationName[ gridData[activeDocIndex][activeVariable].classification ] | lowercase}}</strong> for this report. <a href="#">Accept</a> | <a href="#">Change</a></p>
+            <div ng-if="reportExists && bDocView" id="reportFeedback" class="alert alert-warning">
+              <p ng-if="feedbackText"><em>"{{feedbackText|truncate:20}}"</em> indicates <strong>{{activeVariable}}</strong> to be: <a href="#">{{classificationName['positive']}}</a> | <a href="#">{{classificationName['negative']}}</a></p>
+              <p ng-if="!feedbackText" ><strong>{{activeVariable}}</strong> is marked as <strong>{{classificationName[ gridData[activeDocIndex][activeVariable].classification ] | lowercase}}</strong> for this report. <a href="#">Accept</a> | <a href="#">Change</a></p>
             </div>
             <tabset>
               <tab select="toggleDocView(true)" deselect="toggleDocView(false)" heading="Document View">
