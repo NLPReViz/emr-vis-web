@@ -84,6 +84,8 @@ angular.module('myApp.controllers', [])
               $scope.activeDocIndex = activeDocIndex;
               $scope.loadReport(activeDocIndex);
             }
+
+            $scope.tabs.docView = true;
         };
 
         /*
@@ -238,6 +240,12 @@ angular.module('myApp.controllers', [])
 
 
         /*
+         * Tabs
+         */
+         
+        $scope.tabs = {docView: true};
+
+        /*
          * AppInfo
          */
 
@@ -249,17 +257,4 @@ angular.module('myApp.controllers', [])
             }, 2000);
         }
     }])
-
-  // }])
-    .controller('TabsCtrl', ['$scope', function($scope) {
-        // $scope.tabs = [
-        //   { title:'WordTree View', content:'Dynamic content 1' },
-        //   { title:'Review Feedback <span class="badge pull-right">42</span>', content:'Dynamic content 2', disabled: true }
-        // ];
-
-        $scope.bDocView = true;
-
-        $scope.toggleDocView = function(state){
-            $scope.bDocView = state;
-        }
-    }]);
+        

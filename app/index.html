@@ -143,8 +143,8 @@
           </div>
         </div>
         <div class="main">
-          <div ng-controller="TabsCtrl">
-            <div ng-if="reportExists && bDocView" id="reportFeedback" class="alert alert-warning">
+          <div>
+            <div ng-if="reportExists && tabs.docView" id="reportFeedback" class="alert alert-warning">
               <span ng-if="appInfo">
                 {{appInfo}}
               </span>
@@ -154,7 +154,7 @@
               </span>
             </div>
             <tabset>
-              <tab select="toggleDocView(true)" deselect="toggleDocView(false)" heading="Document View">
+              <tab active="tabs.docView" heading="Document View">
                 <div ng-mouseup="setFeedbackText()" ng-if="reportExists" id="emr-report" class="report">
                   <div class="info">
                     <i class="glyphicon glyphicon-list-alt"></i>&nbsp;
