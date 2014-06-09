@@ -189,9 +189,13 @@
                 <h4>Feedback List</h4>
                 <div id="feedbackList">
                   <alert ng-repeat="feedback in feedbackList" type="default" close="removeFeedback($index)">
-                    <!-- {{feedback}} -->
                     <strong>{{$index + 1}}.</strong>
-                    "<em><span ng-if="!feedback.type">#</span>{{feedback.property}}</em>" should be <strong>{{classificationName[feedback.classification] | lowercase}}</strong> for <strong>{{feedback.variable}}</strong>.
+                    <span ng-if="feedback.kind == 0">
+                      #{{feedback.property}} should have <strong>{{feedback.variable}}</strong> marked as <strong>{{classificationName[feedback.classification] | lowercase}}</strong>.
+                    </span>
+                    <span ng-if="feedback.kind == 1">
+                      "<em>{{feedback.property}}</em>" indicates <strong>{{feedback.variable}}</strong> to be <strong>{{classificationName[feedback.classification] | lowercase}}</strong>.
+                    </span>
                   </alert>
                 </div>
               </tab>
