@@ -187,7 +187,7 @@
                   Feedback Review &nbsp;<span ng-if="feedbackList.length > 0" class="badge alert-info pull-right"> {{feedbackList.length}} </span>
                 </tab-heading>
                 <h4>Feedback List</h4>
-                <div>
+                <div id="feedbackList">
                   <alert ng-repeat="feedback in feedbackList" type="default" close="removeFeedback($index)">
                     <!-- {{feedback}} -->
                     <strong>{{$index + 1}}.</strong>
