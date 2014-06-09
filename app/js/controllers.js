@@ -3,8 +3,8 @@
 /* Controllers */
 
 angular.module('myApp.controllers', [])
-  .controller('MainCtrl', ['$scope', '$http', '$window', '$document', 
-    function($scope, $http, $window, $document) {
+  .controller('MainCtrl', ['$scope', '$http', '$window', '$document', '$timeout',  
+    function($scope, $http, $window, $document, $timeout) {
         /*
          * App config
          */
@@ -190,6 +190,8 @@ angular.module('myApp.controllers', [])
 
         $scope.addFeedbackText = function(text, classification) {
             $scope.feedbackList.push(new Feedback(0, text, classification, $scope.activeVariable));
+            showInfo("Feedback added to the list!");
+            $scope.feedbackText = false;
         }
 
         $scope.addFeedbackDoc = function(bAccept) {
@@ -209,7 +211,8 @@ angular.module('myApp.controllers', [])
             
             $scope.feedbackList.push(new Feedback(1, $scope.gridData[$scope.activeDocIndex].id, 
                                         fClass, $scope.activeVariable));
-            
+
+            showInfo("Feedback added to the list!");
         }
 
         $scope.alertMe = function() {
@@ -229,6 +232,18 @@ angular.module('myApp.controllers', [])
             }
         }
 
+
+        /*
+         * AppInfo
+         */
+
+        function showInfo (notice){
+            $scope.appInfo = notice;
+
+            $timeout(function() {
+                $scope.appInfo = false;
+            }, 2000);
+        }
     }])
 
   // }])

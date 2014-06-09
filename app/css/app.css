@@ -77,7 +77,7 @@ body {
     height: 100%;
 }
 
-#appLoading {
+.appNotice {
     z-index: 2001;
     
     display: block;
