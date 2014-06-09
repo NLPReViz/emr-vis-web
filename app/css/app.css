@@ -104,6 +104,9 @@ body {
     margin-top: 4px;
 }
 
+#reportFeedback a{
+    cursor: pointer;
+}
 
 /* Taken from http://cbracco.me/a-simple-css-tooltip/ */
 /* Base styles for the element that has a tooltip */

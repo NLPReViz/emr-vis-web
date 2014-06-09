@@ -150,8 +150,15 @@ angular.module('myApp.controllers', [])
          * Feedback
          */
 
-        $scope.numFeedback = 42;
         $scope.feedbackText = false;
+        $scope.feedbackList = []
+
+        function Feedback(kind, property, classification, variable) { 
+            this.kind = kind;  // Text or doc
+            this.property = property;
+            this.classification = classification;
+            this.variable = variable
+        }
 
         $scope.setFeedbackText = function(){
             var text = '';
@@ -180,10 +187,52 @@ angular.module('myApp.controllers', [])
                 $scope.feedbackText = false;
             }
         };
+
+        $scope.addFeedbackText = function(text, classification) {
+            $scope.feedbackList.push(new Feedback(0, text, classification, $scope.activeVariable));
+        }
+
+        $scope.addFeedbackDoc = function(bAccept) {
+
+            var docClass = $scope.gridData[$scope.activeDocIndex].classification;
+            var fClass = null;
+
+            if(bAccept) {
+                fClass = docClass;    
+            }
+            else {
+                if (docClass == "positive")
+                    fClass == "negative";
+                else
+                    fClass = "positive";
+            }
+            
+            $scope.feedbackList.push(new Feedback(1, $scope.gridData[$scope.activeDocIndex].id, 
+                                        fClass, $scope.activeVariable));
+            
+        }
+
+        $scope.alertMe = function() {
+            while($scope.feedbackList.length > 0) {
+                $scope.feedbackList.pop();
+            }
+
+            setTimeout(function() {
+              alert('Re-training!');
+            });
+        };
+
+        $window.onbeforeunload = function(event){
+            if($scope.feedbackList.length > 0) {
+                return "You have made unsaved changes. \
+                    Would you still like to leave this page?";
+            }
+        }
+
     }])
 
   // }])
-    .controller('TabsDemoCtrl', ['$scope', function($scope) {
+    .controller('TabsCtrl', ['$scope', function($scope) {
         // $scope.tabs = [
         //   { title:'WordTree View', content:'Dynamic content 1' },
         //   { title:'Review Feedback <span class="badge pull-right">42</span>', content:'Dynamic content 2', disabled: true }
@@ -191,14 +240,7 @@ angular.module('myApp.controllers', [])
 
         $scope.bDocView = true;
 
-        $scope.alertMe = function() {
-        $scope.numFeedback = 0;
-        setTimeout(function() {
-          alert('Re-training!');
-        });
-        };
-
         $scope.toggleDocView = function(state){
-        $scope.bDocView = state;
+            $scope.bDocView = state;
         }
     }]);

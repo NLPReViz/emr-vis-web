@@ -143,10 +143,16 @@
           </div>
         </div>
         <div class="main">
-          <div ng-controller="TabsDemoCtrl">
+          <div ng-controller="TabsCtrl">
             <div ng-if="reportExists && bDocView" id="reportFeedback" class="alert alert-warning">
-              <p ng-if="feedbackText"><em>"{{feedbackText|truncate:20}}"</em> indicates <strong>{{activeVariable}}</strong> to be: <a href="#">{{classificationName['positive']}}</a> | <a href="#">{{classificationName['negative']}}</a></p>
-              <p ng-if="!feedbackText" ><strong>{{activeVariable}}</strong> is marked as <strong>{{classificationName[ gridData[activeDocIndex][activeVariable].classification ] | lowercase}}</strong> for this report. <a href="#">Accept</a> | <a href="#">Change</a></p>
+              <p ng-if="feedbackText"><em>"{{feedbackText|truncate:20}}"</em> indicates <strong>{{activeVariable}}</strong> to be: 
+                <a ng-click="addFeedbackText(feedbackText, 'positive')">{{classificationName['positive']}}</a> | 
+                <a ng-click="addFeedbackText(feedbackText, 'negative')">{{classificationName['negative']}}</a>
+              </p>
+              <p ng-if="!feedbackText" ><strong>{{activeVariable}}</strong> is marked as <strong>{{classificationName[ gridData[activeDocIndex][activeVariable].classification ] | lowercase}}</strong> for this report. 
+                <a ng-click="addFeedbackDoc(true)">Accept</a> | 
+                <a ng-click="addFeedbackDoc(false)">Change</a>
+              </p>
             </div>
             <tabset>
               <tab select="toggleDocView(true)" deselect="toggleDocView(false)" heading="Document View">
@@ -179,9 +185,10 @@
               </tab>
               <tab>
                 <tab-heading>
-                  Feedback Review &nbsp;<span ng-if="numFeedback > 0" class="badge alert-info pull-right"> {{numFeedback}} </span>
+                  Feedback Review &nbsp;<span ng-if="feedbackList.length > 0" class="badge alert-info pull-right"> {{feedbackList.length}} </span>
                 </tab-heading>
                 <h4>Feedback List</h4>
+                <p>{{feedbackList}}</p>
 
               </tab>
               <tab select="alertMe()">
