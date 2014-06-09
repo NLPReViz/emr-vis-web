@@ -188,15 +188,9 @@ angular.module('myApp.controllers', [])
             }
         };
 
-        $scope.addFeedbackText = function(text, classification) {
-            $scope.feedbackList.push(new Feedback(0, text, classification, $scope.activeVariable));
-            showInfo("Feedback added to the list!");
-            $scope.feedbackText = false;
-        }
-
         $scope.addFeedbackDoc = function(bAccept) {
 
-            var docClass = $scope.gridData[$scope.activeDocIndex].classification;
+            var docClass = $scope.gridData[$scope.activeDocIndex][$scope.activeVariable].classification;
             var fClass = null;
 
             if(bAccept) {
@@ -209,10 +203,20 @@ angular.module('myApp.controllers', [])
                     fClass = "positive";
             }
             
-            $scope.feedbackList.push(new Feedback(1, $scope.gridData[$scope.activeDocIndex].id, 
+            $scope.feedbackList.push(new Feedback(0, $scope.gridData[$scope.activeDocIndex].id, 
                                         fClass, $scope.activeVariable));
 
             showInfo("Feedback added to the list!");
+        }
+
+        $scope.addFeedbackText = function(text, classification) {
+            $scope.feedbackList.push(new Feedback(1, text, classification, $scope.activeVariable));
+            showInfo("Feedback added to the list!");
+            $scope.feedbackText = false;
+        }
+
+        $scope.removeFeedback = function(index) {
+            $scope.feedbackList.splice(index, 1);
         }
 
         $scope.alertMe = function() {

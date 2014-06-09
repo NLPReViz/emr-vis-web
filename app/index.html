@@ -144,7 +144,7 @@
         </div>
         <div class="main">
           <div ng-controller="TabsCtrl">
-            <div ng-if="reportExists && bDocView" id="reportFeedback" class="alert alert-info">
+            <div ng-if="reportExists && bDocView" id="reportFeedback" class="alert alert-warning">
               <span ng-if="appInfo">
                 {{appInfo}}
               </span>
@@ -187,8 +187,13 @@
                   Feedback Review &nbsp;<span ng-if="feedbackList.length > 0" class="badge alert-info pull-right"> {{feedbackList.length}} </span>
                 </tab-heading>
                 <h4>Feedback List</h4>
-                <p>{{feedbackList}}</p>
-
+                <div>
+                  <alert ng-repeat="feedback in feedbackList" type="default" close="removeFeedback($index)">
+                    <!-- {{feedback}} -->
+                    <strong>{{$index + 1}}.</strong>
+                    "<em><span ng-if="!feedback.type">#</span>{{feedback.property}}</em>" should be <strong>{{classificationName[feedback.classification] | lowercase}}</strong> for <strong>{{feedback.variable}}</strong>.
+                  </alert>
+                </div>
               </tab>
               <tab select="alertMe()">
                 <tab-heading>
