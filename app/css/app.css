@@ -139,6 +139,8 @@ body {
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
   opacity: 1;
+  transition: 0s visibility;
+  transition-delay:1s;
 }
 
 /* Base styles for the tooltip's directional arrow */
@@ -314,7 +316,7 @@ body {
     overflow-y: auto; 
     background-color: #f5f5f5;
     border-right: 1px solid #eee;
-    width: 600px;
+    width: 601px;
     height: 100%;
 }
 
