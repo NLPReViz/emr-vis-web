@@ -200,7 +200,7 @@ angular.module('myApp.controllers', [])
             }
             else {
                 if (docClass == "positive")
-                    fClass == "negative";
+                    fClass = "negative";
                 else
                     fClass = "positive";
             }
@@ -242,7 +242,7 @@ angular.module('myApp.controllers', [])
         /*
          * Tabs
          */
-         
+
         $scope.tabs = {docView: true};
 
         /*
