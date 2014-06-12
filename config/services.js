@@ -4,5 +4,5 @@
 
 angular.module('myApp.services', [])
   .constant('config', {
-    backendURL: '/@@backEndApp/rest/server'
+    backendURL: '@@backEndApp/rest/server'
   });
