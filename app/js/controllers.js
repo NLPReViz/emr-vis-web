@@ -10,7 +10,11 @@ angular.module('myApp.controllers', [])
          */
 
         //TODO: Move them to configs - affects perf
-        $scope.classificationName = {"positive": "True", "negative": "False", "unclassified": "?"};
+        $scope.classificationName = {
+            "positive": "True", 
+            "negative": "False", 
+            "unclassified": "?"
+        };
 
         $scope.variables = ["any-adenoma", "appendiceal-orifice", "asa", "biopsy", "cecum",
                   "ileo-cecal-valve", "indication-type", "informed-consent", 
@@ -25,13 +29,13 @@ angular.module('myApp.controllers', [])
             "cecum": "cecum",
             "ileo-cecal-valve": "ileo-cecal-valve",
             "indication-type": "indication-type",
-            "informed-consent": "infomed-consent",
+            "informed-consent": "informed-consent",
             "nursing-report": "nursing-report",
             "prep-adequateNo": "no-prep-adequate",
             "prep-adequateNot": "not-prep-adequate",
             "prep-adequateYes": "yes-prep-adequate",
             "proc-aborted": "proc-aborted",
-            "withdraw-time": "widthdraw-time"
+            "withdraw-time": "withdraw-time"
         }
 
         /*
@@ -71,11 +75,12 @@ angular.module('myApp.controllers', [])
 
                 $scope.activeVariable = "asa";
                 $scope.loadDistribution("asa");
+                $scope.appLoading = false;
 
                 // $scope.updateHighlights();
                 
             })
-            .error(function() { alert("Could not load backend data!"); });
+            .error(function() { alert("Could not load backend data!"); $scope.appLoading = false;});
 
         $scope.styleGridCell = function(classification, confidence) {
             if (classification == "positive") {
