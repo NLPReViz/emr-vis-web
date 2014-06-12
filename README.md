@@ -48,8 +48,6 @@ folders in your project.
 * `node_modules` - contains the npm packages for the tools we need
 * `app/bower_components` - contains the angular framework files
 
-*Note that the `bower_components` folder would normally be installed in the root folder but
-emr-vis-web changes this location through the `.bowerrc` file.*
 
 ### Run the Application
 
