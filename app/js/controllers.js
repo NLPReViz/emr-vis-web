@@ -48,7 +48,8 @@ angular.module('myApp.controllers', [])
         $scope.appLoading = true;
         $scope.appDisabled = false;
 
-        $http.get("/testBackEndConnection/rest/server/getVarGridObj/modelList.0..xml/devIDList.xml")
+        //Start page load
+        $http.get("/testBackEndConnection/rest/server/getVarGridObj/mqwewqodelList.0..xml/devIDList.xml")
             .success(function(data, status) {
                 $scope.gridData = data['gridData'];
 
@@ -166,7 +167,7 @@ angular.module('myApp.controllers', [])
                 })
                 .error(function(data, status, headers, config) {
                     $scope.reportText = "Status " + status
-                    alert($scope.reportPath + " is not accessible. Make sure you have the docs/ folder in the app/ directory.");
+                    alert("docs/"+activeDoc+"/report.txt is not accessible. Make sure you have the docs/ folder in the app/ directory.");
 
                     $scope.appLoading = false;
                 });
