@@ -6,29 +6,32 @@ emr-vis-web is the web port for the [emr-vis-nlp](https://github.com/trivedigaur
 
 ## Getting Started
 
-To get you started you can simply clone the emr-vis-web repository and install the dependencies:
+To get started, install the pre-requisites and then clone emr-vis-web as described below:
 
 ### Prerequisites
 
-You need git to clone the emr-vis-web repository. You can get it from
+1. You need git to clone the emr-vis-web repository. You can get it from
 [http://git-scm.com/](http://git-scm.com/).
 
-We also use a number of node.js tools to initialize and test emr-vis-web. You must have node.js and
+2. We also use a number of node.js tools to initialize and test emr-vis-web. You must have node.js and
 its package manager (npm) installed.  You can get them from [http://nodejs.org/](http://nodejs.org/).
+
+3. We use the [Apache Tomcat](http://tomcat.apache.org/) server to deploy the app. You can also use your favourite package manager to get it. For example if you are on a Mac and have homebrew installed, you can run `$ brew install tomcat`.
 
 ### Clone emr-vis-web
 
-Clone the emr-vis-web repository using [git][git]:
+1. Navigate to the home directory of your tomcat server. You can use `$ catalina version` to find `$CATALINA_HOME`.
+2. `cd` to the `webapps/` directory. If you are using the default tomcat setup, your present working directory would be something like _/usr/local/Cellar/tomcat/7.0.54/libexec/webapps/_.
+3. Clone the emr-vis-web repository using [git][git]:
 
-```
-git clone https://github.com/trivedigaurav/emr-vis-web.git
-cd emr-vis-web
-```
+    ```
+    git clone https://github.com/trivedigaurav/emr-vis-web.git
+    cd emr-vis-web
+    ```
 
 ### Install Dependencies
 
-Make sure you have [node.js][node] installed. We have two kinds of dependencies in this project: tools and angular framework code.  The tools help
-us manage and test the application.
+Make sure you have [node.js][node] installed.
 
 * We get the tools we depend upon via `npm`, the [node package manager][npm].
 * We get the angular code via `bower`, a [client-side code package manager][bower].
@@ -46,114 +49,13 @@ folders in your project.
 * `app/bower_components` - contains the angular framework files
 
 *Note that the `bower_components` folder would normally be installed in the root folder but
-emr-vis-web changes this location through the `.bowerrc` file.  Putting it in the app folder makes
-it easier to serve the files by a webserver.*
+emr-vis-web changes this location through the `.bowerrc` file.*
 
 ### Run the Application
 
-We have preconfigured the project with a simple development web server.  The simplest way to start
-this server is:
+If you haven't built the backend project as yet, please do so now.
 
-```
-npm start
-```
-
-Now browse to the app at `http://localhost:8000/app/index.html`.
-
-
-
-## Directory Layout
-
-    app/                --> all of the files to be used in production
-      css/              --> css files
-        app.css         --> default stylesheet
-      img/              --> image files
-      index.html        --> app layout file (the main html template file of the app)
-      index-async.html  --> just like index.html, but loads js files asynchronously
-      js/               --> javascript files
-        app.js          --> application
-        controllers.js  --> application controllers
-        directives.js   --> application directives
-        filters.js      --> custom angular filters
-        services.js     --> custom angular services
-      partials/             --> angular view partials (partial html templates)
-        partial1.html
-        partial2.html
-
-    test/               --> test config and source files
-      protractor-conf.js    --> config file for running e2e tests with Protractor
-      e2e/                  --> end-to-end specs
-        scenarios.js
-      karma.conf.js         --> config file for running unit tests with Karma
-      unit/                 --> unit level specs/tests
-        controllersSpec.js      --> specs for controllers
-        directivessSpec.js      --> specs for directives
-        filtersSpec.js          --> specs for filters
-        servicesSpec.js         --> specs for services
-
-
-## Updating Angular
-
-You can update the tool dependencies by running:
-
-```
-npm update
-```
-
-This will find the latest versions that match the version ranges specified in the `package.json` file.
-
-You can update the Angular dependencies by running:
-
-```
-bower update
-```
-
-This will find the latest versions that match the version ranges specified in the `bower.json` file.
-
-
-## Serving the Application Files
-
-While angular is client-side-only technology and it's possible to create angular webapps that
-don't require a backend server at all, we recommend serving the project files using a local
-webserver during development to avoid issues with security restrictions (sandbox) in browsers. The
-sandbox implementation varies between browsers, but quite often prevents things like cookies, xhr,
-etc to function properly when an html page is opened via `file://` scheme instead of `http://`.
-
-
-### Running the App during Development
-
-The emr-vis-web project comes preconfigured with a local development webserver.  It is a node.js
-tool called [http-server][http-server].  You can start this webserver with `npm start` but you may choose to
-install the tool globally:
-
-```
-sudo npm install -g http-server
-```
-
-Then you can start your own development web server to serve static files from a folder by
-running:
-
-```
-http-server
-```
-
-Alternatively, you can choose to configure your own webserver, such as apache or nginx. Just
-configure your server to serve the files under the `app/` directory.
-
-
-### Running the App in Production
-
-This really depends on how complex is your app and the overall infrastructure of your system, but
-the general rule is that all you need in production are all the files under the `app/` directory.
-Everything else should be omitted.
-
-Angular apps are really just a bunch of static html, css and js files that just need to be hosted
-somewhere they can be accessed by browsers.
-
-If your Angular app is talking to the backend server via xhr or other means, you need to figure
-out what is the best way to host the static files to comply with the same origin policy if
-applicable. Usually this is done by hosting the files by the backend server or through
-reverse-proxying the backend server(s) and webserver(s).
+Now browse to the app at `http://localhost:8080/emr-vis-web/app/index.html` or `<your-local-host-root>/emr-vis-web/app`.
 
 
 [git]: http://git-scm.com/
