@@ -4,7 +4,6 @@
   "version": "0.0.0",
   "description": "Web port of emr-vis-nlp",
   "repository": "https://github.com/trivedigaurav/emr-vis-web",
-  "license": "MIT",
   "devDependencies": {
     "bower": "^1.3.1"
   },
