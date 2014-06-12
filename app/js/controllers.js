@@ -3,8 +3,8 @@
 /* Controllers */
 
 angular.module('myApp.controllers', [])
-  .controller('MainCtrl', ['$scope', '$http', '$window', '$document', '$timeout',  
-    function($scope, $http, $window, $document, $timeout) {
+  .controller('MainCtrl', ['$scope', '$http', '$window', '$document', '$timeout', 'config',  
+    function($scope, $http, $window, $document, $timeout, config) {
         /*
          * App config
          */
@@ -49,7 +49,7 @@ angular.module('myApp.controllers', [])
         $scope.appDisabled = false;
 
         //Start page load
-        $http.get("/testBackEndConnection/rest/server/getVarGridObj/modelList.0..xml/devIDList.xml")
+        $http.get(config.backendURL + "/getVarGridObj/modelList.0..xml/devIDList.xml")
             .success(function(data, status) {
                 $scope.gridData = data['gridData'];
 

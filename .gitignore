@@ -54,3 +54,4 @@ docs/_build/
 
 app/dummy-grid.json
 app/dummy-variable.json
+app/js/services.js
