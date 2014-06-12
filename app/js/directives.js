@@ -73,6 +73,15 @@ angular.module('myApp.directives', [])
                 scope.highlightTerms = function(posTerms, negTerms) {
                     element.text(scope.data);
 
+                    $(element).highlight(/S_O_H[\s\S]*E_O_H/, "dim") // header
+                        .highlight(/De-ID.*reserved./i, "dim") //copright
+                        .highlight(/\[Report de-identified.*/i, "dim") //De-ID
+                        .highlight(/\*\* Report Electronically Signed Out \*\*/, "dim") //Pathology template
+                        .highlight(/My signature is attestation[\s\S]*reflects that evaluation./, "dim") //Pathology template
+                        .highlight(/E_O_R/, "dim") //End of report
+                        .highlight(/\*\*[A-Z\ ,-\[\]\.]*/g, "dim") //DE-IDed Names
+                        .highlight(/[A-Z\-\ #]*\:/g, "dim"); //Colon fields
+
                     posTerms.forEach( function(keyword) {
                         keyword.matchedList.forEach(function (string) {
                             $(element).highlight(new RegExp(string,"gi"), "highlight positive");
@@ -86,15 +95,6 @@ angular.module('myApp.directives', [])
                             // console.log(string);
                         });
                     });
-
-                    $(element).highlight(/S_O_H[\s\S]*E_O_H/, "dim") // header
-                        .highlight(/De-ID.*reserved./i, "dim") //copright
-                        .highlight(/\[Report de-identified.*/i, "dim") //De-ID
-                        .highlight(/\*\* Report Electronically Signed Out \*\*/, "dim") //Pathology template
-                        .highlight(/My signature is attestation[\s\S]*reflects that evaluation./, "dim") //Pathology template
-                        .highlight(/E_O_R/, "dim") //End of report
-                        .highlight(/\*\*[A-Z\ ,-\[\]\.]*/g, "dim") //DE-IDed Names
-                        .highlight(/[A-Z\-\ #]*\:/g, "dim"); //Colon fields
                 };
         
                 scope.$watch('[posTerms, negTerms]', function(){
