@@ -30,27 +30,28 @@ To get started, install the pre-requisites and then clone emr-vis-web as describ
 
 ### Install Dependencies
 
-Make sure you have [node.js][node] installed.
+1. Make sure you have [node.js][node] installed.
 
-* We get the tools we depend upon via `npm`, the [node package manager][npm].
-* We get the angular code via `bower`, a [client-side code package manager][bower].
+    * We get the tools we depend upon via `npm`, the [node package manager][npm].
+    * We get the angular code via `bower`, a [client-side code package manager][bower].
 
-We have preconfigured `npm` to automatically run `bower` so we can simply do:
+2. We have preconfigured `npm` to automatically run `bower` so we can simply do:
 
-```
-npm install
-```
+    ```
+    npm install
+    ```
 
-Behind the scenes this will also call `bower install`.  You should find that you have two new
-folders in your project.
+3. Skip this step to leave default settings as it is. 
+   In case you need to change the backend service's path, edit the corresponding variable in _package.json_ *or* use the commands below to set it temporarily:
 
-* `node_modules` - contains the npm packages for the tools we need
-* `app/bower_components` - contains the angular framework files
-
+    ```
+    npm config set emr-vis-web:backend <relative/path/to/backend/service>
+    npm start
+    ```
 
 ### Run the Application
 
-If you haven't built the backend project as yet, please do so now.
+If you haven't built the backend project as yet, please do so now. Remember to go through step 3 in section above if you wish to change the default path to the backend service.
 
 Now browse to the app at `http://localhost:8080/emr-vis-web/app/index.html` or `<your-localhost-root>/emr-vis-web/app`.
 
