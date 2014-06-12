@@ -53,7 +53,7 @@ folders in your project.
 
 If you haven't built the backend project as yet, please do so now.
 
-Now browse to the app at `http://localhost:8080/emr-vis-web/app/index.html` or `<your-local-host-root>/emr-vis-web/app`.
+Now browse to the app at `http://localhost:8080/emr-vis-web/app/index.html` or `<your-localhost-root>/emr-vis-web/app`.
 
 
 [git]: http://git-scm.com/
