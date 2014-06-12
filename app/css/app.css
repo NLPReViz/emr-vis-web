@@ -502,6 +502,8 @@ body {
 .cert0-pos{background-color: #eef7ea; color: #468847;}
 .cert1-pos{background-color: #d0e9c5; color: #468847;}
 
+.cert0-unclassified{background-color: #ddd; color: #000;}
+
 /* Data grid */
 
 #sidebar-top .progress{

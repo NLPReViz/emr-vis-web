@@ -10,7 +10,7 @@ angular.module('myApp.controllers', [])
          */
 
         //TODO: Move them to configs - affects perf
-        $scope.classificationName = {"positive": "True", "negative": "False"};
+        $scope.classificationName = {"positive": "True", "negative": "False", "unclassified": "?"};
 
         $scope.variables = ["any-adenoma", "appendiceal-orifice", "asa", "biopsy", "cecum",
                   "ileo-cecal-valve", "indication-type", "informed-consent", 
@@ -33,7 +33,7 @@ angular.module('myApp.controllers', [])
             "proc-aborted": "proc-aborted",
             "withdraw-time": "widthdraw-time"
         }
-        
+
         /*
          * Main grid
          */
@@ -75,37 +75,6 @@ angular.module('myApp.controllers', [])
             })
             .error(function() { alert("Could not load backend data!"); });
 
-        // $http.get("dummy-grid.json")
-        //     .success(function(data, status) {
-        //         $scope.gridData = data;
-                
-        //         //Show first report in the set
-        //         $scope.activeDocIndex = 0;
-        //         $scope.loadReport(0);
-                
-        //     })
-        //     .error(function() { alert("Could not load grid data!"); });
-
-        // $http.get("dummy-variable.json")
-        //     .success(function(data, status) {
-        //         $scope.variableData = data;
-
-        //         $scope.variables.forEach(function(variable) {
-        //           // console.log(data[variable]["numPositive"]);
-        //           $scope.variableData[variable]["percPositive"] = 
-        //                                   Math.round(100.0 * data[variable]["numPositive"] / 
-        //                                   (data[variable]["numPositive"] + data[variable]["numNegative"]));
-        //           $scope.variableData[variable]['percNegative'] = 100.0 - $scope.variableData[variable]['percPositive'];
-
-        //           // console.log($scope.variableData[variable]["percPositive"] + " - " + $scope.variableData[variable]["percNegative"]);
-                                          
-        //         });
-
-        //         $scope.activeVariable = "asa";
-        //         $scope.loadDistribution("asa");
-        //     })
-        //     .error(function() { alert("Could not load variable data!"); });
-
         $scope.styleGridCell = function(classification, confidence) {
             if (classification == "positive") {
                 if (confidence >= 0.75) 
@@ -113,11 +82,14 @@ angular.module('myApp.controllers', [])
                 else
                     return "cert0-pos";
             }
-            else {
+            else if (classification == "negative") {
                 if (confidence >= 0.75) 
                     return "cert1-neg";
                 else
                     return "cert0-neg";
+            }
+            else {
+                return "cert0-unclassified";
             }
         };
 
@@ -238,23 +210,23 @@ angular.module('myApp.controllers', [])
             }
         };
 
-        $scope.addFeedbackDoc = function(bAccept) {
+        $scope.addFeedbackDoc = function(classification) {
 
             var docClass = $scope.gridData[$scope.activeDocIndex][$scope.activeVariable].classification;
             var fClass = null;
 
-            if(bAccept) {
-                fClass = docClass;    
-            }
-            else {
-                if (docClass == "positive")
-                    fClass = "negative";
-                else
-                    fClass = "positive";
-            }
+            // if(bAccept) {
+            //     fClass = docClass;    
+            // }
+            // else {
+            //     if (docClass == "positive")
+            //         fClass = "negative";
+            //     else
+            //         fClass = "positive";
+            // }
             
             $scope.feedbackList.push(new Feedback(0, $scope.gridData[$scope.activeDocIndex].id, 
-                                        fClass, $scope.activeVariable));
+                                        classification, $scope.activeVariable));
 
             showInfo("Feedback added to the list!");
         }

@@ -150,7 +150,7 @@
               </span>
               <span ng-if="!appInfo">
                 <span ng-if="feedbackText"><em>"{{feedbackText|truncate:20}}"</em> indicates <strong>{{variableMapping[activeVariable]}}</strong> to be: <a ng-click="addFeedbackText(feedbackText, 'positive')">{{classificationName['positive']}}</a> | <a ng-click="addFeedbackText(feedbackText, 'negative')">{{classificationName['negative']}}</a></span>
-                <span ng-if="!feedbackText" ><strong>{{variableMapping[activeVariable]}}</strong> is marked as <strong>{{classificationName[ gridData[activeDocIndex][activeVariable].classification ] | lowercase}}</strong> for this report: <a ng-click="addFeedbackDoc(true)">Accept</a> | <a ng-click="addFeedbackDoc(false)">Change</a></span>
+                <span ng-if="!feedbackText" ><strong>{{variableMapping[activeVariable]}}</strong> is marked as <strong>{{classificationName[ gridData[activeDocIndex][activeVariable].classification ] | lowercase}}</strong> for this report; it should be: <a ng-click="addFeedbackDoc('positive')">{{classificationName['positive']}}</a> | <a ng-click="addFeedbackDoc('negative')">{{classificationName['negative']}}</a></span>
               </span>
             </div>
             <tabset>
