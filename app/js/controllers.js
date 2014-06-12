@@ -17,11 +17,23 @@ angular.module('myApp.controllers', [])
                   "nursing-report", "prep-adequateNo", "prep-adequateNot",
                   "prep-adequateYes", "proc-aborted", "withdraw-time"]
 
-        $scope.varDisplayName = ["any-adenoma", "appendiceal-orifice", "asa", "biopsy", "cecum",
-          "ileo-cecal-valve", "indication-type", "infomed-consent", 
-          "nursing-report", "no-prep-adequate", "not-prep-adequate",
-          "yes-prep-adequate", "proc-aborted", "widthdraw-time"]
-
+        $scope.variableMapping = 
+        {   "any-adenoma": "any-adenoma",
+            "appendiceal-orifice": "appendiceal-orifice",
+            "asa": "asa",
+            "biopsy": "biopsy",
+            "cecum": "cecum",
+            "ileo-cecal-valve": "ileo-cecal-valve",
+            "indication-type": "indication-type",
+            "informed-consent": "infomed-consent",
+            "nursing-report": "nursing-report",
+            "prep-adequateNo": "no-prep-adequate",
+            "prep-adequateNot": "not-prep-adequate",
+            "prep-adequateYes": "yes-prep-adequate",
+            "proc-aborted": "proc-aborted",
+            "withdraw-time": "widthdraw-time"
+        }
+        
         /*
          * Main grid
          */
