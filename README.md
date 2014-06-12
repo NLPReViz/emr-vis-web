@@ -49,7 +49,7 @@ To get started, install the pre-requisites and then clone emr-vis-web as describ
     npm start
     ```
     
-    Some valid examples of this path can be: _"http://localhost:9090/backEndService"_, _"/backEndService"_ etc.
+    Some valid examples of this path include _"http://localhost:9090/backEndService"_, _"/backEndService"_ etc.
     
     Editing package.json would be a permanent solution while using the `npm config` lets you include the config settings for the current terminal session.
 
