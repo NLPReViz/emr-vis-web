@@ -48,7 +48,7 @@ angular.module('myApp.controllers', [])
             .success(function(data, status) {
                 $scope.gridData = data['gridData'];
 
-                console.log($scope.gridData);
+                // console.log($scope.gridData);
 
                 //Show first report in the set
                 $scope.activeDocIndex = 0;
@@ -56,7 +56,7 @@ angular.module('myApp.controllers', [])
 
                 $scope.variableData = data['variableData'];
 
-                console.log($scope.variableData);
+                // console.log($scope.variableData);
 
                 $scope.variables.forEach(function(variable) {
                   // console.log(data[variable]["numPositive"]);
@@ -71,6 +71,8 @@ angular.module('myApp.controllers', [])
 
                 $scope.activeVariable = "asa";
                 $scope.loadDistribution("asa");
+
+                // $scope.updateHighlights();
                 
             })
             .error(function() { alert("Could not load backend data!"); });
@@ -106,7 +108,30 @@ angular.module('myApp.controllers', [])
             }
 
             $scope.tabs.docView = true;
+
+            // $scope.updateHighlights();
         };
+
+
+        $scope.updateHighlights = function() {
+            var element = $(".report pre");
+
+            console.log(element);
+
+            $scope.gridData[$scope.activeDocIndex][$scope.activeVariable].topPositive.forEach(function(keyword){
+                keyword.matchedList.forEach(function (string){
+                    $(element).highlight(new RegExp(string,"gi"), "highlight positive");
+                    console.log(string);
+                });
+            });
+
+            $scope.gridData[$scope.activeDocIndex][$scope.activeVariable].topNegative.forEach(function(keyword){
+                keyword.matchedList.forEach(function (string){
+                    $(element).highlight(new RegExp(string,"gi"), "highlight negative");
+                    console.log(string);
+                });
+            });
+        }
 
         /*
          * Load reports

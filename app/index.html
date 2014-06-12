@@ -115,8 +115,8 @@
                 </div>
                 <div id="distribution">
                   <h6>Distribution</h6>
-                  <p ng-if="!variableData" class="empty-list">None</p>
-                  <d3-piechart data='pieData'></d3-piechart>
+                  <p ng-hide="variableData" class="empty-list">None</p>
+                  <d3-piechart data='pieData' ng-show="variableData"></d3-piechart>
                 </div>
               </div>
             </div>
@@ -163,17 +163,17 @@
                     </a>
                     <a class="btn btn-xs btn-default pull-right" ng-href="docs/{{gridData[activeDocIndex].id}}/report.txt" target="_blank"><strong>View Raw</strong></a>
                   </div>
-                  <pre><highlighted-report data='reportText'></highlighted-report></pre>
+                  <pre><highlighted-report data='reportText' pos-terms='gridData[activeDocIndex][activeVariable].topPositive' neg-terms='gridData[activeDocIndex][activeVariable].topNegative'></highlighted-report></pre>
                 </div>
                 <div ng-mouseup="setFeedbackText()" ng-if="pathologyExists" id="emr-pathology" class="report">
                   <div class="info">
                     <i class="glyphicon glyphicon-list-alt"></i>&nbsp;
-                    <span href="#" tooltip-placement="bottom" tooltip-animation="false" tooltip="docs/{{gridData[activeDocIndex].id}}/pathology.txt"> 
+                    <a tooltip-placement="bottom" tooltip-animation="false" tooltip="docs/{{gridData[activeDocIndex].id}}/pathology.txt"> 
                       <strong class="file-name js-selectable-text">Pathology: #{{gridData[activeDocIndex].id}}</strong>
-                    </span>
+                    </a>
                     <a class="btn btn-xs btn-default pull-right" ng-href="docs/{{gridData[activeDocIndex].id}}/pathology.txt" target="_blank"><strong>View Raw</strong></a>
                   </div>
-                  <pre><highlighted-report data='pathologyText'></highlighted-report></pre>
+                  <pre><highlighted-report data='pathologyText' pos-terms='gridData[activeDocIndex][activeVariable].topPositive' neg-terms='gridData[activeDocIndex][activeVariable].topNegative' ></highlighted-report></pre>
                 </div>
                 <!-- div id="pathology-report" class>
                 </div> -->

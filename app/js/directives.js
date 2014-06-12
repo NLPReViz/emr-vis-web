@@ -62,13 +62,32 @@ angular.module('myApp.directives', [])
         restrict: 'E',
         scope: {
             data: '=',
+            posTerms: '=',
+            negTerms: '=',
         },
         link: function (scope, element, attrs) {
-                element.text(scope.data);
 
-                $(element).highlight(/ascending/gi, "highlight positive") //sample positive term
-                        .highlight(/colonoscopy/gi, "highlight negative") //sample negative term
-                        .highlight(/S_O_H[\s\S]*E_O_H/, "dim") // header
+                // console.log(scope.posTerms);
+                // console.log(scope.negTerms);
+
+                scope.highlightTerms = function(posTerms, negTerms) {
+                    element.text(scope.data);
+
+                    posTerms.forEach( function(keyword) {
+                        keyword.matchedList.forEach(function (string) {
+                            $(element).highlight(new RegExp(string,"gi"), "highlight positive");
+                            // console.log(string);
+                        });
+                    });
+
+                    negTerms.forEach( function(keyword) {
+                        keyword.matchedList.forEach(function (string) {
+                            $(element).highlight(new RegExp(string,"gi"), "highlight negative");
+                            // console.log(string);
+                        });
+                    });
+
+                    $(element).highlight(/S_O_H[\s\S]*E_O_H/, "dim") // header
                         .highlight(/De-ID.*reserved./i, "dim") //copright
                         .highlight(/\[Report de-identified.*/i, "dim") //De-ID
                         .highlight(/\*\* Report Electronically Signed Out \*\*/, "dim") //Pathology template
@@ -76,6 +95,11 @@ angular.module('myApp.directives', [])
                         .highlight(/E_O_R/, "dim") //End of report
                         .highlight(/\*\*[A-Z\ ,-\[\]\.]*/g, "dim") //DE-IDed Names
                         .highlight(/[A-Z\-\ #]*\:/g, "dim"); //Colon fields
+                };
+        
+                scope.$watch('[posTerms, negTerms]', function(){
+                    scope.highlightTerms(scope.posTerms, scope.negTerms);
+                }, true);
         }
     };
 }])
