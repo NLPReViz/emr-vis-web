@@ -10,7 +10,7 @@
     "grunt-replace": "^0.7.8"
   },
   "config": {
-    "backend": "testBackEndConnection",
+    "backend": "/testBackEndConnection",
     "appFolder": "app"
   },
   "scripts": {
