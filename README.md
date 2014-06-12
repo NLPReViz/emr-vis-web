@@ -21,7 +21,7 @@ its package manager (npm) installed.  You can get them from [http://nodejs.org/]
 ### Clone emr-vis-web
 
 1. Navigate to the home directory of your tomcat server. You can use `$ catalina version` to find `$CATALINA_HOME`.
-2. `cd` to the ~webapps/` directory. If you are using the default tomcat setup, your present working directory would be something like _/usr/local/Cellar/tomcat/7.0.54/libexec/webapps/_.
+2. `cd` to the _webapps/_ directory. If you are using the default tomcat setup, your present working directory would be something like _/usr/local/Cellar/tomcat/7.0.54/libexec/webapps/_.
 3. Clone the emr-vis-web repository using [git][git]:
 
     ```
