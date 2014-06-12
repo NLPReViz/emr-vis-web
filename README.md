@@ -16,12 +16,12 @@ To get started, install the pre-requisites and then clone emr-vis-web as describ
 2. We also use a number of node.js tools to initialize and test emr-vis-web. You must have node.js and
 its package manager (npm) installed.  You can get them from [http://nodejs.org/](http://nodejs.org/). You may also use your favourite package manager to node and npm. For example, if you are on a Mac and have homebrew installed, run `$ brew install node`.
 
-3. We use the [Apache Tomcat](http://tomcat.apache.org/) server to deploy the app. You can also use your favourite package manager to get it. On a Mac with homebrew you may use `$ brew install tomcat`.
+3. We use the [Apache Tomcat](http://tomcat.apache.org/) server to deploy the app. On a Mac with homebrew you may use `$ brew install tomcat` to get it.
 
 ### Clone emr-vis-web
 
 1. Navigate to the home directory of your tomcat server. You can use `$ catalina version` to find `$CATALINA_HOME`.
-2. `cd` to the ~webapps/` directory. If you are using the default tomcat setup, your present working directory would be something like _/usr/local/Cellar/tomcat/7.0.54/libexec/webapps/_.
+2. `cd` to the _webapps/_ directory. If you are using the default tomcat setup, your present working directory would be something like _/usr/local/Cellar/tomcat/7.0.54/libexec/webapps/_.
 3. Clone the emr-vis-web repository using [git][git]:
 
     ```
