@@ -14,9 +14,9 @@ To get started, install the pre-requisites and then clone emr-vis-web as describ
 [http://git-scm.com/](http://git-scm.com/).
 
 2. We also use a number of node.js tools to initialize and test emr-vis-web. You must have node.js and
-its package manager (npm) installed.  You can get them from [http://nodejs.org/](http://nodejs.org/).
+its package manager (npm) installed.  You can get them from [http://nodejs.org/](http://nodejs.org/). You may also use your favourite package manager to node and npm. For example, if you are on a Mac and have homebrew installed, you can run `$ brew install node` 
 
-3. We use the [Apache Tomcat](http://tomcat.apache.org/) server to deploy the app. You can also use your favourite package manager to get it. For example if you are on a Mac and have homebrew installed, you can run `$ brew install tomcat`.
+3. We use the [Apache Tomcat](http://tomcat.apache.org/) server to deploy the app. You can also use your favourite package manager to get it. On a Mac with homebrew, you can run `$ brew install tomcat`.
 
 ### Clone emr-vis-web
 
