@@ -13,9 +13,14 @@ angular.module('myApp.controllers', [])
         $scope.classificationName = {"positive": "True", "negative": "False"};
 
         $scope.variables = ["any-adenoma", "appendiceal-orifice", "asa", "biopsy", "cecum",
-                  "ileo-cecal-valve", "indication-type", "infomed-consent", 
-                  "nursing-report", "no-prep-adequate", "not-prep-adequate",
-                  "yes-prep-adequate", "proc-aborted", "widthdraw-time"]
+                  "ileo-cecal-valve", "indication-type", "informed-consent", 
+                  "nursing-report", "prep-adequateNo", "prep-adequateNot",
+                  "prep-adequateYes", "proc-aborted", "withdraw-time"]
+
+        $scope.varDisplayName = ["any-adenoma", "appendiceal-orifice", "asa", "biopsy", "cecum",
+          "ileo-cecal-valve", "indication-type", "infomed-consent", 
+          "nursing-report", "no-prep-adequate", "not-prep-adequate",
+          "yes-prep-adequate", "proc-aborted", "widthdraw-time"]
 
         /*
          * Main grid
@@ -27,26 +32,25 @@ angular.module('myApp.controllers', [])
         $scope.appLoading = true;
         $scope.appDisabled = false;
 
-        $http.get("dummy-grid.json")
+        $http.get("/testBackEndConnection/rest/server/getVarGridObj/modelList.0..xml/devIDList.xml")
             .success(function(data, status) {
-                $scope.gridData = data;
-                
+                $scope.gridData = data['gridData'];
+
+                console.log($scope.gridData);
+
                 //Show first report in the set
                 $scope.activeDocIndex = 0;
                 $scope.loadReport(0);
-                
-            })
-            .error(function() { alert("Could not load grid data!"); });
 
-        $http.get("dummy-variable.json")
-            .success(function(data, status) {
-                $scope.variableData = data;
+                $scope.variableData = data['variableData'];
+
+                console.log($scope.variableData);
 
                 $scope.variables.forEach(function(variable) {
                   // console.log(data[variable]["numPositive"]);
                   $scope.variableData[variable]["percPositive"] = 
-                                          Math.round(100.0 * data[variable]["numPositive"] / 
-                                          (data[variable]["numPositive"] + data[variable]["numNegative"]));
+                                          Math.round(100.0 *  data['variableData'][variable]["numPositive"] / 
+                                          ( data['variableData'][variable]["numPositive"] +  data['variableData'][variable]["numNegative"]));
                   $scope.variableData[variable]['percNegative'] = 100.0 - $scope.variableData[variable]['percPositive'];
 
                   // console.log($scope.variableData[variable]["percPositive"] + " - " + $scope.variableData[variable]["percNegative"]);
@@ -55,18 +59,50 @@ angular.module('myApp.controllers', [])
 
                 $scope.activeVariable = "asa";
                 $scope.loadDistribution("asa");
+                
             })
-            .error(function() { alert("Could not load variable data!"); });
+            .error(function() { alert("Could not load backend data!"); });
+
+        // $http.get("dummy-grid.json")
+        //     .success(function(data, status) {
+        //         $scope.gridData = data;
+                
+        //         //Show first report in the set
+        //         $scope.activeDocIndex = 0;
+        //         $scope.loadReport(0);
+                
+        //     })
+        //     .error(function() { alert("Could not load grid data!"); });
+
+        // $http.get("dummy-variable.json")
+        //     .success(function(data, status) {
+        //         $scope.variableData = data;
+
+        //         $scope.variables.forEach(function(variable) {
+        //           // console.log(data[variable]["numPositive"]);
+        //           $scope.variableData[variable]["percPositive"] = 
+        //                                   Math.round(100.0 * data[variable]["numPositive"] / 
+        //                                   (data[variable]["numPositive"] + data[variable]["numNegative"]));
+        //           $scope.variableData[variable]['percNegative'] = 100.0 - $scope.variableData[variable]['percPositive'];
+
+        //           // console.log($scope.variableData[variable]["percPositive"] + " - " + $scope.variableData[variable]["percNegative"]);
+                                          
+        //         });
+
+        //         $scope.activeVariable = "asa";
+        //         $scope.loadDistribution("asa");
+        //     })
+        //     .error(function() { alert("Could not load variable data!"); });
 
         $scope.styleGridCell = function(classification, confidence) {
             if (classification == "positive") {
-                if (confidence > 0.5) 
+                if (confidence >= 0.75) 
                     return "cert1-pos";
                 else
                     return "cert0-pos";
             }
             else {
-                if (confidence > 0.5) 
+                if (confidence >= 0.75) 
                     return "cert1-neg";
                 else
                     return "cert0-neg";
