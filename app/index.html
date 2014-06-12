@@ -74,7 +74,7 @@
                     <div class="progress-bar positive" style="width: {{variableData[var]['percPositive']}}%"></div>
                     <div class="progress-bar negative" style="width: {{variableData[var]['percNegative']}}%"></div>
                   </div>
-                  <a class="rotate"><div>{{var}}</div></a>
+                  <a class="rotate"><div>{{variableMapping[var]}}</div></a>
                 </div>
               </div>
               <div class="sidebar-separator breakline" horizontal-splitter>
@@ -98,7 +98,7 @@
           <div id="sidebar-bottom">
             
             <div id="sidebar-bottom-left">
-              <div class="about unselectable">Variable details: <strong>{{activeVariable}}</strong></div>
+              <div class="about unselectable">Variable details: <strong>{{variableMapping[activeVariable]}}</strong></div>
               <div class="content">
                 <div id="keywords">
                   <h6>{{classificationName["positive"]}} indicators</h6>
@@ -149,8 +149,8 @@
                 {{appInfo}}
               </span>
               <span ng-if="!appInfo">
-                <span ng-if="feedbackText"><em>"{{feedbackText|truncate:20}}"</em> indicates <strong>{{activeVariable}}</strong> to be: <a ng-click="addFeedbackText(feedbackText, 'positive')">{{classificationName['positive']}}</a> | <a ng-click="addFeedbackText(feedbackText, 'negative')">{{classificationName['negative']}}</a></span>
-                <span ng-if="!feedbackText" ><strong>{{activeVariable}}</strong> is marked as <strong>{{classificationName[ gridData[activeDocIndex][activeVariable].classification ] | lowercase}}</strong> for this report: <a ng-click="addFeedbackDoc(true)">Accept</a> | <a ng-click="addFeedbackDoc(false)">Change</a></span>
+                <span ng-if="feedbackText"><em>"{{feedbackText|truncate:20}}"</em> indicates <strong>{{variableMapping[activeVariable]}}</strong> to be: <a ng-click="addFeedbackText(feedbackText, 'positive')">{{classificationName['positive']}}</a> | <a ng-click="addFeedbackText(feedbackText, 'negative')">{{classificationName['negative']}}</a></span>
+                <span ng-if="!feedbackText" ><strong>{{variableMapping[activeVariable]}}</strong> is marked as <strong>{{classificationName[ gridData[activeDocIndex][activeVariable].classification ] | lowercase}}</strong> for this report: <a ng-click="addFeedbackDoc(true)">Accept</a> | <a ng-click="addFeedbackDoc(false)">Change</a></span>
               </span>
             </div>
             <tabset>
@@ -191,10 +191,10 @@
                   <alert ng-repeat="feedback in feedbackList" type="default" close="removeFeedback($index)">
                     <strong>{{$index + 1}}.</strong>
                     <span ng-if="feedback.kind == 0">
-                      #{{feedback.property}} should have <strong>{{feedback.variable}}</strong> marked as <strong>{{classificationName[feedback.classification] | lowercase}}</strong>.
+                      #{{feedback.property}} should have <strong>{{variableMapping[feedback.variable]}}</strong> marked as <strong>{{classificationName[feedback.classification] | lowercase}}</strong>.
                     </span>
                     <span ng-if="feedback.kind == 1">
-                      "<em>{{feedback.property}}</em>" indicates <strong>{{feedback.variable}}</strong> to be <strong>{{classificationName[feedback.classification] | lowercase}}</strong>.
+                      "<em>{{feedback.property}}</em>" indicates <strong>{{variableMapping[feedback.variable]}}</strong> to be <strong>{{classificationName[feedback.classification] | lowercase}}</strong>.
                     </span>
                   </alert>
                 </div>
