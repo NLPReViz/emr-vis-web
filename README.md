@@ -57,7 +57,7 @@ To get started, install the pre-requisites and then clone emr-vis-web as describ
 
 ### Run the Application
 
-If you haven't built the backend project as yet, please do so now. Refer to the readme on  [emr-nlp-server](https://github.com/trivedigaurav/emr-nlp-server) for more information. Remember to go through step 3 to modify the default path to the backend service.
+If you haven't built the backend project as yet, please do so now. Refer to the readme on  [emr-nlp-server](https://github.com/trivedigaurav/emr-nlp-server) for more information. Remember to go through step 3 to set the correct path to the backend service if you plan to modify the defaults.
 
 Now browse to the app at `http://localhost:8080/emr-vis-web/app/index.html` or `<your-localhost-root>/emr-vis-web/app`.
 
