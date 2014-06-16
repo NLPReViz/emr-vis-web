@@ -74,8 +74,8 @@ angular.module('myApp.controllers', [])
                                           
                 });
 
-                $scope.activeVariable = "asa";
-                $scope.loadDistribution("asa");
+                $scope.activeVariable = $scope.variables[0];
+                $scope.loadDistribution($scope.activeVariable);
                 $scope.appLoading = false;
 
                 // $scope.updateHighlights();
