@@ -47,13 +47,22 @@ body {
     user-select: none;
 }
 
-.unselectable{
+.unselectable {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.flash {
+    background-color: yellow!important;
+    transition: background-color 100ms linear;
 }
 
 .empty-list { 

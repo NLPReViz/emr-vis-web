@@ -71,6 +71,7 @@ angular.module('myApp.directives', [])
                 // console.log(scope.negTerms);
 
                 scope.highlightTerms = function(posTerms, negTerms) {
+
                     element.text(scope.data);
 
                     $(element).highlight(/S_O_H[\s\S]*E_O_H/, "dim") // header
@@ -84,14 +85,14 @@ angular.module('myApp.directives', [])
 
                     posTerms.forEach( function(keyword) {
                         keyword.matchedList.forEach(function (string) {
-                            $(element).highlight(new RegExp("\\b"+string+"\\b","gi"), "highlight positive");
+                            $(element).highlight(new RegExp("\\b"+string+"\\b","gi"), "highlight positive", keyword.term);
                             // console.log(string);
                         });
                     });
 
                     negTerms.forEach( function(keyword) {
                         keyword.matchedList.forEach(function (string) {
-                            $(element).highlight(new RegExp("\\b"+string+"\\b","gi"), "highlight negative");
+                            $(element).highlight(new RegExp("\\b"+string+"\\b","gi"), "highlight negative", keyword.term);
                             // console.log(string);
                         });
                     });
@@ -180,4 +181,26 @@ angular.module('myApp.directives', [])
                 }, true);
             }
     };
-}]);
+}])
+
+//From http://nadeemkhedr.wordpress.com/2014/01/03/angularjs-scroll-to-element-using-directives/
+.directive('scrollToBookmark', function() {
+    return {
+      link: function(scope, element, attrs) {
+        var value = attrs.scrollToBookmark;
+        element.bind("click", function(e){
+          scope.$apply(function() {
+            var selector = "[scroll-bookmark='"+ value +"']";
+            var element = $(selector);
+
+            if(element.length)
+                window.scrollTo(0, element[0].offsetTop - 100);  // Don't want the top to be the exact element, -100 will go to the top for a little bit more
+                $(element).addClass("flash");
+                setTimeout(function () { 
+                    $(element).removeClass('flash');
+                }, 800);
+          });
+        });
+      }
+    };
+});;
