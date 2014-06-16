@@ -494,6 +494,7 @@ body {
     background-color: #C7254E;
 }
 
+.unclassified{background-color: #eee; color: #555;}
 
 /* From http://colorbrewer2.org/ */
 .cert0-neg{background-color: #F9F2F4; color: #C7254E;}
@@ -501,8 +502,6 @@ body {
 /*.cert4-neu{background-color: #7bccc4; color: #252525;}*/
 .cert0-pos{background-color: #eef7ea; color: #468847;}
 .cert1-pos{background-color: #d0e9c5; color: #468847;}
-
-.cert0-unclassified{background-color: #eee; color: #555;}
 
 /* Data grid */
 

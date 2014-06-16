@@ -133,37 +133,38 @@ angular.module('myApp.directives', [])
 
                 //Render graph based on 'data'
                 scope.render = function(data) {
-                    data.forEach(function(d) {
-                        d.count = +d.count;
-                    });
+                    if(data != null){
+                        data.forEach(function(d) {
+                            d.count = +d.count;
+                        });
 
-                    svg.selectAll('.arc').remove();
+                        svg.selectAll('.arc').remove();
 
-                    var g = svg.selectAll(".arc")
-                                .data(pie(data))
-                              .enter().append("g")
-                                .attr("class", "arc")
-                                .on("mouseover", function(d) { g.select(".d3-tip").style("opacity", "1");})
-                                .on("mouseout", function(d) { g.select(".d3-tip").style("opacity", "0");});
+                        var g = svg.selectAll(".arc")
+                                    .data(pie(data))
+                                  .enter().append("g")
+                                    .attr("class", "arc")
+                                    .on("mouseover", function(d) { g.select(".d3-tip").style("opacity", "1");})
+                                    .on("mouseout", function(d) { g.select(".d3-tip").style("opacity", "0");});
 
-                    g.append("path")
-                        .attr("d", arc)
-                        .attr("class", function(d) { return d.data.classification; })
-                        
-                    g.append("text")
-                        .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
-                        .attr("dy", "0em")
-                        .style("text-anchor", "middle")
-                        .attr("class", function(d) { return d.data.classification+"-label"; })
-                        .text(function(d) { if (d.data.count > 0) return d.data.name; });
+                        g.append("path")
+                            .attr("d", arc)
+                            .attr("class", function(d) { return d.data.classification; })
+                            
+                        g.append("text")
+                            .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
+                            .attr("dy", "0em")
+                            .style("text-anchor", "middle")
+                            .attr("class", function(d) { return d.data.classification+"-label"; })
+                            .text(function(d) { if (d.data.count > 0) return d.data.name; });
 
-                    g.append("text")
-                     .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
-                     .attr("dy", "1.15em")
-                     .style("text-anchor", "middle")
-                     .attr("class", function(d) { return d.data.classification+"-label" + " d3-tip"; })
-                     .text(function(d) { return "(" + d.data.count + ")"; });
-
+                        g.append("text")
+                         .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
+                         .attr("dy", "1.15em")
+                         .style("text-anchor", "middle")
+                         .attr("class", function(d) { return d.data.classification+"-label" + " d3-tip"; })
+                         .text(function(d) { return "(" + d.data.count + ")"; });
+                    }
 
                     // //Animate bars
                     // bars.transition()
