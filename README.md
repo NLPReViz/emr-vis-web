@@ -21,7 +21,7 @@ To get started, install the pre-requisites and then clone emr-vis-web as describ
 
 ### Clone emr-vis-web
 
-1. Navigate to the home directory of your tomcat server. You can use `$ catalina version` to check the value of  `CATALINA_HOME`.
+1. Navigate to the home directory of your tomcat server. You can use `$ catalina version` and find out what `CATALINA_HOME` is set to.
 2. `cd` to the _webapps/_ directory. If you are using the default tomcat setup, your present working directory would be something like _/usr/local/Cellar/tomcat/7.0.54/libexec/webapps/_.
 3. Clone the emr-vis-web repository using [git][git]:
 
@@ -32,19 +32,22 @@ To get started, install the pre-requisites and then clone emr-vis-web as describ
 
 ### Install Dependencies
 
-1. Make sure you have [node.js][node] installed.
+1. Make sure you have [node.js][node] installed. 
 
-    * We get the tools we depend upon via `npm`, the [node package manager][npm].
-    * We get the angular code via `bower`, a [client-side code package manager][bower].
-
-2. We have preconfigured `npm` to automatically run `bower` so we can simply do:
+2. We have preconfigured `npm` to automatically run `bower` and `grunt`. So all you need to do is:
 
     ```
     npm install
     ```
+    
+    This would run the following steps:
+    
+    * Get the tools we depend upon via `npm`, the [node package manager][npm].
+    * Download the angular code and javascript dependencies via `bower`, a [client-side code package manager][bower].
+    * And set the config variables using `grunt`, a [javascript task runner][grunt].
 
 3. (Skip this step to leave default settings as it is.) 
-   In case you need to change the backend service's path, edit the `config.backend` variable in _package.json_ *or* or use the following commands:
+   In case you need to change the backend service's path, edit the `config.backend` variable in _package.json_ **or**  use the following commands:
 
     ```
     npm config set emr-vis-web:backend <relative/path/to/backend/service>
@@ -66,3 +69,4 @@ Now browse to the app at `http://localhost:8080/emr-vis-web/app/index.html` or `
 [bower]: http://bower.io
 [npm]: https://www.npmjs.org/
 [node]: http://nodejs.org
+[grunt]: http://gruntjs.com/
