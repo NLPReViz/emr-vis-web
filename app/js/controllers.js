@@ -97,7 +97,7 @@ angular.module('myApp.controllers', [])
                     return "cert0-neg";
             }
             else {
-                return "cert0-unclassified";
+                return "unclassified";
             }
         };
 
@@ -183,19 +183,25 @@ angular.module('myApp.controllers', [])
          * Pie chart
          */
 
-        $scope.pieData = [
-            {name: "!#def", count: 1, classification: "positive"},
-         ]; 
+        $scope.pieData = null;
 
         $scope.loadDistribution = function(variable) {
-            $scope.pieData = [
-              {name: $scope.classificationName["positive"], count: $scope.variableData[variable]["numPositive"], classification: "positive"},
-              {name: $scope.classificationName["negative"], count: $scope.variableData[variable]["numNegative"], classification: "negative"},
-            ];
 
-            $scope.pieData.sort(function(first, second) {
-              return second.count - first.count;
-            });
+            if ($scope.variableData[variable]["numPositive"] > 0 ||
+                $scope.variableData[variable]["numNegative"] > 0 )
+            { 
+                $scope.pieData = [
+                  {name: $scope.classificationName["positive"], count: $scope.variableData[variable]["numPositive"], classification: "positive"},
+                  {name: $scope.classificationName["negative"], count: $scope.variableData[variable]["numNegative"], classification: "negative"},
+                ];
+            
+                $scope.pieData.sort(function(first, second) {
+                    return second.count - first.count;
+                });
+            }
+            else{
+                $scope.pieData = null;
+            }
         };
 
         /*
