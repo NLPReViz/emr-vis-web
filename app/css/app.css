@@ -589,8 +589,8 @@ body {
     text-align: center;
     font-size: 8pt;
     cursor: pointer;
-    padding-top: 4px;
-    padding-bottom: 4px;
+    padding-top: 2px;
+    padding-bottom: 2px;
 }
 
 #sidebar-top .divrow .cellwidth_var:hover {
