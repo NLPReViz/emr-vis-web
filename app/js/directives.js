@@ -84,14 +84,14 @@ angular.module('myApp.directives', [])
 
                     posTerms.forEach( function(keyword) {
                         keyword.matchedList.forEach(function (string) {
-                            $(element).highlight(new RegExp(string,"gi"), "highlight positive");
+                            $(element).highlight(new RegExp("\\b"+string+"\\b","gi"), "highlight positive");
                             // console.log(string);
                         });
                     });
 
                     negTerms.forEach( function(keyword) {
                         keyword.matchedList.forEach(function (string) {
-                            $(element).highlight(new RegExp(string,"gi"), "highlight negative");
+                            $(element).highlight(new RegExp("\\b"+string+"\\b","gi"), "highlight negative");
                             // console.log(string);
                         });
                     });
