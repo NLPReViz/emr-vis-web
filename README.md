@@ -2,7 +2,7 @@
 
 ![Screenshot](https://github.com/trivedigaurav/emr-vis-web/raw/master/screenshot.png)
 
-emr-vis-web is the web port for the [emr-vis-nlp](https://github.com/trivedigaurav/emr-vis-nlp) project.
+emr-vis-web is the web port for the [emr-vis-nlp](https://github.com/trivedigaurav/emr-vis-nlp) project. It provides the frontend view for [emr-nlp-server](https://github.com/trivedigaurav/emr-nlp-server).
 
 ## Getting Started
 
@@ -16,6 +16,8 @@ To get started, install the pre-requisites and then clone emr-vis-web as describ
 2. You must have node.js and its package manager (npm) installed. You can download them from [http://nodejs.org/](http://nodejs.org/) or get them using your favourite package manager. For example, if you are on a Mac and have homebrew installed, run `$ brew install node`.
 
 3. We use the [Apache Tomcat](http://tomcat.apache.org/) server to deploy the app. On a Mac with homebrew you may use `$ brew install tomcat` to get it.
+
+4. We have separate repository for our backend service. Visit [emr-nlp-server](https://github.com/trivedigaurav/emr-nlp-server) for more. 
 
 ### Clone emr-vis-web
 
@@ -55,7 +57,7 @@ To get started, install the pre-requisites and then clone emr-vis-web as describ
 
 ### Run the Application
 
-If you haven't built the backend project as yet, please do so now. Remember to go through step 3 to modify the default path to the backend service.
+If you haven't built the backend project as yet, please do so now. Refer to the readme on  [emr-nlp-server](https://github.com/trivedigaurav/emr-nlp-server) for more information. Remember to go through step 3 to modify the default path to the backend service.
 
 Now browse to the app at `http://localhost:8080/emr-vis-web/app/index.html` or `<your-localhost-root>/emr-vis-web/app`.
 
