@@ -157,27 +157,26 @@ angular.module('myApp.controllers', [])
             $scope.appLoading = true;
 
             //report
-            $http.get("docs/"+activeDoc+"/report.txt")
+            $http.get(config.backendURL + "/getReport/" + activeDoc)
                 .success(function(data, status) {
-                    $scope.reportText = data;
+                    $scope.reportText = data.reportText;
                     $scope.reportExists = true;
 
+                    //pathology
+                    if (data.pathologyText) {
+                        $scope.pathologyText = data.pathologyText;
+                        $scope.pathologyExists = true;
+                    }
+                    
                     $scope.appLoading = false;
                     $scope.feedbackText = null;
                 })
                 .error(function(data, status, headers, config) {
                     $scope.reportText = "Status " + status
-                    alert("docs/"+activeDoc+"/report.txt is not accessible. Make sure you have the docs/ folder in the app/ directory.");
+                    alert("Unable to fetch information for report "+activeDoc+".");
 
                     $scope.appLoading = false;
                 });
-
-            // pathology
-            $http.get("docs/"+activeDoc+"/pathology.txt")
-                .success(function(data, status) {
-                    $scope.pathologyText = data;
-                    $scope.pathologyExists = true;
-                })
         };
 
         /*
