@@ -214,18 +214,20 @@
                 <tab-heading>
                   Feedback Review &nbsp;<span ng-if="feedbackList.length > 0" class="badge alert-info pull-right"> {{feedbackList.length}} </span>
                 </tab-heading>
-                <h4>Feedback List</h4>
-                <div id="feedbackList">
-                  <p ng-hide="feedbackList.length">Feedback list is empty.</p>
-                  <alert ng-repeat="feedback in feedbackList" type="default" close="removeFeedback($index)">
-                    <strong>{{$index + 1}}.</strong>
-                    <span ng-if="feedback.kind == 0">
-                      #{{feedback.property}} should have <strong>{{variableMapping[feedback.variable]}}</strong> marked as <strong>{{classificationName[feedback.classification] | lowercase}}</strong>.
-                    </span>
-                    <span ng-if="feedback.kind == 1">
-                      "<em>{{feedback.property}}</em>" indicates <strong>{{variableMapping[feedback.variable]}}</strong> to be <strong>{{classificationName[feedback.classification] | lowercase}}</strong>.
-                    </span>
-                  </alert>
+                <div class="tab-content">
+                  <h4>Feedback List</h4>
+                  <div id="feedbackList">
+                    <p ng-hide="feedbackList.length">Feedback list is empty.</p>
+                    <alert ng-repeat="feedback in feedbackList" type="default" close="removeFeedback($index)">
+                      <strong>{{$index + 1}}.</strong>
+                      <span ng-if="feedback.kind == 0">
+                        #{{feedback.property}} should have <strong>{{variableMapping[feedback.variable]}}</strong> marked as <strong>{{classificationName[feedback.classification] | lowercase}}</strong>.
+                      </span>
+                      <span ng-if="feedback.kind == 1">
+                        "<em>{{feedback.property}}</em>" indicates <strong>{{variableMapping[feedback.variable]}}</strong> to be <strong>{{classificationName[feedback.classification] | lowercase}}</strong>.
+                      </span>
+                    </alert>
+                  </div>
                 </div>
               </tab>
               <tab select="alertMe()">
