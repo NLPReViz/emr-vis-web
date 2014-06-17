@@ -155,7 +155,11 @@
             </div>
             <tabset>
               <tab active="tabs.docView" heading="Document View">
-                <div ng-mouseup="setFeedbackText()" ng-if="reportExists" id="emr-report" class="report">
+                <ul ng-show="pathologyExists" class="pager">
+                  <li class="clickable"><a scroll-to-bookmark="reportText">Report</a></li>
+                  <li class="clickable"><a scroll-to-bookmark="pathologyText">Pathology</a></li>
+                </ul>
+                <div scroll-bookmark="reportText" ng-mouseup="setFeedbackText()" ng-if="reportExists" id="emr-report" class="report">
                   <div class="info">
                     <i class="glyphicon glyphicon-list-alt"></i>&nbsp;
                     <a tooltip-placement="bottom" tooltip-animation="false" tooltip="docs/{{gridData[activeDocIndex].id}}/report.txt">
@@ -165,7 +169,7 @@
                   </div>
                   <pre><highlighted-report data='reportText' pos-terms='gridData[activeDocIndex][activeVariable].topPositive' neg-terms='gridData[activeDocIndex][activeVariable].topNegative'></highlighted-report></pre>
                 </div>
-                <div ng-mouseup="setFeedbackText()" ng-if="pathologyExists" id="emr-pathology" class="report">
+                <div scroll-bookmark="pathologyText" ng-mouseup="setFeedbackText()" ng-if="pathologyExists" id="emr-pathology" class="report">
                   <div class="info">
                     <i class="glyphicon glyphicon-list-alt"></i>&nbsp;
                     <a tooltip-placement="bottom" tooltip-animation="false" tooltip="docs/{{gridData[activeDocIndex].id}}/pathology.txt"> 
