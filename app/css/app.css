@@ -692,6 +692,10 @@ body {
     background-color: #eee;
 }
 
+.report .info .btn{
+    width: 50px;
+}
+
 .report pre {
     border: 0;
     background-color: white;

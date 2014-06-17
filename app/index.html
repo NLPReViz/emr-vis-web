@@ -165,7 +165,7 @@
                     <a tooltip-placement="bottom" tooltip-animation="false" tooltip="docs/{{gridData[activeDocIndex].id}}/report.txt">
                       <strong class="file-name js-selectable-text">Report: #{{gridData[activeDocIndex].id}}</strong>
                     </a>
-                    <a class="btn btn-xs btn-default pull-right" ng-href="docs/{{gridData[activeDocIndex].id}}/report.txt" target="_blank"><strong>View Raw</strong></a>
+                    <a class="btn btn-xs btn-default pull-right" ng-click="PrintReport('emr-report')"><strong>Print</strong></a>
                   </div>
                   <pre><highlighted-report data='reportText' pos-terms='gridData[activeDocIndex][activeVariable].topPositive' neg-terms='gridData[activeDocIndex][activeVariable].topNegative'></highlighted-report></pre>
                 </div>
@@ -175,7 +175,7 @@
                     <a tooltip-placement="bottom" tooltip-animation="false" tooltip="docs/{{gridData[activeDocIndex].id}}/pathology.txt"> 
                       <strong class="file-name js-selectable-text">Pathology: #{{gridData[activeDocIndex].id}}</strong>
                     </a>
-                    <a class="btn btn-xs btn-default pull-right" ng-href="docs/{{gridData[activeDocIndex].id}}/pathology.txt" target="_blank"><strong>View Raw</strong></a>
+                    <a class="btn btn-xs btn-default pull-right" ng-click="PrintReport('#emr-pathology')"><strong>Print</strong></a>
                   </div>
                   <pre><highlighted-report data='pathologyText' pos-terms='gridData[activeDocIndex][activeVariable].topPositive' neg-terms='gridData[activeDocIndex][activeVariable].topNegative' ></highlighted-report></pre>
                 </div>
