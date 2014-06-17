@@ -47,10 +47,6 @@ body {
     user-select: none;
 }
 
-.feedback-content{
-    margin-top: 20px;
-}
-
 .unselectable {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -811,6 +807,10 @@ body {
     padding: 2px;
 }
 
+.feedback-content{
+    margin-top: 20px;
+    padding: 10px;
+}
 
 /*
  * WordTree
