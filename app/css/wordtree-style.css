@@ -1,0 +1,61 @@
+#wordtree-view{
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#wordtree-view text.leaf{
+    fill:#aaa;
+    cursor:pointer;
+}
+
+#wordtree-view text.tree{
+    cursor:pointer;
+    fill:black;
+}
+
+/*
+#wordtree-view text.selected{
+    fill:#B35522;
+}*/
+
+#wordtree-view .node {
+    font: 10px sans-serif;
+}
+
+#wordtree-view .link {
+    fill: none;
+    stroke: #D17519;
+    stroke-width: 0.5px;
+}
+
+#wordtree-view text.number-popup{
+    fill:red;
+}
+
+#wordtree-view g.sentence-popup{
+    fill:#fff;
+    stroke-width:0.5px;
+}
+
+#wordtree-view text.wordtree-highlight-sentence {
+    fill: #D17519;
+    /*stroke: #D17519;*/
+    /*stroke-width: 0.5px;*/
+}
+
+/*
+#wordtree-view text.positive{
+    fill: red;
+}
+
+#wordtree-view text.negative{
+    fill: blue;
+}
+
+#wordtree-view text.positive.negative{
+    fill: green;
+}*/
