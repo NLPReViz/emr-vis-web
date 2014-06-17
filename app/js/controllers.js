@@ -45,10 +45,9 @@ angular.module('myApp.controllers', [])
         $scope.activeDocIndex = null;
         $scope.showGrid = true;
 
-        $scope.appLoading = true;
-        $scope.appDisabled = false;
+        startLoading();
 
-        //Start page load
+        // Start page load
         $http.get(config.backendURL + "/getVarGridObj/modelList.0..xml/devIDList.xml")
             .success(function(data, status) {
                 $scope.gridData = data['gridData'];
@@ -85,12 +84,12 @@ angular.module('myApp.controllers', [])
 
                 $scope.activeVariable = $scope.variables[0];
                 $scope.loadDistribution($scope.activeVariable);
-                $scope.appLoading = false;
+                stopLoading()
 
                 // $scope.updateHighlights();
                 
             })
-            .error(function() { alert("Could not load backend data!"); $scope.appLoading = false;});
+            .error(function() { alert("Could not load backend data!"); stopLoading()});
 
         $scope.styleGridCell = function(classification, confidence) {
             if (classification == "positive") {
@@ -163,7 +162,7 @@ angular.module('myApp.controllers', [])
             $scope.reportExists = false;
             $scope.pathologyExists = false;
 
-            $scope.appLoading = true;
+            startLoading();
 
             //report
             $http.get(config.backendURL + "/getReport/" + activeDoc)
@@ -177,14 +176,14 @@ angular.module('myApp.controllers', [])
                         $scope.pathologyExists = true;
                     }
                     
-                    $scope.appLoading = false;
+                    stopLoading();
                     $scope.feedbackText = null;
                 })
                 .error(function(data, status, headers, config) {
                     $scope.reportText = "Status " + status
                     alert("Unable to fetch information for report "+activeDoc+".");
 
-                    $scope.appLoading = false;
+                    stopLoading();
                 });
         };
 
@@ -305,10 +304,40 @@ angular.module('myApp.controllers', [])
 
 
         /*
+         * WordTree
+         */
+
+        $scope.loadWordTree = function(query){
+            
+            startLoading();
+            
+            console.log(config.backendURL + "/getWordTree/devIDList.xml/" + query);
+            $http.get(config.backendURL + "/getWordTree/devIDList.xml/" + query)
+                .success(function(data, status) {
+                    $scope.wordTree = data;
+                    stopLoading();
+                })
+                .error(function(data, status, headers, config) {
+                    $scope.wordTree = "Status " + status
+                    alert("Unable to fetch wordtree.");
+
+                    stopLoading();
+                });      
+        }
+
+        /*
          * Tabs
          */
 
         $scope.tabs = {docView: true};
+
+        $scope.setWordTreeHeight = function() {
+            // console.log( wordtree.offset().top);
+            $("#wordtree-view").height($(window).height() - 200);
+        };
+
+        $($window).resize($scope.setWordTreeHeight);
+
 
         /*
          * AppInfo
@@ -335,6 +364,26 @@ angular.module('myApp.controllers', [])
             mywindow.document.write('</pre></body></html>');
             mywindow.print();
             mywindow.close();
+        }
+
+        /*
+         * Loading
+         */
+
+        var loaderCount = 0;
+        $scope.appDisabled = false;
+
+        function startLoading() {
+            loaderCount += 1;
+            $scope.appLoading = true;
+        }
+
+        function stopLoading() {
+            if (loaderCount > 1)
+                loaderCount -= 1;
+            else
+                loaderCount = 0;
+                $scope.appLoading = false;
         }
 
         return true;
