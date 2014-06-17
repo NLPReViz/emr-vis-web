@@ -194,12 +194,11 @@ angular.module('myApp.directives', [])
             var element = $(selector);
 
             if(element.length){
-                $('html, body').animate({scrollTop: $(element).offset().top - 100}, 1000, function() {
-                    $(element).addClass("flash");
-                    setTimeout(function () { 
-                        $(element).removeClass('flash');
-                    }, 1000);
-                });
+                $('html, body').animate({scrollTop: $(element).offset().top - 100}, 1000);
+                $(element).addClass("flash");
+                setTimeout(function () { 
+                    $(element).removeClass('flash');
+                }, 2000);
             }
           });
         });
