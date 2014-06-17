@@ -83,7 +83,7 @@
               <div id="expandtable">
                 <div class="divrow ng-cloak" ng-repeat="doc in gridData | filter: { id: searchQuery }">
                   <div class="divcell cellwidth_id">{{doc.id}}</div>
-                  <div ng-repeat="var in variables" class="divcell cellwidth_var {{styleGridCell(doc[var].classification, doc[var].confidence)}} custom-tooltip-bottom" ng-click="updateGrid(var, $parent.$index)" ng-class="{selected: $parent.$index==activeDocIndex && var==activeVariable}" data-custom-tooltip="{{doc[var].confidence}}">
+                  <div ng-repeat="var in variables" class="divcell cellwidth_var {{styleGridCell(doc[var].classification, doc[var].confidence)}} custom-tooltip-bottom" ng-click="updateGrid(var, $parent.$index)" ng-class="{selected: $parent.$index==active.docIndex && var==active.variable}" data-custom-tooltip="{{doc[var].confidence}}">
                     {{classificationName[ doc[var].classification ]}}
                   </div>
                 </div>
@@ -98,19 +98,19 @@
           <div id="sidebar-bottom">
             
             <div id="sidebar-bottom-left">
-              <div class="about unselectable">Variable details: <strong>{{variableMapping[activeVariable]}}</strong></div>
+              <div class="about unselectable">Variable details: <strong>{{variableMapping[active.variable]}}</strong></div>
               <div class="content">
                 <div id="keywords">
                   <h6>{{classificationName["positive"]}} indicators</h6>
-                  <p ng-hide="variableData[activeVariable].topPositive.length" class="empty-list">None</p>
+                  <p ng-hide="variableData[active.variable].topPositive.length" class="empty-list">None</p>
                   <ol>
-                    <li ng-repeat="keyword in variableData[activeVariable].topPositive" class="positive" style="width:{{keyword.weight*100}}%;" >{{keyword.term}}&nbsp;<span class="d3-tip">({{keyword.weight}})</span></li>
+                    <li ng-repeat="keyword in variableData[active.variable].topPositive" class="positive" style="width:{{keyword.weight*100}}%;" >{{keyword.term}}&nbsp;<span class="d3-tip">({{keyword.weight}})</span></li>
                   </ol>
 
                   <h6>{{classificationName["negative"]}} indicators</h6>
-                  <p ng-hide="variableData[activeVariable].topNegative.length" class="empty-list">None</p>
+                  <p ng-hide="variableData[active.variable].topNegative.length" class="empty-list">None</p>
                   <ol>
-                    <li ng-repeat="keyword in variableData[activeVariable].topNegative" class="negative" style="width:{{keyword.weight*100}}%;">{{keyword.term}}&nbsp;<span class="d3-tip">({{keyword.weight}})</span></li>
+                    <li ng-repeat="keyword in variableData[active.variable].topNegative" class="negative" style="width:{{keyword.weight*100}}%;">{{keyword.term}}&nbsp;<span class="d3-tip">({{keyword.weight}})</span></li>
                   </ol>
                 </div>
                 <div id="distribution">
@@ -122,19 +122,19 @@
             </div>
 
             <div id="sidebar-bottom-right">
-              <div class="about unselectable">Report: <strong>#{{gridData[activeDocIndex].id}}</strong></div>
+              <div class="about unselectable">Report: <strong>#{{gridData[active.docIndex].id}}</strong></div>
               
               <div class="content">
                 <h6>{{classificationName["positive"]}} indicators</h6>
-                <p ng-hide="gridData[activeDocIndex][activeVariable].topPositive.length" class="empty-list">None</p>
+                <p ng-hide="gridData[active.docIndex][active.variable].topPositive.length" class="empty-list">None</p>
                 <ol>
-                  <li ng-repeat="keyword in gridData[activeDocIndex][activeVariable].topPositive"  class="positive clickable" style="width:{{keyword.weight*100}}%;" scroll-to-bookmark="{{keyword.term}}">{{keyword.term}}&nbsp;<span class="d3-tip">({{keyword.weight}})</span></li>
+                  <li ng-repeat="keyword in gridData[active.docIndex][active.variable].topPositive"  class="positive clickable" style="width:{{keyword.weight*100}}%;" scroll-to-bookmark="{{keyword.term}}">{{keyword.term}}&nbsp;<span class="d3-tip">({{keyword.weight}})</span></li>
                 </ol>
 
                 <h6>{{classificationName["negative"]}} indicators</h6>
-                <p ng-hide="gridData[activeDocIndex][activeVariable].topNegative.length" class="empty-list">None</p>
+                <p ng-hide="gridData[active.docIndex][active.variable].topNegative.length" class="empty-list">None</p>
                 <ol>
-                  <li ng-repeat="keyword in gridData[activeDocIndex][activeVariable].topNegative" class="negative clickable" scroll-to-bookmark="{{keyword.term}}" style="width:{{keyword.weight*100}}%;">{{keyword.term}}&nbsp;<span class="d3-tip">({{keyword.weight}})</span></li>
+                  <li ng-repeat="keyword in gridData[active.docIndex][active.variable].topNegative" class="negative clickable" scroll-to-bookmark="{{keyword.term}}" style="width:{{keyword.weight*100}}%;">{{keyword.term}}&nbsp;<span class="d3-tip">({{keyword.weight}})</span></li>
                 </ol>
               </div>
 
@@ -144,48 +144,48 @@
         </div>
         <div class="main">
           <div>
-            <div ng-if="reportExists && tabs.docView" id="reportFeedback" class="alert alert-warning">
+            <div ng-if="records.report.exists && tabs.docView" id="reportFeedback" class="alert alert-warning">
               <span ng-if="appInfo">
                 {{appInfo}}
               </span>
               <span ng-if="!appInfo">
-                <span ng-if="feedbackText"><em>"{{feedbackText|truncate:20}}"</em> indicates <strong>{{variableMapping[activeVariable]}}</strong> to be: <a ng-click="addFeedbackText(feedbackText, 'positive')">{{classificationName['positive']}}</a> | <a ng-click="addFeedbackText(feedbackText, 'negative')">{{classificationName['negative']}}</a></span>
-                <span ng-if="!feedbackText" ><strong>{{variableMapping[activeVariable]}}</strong> is marked as <strong>{{classificationName[ gridData[activeDocIndex][activeVariable].classification ] | lowercase}}</strong> for this record. Label it as: <a ng-click="addFeedbackDoc('positive')">{{classificationName['positive']}}</a> | <a ng-click="addFeedbackDoc('negative')">{{classificationName['negative']}}</a></span>
+                <span ng-if="feedbackText"><em>"{{feedbackText|truncate:20}}"</em> indicates <strong>{{variableMapping[active.variable]}}</strong> to be: <a ng-click="addFeedbackText(feedbackText, 'positive')">{{classificationName['positive']}}</a> | <a ng-click="addFeedbackText(feedbackText, 'negative')">{{classificationName['negative']}}</a></span>
+                <span ng-if="!feedbackText" ><strong>{{variableMapping[active.variable]}}</strong> is marked as <strong>{{classificationName[ gridData[active.docIndex][active.variable].classification ] | lowercase}}</strong> for this record. Label it as: <a ng-click="addFeedbackDoc('positive')">{{classificationName['positive']}}</a> | <a ng-click="addFeedbackDoc('negative')">{{classificationName['negative']}}</a></span>
               </span>
             </div>
             <tabset>
               <tab active="tabs.docView" heading="Document View">
-                <div ng-show="pathologyExists" class="pagerview">
+                <div ng-show="records.pathology.exists" class="pagerview">
                   <div class="pagerview-row">
                       <div class="pagerview-step">
-                          <button type="button" scroll-to-bookmark="reportText" class="btn btn-default btn-circle">1</button>
-                          <p class="clickable" scroll-to-bookmark="reportText">Report</p>
+                          <button type="button" scroll-to-bookmark="records.report.text" class="btn btn-default btn-circle">1</button>
+                          <p class="clickable" scroll-to-bookmark="records.report.text">Report</p>
                       </div>
                       <div class="pagerview-step">
-                          <button type="button" scroll-to-bookmark="pathologyText" class="btn btn-default btn-circle">2</button>
-                          <p class="clickable" scroll-to-bookmark="pathologyText">Pathology</p>
+                          <button type="button" scroll-to-bookmark="records.pathology.text" class="btn btn-default btn-circle">2</button>
+                          <p class="clickable" scroll-to-bookmark="records.pathology.text">Pathology</p>
                       </div>
                   </div>
                 </div>
-                <div scroll-bookmark="reportText" ng-mouseup="setFeedbackText()" ng-if="reportExists" id="emr-report" class="report">
+                <div scroll-bookmark="records.report.text" ng-mouseup="setFeedbackText()" ng-if="records.report.exists" id="emr-report" class="report">
                   <div class="info">
                     <i class="glyphicon glyphicon-list-alt"></i>&nbsp;
-                    <a tooltip-placement="bottom" tooltip-animation="false" tooltip="docs/{{gridData[activeDocIndex].id}}/report.txt">
-                      <strong class="file-name js-selectable-text">Report: #{{gridData[activeDocIndex].id}}</strong>
+                    <a tooltip-placement="bottom" tooltip-animation="false" tooltip="docs/{{gridData[active.docIndex].id}}/report.txt">
+                      <strong class="file-name js-selectable-text">Report: #{{gridData[active.docIndex].id}}</strong>
                     </a>
                     <a class="btn btn-xs btn-default pull-right" ng-click="PrintReport('emr-report')"><strong>Print</strong></a>
                   </div>
-                  <pre><highlighted-report data='reportText' pos-terms='gridData[activeDocIndex][activeVariable].topPositive' neg-terms='gridData[activeDocIndex][activeVariable].topNegative'></highlighted-report></pre>
+                  <pre><highlighted-report data='records.report.text' pos-terms='gridData[active.docIndex][active.variable].topPositive' neg-terms='gridData[active.docIndex][active.variable].topNegative'></highlighted-report></pre>
                 </div>
-                <div scroll-bookmark="pathologyText" ng-mouseup="setFeedbackText()" ng-if="pathologyExists" id="emr-pathology" class="report">
+                <div scroll-bookmark="records.pathology.text" ng-mouseup="setFeedbackText()" ng-if="records.pathology.exists" id="emr-pathology" class="report">
                   <div class="info">
                     <i class="glyphicon glyphicon-list-alt"></i>&nbsp;
-                    <a tooltip-placement="bottom" tooltip-animation="false" tooltip="docs/{{gridData[activeDocIndex].id}}/pathology.txt"> 
-                      <strong class="file-name js-selectable-text">Pathology: #{{gridData[activeDocIndex].id}}</strong>
+                    <a tooltip-placement="bottom" tooltip-animation="false" tooltip="docs/{{gridData[active.docIndex].id}}/pathology.txt"> 
+                      <strong class="file-name js-selectable-text">Pathology: #{{gridData[active.docIndex].id}}</strong>
                     </a>
                     <a class="btn btn-xs btn-default pull-right" ng-click="PrintReport('emr-pathology')"><strong>Print</strong></a>
                   </div>
-                  <pre><highlighted-report data='pathologyText' pos-terms='gridData[activeDocIndex][activeVariable].topPositive' neg-terms='gridData[activeDocIndex][activeVariable].topNegative' ></highlighted-report></pre>
+                  <pre><highlighted-report data='records.pathology.text' pos-terms='gridData[active.docIndex][active.variable].topPositive' neg-terms='gridData[active.docIndex][active.variable].topNegative' ></highlighted-report></pre>
                 </div>
                 <!-- div id="pathology-report" class>
                 </div> -->
@@ -202,7 +202,7 @@
                   </div>
                 </form>
                 <div id="wordtree-view">
-                  <pre style="height:100%;" ng-if="wordTree">{{ wordTree | json }}</pre>
+                  <wordtree data="wordTree"></wordtree>
                 </div>
               </tab>
               <tab>

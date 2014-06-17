@@ -42,7 +42,12 @@ angular.module('myApp.controllers', [])
          * Main grid
          */
 
-        $scope.activeDocIndex = null;
+        $scope.active = {
+            docIndex: null,
+            variable: null
+        }
+
+        // $scope.active.docIndex = null;
         $scope.showGrid = true;
 
         startLoading();
@@ -55,7 +60,7 @@ angular.module('myApp.controllers', [])
                 // console.log($scope.gridData);
 
                 //Show first report in the set
-                $scope.activeDocIndex = 0;
+                $scope.active.docIndex = 0;
                 $scope.loadReport(0);
 
                 $scope.variableData = data['variableData'];
@@ -82,8 +87,8 @@ angular.module('myApp.controllers', [])
                                           
                 });
 
-                $scope.activeVariable = $scope.variables[0];
-                $scope.loadDistribution($scope.activeVariable);
+                $scope.active.variable = $scope.variables[0];
+                $scope.loadDistribution($scope.active.variable);
                 stopLoading()
 
                 // $scope.updateHighlights();
@@ -112,12 +117,12 @@ angular.module('myApp.controllers', [])
         $scope.updateGrid = function(variable, activeDocIndex) {
             // console.log(variable, activeDoc);
             if(variable != $scope.variable) {
-              $scope.activeVariable = variable;
+              $scope.active.variable = variable;
               $scope.loadDistribution(variable);
             }
 
-            if(activeDocIndex != $scope.activeDocIndex) {
-              $scope.activeDocIndex = activeDocIndex;
+            if(activeDocIndex != $scope.active.docIndex) {
+              $scope.active.docIndex = activeDocIndex;
               $scope.loadReport(activeDocIndex);
             }
 
@@ -132,14 +137,14 @@ angular.module('myApp.controllers', [])
 
             console.log(element);
 
-            $scope.gridData[$scope.activeDocIndex][$scope.activeVariable].topPositive.forEach(function(keyword){
+            $scope.gridData[$scope.active.docIndex][$scope.active.variable].topPositive.forEach(function(keyword){
                 keyword.matchedList.forEach(function (string){
                     $(element).highlight(new RegExp(string,"gi"), "highlight positive");
                     console.log(string);
                 });
             });
 
-            $scope.gridData[$scope.activeDocIndex][$scope.activeVariable].topNegative.forEach(function(keyword){
+            $scope.gridData[$scope.active.docIndex][$scope.active.variable].topNegative.forEach(function(keyword){
                 keyword.matchedList.forEach(function (string){
                     $(element).highlight(new RegExp(string,"gi"), "highlight negative");
                     console.log(string);
@@ -151,6 +156,17 @@ angular.module('myApp.controllers', [])
          * Load reports
          */
 
+        $scope.records = {
+            "report": {
+                exists: false,
+                text: null
+            },
+            "pathology": {
+                exists: false,
+                text: null
+            }
+        }
+
         //TODO: Load reports not as variables but as docs
         $scope.loadReport = function(activeDocIndex) {
 
@@ -159,28 +175,28 @@ angular.module('myApp.controllers', [])
             // $scope.reportPath = "docs/"+ activeDoc +"/report.txt";
             // $scope.pathologyPath = "docs/"+ activeDoc +"/pathology.txt";
 
-            $scope.reportExists = false;
-            $scope.pathologyExists = false;
+            $scope.records.report.exists = false;
+            $scope.records.pathology.exists = false;
 
             startLoading();
 
             //report
             $http.get(config.backendURL + "/getReport/" + activeDoc)
                 .success(function(data, status) {
-                    $scope.reportText = data.reportText;
-                    $scope.reportExists = true;
+                    $scope.records.report.text = data.reportText;
+                    $scope.records.report.exists = true;
 
                     //pathology
                     if (data.pathologyText) {
-                        $scope.pathologyText = data.pathologyText;
-                        $scope.pathologyExists = true;
+                        $scope.records.pathology.text = data.pathologyText;
+                        $scope.records.pathology.exists = true;
                     }
                     
                     stopLoading();
                     $scope.feedbackText = null;
                 })
                 .error(function(data, status, headers, config) {
-                    $scope.reportText = "Status " + status
+                    $scope.records.report.text = "Status " + status
                     alert("Unable to fetch information for report "+activeDoc+".");
 
                     stopLoading();
@@ -256,7 +272,7 @@ angular.module('myApp.controllers', [])
 
         $scope.addFeedbackDoc = function(classification) {
 
-            var docClass = $scope.gridData[$scope.activeDocIndex][$scope.activeVariable].classification;
+            var docClass = $scope.gridData[$scope.active.docIndex][$scope.active.variable].classification;
             var fClass = null;
 
             // if(bAccept) {
@@ -269,14 +285,14 @@ angular.module('myApp.controllers', [])
             //         fClass = "positive";
             // }
             
-            $scope.feedbackList.push(new Feedback(0, $scope.gridData[$scope.activeDocIndex].id, 
-                                        classification, $scope.activeVariable));
+            $scope.feedbackList.push(new Feedback(0, $scope.gridData[$scope.active.docIndex].id, 
+                                        classification, $scope.active.variable));
 
             showInfo("Feedback added to the list!");
         }
 
         $scope.addFeedbackText = function(text, classification) {
-            $scope.feedbackList.push(new Feedback(1, text, classification, $scope.activeVariable));
+            $scope.feedbackList.push(new Feedback(1, text, classification, $scope.active.variable));
             showInfo("Feedback added to the list!");
             $scope.feedbackText = false;
         }
@@ -358,7 +374,7 @@ angular.module('myApp.controllers', [])
         $scope.PrintReport = function(doc) {
             //http://stackoverflow.com/questions/2255291/print-the-contents-of-a-div
             var mywindow = $window.open('', 'Print Window', "toolbar=no, scrollbars=yes, width=800");
-            mywindow.document.write('<html><head><title>Record #'+ $scope.gridData[$scope.activeDocIndex].id +' — '+ doc +'</title>');
+            mywindow.document.write('<html><head><title>Record #'+ $scope.gridData[$scope.active.docIndex].id +' — '+ doc +'</title>');
             mywindow.document.write('</head><body><pre>');
             mywindow.document.write($("#" + doc + " pre").html());
             mywindow.document.write('</pre></body></html>');
