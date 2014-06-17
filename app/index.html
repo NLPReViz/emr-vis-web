@@ -155,10 +155,18 @@
             </div>
             <tabset>
               <tab active="tabs.docView" heading="Document View">
-                <ul ng-show="pathologyExists" class="pager">
-                  <li class="clickable"><a scroll-to-bookmark="reportText">Report</a></li>
-                  <li class="clickable"><a scroll-to-bookmark="pathologyText">Pathology</a></li>
-                </ul>
+                <div ng-show="pathologyExists" class="pagerview">
+                  <div class="pagerview-row">
+                      <div class="pagerview-step">
+                          <button type="button" scroll-to-bookmark="reportText" class="btn btn-default btn-circle">1</button>
+                          <p class="clickable" scroll-to-bookmark="reportText">Report</p>
+                      </div>
+                      <div class="pagerview-step">
+                          <button type="button" scroll-to-bookmark="pathologyText" class="btn btn-default btn-circle">2</button>
+                          <p class="clickable" scroll-to-bookmark="pathologyText">Pathology</p>
+                      </div>
+                  </div>
+                </div>
                 <div scroll-bookmark="reportText" ng-mouseup="setFeedbackText()" ng-if="reportExists" id="emr-report" class="report">
                   <div class="info">
                     <i class="glyphicon glyphicon-list-alt"></i>&nbsp;
