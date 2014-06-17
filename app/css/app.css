@@ -822,3 +822,8 @@ body {
     border-radius: 4px;
     overflow: scroll;
 }
+
+#wordtree-empty {
+    padding: 10px;
+    color: #ddd;
+}
