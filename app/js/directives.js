@@ -222,6 +222,6 @@ angular.module('myApp.directives', [])
                     scope.render(scope.data);
                 }, true);
         },
-        template: '<pre style="height:100%;">{{ wordTree | json }}</pre>'
+        template: '<pre style="height:100%;">{{data | json}}</pre>'
     };
 });
