@@ -327,16 +327,15 @@ angular.module('myApp.controllers', [])
             
             startLoading();
             
-            console.log(config.backendURL + "/getWordTree/devIDList.xml/" + query);
+            // console.log(config.backendURL + "/getWordTree/devIDList.xml/" + query);
             $http.get(config.backendURL + "/getWordTree/devIDList.xml/" + query)
                 .success(function(data, status) {
-                    $scope.wordTree = data;
+                    $("#wordtree-container").empty();
+                    makeWordTree(data);
                     stopLoading();
                 })
                 .error(function(data, status, headers, config) {
-                    $scope.wordTree = "Status " + status
                     alert("Unable to fetch wordtree.");
-
                     stopLoading();
                 });      
         }
