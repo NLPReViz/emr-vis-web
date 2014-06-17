@@ -182,9 +182,20 @@
                 <!-- div id="pathology-report" class>
                 </div> -->
               </tab>
-              <tab heading="WordTree View">
-                <h4>Keyword Search</h4>
-                <p>[wordtree]</p>
+              <tab select="setWordTreeHeight()" heading="WordTree View">
+                <form ng-submit="loadWordTree(wordTreeQuery)" id="wordtree-search">
+                  <div class="row">
+                    <div class="input-group">
+                      <input type="text" ng-model="wordTreeQuery" class="form-control" placeholder="Enter keywords&hellip;">
+                      <span class="input-group-btn">
+                          <button type="submit" class="btn btn-default">Search</button>
+                      </span>
+                    </div>
+                  </div>
+                </form>
+                <div id="wordtree-view">
+                  <pre style="height:100%;" ng-if="wordTree">{{ wordTree | json }}</pre>
+                </div>
               </tab>
               <tab>
                 <tab-heading>
@@ -192,6 +203,7 @@
                 </tab-heading>
                 <h4>Feedback List</h4>
                 <div id="feedbackList">
+                  <p ng-hide="feedbackList.length">Feedback list is empty.</p>
                   <alert ng-repeat="feedback in feedbackList" type="default" close="removeFeedback($index)">
                     <strong>{{$index + 1}}.</strong>
                     <span ng-if="feedback.kind == 0">

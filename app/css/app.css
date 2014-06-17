@@ -754,3 +754,18 @@ body {
     background-color: #eee;
     padding: 2px;
 }
+
+
+/*
+ * WordTree
+ */
+
+#wordtree-search {
+    padding: 15px;
+}
+
+#wordtree-view {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
