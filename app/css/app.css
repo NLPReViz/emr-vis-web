@@ -65,6 +65,13 @@ body {
     transition: background-color 100ms linear;
 }
 
+.pre-like {
+    display: block;
+    unicode-bidi: embed;
+    font-family: monospace;
+    white-space: pre;
+}
+
 .empty-list { 
     padding: 2px;
     font-weight: bold;
