@@ -324,7 +324,7 @@ angular.module('myApp.controllers', [])
             mywindow.document.write('</head><body><pre>');
             mywindow.document.write($("#" + doc + " pre").html());
             mywindow.document.write('</pre></body></html>');
-
+            mywindow.focus()
             mywindow.print();
         }
 
