@@ -312,5 +312,22 @@ angular.module('myApp.controllers', [])
                 $scope.appInfo = false;
             }, 2000);
         }
+
+        /*
+         * Print report
+         */
+
+        $scope.PrintReport = function(doc) {
+            //http://stackoverflow.com/questions/2255291/print-the-contents-of-a-div
+            var mywindow = $window.open('', 'Print Window', "toolbar=no, scrollbars=yes, width=800");
+            mywindow.document.write('<html><head><title>Record #'+ $scope.gridData[$scope.activeDocIndex].id +' — '+ doc +'</title>');
+            mywindow.document.write('</head><body><pre>');
+            mywindow.document.write($("#" + doc + " pre").html());
+            mywindow.document.write('</pre></body></html>');
+
+            mywindow.print();
+        }
+
+        return true;
     }])
         
