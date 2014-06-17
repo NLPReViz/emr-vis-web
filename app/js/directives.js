@@ -1,4 +1,4 @@
-'use strict';
+// 'use strict';
 
 /* Directives */
 
@@ -205,23 +205,3 @@ angular.module('myApp.directives', [])
       }
     };
 })
-
-.directive('wordtree', function() {
-    return {
-        restrict: 'E',
-        scope: {
-            data: '='
-        },
-        link: function (scope, element) {
-                
-                scope.render = function() {
-                    // alert("changed");
-                }
-
-                scope.$watch('data', function(){
-                    scope.render(scope.data);
-                }, true);
-        },
-        template: '<pre style="height:100%;">{{data | json}}</pre>'
-    };
-});

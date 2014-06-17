@@ -9,7 +9,7 @@
     contain a list of sentence fragments that occurred to the left and right of
     the search query.
 */
-function makeWordTree(){
+function makeWordTree(data){
     var detail = 100;
 
     for(var i = 0; i < data.lefts.length; i++){
@@ -23,8 +23,8 @@ function makeWordTree(){
     canvasWidth = w*10,
     h = $(document).height();
     
-    var container = '#word-tree'
-    var containerClass = 'word-tree-container';
+    var container = '#wordtree-container'
+    var containerClass = 'wordtree-container-class';
     $(container).addClass(containerClass);  
 
     var m = [20, 120, 20, canvasWidth/2];
