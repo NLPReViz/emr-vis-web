@@ -68,7 +68,16 @@ angular.module('myApp.controllers', [])
                   $scope.variableData[variable]["percPositive"] = 
                                           Math.round(100.0 *  data['variableData'][variable]["numPositive"] / 
                                           ( data['variableData'][variable]["numPositive"] +  data['variableData'][variable]["numNegative"]));
-                  $scope.variableData[variable]['percNegative'] = 100.0 - $scope.variableData[variable]['percPositive'];
+                  
+                  if(isNaN($scope.variableData[variable]["percPositive"]))
+                    $scope.variableData[variable]["percPositive"] = 0;
+
+                  $scope.variableData[variable]['percNegative'] = 
+                                          Math.round(100.0 *  data['variableData'][variable]["numNegative"] / 
+                                          ( data['variableData'][variable]["numPositive"] +  data['variableData'][variable]["numNegative"]));
+
+                  if(isNaN($scope.variableData[variable]["percNegative"]))
+                    $scope.variableData[variable]["percNegative"] = 0;
 
                   // console.log($scope.variableData[variable]["percPositive"] + " - " + $scope.variableData[variable]["percNegative"]);
                                           
