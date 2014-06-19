@@ -129,8 +129,8 @@ angular.module('myApp.controllers', [])
               $scope.loadReport(activeDocIndex);
             }
 
+            //Change view to docView
             $scope.tabs.docView = true;
-
             // $scope.updateHighlights();
         };
 
@@ -294,8 +294,22 @@ angular.module('myApp.controllers', [])
             showInfo("Feedback added to the list!");
         }
 
-        $scope.addFeedbackText = function(text, classification) {
-            $scope.feedbackList.push(new Feedback(1, text, classification, $scope.active.variable));
+        $scope.addFeedbackText = function(classification) {
+            $scope.feedbackList.push(new Feedback(1, $scope.feedbackText, classification, $scope.active.variable));
+            showInfo("Feedback added to the list!");
+            $scope.feedbackText = false;
+        }
+
+        $scope.addWordTreeFeedback = function(classification) {
+
+            var variable = null;
+            $scope.variables.forEach(function(v) {
+                if ($scope.variableMapping[v] == $scope.WordTreeData.feedbackVar) {
+                    variable = v;
+                }
+            });
+            
+            $scope.feedbackList.push(new Feedback(1, $scope.WordTreeData.feedbackText, classification, variable));
             showInfo("Feedback added to the list!");
             $scope.feedbackText = false;
         }
@@ -325,7 +339,7 @@ angular.module('myApp.controllers', [])
          * Tabs
          */
 
-        $scope.tabs = {docView: true};
+        $scope.tabs = {docView: true, wordtreeView: false};
 
         $scope.setWordTreeHeight = function() {
             // console.log( wordtree.offset().top);
@@ -401,6 +415,7 @@ angular.module('myApp.controllers', [])
                     stopLoading();
 
                     $scope.setWordTreePercentage(data.matches, data.total);
+                    $scope.WordTreeData.feedbackText = data.query;
                 })
                 .error(function(data, status, headers, config) {
                     alert("Unable to fetch wordtree.");
@@ -414,10 +429,9 @@ angular.module('myApp.controllers', [])
             $scope.WordTreeData.total = total;
         }
 
-        $scope.setWordTreeFeedback = function(query){
-            
+        $scope.setWordTreeFeedback = function(selected, root) {
+            $scope.WordTreeData.feedbackText = selected;
         }
-
 
         return true;
     }])

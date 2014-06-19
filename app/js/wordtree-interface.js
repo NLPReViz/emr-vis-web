@@ -1,5 +1,5 @@
 /*
- * All the world is programmable, but the code merely hacks!
+ * All the world is programmable, and codes merely hacks!
  */
 
 WordTreeData.doc_class = new Object();
@@ -23,7 +23,7 @@ function updateSentenceStats(matches){
 
 function updateFeedback(selected, root){
 	appCtrl.setWordTreeFeedback(selected, root); 
-  	// appCtrl.$apply(); 
+  	appCtrl.$apply(); 
 }
 
 function updateClass(variable, positive, negative){

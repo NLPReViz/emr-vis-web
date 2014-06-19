@@ -145,13 +145,21 @@
         </div>
         <div class="main">
           <div>
-            <div ng-if="records.report.exists && tabs.docView" id="reportFeedback" class="alert alert-warning">
+            <div ng-if="records.report.exists && tabs.docView" class="alert alert-warning reportFeedback">
               <span ng-if="appInfo">
                 {{appInfo}}
               </span>
               <span ng-if="!appInfo">
-                <span ng-if="feedbackText"><em>"{{feedbackText|truncate:20}}"</em> indicates <strong>{{variableMapping[active.variable]}}</strong> to be: <a ng-click="addFeedbackText(feedbackText, 'positive')">{{classificationName['positive']}}</a> | <a ng-click="addFeedbackText(feedbackText, 'negative')">{{classificationName['negative']}}</a></span>
+                <span ng-if="feedbackText"><em>"{{feedbackText|truncate:20}}"</em> indicates <strong>{{variableMapping[active.variable]}}</strong> to be: <a ng-click="addFeedbackText('positive')">{{classificationName['positive']}}</a> | <a ng-click="addFeedbackText('negative')">{{classificationName['negative']}}</a></span>
                 <span ng-if="!feedbackText" ><strong>{{variableMapping[active.variable]}}</strong> is marked as <strong>{{classificationName[ gridData[active.docIndex][active.variable].classification ] | lowercase}}</strong> for this record. Label it as: <a ng-click="addFeedbackDoc('positive')">{{classificationName['positive']}}</a> | <a ng-click="addFeedbackDoc('negative')">{{classificationName['negative']}}</a></span>
+              </span>
+            </div>
+            <div ng-if="WordTreeData.feedbackText && tabs.wordTreeView" class="alert alert-warning reportFeedback">
+              <span ng-if="appInfo">
+                {{appInfo}}
+              </span>
+              <span ng-if="!appInfo">
+                <em>"{{WordTreeData.feedbackText|truncate:20}}"</em> indicates <select ng-init="WordTreeData.feedbackVar = variableMapping[active.variable]" ng-model="WordTreeData.feedbackVar" ng-options="variableMapping[var] for var in variables"></select> to be: <a ng-click="addWordTreeFeedback('positive')">{{classificationName['positive']}}</a> | <a ng-click="addWordTreeFeedback('negative')">{{classificationName['negative']}}</a>
               </span>
             </div>
             <tabset>
@@ -191,7 +199,7 @@
                 <!-- div id="pathology-report" class>
                 </div> -->
               </tab>
-              <tab select="setWordTreeHeight()" heading="WordTree View">
+              <tab active="tabs.wordTreeView" select="setWordTreeHeight()" heading="WordTree View">
                 <form ng-submit="loadWordTree(wordTreeQuery)" id="wordtree-search">
                   <div class="row">
                     <div class="input-group">
