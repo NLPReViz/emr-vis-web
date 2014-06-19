@@ -159,7 +159,7 @@
                 {{appInfo}}
               </span>
               <span ng-if="!appInfo">
-                <em>"{{WordTreeData.feedbackText|truncate:20}}"</em> indicates <select ng-init="WordTreeData.feedbackVar = variableMapping[active.variable]" ng-model="WordTreeData.feedbackVar" ng-options="variableMapping[var] for var in variables"></select> to be: <a ng-click="addWordTreeFeedback('positive')">{{classificationName['positive']}}</a> | <a ng-click="addWordTreeFeedback('negative')">{{classificationName['negative']}}</a>
+                <em>"{{WordTreeData.feedbackText|truncate:20}}"</em> indicates <select ng-init="WordTreeData.feedbackVar = active.variable" ng-model="WordTreeData.feedbackVar" ng-options="variableMapping[var] for var in variables"></select> to be: <a ng-click="addWordTreeFeedback('positive')">{{classificationName['positive']}}</a> | <a ng-click="addWordTreeFeedback('negative')">{{classificationName['negative']}}</a>
               </span>
             </div>
             <tabset>
