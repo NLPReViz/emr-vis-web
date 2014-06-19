@@ -384,18 +384,21 @@ function calculateDepths(d, vis, sign){
 function adjustHeight(d){
     if(!d.isRoot){
         var minX = d.x;
-        d.children.forEach(function(node){
-            if(!minX){
-                minX = node.x
+
+        if(d.children){
+            d.children.forEach(function(node){
+                if(!minX){
+                    minX = node.x
+                }
+                if(node.x < minX){
+                    minX = node.x
+                }
+            })
+            var newX = Math.min(minX+20, d.x);
+            if (newX != d.x){
+                d.x = newX;
+                adjustHeight(d.parent);
             }
-            if(node.x < minX){
-                minX = node.x
-            }
-        })
-        var newX = Math.min(minX+20, d.x);
-        if (newX != d.x){
-            d.x = newX;
-            adjustHeight(d.parent);
         }
     }
 }

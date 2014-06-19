@@ -780,7 +780,7 @@ body {
  * Feedback
  */
 
- #reportFeedback {
+.reportFeedback {
     z-index: 1510;
     
     display: block;
@@ -794,7 +794,7 @@ body {
     margin-top: 4px;
 }
 
-#reportFeedback a{
+.reportFeedback a{
     cursor: pointer;
 }
 
