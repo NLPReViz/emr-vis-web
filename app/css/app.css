@@ -347,7 +347,7 @@ body {
     top: -8px;
     left: -8px;
     height: 30px;
-    padding: 5px;
+    padding: 8px;
     
     border-style: solid;
     border-color: #DDDDDD;
@@ -828,5 +828,25 @@ body {
 
 #wordtree-empty {
     padding: 10px;
-    color: #ddd;
+    color: #999;
+}
+
+.about-wordtree {
+    display:inline-block;
+    position: relative;
+    top: -30px;
+    height: 30px;
+    padding: 6px;
+    
+    border-style: solid;
+    border-color: #DDDDDD;
+    border-width: 1px;
+    
+    background-color: #eee;
+    border-radius: 0px 4px 0px 0px;
+    
+    color: #888;
+    font-size: 12px;
+
+    cursor: default;
 }

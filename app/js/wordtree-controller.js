@@ -9,7 +9,15 @@
     contain a list of sentence fragments that occurred to the left and right of
     the search query.
 */
+
+var WordTreeData = {};
+
 function makeWordTree(data){
+
+    WordTreeData.total = data.total;
+    WordTreeData.matches = data.matches;
+    WordTreeData.query = data.query;
+
     var detail = 100;
 
     for(var i = 0; i < data.lefts.length; i++){
@@ -663,19 +671,19 @@ function wordTreeNodeMouseOver(node, d, orientation, root, vis, eventName){
 
          /* Add popup for class numbers */
     
-      if(doc_class.variable != null){
+      if(WordTreeData.doc_class.variable != null){
         var pos = 0;
         var neg = 0;
 
         var elm = document.getElementById("text-"+d.id+"-wordtree-"+vis.wordtreeID);
 
-        for(var i=0; i < doc_class.positive.length; i++){
-          if (elm.className.baseVal.indexOf("wordtree-doc-" + doc_class.positive[i]) > -1)
+        for(var i=0; i < WordTreeData.doc_class.positive.length; i++){
+          if (elm.className.baseVal.indexOf("wordtree-doc-" + WordTreeData.doc_class.positive[i]) > -1)
             pos++;
         }
 
-        for(var i=0; i < doc_class.negative.length; i++){
-          if (elm.className.baseVal.indexOf("wordtree-doc-" + doc_class.negative[i]) > -1)
+        for(var i=0; i < WordTreeData.doc_class.negative.length; i++){
+          if (elm.className.baseVal.indexOf("wordtree-doc-" + WordTreeData.doc_class.negative[i]) > -1)
             neg++;
         }
 

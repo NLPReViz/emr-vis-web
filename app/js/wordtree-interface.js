@@ -1,28 +1,35 @@
-doc_class = new Object();
-doc_class.variable = null;
-doc_class.positive = [];
-doc_class.negative = [];
+/*
+ * All the world is programmable, but the code merely hacks!
+ */
+
+WordTreeData.doc_class = new Object();
+WordTreeData.doc_class.variable = null;
+WordTreeData.doc_class.positive = [];
+WordTreeData.doc_class.negative = [];
+
+// WordTreeData.feedback = new Object();
+// WordTreeData.feedback.selected = null;
+// WordTreeData.feedback.root = null;
 
 function getSentenceStats() {
-  	updateSentenceStats(data.matches);
+  	updateSentenceStats(WordTreeData.matches);
 }
 
 function updateSentenceStats(matches){
-	// total = data.total;
-  	percentange = 100*matches/total;
-  	// JavaFXApp.setLabelText("Documents included: "+ 
-    //                          matches+"/"+total+
-    //                          " ( "+percentange.toFixed(2)+"% ) ");
+  	// percentange = 100*matches/(WordTreeData.total).toFixed(2);
+  	appCtrl.setWordTreePercentage(matches, WordTreeData.total); 
+  	appCtrl.$apply(); 
 }
 
 function updateFeedback(selected, root){
-	// JavaFXApp.updateFeedback(selected, root);
+	appCtrl.setWordTreeFeedback(selected, root); 
+  	// appCtrl.$apply(); 
 }
 
 function updateClass(variable, positive, negative){
-	doc_class.variable = variable;
-	doc_class.positive = JSON.parse(positive);
-	doc_class.negative = JSON.parse(negative);
+	WordTreeData.doc_class.variable = variable;
+	WordTreeData.doc_class.positive = JSON.parse(positive);
+	WordTreeData.doc_class.negative = JSON.parse(negative);
 }
 
 /* Dummy values */
