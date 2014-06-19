@@ -300,16 +300,8 @@ angular.module('myApp.controllers', [])
             $scope.feedbackText = false;
         }
 
-        $scope.addWordTreeFeedback = function(classification) {
-
-            var variable = null;
-            $scope.variables.forEach(function(v) {
-                if ($scope.variableMapping[v] == $scope.WordTreeData.feedbackVar) {
-                    variable = v;
-                }
-            });
-            
-            $scope.feedbackList.push(new Feedback(1, $scope.WordTreeData.feedbackText, classification, variable));
+        $scope.addWordTreeFeedback = function(classification) {            
+            $scope.feedbackList.push(new Feedback(1, $scope.WordTreeData.feedbackText, classification, $scope.WordTreeData.feedbackVar));
             showInfo("Feedback added to the list!");
             $scope.feedbackText = false;
         }
