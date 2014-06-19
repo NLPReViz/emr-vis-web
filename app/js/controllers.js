@@ -9,6 +9,9 @@ angular.module('myApp.controllers', [])
          * App config
          */
 
+        //TODO: Fix WordTree hack!
+        $window.appCtrl = $scope;
+
         //TODO: Move them to configs - affects perf
         $scope.classificationName = {
             "positive": "True", 
@@ -318,28 +321,6 @@ angular.module('myApp.controllers', [])
             }
         }
 
-
-        /*
-         * WordTree
-         */
-
-        $scope.loadWordTree = function(query){
-            
-            startLoading();
-            
-            // console.log(config.backendURL + "/getWordTree/devIDList.xml/" + query);
-            $http.get(config.backendURL + "/getWordTree/devIDList.xml/" + query)
-                .success(function(data, status) {
-                    $("#wordtree-container").empty();
-                    makeWordTree(data);
-                    stopLoading();
-                })
-                .error(function(data, status, headers, config) {
-                    alert("Unable to fetch wordtree.");
-                    stopLoading();
-                });      
-        }
-
         /*
          * Tabs
          */
@@ -400,6 +381,43 @@ angular.module('myApp.controllers', [])
                 loaderCount = 0;
                 $scope.appLoading = false;
         }
+
+
+        /*
+         * WordTree
+         */
+
+        $scope.WordTreeData = new Object();
+
+        $scope.loadWordTree = function(query){
+            
+            startLoading();
+            
+            // console.log(config.backendURL + "/getWordTree/devIDList.xml/" + query);
+            $http.get(config.backendURL + "/getWordTree/devIDList.xml/" + query)
+                .success(function(data, status) {
+                    $("#wordtree-container").empty();
+                    makeWordTree(data);
+                    stopLoading();
+
+                    $scope.setWordTreePercentage(data.matches, data.total);
+                })
+                .error(function(data, status, headers, config) {
+                    alert("Unable to fetch wordtree.");
+                    stopLoading();
+                });      
+        }
+
+        $scope.setWordTreePercentage = function (matches, total) {
+            $scope.WordTreeData.percentage = (100*matches/total).toFixed(2);
+            $scope.WordTreeData.matches = matches;
+            $scope.WordTreeData.total = total;
+        }
+
+        $scope.setWordTreeFeedback = function(query){
+            
+        }
+
 
         return true;
     }])

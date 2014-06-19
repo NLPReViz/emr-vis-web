@@ -209,6 +209,7 @@
                     </p>
                   </div>
                 </div>
+                <div ng-show="WordTreeData.matches" class="about-wordtree unselectable">Documents: <strong> {{WordTreeData.matches}}/{{WordTreeData.total}} ({{WordTreeData.percentage}}%)</strong></div>
               </tab>
               <tab>
                 <tab-heading>
@@ -246,6 +247,7 @@
   <!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
   -->
+  <!-- Do not change the order -->
   <script src="bower_components/angular/angular.js"></script>
   <!-- <script src="bower_components/angular-route/angular-route.js"></script> -->
   <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
@@ -259,9 +261,11 @@
   <script src="js/directives.js"></script>
   <script src="js/report-highlight.js"></script>
   <script src="js/jquery-routines.js"></script>
-  <script src="js/wordtree-controller.js"></script>
-  <script src="js/wordtree-layout.js"></script>
-  <script src="js/wordtree-interface.js"></script>
+  <!-- After angular controllers -->
+  <script src="js/wordtree-controller.js"></script> 
+  <script src="js/wordtree-layout.js"></script> 
+  <script src="js/wordtree-interface.js"></script> 
+  <!-- After wordtree-controller -->
 
   <!-- <script type="text/javascript" src="wordtree-javafx-interface.js"></script> -->
         
