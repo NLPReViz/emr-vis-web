@@ -23,9 +23,10 @@ To get started, install the pre-requisites and then clone emr-vis-web as describ
 
 1. Navigate to the home directory of your tomcat server. You can use `$ catalina version` and find out what `CATALINA_HOME` is set to.
 2. `cd` to the _webapps/_ directory. If you are using the default tomcat setup, your present working directory would be something like _/usr/local/Cellar/tomcat/7.0.54/libexec/webapps/_.
-3. Clone the emr-vis-web repository using [git][git]:
+3. Clone the emr-vis-web repository into the webapps direcoryusing [git][git]:
 
     ```
+    cd webapps
     git clone https://github.com/trivedigaurav/emr-vis-web.git
     cd emr-vis-web
     ```
