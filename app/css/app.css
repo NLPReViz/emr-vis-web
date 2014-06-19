@@ -832,21 +832,21 @@ body {
 }
 
 .about-wordtree {
-    display:inline-block;
-    position: relative;
-    top: -30px;
+    position: absolute;
     height: 30px;
     padding: 6px;
     
     border-style: solid;
-    border-color: #DDDDDD;
+    border-color: #ccc;
     border-width: 1px;
-    
+    border-radius: 0px 4px 0px;
+
     background-color: #eee;
-    border-radius: 0px 4px 0px 0px;
     
     color: #888;
     font-size: 12px;
 
     cursor: default;
+    overflow: hidden;
+    margin-top: -30px;
 }
