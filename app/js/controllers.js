@@ -301,7 +301,7 @@ angular.module('myApp.controllers', [])
         }
 
         $scope.addWordTreeFeedback = function(classification) {            
-            $scope.feedbackList.push(new Feedback(1, $scope.WordTreeData.feedbackText, classification, $scope.WordTreeData.feedbackVar));
+            $scope.feedbackList.push(new Feedback(1, $scope.wordTreeData.feedbackText, classification, $scope.wordTreeData.feedbackVar));
             showInfo("Feedback added to the list!");
             $scope.feedbackText = false;
         }
@@ -333,12 +333,17 @@ angular.module('myApp.controllers', [])
 
         $scope.tabs = {docView: true, wordtreeView: false};
 
-        $scope.setWordTreeHeight = function() {
+        $scope.setWordTreeHeight = function(minusHeight) {
+            if($scope.wordTreeFullscreenButton)
+                minusHeight = 50;
+            else
+                minusHeight = 200;
+
             // console.log( wordtree.offset().top);
-            $("#wordtree-view").height($(window).height() - 200);
+            $("#wordtree-view").height($(window).height() - minusHeight);
         };
 
-        $($window).resize($scope.setWordTreeHeight);
+        $($window).resize($scope.setWordTreeHeight(200));
 
 
         /*
@@ -393,7 +398,7 @@ angular.module('myApp.controllers', [])
          * WordTree
          */
 
-        $scope.WordTreeData = new Object();
+        $scope.wordTreeData = new Object();
 
         $scope.loadWordTree = function(query){
             
@@ -407,7 +412,7 @@ angular.module('myApp.controllers', [])
                     stopLoading();
 
                     $scope.setWordTreePercentage(data.matches, data.total);
-                    $scope.WordTreeData.feedbackText = data.query;
+                    $scope.wordTreeData.feedbackText = data.query;
                 })
                 .error(function(data, status, headers, config) {
                     alert("Unable to fetch wordtree.");
@@ -416,13 +421,32 @@ angular.module('myApp.controllers', [])
         }
 
         $scope.setWordTreePercentage = function (matches, total) {
-            $scope.WordTreeData.percentage = (100*matches/total).toFixed(2);
-            $scope.WordTreeData.matches = matches;
-            $scope.WordTreeData.total = total;
+            $scope.wordTreeData.percentage = (100*matches/total).toFixed(2);
+            $scope.wordTreeData.matches = matches;
+            $scope.wordTreeData.total = total;
         }
 
         $scope.setWordTreeFeedback = function(selected, root) {
-            $scope.WordTreeData.feedbackText = selected;
+            $scope.wordTreeData.feedbackText = selected;
+        }
+
+        $scope.wordTreeFullscreenButton = false;
+        $scope.toggleWordTreeFullscreen = function() {
+            $scope.wordTreeFullscreenButton = !$scope.wordTreeFullscreenButton;
+            if($scope.wordTreeFullscreenButton){
+                $("#wordtree-view").addClass('wordtree-view-overlay');
+                $("#wordtree-about").addClass('wordtree-about-overlay');
+                $("#wordtree-fullscreen-button").addClass('wordtree-fullscreen-button-overlay');
+                $scope.setWordTreeHeight();
+                $("#wordtree-view").scrollTo('51%', {duration:1, axis:'x'});
+            }
+            else{
+                $("#wordtree-view").removeClass('wordtree-view-overlay');
+                $("#wordtree-about").removeClass('wordtree-about-overlay');
+                $("#wordtree-fullscreen-button").removeClass('wordtree-fullscreen-button-overlay');
+                $scope.setWordTreeHeight();
+                $("#wordtree-view").scrollTo('51%', {duration:1, axis:'x'});
+            }
         }
 
         return true;
