@@ -866,6 +866,7 @@ body {
     width:100%;
     z-index:1010;
     background-color: white;
+    border: none!important;
 }
 
 .wordtree-about-overlay {  
