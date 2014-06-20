@@ -154,12 +154,12 @@
                 <span ng-if="!feedbackText" ><strong>{{variableMapping[active.variable]}}</strong> is marked as <strong>{{classificationName[ gridData[active.docIndex][active.variable].classification ] | lowercase}}</strong> for this record. Label it as: <a ng-click="addFeedbackDoc('positive')">{{classificationName['positive']}}</a> | <a ng-click="addFeedbackDoc('negative')">{{classificationName['negative']}}</a></span>
               </span>
             </div>
-            <div ng-if="WordTreeData.feedbackText && tabs.wordTreeView" class="alert alert-warning reportFeedback">
+            <div ng-if="wordTreeData.feedbackText && tabs.wordTreeView" class="alert alert-warning reportFeedback">
               <span ng-if="appInfo">
                 {{appInfo}}
               </span>
               <span ng-if="!appInfo">
-                <em>"{{WordTreeData.feedbackText|truncate:20}}"</em> indicates <select ng-init="WordTreeData.feedbackVar = active.variable" ng-model="WordTreeData.feedbackVar" ng-options="variableMapping[var] for var in variables"></select> to be: <a ng-click="addWordTreeFeedback('positive')">{{classificationName['positive']}}</a> | <a ng-click="addWordTreeFeedback('negative')">{{classificationName['negative']}}</a>
+                <em>"{{wordTreeData.feedbackText|truncate:20}}"</em> indicates <select ng-init="wordTreeData.feedbackVar = active.variable" ng-model="wordTreeData.feedbackVar" ng-options="variableMapping[var] for var in variables"></select> to be: <a ng-click="addWordTreeFeedback('positive')">{{classificationName['positive']}}</a> | <a ng-click="addWordTreeFeedback('negative')">{{classificationName['negative']}}</a>
               </span>
             </div>
             <tabset>
@@ -217,7 +217,12 @@
                     </p>
                   </div>
                 </div>
-                <div ng-show="WordTreeData.matches" class="about-wordtree unselectable">Documents: <strong> {{WordTreeData.matches}}/{{WordTreeData.total}} ({{WordTreeData.percentage}}%)</strong></div>
+                <div ng-show="wordTreeData.matches" id="wordtree-about" class="unselectable">Documents: <strong> {{wordTreeData.matches}}/{{wordTreeData.total}} ({{wordTreeData.percentage}}%)</strong></div>
+                <div id="wordtree-fullscreen-button">
+                  <button type="button" class="btn btn-sm btn-default" ng-model="singleModel" btn-checkbox ng-click="toggleWordTreeFullscreen()">
+                  <span class="glyphicon glyphicon-fullscreen"></span>
+                  </button>
+                </div>
               </tab>
               <tab>
                 <tab-heading>
