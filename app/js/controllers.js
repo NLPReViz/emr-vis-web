@@ -439,6 +439,7 @@ angular.module('myApp.controllers', [])
                 $("#wordtree-fullscreen-button").addClass('wordtree-fullscreen-button-overlay');
                 $scope.setWordTreeHeight();
                 $("#wordtree-view").scrollTo('51%', {duration:1, axis:'x'});
+                $('header').hide();
             }
             else{
                 $("#wordtree-view").removeClass('wordtree-view-overlay');
@@ -446,6 +447,7 @@ angular.module('myApp.controllers', [])
                 $("#wordtree-fullscreen-button").removeClass('wordtree-fullscreen-button-overlay');
                 $scope.setWordTreeHeight();
                 $("#wordtree-view").scrollTo('51%', {duration:1, axis:'x'});
+                $('header').show();
             }
         }
 
