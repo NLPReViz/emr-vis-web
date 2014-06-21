@@ -18,6 +18,7 @@
     "postinstall": "bower install && grunt",
     "prestart": "bower install",
     "start": "grunt",
-    "poststart": "echo App ready for deployment! If the project directory is not inside Tomcat webapps, you may move it now."
+    "poststart": "echo App ready for deployment! If the project directory is not inside Tomcat webapps, you may move it now.",
+    "stop": "echo This does not do anything now. Use catalina to stop the webserver."
   }
 }
