@@ -29,6 +29,9 @@ angular.module('myApp.directives', [])
 
             $document.on('mouseup', mouseup);
             $document.on('mousemove', mousemove);
+
+            scope.appDisabled = true;
+            scope.$apply();
         });
 
         function mousemove(event) {
@@ -53,6 +56,9 @@ angular.module('myApp.directives', [])
 
             $document.off('mousemove', mousemove);
             $document.off('mouseup', mouseup);
+
+            scope.appDisabled = false;
+            scope.$apply();
         }
     };
 }])
