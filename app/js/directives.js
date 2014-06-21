@@ -150,14 +150,6 @@ angular.module('myApp.directives', [])
                               .append("g")
                                 .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
 
-                // var arc = d3.svg.arc()
-                //             .outerRadius(radius - 10)
-                //             .innerRadius(0);
-
-                // var pie = d3.layout.stack()
-                //             .sort(null)
-                //             .value(function(d) { return d.count; });
-
                 function type(d) {
                     d.count = +d.count;
                     return d;
@@ -166,10 +158,6 @@ angular.module('myApp.directives', [])
                 //Render graph based on 'data'
                 scope.render = function(data) {
                     if(data != null){
-
-                        data.forEach(function(d) {
-                            d.count = +d.count;
-                        });
 
                         svg.selectAll('g').remove();
                         svg.selectAll(".bar").remove();
@@ -189,7 +177,7 @@ angular.module('myApp.directives', [])
                           .attr("transform", "rotate(-90)")
                           .attr("y", 6)
                           .attr("dy", ".71em")
-                          .style("text-anchor", "end")
+                          .style("text-anchor", "middle")
                           .text("Count");
 
                         svg.selectAll(".bar")
@@ -199,42 +187,10 @@ angular.module('myApp.directives', [])
                           .attr("x", function(d) { return x(d.name) + margin.left/3 + 8; })
                           .attr("width", "20")
                           .attr("y", function(d) { return y(d.count); })
-                          .attr("height", function(d) { return height - y(d.count); });
+                          .attr("height", function(d) { return height - y(d.count); })
 
 
-                        // svg.selectAll('.arc').remove();
-
-                        // var g = svg.selectAll(".arc")
-                        //             .data(pie(data))
-                        //           .enter().append("g")
-                        //             .attr("class", "arc")
-                        //             .on("mouseover", function(d) { g.select(".d3-tip").style("opacity", "1");})
-                        //             .on("mouseout", function(d) { g.select(".d3-tip").style("opacity", "0");});
-
-                        // g.append("path")
-                        //     .attr("d", arc)
-                        //     .attr("class", function(d) { return d.data.classification; })
-                            
-                        // g.append("text")
-                        //     .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
-                        //     .attr("dy", "0em")
-                        //     .style("text-anchor", "middle")
-                        //     .attr("class", function(d) { return d.data.classification+"-label"; })
-                        //     .text(function(d) { if (d.data.count > 0) return d.data.name; });
-
-                        // g.append("text")
-                        //  .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
-                        //  .attr("dy", "1.15em")
-                        //  .style("text-anchor", "middle")
-                        //  .attr("class", function(d) { return d.data.classification+"-label" + " d3-tip"; })
-                        //  .text(function(d) { return "(" + d.data.count + ")"; });
                     }
-
-                    // //Animate bars
-                    // bars.transition()
-                    //     .duration(1000)
-                    //     .attr('height', function(d) { return height - y(d.count); })
-                    //     .attr("y", function(d) { return y(d.count); })
                 };
 
                 //Watch 'data' and run scope.render(newVal) whenever it changes
