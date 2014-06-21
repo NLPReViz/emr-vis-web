@@ -16,7 +16,8 @@
   },
   "scripts": {
     "postinstall": "bower install && grunt",
-    "prestart": "bower install && grunt",
-    "start": "echo 'App ready for deployment!'"
+    "prestart": "bower install",
+    "start": "grunt",
+    "poststart": "echo App ready for deployment! If the project directory is not inside Tomcat webapps, you may move it now."
   }
 }
