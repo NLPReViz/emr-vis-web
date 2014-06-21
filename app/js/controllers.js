@@ -222,9 +222,9 @@ angular.module('myApp.controllers', [])
                   {name: $scope.classificationName["negative"], count: $scope.variableData[variable]["numNegative"], classification: "negative"},
                 ];
             
-                $scope.pieData.sort(function(first, second) {
-                    return second.count - first.count;
-                });
+                // $scope.pieData.sort(function(first, second) {
+                //     return second.count - first.count;
+                // });
             }
             else{
                 $scope.pieData = null;
