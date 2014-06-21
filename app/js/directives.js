@@ -111,7 +111,7 @@ angular.module('myApp.directives', [])
     };
 }])
 
-.directive( 'd3Piechart', [  function () {
+.directive( 'd3Distchart', [  function () {
     return {
         restrict: 'E',
         scope: {
