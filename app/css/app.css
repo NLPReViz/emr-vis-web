@@ -149,6 +149,7 @@ body {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
   opacity: 1;
   transition: 0s visibility;
+  transition-delay:0.5s;
 }
 
 /* Base styles for the tooltip's directional arrow */
