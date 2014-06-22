@@ -125,8 +125,8 @@ angular.module('myApp.directives', [])
                 // radius = Math.min(width, height) / 2;
 
                 var margin = {top: 20, right: 20, bottom: 30, left: 25},
-                width = 170 - margin.left - margin.right,
-                height = 170 - margin.top - margin.bottom;
+                width = 100 - margin.left - margin.right,
+                height = 100 - margin.top - margin.bottom;
 
                 var x = d3.scale.ordinal()
                     .rangeRoundBands([0, width], .1);
@@ -175,8 +175,8 @@ angular.module('myApp.directives', [])
                           .call(yAxis)
                         .append("text")
                           .attr("transform", "rotate(-90)")
-                          .attr("y", 6)
-                          .attr("dy", ".71em")
+                          .attr("y", 0)
+                          .attr("dy", "6.2em")
                           .style("text-anchor", "middle")
                           .text("Count");
 
@@ -184,8 +184,8 @@ angular.module('myApp.directives', [])
                           .data(data)
                         .enter().append("rect")
                           .attr("class", function(d) { return "bar " + d.classification+"-label"; })
-                          .attr("x", function(d) { return x(d.name) + margin.left/3 + 8; })
-                          .attr("width", "20")
+                          .attr("x", function(d) { return x(d.name) + margin.left/4; })
+                          .attr("width", "10")
                           .attr("y", function(d) { return y(d.count); })
                           .attr("height", function(d) { return height - y(d.count); })
 
