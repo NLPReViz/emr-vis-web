@@ -70,6 +70,10 @@ angular.module('myApp.controllers', [])
 
         function setModelAndDataset (model, dataset) {
 
+            if(model === undefined || dataset === undefined ){
+                return
+            }
+
             if ( !($scope.active.model == model && $scope.active.dataset == dataset) ) {
                 $scope.active.model = model;
                 $scope.active.dataset = dataset;

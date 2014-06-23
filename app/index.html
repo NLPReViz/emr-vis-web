@@ -56,6 +56,7 @@
       <div collapse="modal.isCollapsed" id="modal">
         <div class="list">
           <h5>Select Dataset</h5>
+          <p ng-hide="datasetList.length" class="empty-list">None</p>
           <ul>
             <li ng-repeat="dataset in datasetList" ng-class="{selected: modal.selectedDataset == dataset.name}" ng-click="modal.selectedDataset = dataset.name">
                 {{dataset.name | truncate:20}}
@@ -64,6 +65,7 @@
         </div>
         <div class="list">
           <h5>Select Model</h5>
+          <p ng-hide="modelList.length" class="empty-list">None</p>
           <ul>
             <!-- <li class="pick">Test</li> -->
             <li ng-repeat="model in modelList" ng-class="{selected: modal.selectedModel == model.name}" ng-click="modal.selectedModel = model.name">
