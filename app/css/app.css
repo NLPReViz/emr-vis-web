@@ -47,13 +47,13 @@ body {
     user-select: none;
 }
 
-nav .navbar-nav > li a{
+.navbar-nav > li a{
   padding-top: 10px;
   padding-bottom: 0px;
   margin-bottom: -7px;
 }
 
-nav .navbar-nav > li span{
+.navbar-nav > li span{
   font-size: 80%;
   padding-left: 15px;
   color: #aaa;
@@ -888,9 +888,9 @@ nav .navbar-nav > li span{
 }
 
 #wordtree-fullscreen-button {
-    float: right;
-    margin-right: 8px;
-    margin-top: -38px;
+    bottom: 30px;
+    position: absolute;
+    right: 28px;
     z-index: 1050;
 }
 
