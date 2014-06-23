@@ -654,15 +654,38 @@ body {
     overflow-x: hidden;
 }
 
-#distribution .arc path {
+/*#distribution .arc path {
     stroke: #ccc;
     stroke-width: 0.5;
 }
 
 #distribution g:hover path {
     stroke: #aaa;
+}*/
+
+/*#distribution .bar {
+  box-shadow: 1px 1px 0.5px #ccc;
+}*/
+
+#distribution .bar:hover {
+  opacity: 0.8;
 }
 
+
+#distribution .axis {
+  font: 10px sans-serif;
+}
+
+#distribution .axis path,
+#distribution .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+#distribution .x.axis path {
+  display: none;
+}
 
 #keywords{
     float: left;

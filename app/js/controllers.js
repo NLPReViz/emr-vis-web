@@ -207,27 +207,27 @@ angular.module('myApp.controllers', [])
         };
 
         /*
-         * Pie chart
+         * Distribution chart
          */
 
-        $scope.pieData = null;
+        $scope.distData = null;
 
         $scope.loadDistribution = function(variable) {
 
             if ($scope.variableData[variable]["numPositive"] > 0 ||
                 $scope.variableData[variable]["numNegative"] > 0 )
             { 
-                $scope.pieData = [
+                $scope.distData = [
                   {name: $scope.classificationName["positive"], count: $scope.variableData[variable]["numPositive"], classification: "positive"},
                   {name: $scope.classificationName["negative"], count: $scope.variableData[variable]["numNegative"], classification: "negative"},
                 ];
             
-                $scope.pieData.sort(function(first, second) {
-                    return second.count - first.count;
-                });
+                // $scope.distData.sort(function(first, second) {
+                //     return second.count - first.count;
+                // });
             }
             else{
-                $scope.pieData = null;
+                $scope.distData = null;
             }
         };
 
