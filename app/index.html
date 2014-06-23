@@ -27,7 +27,7 @@
   <div ng-show="appDisabled" id="coverall">
   </div>
   
-  <div ng-show="appLoading" id="appLoading" class="alert alert-warning appNotice">
+  <div ng-if="appLoading" id="appLoading" class="alert alert-warning appNotice">
     <strong>Loading!</strong> Please wait.
   </div>
 
@@ -44,8 +44,8 @@
         <a href="#top" role="button" class="navbar-brand">
           EMR VisWeb
         </a>
-        <li><a class="dropdown-toggle" href="#/">DATASET <i class="glyphicon glyphicon-chevron-down"></i></a></li>
-        <li><a class="dropdown-toggle" href="#/">MODEL <i class="glyphicon glyphicon-chevron-down"></i></a></li>
+        <li><a class="dropdown-toggle" href="#/">DATASET <i class="glyphicon glyphicon-chevron-down"></i></a> <span>{{active.dataset | truncate:10}}</span> </li>
+        <li><a class="dropdown-toggle" href="#/">MODEL <i class="glyphicon glyphicon-chevron-down"></i></a> <span>{{active.model | truncate:10}}</span></li>
       </ul>
       <form class="navbar-form navbar-right" role="search">
         <div class="form-group">
