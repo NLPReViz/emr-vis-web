@@ -27,7 +27,7 @@
   <div ng-show="appDisabled" id="coverall">
   </div>
   
-  <div ng-if="appLoading" id="appLoading" class="alert alert-warning appNotice">
+  <div ng-show="appLoading" id="appLoading" class="alert alert-warning appNotice">
     <strong>Loading!</strong> Please wait.
   </div>
 
@@ -217,12 +217,11 @@
                     </p>
                   </div>
                 </div>
-                <div ng-show="wordTreeData.matches" id="wordtree-about" class="unselectable">Documents: <strong> {{wordTreeData.matches}}/{{wordTreeData.total}} ({{wordTreeData.percentage}}%)</strong></div>
-                <div id="wordtree-fullscreen-button">
-                  <button type="button" class="btn btn-sm btn-default" ng-model="singleModel" btn-checkbox ng-click="toggleWordTreeFullscreen()">
+                <div ng-show="wordTreeData.matches" id="wordtree-about">
+                  Documents: <strong> {{wordTreeData.matches}}/{{wordTreeData.total}} ({{wordTreeData.percentage}}%)</strong></div>
+                <button id="wordtree-fullscreen-button" type="button" class="btn btn-sm btn-default" ng-model="singleModel" btn-checkbox ng-click="toggleWordTreeFullscreen()">
                   <span class="glyphicon glyphicon-fullscreen"></span>
-                  </button>
-                </div>
+                </button>
               </tab>
               <tab>
                 <tab-heading>
