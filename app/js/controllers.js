@@ -475,6 +475,13 @@ angular.module('myApp.controllers', [])
             }
         }
 
+        /*
+         * Modal
+         */
+
+        $scope.openModal = function(){
+        };
+
         return true;
     }])
         
