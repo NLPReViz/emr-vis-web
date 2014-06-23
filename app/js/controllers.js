@@ -56,7 +56,29 @@ angular.module('myApp.controllers', [])
         startLoading();
 
         // Start page load
-        $http.get(config.backendURL + "/getVarGridObj/modelList.0..xml/devIDList.xml")
+        $http.get(config.backendURL + "/getVarDatasetList/")
+            .success(function (data, status) {
+                $scope.modelList = data['model'];
+                $scope.datasetList = data['dataset'];
+                
+                stopLoading();
+
+                $scope.setModelAndDataset($scope.modelList[0].name, $scope.datasetList[0].name);
+            })
+            .error(function() { alert("Could not retrieve model list!"); stopLoading()}); 
+
+
+        $scope.setModelAndDataset = function (model, dataset) {
+            $scope.active.model = model;
+            $scope.active.dataset = dataset;
+            loadData();
+        };
+
+        function loadData() {
+
+            startLoading();
+
+            $http.get(config.backendURL + "/getVarGridObj/" + $scope.active.model +".xml/" + $scope.active.dataset + ".xml")
             .success(function(data, status) {
                 $scope.gridData = data['gridData'];
 
@@ -98,6 +120,8 @@ angular.module('myApp.controllers', [])
                 
             })
             .error(function() { alert("Could not load backend data!"); stopLoading()});
+
+        }
 
         $scope.styleGridCell = function(classification, confidence) {
             if (classification == "positive") {
@@ -405,7 +429,7 @@ angular.module('myApp.controllers', [])
             startLoading();
             
             // console.log(config.backendURL + "/getWordTree/devIDList.xml/" + query);
-            $http.get(config.backendURL + "/getWordTree/devIDList.xml/" + query)
+            $http.get(config.backendURL + "/getWordTree/" + $scope.active.dataset + ".xml/" + query)
                 .success(function(data, status) {
                     $("#wordtree-container").empty();
                     makeWordTree(data);

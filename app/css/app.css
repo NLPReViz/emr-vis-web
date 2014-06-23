@@ -47,6 +47,18 @@ body {
     user-select: none;
 }
 
+nav .navbar-nav > li a{
+  padding-top: 10px;
+  padding-bottom: 0px;
+  margin-bottom: -7px;
+}
+
+nav .navbar-nav > li span{
+  font-size: 80%;
+  padding-left: 15px;
+  color: #aaa;
+}
+
 .unselectable {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
