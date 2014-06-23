@@ -44,8 +44,8 @@
         <a href="#top" role="button" class="navbar-brand">
           EMR VisWeb
         </a>
-        <li ng-click="openModal()"><a class="dropdown-toggle" href="#/">DATASET <i class="glyphicon glyphicon-chevron-down"></i></a> <span>{{active.dataset | truncate:10}}</span> </li>
-        <li ng-click="openModal()"><a class="dropdown-toggle" href="#/">MODEL <i class="glyphicon glyphicon-chevron-down"></i></a> <span>{{active.model | truncate:10}}</span></li>
+        <li ng-click="modal.toggle()"><a class="dropdown-toggle" href="#/">DATASET <i class="glyphicon glyphicon-chevron-down"></i></a> <span>{{active.dataset | truncate:10}}</span> </li>
+        <li ng-click="modal.toggle()"><a class="dropdown-toggle" href="#/">MODEL <i class="glyphicon glyphicon-chevron-down"></i></a> <span>{{active.model | truncate:10}}</span></li>
       </ul>
       <form class="navbar-form navbar-right" role="search">
         <div class="form-group">
@@ -53,6 +53,29 @@
           <input class="form-control" type="search" ng-model="searchQuery" /><span id="searchclear" class="searchclear glyphicon glyphicon-remove-circle" ng-click="searchQuery = ''"></span>
         </div>
       </form>
+      <div collapse="modal.isCollapsed" id="modal">
+        <div class="list">
+          <h5>Select Dataset</h5>
+          <ul>
+            <li ng-repeat="dataset in datasetList" ng-class="{selected: modal.selectedDataset == dataset.name}" ng-click="modal.selectedDataset = dataset.name">
+                {{dataset.name | truncate:20}}
+            </li>
+          </ul>
+        </div>
+        <div class="list">
+          <h5>Select Model</h5>
+          <ul>
+            <!-- <li class="pick">Test</li> -->
+            <li ng-repeat="model in modelList" ng-class="{selected: modal.selectedModel == model.name}" ng-click="modal.selectedModel = model.name">
+                {{model.name | truncate:20}}
+            </li>
+          </ul>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-default" ng-click="modal.toggle()">Cancel</button>
+            <button class="btn btn-primary" ng-click="modal.confirm()">OK</button>
+        </div>
+      </div>
     </nav>
   </header>
 
@@ -162,6 +185,7 @@
                 <em>"{{wordTreeData.feedbackText|truncate:20}}"</em> indicates <select ng-init="wordTreeData.feedbackVar = active.variable" ng-model="wordTreeData.feedbackVar" ng-options="variableMapping[var] for var in variables"></select> to be: <a ng-click="addWordTreeFeedback('positive')">{{classificationName['positive']}}</a> | <a ng-click="addWordTreeFeedback('negative')">{{classificationName['negative']}}</a>
               </span>
             </div>
+
             <tabset>
               <tab active="tabs.docView" heading="Document View">
                 <div ng-show="records.pathology.exists" class="pagerview">
@@ -227,7 +251,7 @@
                 <tab-heading>
                   Feedback Review &nbsp;<span ng-if="feedbackList.length > 0" class="badge alert-info pull-right"> {{feedbackList.length}} </span>
                 </tab-heading>
-                <div class="feedback-content">
+                <div class="tab-div">
                   <h4>Feedback List</h4>
                   <div id="feedbackList">
                     <p ng-hide="feedbackList.length">Feedback list is empty.</p>
@@ -247,7 +271,9 @@
                 <tab-heading>
                   <i class="glyphicon glyphicon-refresh"></i> Re-Train
                 </tab-heading>
-                <h4>Training results</h4>
+                <div class="tab-div">
+                  <h4>Training results</h4>
+                </div>
               </tab>
             </tabset>
           </div>
