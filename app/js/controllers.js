@@ -63,15 +63,18 @@ angular.module('myApp.controllers', [])
                 
                 stopLoading();
 
-                $scope.setModelAndDataset($scope.modelList[0].name, $scope.datasetList[0].name);
+                setModelAndDataset($scope.modelList[0].name, $scope.datasetList[0].name);
             })
             .error(function() { alert("Could not retrieve model list!"); stopLoading()}); 
 
 
-        $scope.setModelAndDataset = function (model, dataset) {
-            $scope.active.model = model;
-            $scope.active.dataset = dataset;
-            loadData();
+        function setModelAndDataset (model, dataset) {
+
+            if ( !($scope.active.model == model && $scope.active.dataset == dataset) ) {
+                $scope.active.model = model;
+                $scope.active.dataset = dataset;
+                loadData();
+            }
         };
 
         function loadData() {
@@ -479,8 +482,21 @@ angular.module('myApp.controllers', [])
          * Modal
          */
 
-        $scope.openModal = function(){
+        $scope.modal = Object();
+        $scope.modal.isCollapsed = true;
+        $scope.modal.toggle = function() {
+            $scope.modal.isCollapsed = !$scope.modal.isCollapsed;
+
+            if(!$scope.modal.isCollapsed){
+                $scope.modal.selectedModel = $scope.active.model;
+                $scope.modal.selectedDataset = $scope.active.dataset;
+            }
         };
+
+        $scope.modal.confirm = function() {
+            $scope.modal.isCollapsed = true;
+            setModelAndDataset($scope.modal.selectedModel, $scope.modal.selectedDataset);
+        }
 
         return true;
     }])

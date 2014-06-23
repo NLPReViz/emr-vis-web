@@ -27,7 +27,7 @@ body {
 
 .searchclear {
     position:absolute;
-    right:13px;
+    right:30px;
     top:0;
     bottom:0;
     height:14px;
@@ -57,6 +57,47 @@ body {
   font-size: 80%;
   padding-left: 15px;
   color: #aaa;
+}
+
+#modal {
+  position: absolute;
+  height: 100px;
+  /*background-clip: padding-box;*/
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 0 0 4px 0px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.176);
+  float: left;
+  font-size: 14px;
+  left: 0px;
+  padding: 8px;
+  position: absolute;
+  top: 100%;
+  z-index: 1000;
+  width: 400px;
+}
+
+#modal .list {
+  margin-left: 15px;
+  width: 170px;
+  vertical-align: top;
+  display: inline-block;
+}
+
+#modal .list ul {
+  padding: 0;
+}
+
+#modal .list li{
+  padding: 5px;
+  width: 120px;
+  cursor: pointer;
+}
+
+#modal .list ul .selected{
+  background-color: #eee;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
 }
 
 .unselectable {
@@ -109,6 +150,20 @@ body {
 
     padding: 10px;
     margin: 10px;
+}
+
+.reportFeedback {
+    z-index: 1510;
+    
+    display: block;
+    position: fixed;
+
+    top: -8px;
+    left: 620px;
+
+    padding: 5px;
+    padding-top: 15px;
+    margin-top: 4px;
 }
 
 /* Taken from http://cbracco.me/a-simple-css-tooltip/ */
@@ -842,7 +897,7 @@ body {
     padding: 2px;
 }
 
-.feedback-content {
+.tab-div {
     padding: 15px;
 }
 
