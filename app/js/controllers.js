@@ -3,7 +3,7 @@
 /* Controllers */
 
 angular.module('myApp.controllers', [])
-  .controller('MainCtrl', ['$scope', '$window', '$document', 'backend',  
+  .controller('appCtrl', ['$scope', '$window', '$document', 'backend',  
     function($scope, $window, $document, backend) {
         /*
          * App config
