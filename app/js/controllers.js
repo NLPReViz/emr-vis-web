@@ -369,7 +369,8 @@ angular.module('myApp.controllers', [])
 
             setTimeout(function() {
               $scope.appInfo = false;
-            }, 2000);
+              $scope.$digest();
+            }, 1500);
         }
 
         /*
