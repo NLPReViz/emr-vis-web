@@ -29,6 +29,7 @@ angular.module('myApp.directives', [])
 
             $document.on('mouseup', mouseup);
             $document.on('mousemove', mousemove);
+            $('body').addClass('resizable');
 
             scope.appDisabled = true;
             scope.$apply();
@@ -56,6 +57,7 @@ angular.module('myApp.directives', [])
 
             $document.off('mousemove', mousemove);
             $document.off('mouseup', mouseup);
+            $('body').removeClass('resizable');
 
             scope.appDisabled = false;
             scope.$apply();
