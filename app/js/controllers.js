@@ -12,7 +12,7 @@ angular.module('myApp.controllers', [])
         //TODO: Fix WordTree hack!
         $window.appCtrl = $scope;
 
-        //TODO: Move them to configs - affects perf
+        //TODO: Move them to configs
         $scope.classificationName = {
             "positive": "True", 
             "negative": "False", 
@@ -50,7 +50,6 @@ angular.module('myApp.controllers', [])
             variable: null
         }
 
-        // $scope.active.docIndex = null;
         $scope.showGrid = true;
 
         startLoading();
@@ -110,8 +109,6 @@ angular.module('myApp.controllers', [])
 
                   if(isNaN($scope.variableData[variable]["percNegative"]))
                     $scope.variableData[variable]["percNegative"] = 0;
-
-                  // console.log($scope.variableData[variable]["percPositive"] + " - " + $scope.variableData[variable]["percNegative"]);
                                           
                 });
 
@@ -155,7 +152,6 @@ angular.module('myApp.controllers', [])
 
             //Change view to docView
             $scope.tabs.docView = true;
-            // $scope.updateHighlights();
         };
 
 
@@ -198,9 +194,6 @@ angular.module('myApp.controllers', [])
         $scope.loadReport = function(activeDocIndex) {
 
             var activeDoc = $scope.gridData[activeDocIndex].id;
-
-            // $scope.reportPath = "docs/"+ activeDoc +"/report.txt";
-            // $scope.pathologyPath = "docs/"+ activeDoc +"/pathology.txt";
 
             $scope.records.report.exists = false;
             $scope.records.pathology.exists = false;
