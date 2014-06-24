@@ -57,6 +57,7 @@ body {
   font-size: 80%;
   padding-left: 15px;
   color: #aaa;
+  cursor: pointer;
 }
 
 #modal {
