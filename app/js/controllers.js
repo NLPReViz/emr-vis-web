@@ -442,22 +442,11 @@ angular.module('myApp.controllers', [])
         $scope.wordTreeFullscreenButton = false;
         $scope.toggleWordTreeFullscreen = function() {
             $scope.wordTreeFullscreenButton = !$scope.wordTreeFullscreenButton;
-            if($scope.wordTreeFullscreenButton){
-                $("#wordtree-view").addClass('wordtree-view-overlay');
-                $("#wordtree-about").addClass('wordtree-about-overlay');
-                $("#wordtree-fullscreen-button").addClass('wordtree-fullscreen-button-overlay');
+
+            setTimeout(function() {
                 $scope.setWordTreeHeight();
                 $("#wordtree-view").scrollTo('51%', {duration:1, axis:'x'});
-                $('header').hide();
-            }
-            else{
-                $("#wordtree-view").removeClass('wordtree-view-overlay');
-                $("#wordtree-about").removeClass('wordtree-about-overlay');
-                $("#wordtree-fullscreen-button").removeClass('wordtree-fullscreen-button-overlay');
-                $scope.setWordTreeHeight();
-                $("#wordtree-view").scrollTo('51%', {duration:1, axis:'x'});
-                $('header').show();
-            }
+            });
         }
 
         /*
