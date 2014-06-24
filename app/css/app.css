@@ -47,6 +47,10 @@ body {
     user-select: none;
 }
 
+.navbar-nav > li{
+   cursor: pointer;
+}
+
 .navbar-nav > li a{
   padding-top: 10px;
   padding-bottom: 0px;
@@ -57,7 +61,6 @@ body {
   font-size: 80%;
   padding-left: 15px;
   color: #aaa;
-  cursor: pointer;
 }
 
 #modal {
