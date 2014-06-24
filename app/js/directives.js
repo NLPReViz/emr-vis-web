@@ -124,8 +124,8 @@ angular.module('myApp.directives', [])
                 // height = 170 - margin.top - margin.bottom,
                 // radius = Math.min(width, height) / 2;
 
-                var margin = {top: 10, right: 20, bottom: 30, left: 35},
-                width = 150 - margin.left - margin.right,
+                var margin = {top: 10, right: 20, bottom: 30, left: 25},
+                width = 140 - margin.left - margin.right,
                 height = 95 - margin.top - margin.bottom;
 
                 var x = d3.scale.ordinal()
@@ -161,6 +161,7 @@ angular.module('myApp.directives', [])
 
                         svg.selectAll('g').remove();
                         svg.selectAll(".bar").remove();
+                        svg.selectAll(".bar-label").remove();
 
                         x.domain(data.map(function(d) { return d.name; }));
                         y.domain([0, d3.max(data, function(d) { return d.count; })]);
@@ -173,22 +174,23 @@ angular.module('myApp.directives', [])
                         svg.append("g")
                           .attr("class", "y axis")
                           .call(yAxis)
-                        .append("text")
-                          .attr("transform", "rotate(-90)")
-                          .attr("y", 0)
-                          .attr("dy", "-2.75em")
-                          .style("text-anchor", "end")
-                          .text("Count");
 
                         svg.selectAll(".bar")
                           .data(data)
                         .enter().append("rect")
                           .attr("class", function(d) { return "bar " + d.classification; })
-                          .attr("x", function(d) { return x(d.name) + margin.left/4;})
+                          .attr("x", function(d) { return x(d.name) + margin.left/4 + 2;})
                           .attr("width", "10")
                           .attr("y", function(d) { return y(d.count); })
                           .attr("height", function(d) { return height - y(d.count); })
 
+                        svg.selectAll(".bar-label")
+                          .data(data)
+                          .enter().append("text")
+                          .attr("class", "bar-label")
+                          .attr("x", function(d) { return x(d.name) + margin.left/4 + 7;})
+                          .attr("y", function(d) { return y(d.count) - 2; })
+                          .text(function(d) { return d.count; });
 
                     }
                 };
