@@ -644,7 +644,7 @@ body {
     border: 1px solid #e5e5e5; 
     height: 100%;
     font-weight: bold;
-    cursor: help;
+    cursor: default;
 }
 
 #sidebar-top .cellwidth_id { 
