@@ -35,7 +35,7 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
   
-  <header class="navbar navbar-default navbar-fixed-top">
+  <header ng-hide="wordTreeFullscreenButton" class="navbar navbar-default navbar-fixed-top">
     <div class="navbar-header">
       <a class="navbar-brand visible-xs">EMR VisWeb</a>
     </div>
@@ -236,16 +236,16 @@
                     </div>
                   </div>
                 </form>
-                <div id="wordtree-view">
+                <div id="wordtree-view" ng-class="{'wordtree-view-overlay': wordTreeFullscreenButton}">
                   <div id="wordtree-container" class="wordtree-container-class">
                     <p id="wordtree-empty">
                       No wordtree to show. Enter keywords above and search.
                     </p>
                   </div>
                 </div>
-                <div ng-show="wordTreeData.matches" id="wordtree-about">
+                <div ng-show="wordTreeData.matches" id="wordtree-about" ng-class="{'wordtree-about-overlay': wordTreeFullscreenButton}">
                   Documents: <strong> {{wordTreeData.matches}}/{{wordTreeData.total}} ({{wordTreeData.percentage}}%)</strong></div>
-                <button id="wordtree-fullscreen-button" type="button" class="btn btn-sm btn-default" ng-model="singleModel" btn-checkbox ng-click="toggleWordTreeFullscreen()">
+                <button id="wordtree-fullscreen-button" type="button" class="btn btn-sm btn-default" ng-model="singleModel" btn-checkbox ng-click="toggleWordTreeFullscreen()" ng-class="{'wordtree-fullscreen-button-overlay': wordTreeFullscreenButton}">
                   <span class="glyphicon glyphicon-fullscreen"></span>
                 </button>
               </tab>
