@@ -733,6 +733,15 @@ body {
   opacity: 0.8;
 }
 
+#distribution .bar-label {
+  font-size: 75%;
+  text-anchor: middle;
+  opacity: 0;
+}
+
+#distribution:hover .bar-label {
+  opacity: 1;
+}
 
 #distribution .axis {
   font: 10px sans-serif;
