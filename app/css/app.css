@@ -68,7 +68,7 @@ body {
   height: 100px;
   /*background-clip: padding-box;*/
   background-color: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.15);
+  /*border: 1px solid rgba(0, 0, 0, 0.15);*/
   border-radius: 0 0 4px 0px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.176);
   float: left;
