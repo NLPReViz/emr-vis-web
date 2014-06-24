@@ -436,8 +436,11 @@ body {
     height: 8px;
     width: 100%;
     position:relative;
-    cursor: row-resize;
     z-index: 1020;
+}
+
+.resizable {
+  cursor: row-resize;
 }
 
 #sidebar-resize-indicator {
@@ -447,7 +450,6 @@ body {
     width: 600px;
     height: 8px;
     background-color: black;
-    cursor: row-resize;
     /*Greater than disable screen*/
     z-index: 3001; 
     opacity: 0.2;
