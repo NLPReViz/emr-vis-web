@@ -3,8 +3,8 @@
 /* Controllers */
 
 angular.module('myApp.controllers', [])
-  .controller('MainCtrl', ['$scope', '$http', '$window', '$document', '$timeout', 'config',  
-    function($scope, $http, $window, $document, $timeout, config) {
+  .controller('MainCtrl', ['$scope', '$window', '$document', 'backend',  
+    function($scope, $window, $document, backend) {
         /*
          * App config
          */
@@ -56,17 +56,14 @@ angular.module('myApp.controllers', [])
         startLoading();
 
         // Start page load
-        $http.get(config.backendURL + "/getVarDatasetList/")
-            .success(function (data, status) {
-                $scope.modelList = data['model'];
-                $scope.datasetList = data['dataset'];
-                
-                stopLoading();
+        backend.getVarDatasetList().then(function(data) {
+            $scope.modelList = data['model'];
+            $scope.datasetList = data['dataset'];
 
-                setModelAndDataset($scope.modelList[0].name, $scope.datasetList[0].name);
-            })
-            .error(function() { alert("Could not retrieve model list!"); stopLoading()}); 
-
+            stopLoading();
+            setModelAndDataset($scope.modelList[0].name, $scope.datasetList[0].name);
+        }, function() { alert("Could not retrieve model list!"); stopLoading(); });
+        
 
         function setModelAndDataset (model, dataset) {
 
@@ -85,8 +82,7 @@ angular.module('myApp.controllers', [])
 
             startLoading();
 
-            $http.get(config.backendURL + "/getVarGridObj/" + $scope.active.model +".xml/" + $scope.active.dataset + ".xml")
-            .success(function(data, status) {
+            backend.getGridData($scope.active.model, $scope.active.dataset).then(function(data) {
                 $scope.gridData = data['gridData'];
 
                 // console.log($scope.gridData);
@@ -121,12 +117,9 @@ angular.module('myApp.controllers', [])
 
                 $scope.active.variable = $scope.variables[0];
                 $scope.loadDistribution($scope.active.variable);
-                stopLoading()
+                stopLoading();
 
-                // $scope.updateHighlights();
-                
-            })
-            .error(function() { alert("Could not load backend data!"); stopLoading()});
+            }, function() { alert("Could not load backend data!"); stopLoading(); });
 
         }
 
@@ -215,9 +208,8 @@ angular.module('myApp.controllers', [])
             startLoading();
 
             //report
-            $http.get(config.backendURL + "/getReport/" + activeDoc)
-                .success(function(data, status) {
-                    $scope.records.report.text = data.reportText;
+            backend.getReport(activeDoc).then(function(data) {
+                $scope.records.report.text = data.reportText;
                     $scope.records.report.exists = true;
 
                     //pathology
@@ -228,13 +220,11 @@ angular.module('myApp.controllers', [])
                     
                     stopLoading();
                     $scope.feedbackText = null;
-                })
-                .error(function(data, status, headers, config) {
-                    $scope.records.report.text = "Status " + status
-                    alert("Unable to fetch information for report "+activeDoc+".");
-
-                    stopLoading();
-                });
+            }, function() { 
+                $scope.records.report.text = "Status " + status;
+                alert("Unable to fetch information for report "+activeDoc+".");
+                stopLoading();
+            });
         };
 
         /*
@@ -384,8 +374,8 @@ angular.module('myApp.controllers', [])
         function showInfo (notice){
             $scope.appInfo = notice;
 
-            $timeout(function() {
-                $scope.appInfo = false;
+            setTimeout(function() {
+              $scope.appInfo = false;
             }, 2000);
         }
 
@@ -435,20 +425,15 @@ angular.module('myApp.controllers', [])
             
             startLoading();
             
-            // console.log(config.backendURL + "/getWordTree/devIDList.xml/" + query);
-            $http.get(config.backendURL + "/getWordTree/" + $scope.active.dataset + ".xml/" + query)
-                .success(function(data, status) {
-                    $("#wordtree-container").empty();
-                    makeWordTree(data);
-                    stopLoading();
+            backend.getWordTree($scope.active.dataset, query).then(function(data) {
+                $("#wordtree-container").empty();
+                makeWordTree(data);
+                stopLoading();
 
-                    $scope.setWordTreePercentage(data.matches, data.total);
-                    $scope.wordTreeData.feedbackText = data.query;
-                })
-                .error(function(data, status, headers, config) {
-                    alert("Unable to fetch wordtree.");
-                    stopLoading();
-                });      
+                $scope.setWordTreePercentage(data.matches, data.total);
+                $scope.wordTreeData.feedbackText = data.query;
+            }, function() { alert("Unable to fetch wordtree."); stopLoading(); });
+        
         }
 
         $scope.setWordTreePercentage = function (matches, total) {
