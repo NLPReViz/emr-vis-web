@@ -540,7 +540,7 @@ body {
 
 .positive {
     background-color: #DFF0D8;
-    fill: #DFF0D8;
+    fill: #468847;
     color: #468847;
 }
 
@@ -549,20 +549,10 @@ body {
     background-color: #468847;
 }
 
-.positive-label {
-    fill: #468847;
-    width: 10px;
-}
-
 .negative {
     background-color: #F9F2F4;
-    fill: #F9F2F4;
-    color: #C7254E;
-}
-
-.negative-label {
     fill: #C7254E;
-    width: 10px;
+    color: #C7254E;
 }
 
 .progress .negative {
@@ -570,7 +560,11 @@ body {
     background-color: #C7254E;
 }
 
-.unclassified{background-color: #eee; color: #555;}
+.unclassified {
+  background-color: #eee; 
+  color: #555;
+  fill: #555;
+}
 
 /* From http://colorbrewer2.org/ */
 .cert0-neg{background-color: #F9F2F4; color: #C7254E;}

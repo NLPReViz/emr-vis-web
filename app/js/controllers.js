@@ -96,17 +96,17 @@ angular.module('myApp.controllers', [])
                 // console.log($scope.variableData);
 
                 $scope.variables.forEach(function(variable) {
-                  // console.log(data[variable]["numPositive"]);
+                  // console.log(data[variable]["docPositive"].length);
                   $scope.variableData[variable]["percPositive"] = 
-                                          Math.round(100.0 *  data['variableData'][variable]["numPositive"] / 
-                                          ( data['variableData'][variable]["numPositive"] +  data['variableData'][variable]["numNegative"]));
+                                          Math.round(100.0 *  data['variableData'][variable]["docPositive"].length / 
+                                          ( data['variableData'][variable]["docPositive"].length +  data['variableData'][variable]["docNegative"].length));
                   
                   if(isNaN($scope.variableData[variable]["percPositive"]))
                     $scope.variableData[variable]["percPositive"] = 0;
 
                   $scope.variableData[variable]['percNegative'] = 
-                                          Math.round(100.0 *  data['variableData'][variable]["numNegative"] / 
-                                          ( data['variableData'][variable]["numPositive"] +  data['variableData'][variable]["numNegative"]));
+                                          Math.round(100.0 *  data['variableData'][variable]["docNegative"].length / 
+                                          ( data['variableData'][variable]["docPositive"].length +  data['variableData'][variable]["docNegative"].length));
 
                   if(isNaN($scope.variableData[variable]["percNegative"]))
                     $scope.variableData[variable]["percNegative"] = 0;
@@ -234,22 +234,15 @@ angular.module('myApp.controllers', [])
         $scope.distData = null;
 
         $scope.loadDistribution = function(variable) {
-
-            if ($scope.variableData[variable]["numPositive"] > 0 ||
-                $scope.variableData[variable]["numNegative"] > 0 )
-            { 
-                $scope.distData = [
-                  {name: $scope.classificationName["positive"], count: $scope.variableData[variable]["numPositive"], classification: "positive"},
-                  {name: $scope.classificationName["negative"], count: $scope.variableData[variable]["numNegative"], classification: "negative"},
-                ];
+            $scope.distData = [
+              {name: $scope.classificationName["positive"], count: $scope.variableData[variable]["docPositive"].length, classification: "positive"},
+              {name: $scope.classificationName["negative"], count: $scope.variableData[variable]["docNegative"].length, classification: "negative"},
+              {name: $scope.classificationName["unclassified"], count: $scope.variableData[variable]["docUnclassified"].length, classification: "unclassified"},
+            ];
             
-                // $scope.distData.sort(function(first, second) {
-                //     return second.count - first.count;
-                // });
-            }
-            else{
-                $scope.distData = null;
-            }
+            // $scope.distData.sort(function(first, second) {
+            //     return second.count - first.count;
+            // });
         };
 
         /*

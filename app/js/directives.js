@@ -124,9 +124,9 @@ angular.module('myApp.directives', [])
                 // height = 170 - margin.top - margin.bottom,
                 // radius = Math.min(width, height) / 2;
 
-                var margin = {top: 15, right: 20, bottom: 30, left: 25},
-                width = 100 - margin.left - margin.right,
-                height = 100 - margin.top - margin.bottom;
+                var margin = {top: 10, right: 20, bottom: 30, left: 35},
+                width = 150 - margin.left - margin.right,
+                height = 95 - margin.top - margin.bottom;
 
                 var x = d3.scale.ordinal()
                     .rangeRoundBands([0, width], .1);
@@ -176,15 +176,15 @@ angular.module('myApp.directives', [])
                         .append("text")
                           .attr("transform", "rotate(-90)")
                           .attr("y", 0)
-                          .attr("dy", "6.2em")
-                          .style("text-anchor", "middle")
+                          .attr("dy", "-2.75em")
+                          .style("text-anchor", "end")
                           .text("Count");
 
                         svg.selectAll(".bar")
                           .data(data)
                         .enter().append("rect")
-                          .attr("class", function(d) { return "bar " + d.classification+"-label"; })
-                          .attr("x", function(d) { return x(d.name) + margin.left/4; })
+                          .attr("class", function(d) { return "bar " + d.classification; })
+                          .attr("x", function(d) { return x(d.name) + margin.left/4;})
                           .attr("width", "10")
                           .attr("y", function(d) { return y(d.count); })
                           .attr("height", function(d) { return height - y(d.count); })
