@@ -314,10 +314,12 @@ angular.module('myApp.controllers', [])
             $scope.feedbackText = false;
         }
 
-        $scope.addWordTreeFeedback = function(classification) {            
-            $scope.feedbackList.push(new Feedback(1, $scope.wordTreeData.feedbackText, classification, $scope.wordTreeData.feedbackVar));
-            showInfo("Feedback added to the list!");
-            $scope.feedbackText = false;
+        $scope.addWordTreeFeedback = function(classification) {
+            if ($scope.wordTreeData.feedbackVar) {
+                $scope.feedbackList.push(new Feedback(1, $scope.wordTreeData.feedbackText, classification, $scope.wordTreeData.feedbackVar));
+                showInfo("Feedback added to the list!");
+                $scope.feedbackText = false;
+            }
         }
 
         $scope.removeFeedback = function(index) {
