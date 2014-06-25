@@ -3,8 +3,8 @@
 /* Controllers */
 
 angular.module('myApp.controllers', [])
-  .controller('appCtrl', ['$scope', '$window', '$document', 'backend',  
-    function($scope, $window, $document, backend) {
+  .controller('appCtrl', ['$scope', '$window', '$document', '$rootScope', 'backend',  
+    function($scope, $window, $document, $rootScope, backend) {
         /*
          * App config
          */
@@ -12,19 +12,19 @@ angular.module('myApp.controllers', [])
         //TODO: Fix WordTree hack!
         $window.appCtrl = $scope;
 
-        //TODO: Move them to configs
-        $scope.classificationName = {
+        $rootScope.config = Object();
+        $rootScope.config.classificationName = {
             "positive": "True", 
             "negative": "False", 
             "unclassified": "?"
         };
 
-        $scope.variables = ["any-adenoma", "appendiceal-orifice", "asa", "biopsy", "cecum",
+        $rootScope.config.variables = ["any-adenoma", "appendiceal-orifice", "asa", "biopsy", "cecum",
                   "ileo-cecal-valve", "indication-type", "informed-consent", 
                   "nursing-report", "prep-adequateNo", "prep-adequateNot",
                   "prep-adequateYes", "proc-aborted", "withdraw-time"]
 
-        $scope.variableMapping = 
+        $rootScope.config.variableMapping = 
         {   "any-adenoma": "any-adenoma",
             "appendiceal-orifice": "appendiceal-orifice",
             "asa": "asa",
@@ -98,7 +98,7 @@ angular.module('myApp.controllers', [])
 
                 // console.log($scope.variableData);
 
-                $scope.variables.forEach(function(variable) {
+                $rootScope.config.variables.forEach(function(variable) {
                   // console.log(data[variable]["docPositive"].length);
                   $scope.variableData[variable]["percPositive"] = 
                                           Math.round(100.0 *  data['variableData'][variable]["docPositive"].length / 
@@ -116,7 +116,7 @@ angular.module('myApp.controllers', [])
                                           
                 });
 
-                $scope.active.variable = $scope.variables[0];
+                $scope.active.variable = $rootScope.config.variables[0];
                 $scope.loadDistribution($scope.active.variable);
                 stopLoading();
 
@@ -158,26 +158,6 @@ angular.module('myApp.controllers', [])
             $scope.tabs.docView = true;
         };
 
-
-        // $scope.updateHighlights = function() {
-        //     var element = $(".report pre");
-
-        //     console.log(element);
-
-        //     $scope.gridData[$scope.active.docIndex][$scope.active.variable].topPositive.forEach(function(keyword){
-        //         keyword.matchedList.forEach(function (string){
-        //             $(element).highlight(new RegExp(string,"gi"), "highlight positive");
-        //             console.log(string);
-        //         });
-        //     });
-
-        //     $scope.gridData[$scope.active.docIndex][$scope.active.variable].topNegative.forEach(function(keyword){
-        //         keyword.matchedList.forEach(function (string){
-        //             $(element).highlight(new RegExp(string,"gi"), "highlight negative");
-        //             console.log(string);
-        //         });
-        //     });
-        // }
 
         /*
          * Load reports
@@ -232,9 +212,9 @@ angular.module('myApp.controllers', [])
 
         $scope.loadDistribution = function(variable) {
             $scope.distData = [
-              {name: $scope.classificationName["positive"], count: $scope.variableData[variable]["docPositive"].length, classification: "positive"},
-              {name: $scope.classificationName["negative"], count: $scope.variableData[variable]["docNegative"].length, classification: "negative"},
-              {name: $scope.classificationName["unclassified"], count: $scope.variableData[variable]["docUnclassified"].length, classification: "unclassified"},
+              {name: $rootScope.config.classificationName["positive"], count: $scope.variableData[variable]["docPositive"].length, classification: "positive"},
+              {name: $rootScope.config.classificationName["negative"], count: $scope.variableData[variable]["docNegative"].length, classification: "negative"},
+              {name: $rootScope.config.classificationName["unclassified"], count: $scope.variableData[variable]["docUnclassified"].length, classification: "unclassified"},
             ];
             
             // $scope.distData.sort(function(first, second) {
