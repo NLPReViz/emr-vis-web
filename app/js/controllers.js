@@ -159,25 +159,25 @@ angular.module('myApp.controllers', [])
         };
 
 
-        $scope.updateHighlights = function() {
-            var element = $(".report pre");
+        // $scope.updateHighlights = function() {
+        //     var element = $(".report pre");
 
-            console.log(element);
+        //     console.log(element);
 
-            $scope.gridData[$scope.active.docIndex][$scope.active.variable].topPositive.forEach(function(keyword){
-                keyword.matchedList.forEach(function (string){
-                    $(element).highlight(new RegExp(string,"gi"), "highlight positive");
-                    console.log(string);
-                });
-            });
+        //     $scope.gridData[$scope.active.docIndex][$scope.active.variable].topPositive.forEach(function(keyword){
+        //         keyword.matchedList.forEach(function (string){
+        //             $(element).highlight(new RegExp(string,"gi"), "highlight positive");
+        //             console.log(string);
+        //         });
+        //     });
 
-            $scope.gridData[$scope.active.docIndex][$scope.active.variable].topNegative.forEach(function(keyword){
-                keyword.matchedList.forEach(function (string){
-                    $(element).highlight(new RegExp(string,"gi"), "highlight negative");
-                    console.log(string);
-                });
-            });
-        }
+        //     $scope.gridData[$scope.active.docIndex][$scope.active.variable].topNegative.forEach(function(keyword){
+        //         keyword.matchedList.forEach(function (string){
+        //             $(element).highlight(new RegExp(string,"gi"), "highlight negative");
+        //             console.log(string);
+        //         });
+        //     });
+        // }
 
         /*
          * Load reports
