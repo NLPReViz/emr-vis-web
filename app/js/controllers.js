@@ -65,23 +65,27 @@ angular.module('myApp.controllers', [])
         
 
         function setModelAndDataset (model, dataset) {
-
             if(model === undefined || dataset === undefined ){
                 return
             }
 
             if ( !($scope.active.model == model && $scope.active.dataset == dataset) ) {
-                $scope.active.model = model;
-                $scope.active.dataset = dataset;
-                loadData();
+                loadData(model, dataset);
             }
+
+            if ($scope.active.dataset != dataset && $scope.active.wordTreeQuery) {
+                $scope.loadWordTree($scope.active.wordTreeQuery);
+            }
+
+            $scope.active.model = model;
+            $scope.active.dataset = dataset;
         };
 
-        function loadData() {
+        function loadData(model, dataset) {
 
             startLoading();
 
-            backend.getGridData($scope.active.model, $scope.active.dataset).then(function(data) {
+            backend.getGridData(model, dataset).then(function(data) {
                 $scope.gridData = data['gridData'];
 
                 // console.log($scope.gridData);
@@ -411,6 +415,9 @@ angular.module('myApp.controllers', [])
         $scope.wordTreeData = new Object();
 
         $scope.loadWordTree = function(query){
+
+            if ($scope.active.dataset === undefined)
+                return
             
             startLoading();
             
@@ -421,6 +428,8 @@ angular.module('myApp.controllers', [])
 
                 $scope.setWordTreePercentage(data.matches, data.total);
                 $scope.wordTreeData.feedbackText = data.query;
+                $scope.active.wordTreeQuery = data.query;
+
             }, function() { alert("Unable to fetch wordtree."); stopLoading(); });
         
         }
