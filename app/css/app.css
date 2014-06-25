@@ -104,6 +104,10 @@ body {
   border-radius: 4px;
 }
 
+.navbar-nav:hover li a{
+  color: #333;
+}
+
 .unselectable {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
