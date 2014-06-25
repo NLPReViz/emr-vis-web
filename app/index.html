@@ -95,12 +95,12 @@
                   </div>
                   <a class="rotate"><div>doc #</div></a>
                 </div>
-                <div class="colname cellwidth_var" ng-repeat="var in variables" tooltip="{{variableData[var]['percPositive']}}% {{classificationName['positive']}}" tooltip-placement="{{$index > 6 ? 'left' : 'right'}}">
+                <div class="colname cellwidth_var" ng-repeat="var in $root.config.variables" tooltip="{{variableData[var]['percPositive']}}% {{$root.config.classificationName['positive']}}" tooltip-placement="{{$index > 6 ? 'left' : 'right'}}">
                   <div class="progress">
                     <div class="progress-bar positive" style="width: {{variableData[var]['percPositive']}}%"></div>
                     <div class="progress-bar negative" style="width: {{variableData[var]['percNegative']}}%"></div>
                   </div>
-                  <a class="rotate"><div>{{variableMapping[var]}}</div></a>
+                  <a class="rotate"><div>{{$root.config.variableMapping[var]}}</div></a>
                 </div>
               </div>
               <div class="sidebar-separator breakline resizable" horizontal-splitter>
@@ -109,8 +109,8 @@
               <div id="expandtable">
                 <div class="divrow ng-cloak" ng-repeat="doc in gridData | filter: { id: searchQuery }">
                   <div class="divcell cellwidth_id">{{doc.id}}</div>
-                  <div ng-repeat="var in variables" class="divcell cellwidth_var {{styleGridCell(doc[var].classification, doc[var].confidence)}} custom-tooltip-bottom" ng-click="updateGrid(var, $parent.$index)" ng-class="{selected: $parent.$index==active.docIndex && var==active.variable}" data-custom-tooltip="{{doc[var].confidence}}">
-                    {{classificationName[ doc[var].classification ]}}
+                  <div ng-repeat="var in $root.config.variables" class="divcell cellwidth_var {{styleGridCell(doc[var].classification, doc[var].confidence)}} custom-tooltip-bottom" ng-click="updateGrid(var, $parent.$index)" ng-class="{selected: $parent.$index==active.docIndex && var==active.variable}" data-custom-tooltip="{{doc[var].confidence}}">
+                    {{$root.config.classificationName[ doc[var].classification ]}}
                   </div>
                 </div>
               </div>
@@ -124,16 +124,16 @@
           <div id="sidebar-bottom">
             
             <div id="sidebar-bottom-left">
-              <div class="about unselectable">Variable: <strong>{{variableMapping[active.variable]}}</strong></div>
+              <div class="about unselectable">Variable: <strong>{{$root.config.variableMapping[active.variable]}}</strong></div>
               <div class="content">
                 <div id="keywords">
-                  <h6>{{classificationName["positive"]}} indicators</h6>
+                  <h6>{{$root.config.classificationName["positive"]}} indicators</h6>
                   <p ng-hide="variableData[active.variable].topPositive.length" class="empty-list">None</p>
                   <ol>
                     <li ng-repeat="keyword in variableData[active.variable].topPositive" class="positive" style="width:{{keyword.weight*100}}%;" >{{keyword.term}}&nbsp;<span class="d3-tip">({{keyword.weight}})</span></li>
                   </ol>
 
-                  <h6>{{classificationName["negative"]}} indicators</h6>
+                  <h6>{{$root.config.classificationName["negative"]}} indicators</h6>
                   <p ng-hide="variableData[active.variable].topNegative.length" class="empty-list">None</p>
                   <ol>
                     <li ng-repeat="keyword in variableData[active.variable].topNegative" class="negative" style="width:{{keyword.weight*100}}%;">{{keyword.term}}&nbsp;<span class="d3-tip">({{keyword.weight}})</span></li>
@@ -151,13 +151,13 @@
               <div class="about unselectable">Report: <strong>#{{gridData[active.docIndex].id}}</strong></div>
               
               <div class="content">
-                <h6>{{classificationName["positive"]}} indicators</h6>
+                <h6>{{$root.config.classificationName["positive"]}} indicators</h6>
                 <p ng-hide="gridData[active.docIndex][active.variable].topPositive.length" class="empty-list">None</p>
                 <ol>
                   <li ng-repeat="keyword in gridData[active.docIndex][active.variable].topPositive"  class="positive clickable" style="width:{{keyword.weight*100}}%;" scroll-to-bookmark="{{keyword.term}}">{{keyword.term}}&nbsp;<span class="d3-tip">({{keyword.weight}})</span></li>
                 </ol>
 
-                <h6>{{classificationName["negative"]}} indicators</h6>
+                <h6>{{$root.config.classificationName["negative"]}} indicators</h6>
                 <p ng-hide="gridData[active.docIndex][active.variable].topNegative.length" class="empty-list">None</p>
                 <ol>
                   <li ng-repeat="keyword in gridData[active.docIndex][active.variable].topNegative" class="negative clickable" scroll-to-bookmark="{{keyword.term}}" style="width:{{keyword.weight*100}}%;">{{keyword.term}}&nbsp;<span class="d3-tip">({{keyword.weight}})</span></li>
@@ -175,8 +175,8 @@
                 {{appInfo}}
               </span>
               <span ng-if="!appInfo">
-                <span ng-if="feedbackText"><em>"{{feedbackText|truncate:20}}"</em> indicates <strong>{{variableMapping[active.variable]}}</strong> to be: <a ng-click="addFeedbackText('positive')">{{classificationName['positive']}}</a> | <a ng-click="addFeedbackText('negative')">{{classificationName['negative']}}</a></span>
-                <span ng-if="!feedbackText" ><strong>{{variableMapping[active.variable]}}</strong> is marked as <strong>{{classificationName[ gridData[active.docIndex][active.variable].classification ] | lowercase}}</strong> for this record. Label it as: <a ng-click="addFeedbackDoc('positive')">{{classificationName['positive']}}</a> | <a ng-click="addFeedbackDoc('negative')">{{classificationName['negative']}}</a></span>
+                <span ng-if="feedbackText"><em>"{{feedbackText|truncate:20}}"</em> indicates <strong>{{$root.config.variableMapping[active.variable]}}</strong> to be: <a ng-click="addFeedbackText('positive')">{{$root.config.classificationName['positive']}}</a> | <a ng-click="addFeedbackText('negative')">{{$root.config.classificationName['negative']}}</a></span>
+                <span ng-if="!feedbackText" ><strong>{{$root.config.variableMapping[active.variable]}}</strong> is marked as <strong>{{$root.config.classificationName[ gridData[active.docIndex][active.variable].classification ] | lowercase}}</strong> for this record. Label it as: <a ng-click="addFeedbackDoc('positive')">{{$root.config.classificationName['positive']}}</a> | <a ng-click="addFeedbackDoc('negative')">{{$root.config.classificationName['negative']}}</a></span>
               </span>
             </div>
             <div ng-if="wordTreeData.feedbackText && tabs.wordTreeView" class="alert alert-warning reportFeedback">
@@ -184,7 +184,7 @@
                 {{appInfo}}
               </span>
               <span ng-if="!appInfo">
-                <em>"{{wordTreeData.feedbackText|truncate:20}}"</em> indicates <select ng-init="wordTreeData.feedbackVar = active.variable" ng-model="wordTreeData.feedbackVar" ng-options="variableMapping[var] for var in variables"></select> to be: <a ng-click="addWordTreeFeedback('positive')">{{classificationName['positive']}}</a> | <a ng-click="addWordTreeFeedback('negative')">{{classificationName['negative']}}</a>
+                <em>"{{wordTreeData.feedbackText|truncate:20}}"</em> indicates <select ng-init="wordTreeData.feedbackVar = active.variable" ng-model="wordTreeData.feedbackVar" ng-options="$root.config.variableMapping[var] for var in $root.config.variables"></select> to be: <a ng-click="addWordTreeFeedback('positive')">{{$root.config.classificationName['positive']}}</a> | <a ng-click="addWordTreeFeedback('negative')">{{$root.config.classificationName['negative']}}</a>
               </span>
             </div>
 
@@ -260,10 +260,10 @@
                     <alert ng-repeat="feedback in feedbackList" type="default" close="removeFeedback($index)">
                       <strong>{{$index + 1}}.</strong>
                       <span ng-if="feedback.kind == 0">
-                        #{{feedback.property}} should have <strong>{{variableMapping[feedback.variable]}}</strong> marked as <strong>{{classificationName[feedback.classification] | lowercase}}</strong>.
+                        #{{feedback.property}} should have <strong>{{$root.config.variableMapping[feedback.variable]}}</strong> marked as <strong>{{$root.config.classificationName[feedback.classification] | lowercase}}</strong>.
                       </span>
                       <span ng-if="feedback.kind == 1">
-                        "<em>{{feedback.property}}</em>" indicates <strong>{{variableMapping[feedback.variable]}}</strong> to be <strong>{{classificationName[feedback.classification] | lowercase}}</strong>.
+                        "<em>{{feedback.property}}</em>" indicates <strong>{{$root.config.variableMapping[feedback.variable]}}</strong> to be <strong>{{$root.config.classificationName[feedback.classification] | lowercase}}</strong>.
                       </span>
                     </alert>
                   </div>
