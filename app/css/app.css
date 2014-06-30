@@ -797,6 +797,13 @@ body {
     font-size: 10pt; 
 }
 
+::selection {
+  background: #f5e79e;
+}
+::-moz-selection {
+  background: #f5e79e; /* Firefox */
+}
+
 .report .info {
     border-bottom: 1px solid #ddd;
     height: 33px;
