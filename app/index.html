@@ -47,8 +47,8 @@
       </ul>
       <form class="navbar-form navbar-right" role="search">
         <div class="form-group">
-          <span class="add-on">Doc #</span>
-          <input class="form-control" type="search" ng-model="searchQuery" /><span id="searchclear" class="searchclear glyphicon glyphicon-remove-circle" ng-click="searchQuery = ''"></span>
+          <span id="add-on">Doc #</span>
+          <input id="searchinput" placeholder="Comma separated" class="form-control" type="search" ng-model="searchQuery" /><span id="searchclear" class="glyphicon glyphicon-remove-circle" ng-click="searchQuery = ''"></span>
         </div>
       </form>
       <div collapse="modal.isCollapsed" id="modal">
@@ -105,7 +105,7 @@
                 <div class="handle"></div>
               </div>
               <div id="expandtable">
-                <div class="divrow ng-cloak" ng-repeat="doc in gridData | filter: { id: searchQuery }">
+                <div class="divrow ng-cloak" ng-repeat="doc in gridData | inArray: searchQuery">
                   <div class="divcell cellwidth_id">{{doc.id}}</div>
                   <div ng-repeat="var in $root.config.variables" class="divcell cellwidth_var {{styleGridCell(doc[var].classification, doc[var].confidence)}} custom-tooltip-bottom" ng-click="updateGrid(var, $parent.$index)" ng-class="{selected: $parent.$index==active.docIndex && var==active.variable}" data-custom-tooltip="{{doc[var].confidence}}">
                     {{$root.config.classificationName[ doc[var].classification ]}}

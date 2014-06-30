@@ -25,16 +25,25 @@ body {
     width: 200px;
 }
 
-.searchclear {
-    position:absolute;
-    right:30px;
-    top:0;
-    bottom:0;
-    height:14px;
-    margin:auto;
-    font-size:14px;
-    cursor:pointer;
-    color:#ccc;
+#add-on{
+  display: inline-block;
+}
+
+#searchclear {
+    position: absolute;
+    right: 30px;
+    top: 0;
+    bottom: 0;
+    height: 14px;
+    margin: auto;
+    font-size: 14px;
+    cursor: pointer;
+    color: #ccc;
+    background-color: white;
+}
+
+#searchinput {
+  padding-right: 30px;
 }
 
 .nav-tabs {
