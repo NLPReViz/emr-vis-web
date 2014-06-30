@@ -242,10 +242,11 @@
                   </div>
                 </div>
                 <div ng-show="wordTreeData.matches" id="wordtree-about" ng-class="{'wordtree-about-overlay': wordTreeFullscreenButton}">
-                  Documents: <strong> {{wordTreeData.matches}}/{{wordTreeData.total}} ({{wordTreeData.percentage}}%)</strong></div>
-                <button id="wordtree-fullscreen-button" type="button" class="btn btn-sm btn-default" ng-model="singleModel" btn-checkbox ng-click="toggleWordTreeFullscreen()" ng-class="{'wordtree-fullscreen-button-overlay': wordTreeFullscreenButton}">
-                  <span class="glyphicon glyphicon-fullscreen"></span>
-                </button>
+                <button id="wordtree-fullscreen-button" type="button" class="btn btn-xs btn-default" ng-model="singleModel" btn-checkbox ng-click="toggleWordTreeFullscreen()" ng-class="{'wordtree-fullscreen-button-overlay': wordTreeFullscreenButton}"><span class="glyphicon glyphicon-fullscreen"></span></button>
+                <span id="wordtree-about-info">
+                  Documents: <strong> {{wordTreeData.matches}}/{{wordTreeData.total}} ({{wordTreeData.percentage}}%)</strong>
+                </span>
+                </div>
               </tab>
               <tab>
                 <tab-heading>
