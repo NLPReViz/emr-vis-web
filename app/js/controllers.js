@@ -406,7 +406,7 @@ angular.module('myApp.controllers', [])
                 makeWordTree(data);
                 stopLoading();
 
-                $scope.setWordTreePercentage(data.matches, data.total);
+                $scope.setWordTreePercentage(data.matchedList.length, data.total);
                 $scope.wordTreeData.feedbackText = data.query;
                 $scope.active.wordTreeQuery = data.query;
                 $scope.searchQuery = data.matchedList;
