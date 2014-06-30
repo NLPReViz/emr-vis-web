@@ -16,6 +16,7 @@ function makeWordTree(data){
 
     WordTreeData.total = data.total;
     WordTreeData.matches = data.matches;
+    WordTreeData.matchedList = data.matchedList;
     WordTreeData.query = data.query;
 
     var detail = 100;
@@ -513,10 +514,10 @@ function wordTreeNodeClick(node, d, orientation, root, vis, clickType){
 
     // Update stats
     if(d.isRoot){
-      getSentenceStats();
+      updateRootStats();
     }
     else{
-      updateSentenceStats(d.ids.length); 
+      updateSentenceStats(d.docs); 
     }
 
     // Update feedback
