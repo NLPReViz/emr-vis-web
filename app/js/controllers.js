@@ -409,6 +409,7 @@ angular.module('myApp.controllers', [])
                 $scope.setWordTreePercentage(data.matches, data.total);
                 $scope.wordTreeData.feedbackText = data.query;
                 $scope.active.wordTreeQuery = data.query;
+                $scope.searchQuery = data.matchedList;
 
             }, function() { alert("Unable to fetch wordtree."); stopLoading(); });
         

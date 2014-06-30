@@ -11,13 +11,15 @@ WordTreeData.doc_class.negative = [];
 // WordTreeData.feedback.selected = null;
 // WordTreeData.feedback.root = null;
 
-function getSentenceStats() {
-  	updateSentenceStats(WordTreeData.matches);
+function updateRootStats() {
+  	updateSentenceStats(WordTreeData.matchedList);
 }
 
-function updateSentenceStats(matches){
+function updateSentenceStats(docs){
   	// percentange = 100*matches/(WordTreeData.total).toFixed(2);
-  	appCtrl.setWordTreePercentage(matches, WordTreeData.total); 
+  	d = jQuery.unique(docs);
+  	appCtrl.setWordTreePercentage(d.length, WordTreeData.total); 
+  	appCtrl.searchQuery = d;
   	appCtrl.$apply(); 
 }
 
