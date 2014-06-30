@@ -945,7 +945,7 @@ body {
 
 #wordtree-about {
     position: absolute;
-    height: 30px;
+    height: 35px;
     padding: 6px;
     
     border-style: solid;
@@ -960,14 +960,7 @@ body {
 
     cursor: default;
     overflow: hidden;
-    margin-top: -30px;
-    z-index: 1050;
-}
-
-#wordtree-fullscreen-button {
-    bottom: 30px;
-    position: absolute;
-    right: 28px;
+    margin-top: -35px;
     z-index: 1050;
 }
 
@@ -988,9 +981,7 @@ body {
     z-index:1010;
 }
 
-.wordtree-fullscreen-button-overlay {
-    position:absolute;
-    bottom:8px;
-    right:0px;
-    z-index:1010;
+#wordtree-about-info {
+    display: inline-block;
+    margin-left: 5px; 
 }
