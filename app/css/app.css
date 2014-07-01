@@ -492,6 +492,17 @@ body {
 #sidebar-bottom {
     height: 42%;
     width: 100%;
+    position: relative;
+}
+
+#sidebar-bottom-cover {
+    height: 100%;
+    width: 100%;
+    background: url(../img/ui-bg_diagonals.png) top left repeat;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    opacity: 0.15;
 }
 
 #sidebar-bottom-left {
