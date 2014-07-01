@@ -33,7 +33,12 @@ function makeTree(context, level, detail, orientation){
 				}
 				tree[first].after.push({id:context[i].id, sentence:sentence.slice(1), doc:context[i].doc});
 				tree[first].ids.push(context[i].id);
-				tree[first].docs.push(context[i].doc);
+
+				if ( tree[first].docs.indexOf(context[i].doc) == -1 ){
+					// console.log(context[i].doc);
+					tree[first].docs.push(context[i].doc);
+				}
+
 				tree[first].count += 1;
 			} 
 		}
