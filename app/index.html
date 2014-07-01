@@ -173,8 +173,8 @@
                 {{appInfo}}
               </span>
               <span ng-if="!appInfo">
-                <span ng-if="feedbackText"><em>"{{feedbackText|truncate:20}}"</em> indicates <strong>{{$root.config.variableMapping[active.variable]}}</strong> to be: <a ng-click="addFeedbackText('positive')">{{$root.config.classificationName['positive']}}</a> | <a ng-click="addFeedbackText('negative')">{{$root.config.classificationName['negative']}}</a></span>
-                <span ng-if="!feedbackText" ><strong>{{$root.config.variableMapping[active.variable]}}</strong> is marked as <strong>{{$root.config.classificationName[ gridData[active.docIndex][active.variable].classification ] | lowercase}}</strong> for this record. Label it as: <a ng-click="addFeedbackDoc('positive')">{{$root.config.classificationName['positive']}}</a> | <a ng-click="addFeedbackDoc('negative')">{{$root.config.classificationName['negative']}}</a></span>
+                <span ng-if="feedbackText"><strong>"{{feedbackText|truncate:20}}"</strong> indicates <select ng-model="active.variable" ng-options="$root.config.variableMapping[var] for var in $root.config.variables" ng-change="updateGrid(active.variable, active.docIndex)"></select> to be: <a ng-click="addFeedbackText('positive')">{{$root.config.classificationName['positive']}}</a> | <a ng-click="addFeedbackText('negative')">{{$root.config.classificationName['negative']}}</a></span>
+                <span ng-if="!feedbackText" ><select ng-model="active.variable" ng-options="$root.config.variableMapping[var] for var in $root.config.variables" ng-change="updateGrid(active.variable, active.docIndex)"></select> is marked as <strong>{{$root.config.classificationName[ gridData[active.docIndex][active.variable].classification ] | lowercase}}</strong> for this record. Label it: <a ng-click="addFeedbackDoc('positive')">{{$root.config.classificationName['positive']}}</a> | <a ng-click="addFeedbackDoc('negative')">{{$root.config.classificationName['negative']}}</a></span>
               </span>
             </div>
             <div ng-if="wordTreeData.feedbackText && tabs.wordTreeView" class="alert alert-warning reportFeedback">
@@ -182,7 +182,7 @@
                 {{appInfo}}
               </span>
               <span ng-if="!appInfo">
-                <em>"{{wordTreeData.feedbackText|truncate:20}}"</em> indicates <select ng-init="wordTreeData.feedbackVar = active.variable" ng-model="wordTreeData.feedbackVar" ng-options="$root.config.variableMapping[var] for var in $root.config.variables"></select> to be: <a ng-click="addWordTreeFeedback('positive')">{{$root.config.classificationName['positive']}}</a> | <a ng-click="addWordTreeFeedback('negative')">{{$root.config.classificationName['negative']}}</a>
+                <em>"{{wordTreeData.feedbackText|truncate:20}}"</em> indicates <select ng-init="wordTreeData.feedbackVar = active.variable" ng-model="wordTreeData.feedbackVar" ng-options="$root.config.variableMapping[var] for var in $root.config.variables" ng-change="updateWordTreeVariable()"></select> to be: <a ng-click="addWordTreeFeedback('positive')">{{$root.config.classificationName['positive']}}</a> | <a ng-click="addWordTreeFeedback('negative')">{{$root.config.classificationName['negative']}}</a>
               </span>
             </div>
 
