@@ -229,11 +229,13 @@ angular.module('myApp.controllers', [])
         $scope.feedbackText = false;
         $scope.feedbackList = []
 
-        function Feedback(kind, property, classification, variable) { 
-            this.kind = kind;  // Text or doc
-            this.property = property;
+        function Feedback(kind, selected, span, classification, variable, docList) { 
+            this.kind = kind;  // Text / doc / word tree
+            this.selected = selected; // valid for text spans and wordtree
+            this.span = span; // full text span in case of word tree ; only valid for word tree
             this.classification = classification;
-            this.variable = variable
+            this.variable = variable;
+            this.docList = docList;
         }
 
         $scope.setFeedbackText = function(){
@@ -279,21 +281,26 @@ angular.module('myApp.controllers', [])
             //         fClass = "positive";
             // }
             
-            $scope.feedbackList.push(new Feedback(0, $scope.gridData[$scope.active.docIndex].id, 
-                                        classification, $scope.active.variable));
+            $scope.feedbackList.push(new Feedback("TYPE_DOC", null, null, 
+                                        classification, $scope.active.variable, 
+                                        $scope.gridData[$scope.active.docIndex].id));
 
             showInfo("Feedback added to the list!");
         }
 
         $scope.addFeedbackText = function(classification) {
-            $scope.feedbackList.push(new Feedback(1, $scope.feedbackText, classification, $scope.active.variable));
+            $scope.feedbackList.push(new Feedback("TYPE_TEXT", $scope.feedbackText, null,
+                                        classification, $scope.active.variable,
+                                        $scope.gridData[$scope.active.docIndex].id));
             showInfo("Feedback added to the list!");
             $scope.feedbackText = false;
         }
 
         $scope.addWordTreeFeedback = function(classification) {
             if ($scope.wordTreeData.feedbackVar) {
-                $scope.feedbackList.push(new Feedback(1, $scope.wordTreeData.feedbackText, classification, $scope.wordTreeData.feedbackVar));
+                $scope.feedbackList.push(new Feedback("TYPE_WORDTREE", $scope.wordTreeData.feedbackText, 
+                                        $scope.wordTreeData.spanText, classification, 
+                                        $scope.wordTreeData.feedbackVar, $scope.wordTreeData.docList));
                 showInfo("Feedback added to the list!");
                 $scope.feedbackText = false;
             }
@@ -408,6 +415,7 @@ angular.module('myApp.controllers', [])
 
                 $scope.setWordTreePercentage(data.matchedList.length, data.total);
                 $scope.wordTreeData.feedbackText = data.query;
+                $scope.wordTreeData.spanText = data.query
                 $scope.active.wordTreeQuery = data.query;
                 $scope.searchQuery = data.matchedList;
                 $scope.wordTreeData.docList = data.matchedList;
@@ -425,6 +433,7 @@ angular.module('myApp.controllers', [])
 
         $scope.setWordTreeFeedback = function(selected, root) {
             $scope.wordTreeData.feedbackText = selected;
+            $scope.wordTreeData.spanText = null;
         }
 
         $scope.wordTreeFullscreenButton = false;
