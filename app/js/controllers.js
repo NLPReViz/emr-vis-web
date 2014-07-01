@@ -447,13 +447,15 @@ angular.module('myApp.controllers', [])
         }
 
         $scope.updateWordTreeClass = function() {
+            
             $scope.active.variable = $scope.wordTreeData.feedbackVar;
-            $scope.loadDistribution($scope.wordTreeData.feedbackVar);
 
-            var variable = $scope.wordTreeData.feedbackVar
+            var variable = $scope.wordTreeData.feedbackVar;
 
             if ($scope.variableData === undefined || !variable)
                 return;
+
+            $scope.loadDistribution($scope.wordTreeData.feedbackVar);
 
             updateClass(variable, 
                         $scope.variableData[variable]["docPositive"],
