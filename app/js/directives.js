@@ -91,19 +91,23 @@ angular.module('myApp.directives', [])
                         .highlight(/\*\*[A-Z\ ,-\[\]\.]*/g, "dim") //DE-IDed Names
                         .highlight(/[A-Z\-\ #]*\:/g, "dim"); //Colon fields
 
-                    posTerms.forEach( function(keyword) {
-                        keyword.matchedList.forEach(function (string) {
-                            $(element).highlight(new RegExp("\\b"+string+"\\b","gi"), "highlight positive", keyword.term);
-                            // console.log(string);
+                    if (!angular.isUndefined(posTerms)) {
+                        posTerms.forEach( function(keyword) {
+                            keyword.matchedList.forEach(function (string) {
+                                $(element).highlight(new RegExp("\\b"+string+"\\b","gi"), "highlight positive", keyword.term);
+                                // console.log(string);
+                            });
                         });
-                    });
+                    }
 
-                    negTerms.forEach( function(keyword) {
-                        keyword.matchedList.forEach(function (string) {
-                            $(element).highlight(new RegExp("\\b"+string+"\\b","gi"), "highlight negative", keyword.term);
-                            // console.log(string);
+                    if (!angular.isUndefined(negTerms)) {
+                        negTerms.forEach( function(keyword) {
+                            keyword.matchedList.forEach(function (string) {
+                                $(element).highlight(new RegExp("\\b"+string+"\\b","gi"), "highlight negative", keyword.term);
+                                // console.log(string);
+                            });
                         });
-                    });
+                    }
                 };
         
                 scope.$watch('[posTerms, negTerms]', function(){
