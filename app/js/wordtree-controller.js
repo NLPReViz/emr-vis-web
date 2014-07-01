@@ -652,82 +652,77 @@ function showSentences(ids, tree, vis, thisOrientation){
 */
     
 function wordTreeNodeMouseOver(node, d, orientation, root, vis, eventName){
-    // Do nothing if the root is hovered over.
     if(!d.isRoot){ 
       ids = d.ids
-      // console.log(ids);
-      for (var i = 0; i < ids.length; i++) {
-        // var nodes = $( ('*[class~="wordtree-' + 
-        //    vis.wordtreeID +'-sentence-'+ids[i]+'"]'));
-
-        d3.selectAll('*[class~="wordtree-' + 
-          vis.wordtreeID +'-sentence-'+ids[i]+'"]').classed("wordtree-highlight-sentence", true)
-
-        // for (var j = 0; j < nodes.length; j++) {
-        //     // console.log('#'+nodes[j].id)
-        //     var element = document.getElementById(nodes[j].id);
-        //     var old_class = element.getAttribute("class");
-        //     console.log(old_class);
-        //     element.setAttribute("old-classes", old_class);
-        //     element.setAttribute("class", old_class + " wordtree-highlight-sentence");
-        // }
-      }
-
-         /* Add popup for class numbers */
     
-      if(WordTreeData.doc_class.variable != null){
-        var pos = 0;
-        var neg = 0;
+      //Highlight other parts of the sentence
+      for (var i = 0; i < ids.length; i++) 
+        d3.selectAll('*[class~="wordtree-' + 
+          vis.wordtreeID +'-sentence-'+ids[i]+'"]').classed("wordtree-highlight-sentence", true);
 
-        var elm = document.getElementById("text-"+d.id+"-wordtree-"+vis.wordtreeID);
-
-        for(var i=0; i < WordTreeData.doc_class.positive.length; i++){
-          if (elm.className.baseVal.indexOf("wordtree-doc-" + WordTreeData.doc_class.positive[i]) > -1)
-            pos++;
-        }
-
-        for(var i=0; i < WordTreeData.doc_class.negative.length; i++){
-          if (elm.className.baseVal.indexOf("wordtree-doc-" + WordTreeData.doc_class.negative[i]) > -1)
-            neg++;
-        }
-
-        /* Add popup for class numbers */
-
-        var child = document.getElementById("text-"+d.id+"-wordtree-"+vis.wordtreeID);
-        
-        var num_text = "("+pos+ "/" + neg + ")";
-
-        vis.number_popup = d3.select(child.parentNode)
-                            .append("svg:text")
-                            .attr("y", 1)
-                            .attr("id", "number-popup")
-                            .text(num_text)
-                            .attr("font-size", 10)
-                            .attr("class", "number-popup")
-                            .attr("x", -1*(orientation=="left"?-5:num_text.length*5));
-
-        // vis.number_popup = document.createElement('text');
-        // vis.number_popup.setAttribute("x", -15*(orientation=="left"?-1:1));
-        // vis.number_popup.setAttribute("x", -15*(orientation=="left"?-1:1));
-        // vis.number_popup.setAttribute("y", 10);
-        // vis.number_popup.setAttribute("id", "number-popup");
-        // vis.number_popup.setAttribute("font-size", 10);
-        // vis.number_popup.setAttribute("class", "number-popup");
-        // vis.number_popup.innerHTML = "("+pos+ "/" + neg + ")" ;
-
-        // child.parentNode.insertBefore(vis.number_popup, child.nextSibling);    
-
-        // var nodeEl = $("#text-"+d.id+"-wordtree-"+vis.wordtreeID).parent();
-        // vis.number_popup = d3.select(nodeEl).append("svg:text")
-        //                     .attr("x", -15*(orientation=="left"?-1:1))
-        //                     .attr("y", 10)
-        //                     .attr("id", "number-popup")
-        //                     .text("("+pos+ "/" + neg + ")")
-        //                     .attr("font-size", 10)
-        //                     .attr("class", "number-popup");
-
-      }
+      docs = d.docs;
     }
+    else {
+      docs = WordTreeData.matchedList
+    }
+
+    if(WordTreeData.doc_class.variable == null)
+      return;
+
+    /* Count positive and negatives */
+    var pos = 0;
+    var neg = 0;
+
+    for (var i=0; i < docs.length; i++){
+      if (WordTreeData.doc_class.positive.indexOf(docs[i]) > -1)
+        pos++;
+      else if (WordTreeData.doc_class.negative.indexOf(docs[i]) > -1)
+        neg++;
+    } 
+
+    /* Add popup for class numbers */
+
+    var child = document.getElementById("text-"+d.id+"-wordtree-"+vis.wordtreeID);
+    
+    var num_text = "("+pos+ "/" + neg + ")";
+
+    vis.number_popup = d3.select(child.parentNode)
+                        .append("svg:text")
+                        .attr("y", function() {if (!d.isRoot) return 1; else return -20;})
+                        .attr("id", "number-popup")
+                        .text(num_text)
+                        .attr("font-size", 10)
+                        .attr("class", "number-popup")
+                        .attr("x", function() {
+                                      if (!d.isRoot){
+                                        if (orientation == "left")
+                                          return 5;
+                                        else
+                                          return -5*num_text.length;
+                                      } 
+                                      else
+                                        return 0;
+                                    });
+
+    // vis.number_popup = document.createElement('text');
+    // vis.number_popup.setAttribute("x", -15*(orientation=="left"?-1:1));
+    // vis.number_popup.setAttribute("x", -15*(orientation=="left"?-1:1));
+    // vis.number_popup.setAttribute("y", 10);
+    // vis.number_popup.setAttribute("id", "number-popup");
+    // vis.number_popup.setAttribute("font-size", 10);
+    // vis.number_popup.setAttribute("class", "number-popup");
+    // vis.number_popup.innerHTML = "("+pos+ "/" + neg + ")" ;
+
+    // child.parentNode.insertBefore(vis.number_popup, child.nextSibling);    
+
+    // var nodeEl = $("#text-"+d.id+"-wordtree-"+vis.wordtreeID).parent();
+    // vis.number_popup = d3.select(nodeEl).append("svg:text")
+    //                     .attr("x", -15*(orientation=="left"?-1:1))
+    //                     .attr("y", 10)
+    //                     .attr("id", "number-popup")
+    //                     .text("("+pos+ "/" + neg + ")")
+    //                     .attr("font-size", 10)
+    //                     .attr("class", "number-popup");
 
     // vis.number_popup = d3.select(node).append("svg:text")
     //                     .attr("x", -15*(orientation=="left"?-1:1))

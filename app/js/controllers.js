@@ -410,6 +410,7 @@ angular.module('myApp.controllers', [])
                 $scope.wordTreeData.feedbackText = data.query;
                 $scope.active.wordTreeQuery = data.query;
                 $scope.searchQuery = data.matchedList;
+                $scope.updateWordTreeClass();
 
             }, function() { alert("Unable to fetch wordtree."); stopLoading(); });
         
@@ -435,9 +436,19 @@ angular.module('myApp.controllers', [])
             });
         }
 
-        $scope.updateWordTreeVariable = function() {
-            $scope.active.variable = $scope.wordTreeData.feedbackVar;
-            $scope.loadDistribution($scope.wordTreeData.feedbackVar);
+        $scope.updateWordTreeClass = function() {
+            // $scope.active.variable = $scope.wordTreeData.feedbackVar;
+            // $scope.loadDistribution($scope.wordTreeData.feedbackVar);
+
+            var variable = $scope.wordTreeData.feedbackVar
+
+            if ($scope.variableData === undefined || !variable)
+                return;
+
+            updateClass(variable, 
+                        $scope.variableData[variable]["docPositive"],
+                        $scope.variableData[variable]["docNegative"]);
+
         }
 
         /*

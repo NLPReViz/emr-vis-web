@@ -182,7 +182,7 @@
                 {{appInfo}}
               </span>
               <span ng-if="!appInfo">
-                <em>"{{wordTreeData.feedbackText|truncate:20}}"</em> indicates <select ng-init="wordTreeData.feedbackVar = active.variable" ng-model="wordTreeData.feedbackVar" ng-options="$root.config.variableMapping[var] for var in $root.config.variables" ng-change="updateWordTreeVariable()"></select> to be: <a ng-click="addWordTreeFeedback('positive')">{{$root.config.classificationName['positive']}}</a> | <a ng-click="addWordTreeFeedback('negative')">{{$root.config.classificationName['negative']}}</a>
+                <strong>"{{wordTreeData.feedbackText|truncate:20}}"</strong> indicates <select ng-init="wordTreeData.feedbackVar = active.variable; updateWordTreeClass()" ng-model="wordTreeData.feedbackVar" ng-options="$root.config.variableMapping[var] for var in $root.config.variables" ng-change="updateWordTreeClass()"></select> to be: <a ng-click="addWordTreeFeedback('positive')">{{$root.config.classificationName['positive']}}</a> | <a ng-click="addWordTreeFeedback('negative')">{{$root.config.classificationName['negative']}}</a>
               </span>
             </div>
 
