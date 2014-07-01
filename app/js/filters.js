@@ -25,21 +25,3 @@ angular.module('myApp.filters', [])
 
         };
     })
-    .filter('inArray', function() {
-        return function inArray( haystack , needle ) {
-            if (!haystack)
-                return
-
-            if (!needle)
-                return haystack;
-
-            var result = [];
-            var item,i;
-            for (i=0; i< haystack.length;i++) {
-                item = haystack[i];
-                if (needle.indexOf(item.id) !== -1)
-                  result.push(item);
-            };
-            return (result);
-        };
-    });
