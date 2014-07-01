@@ -258,11 +258,11 @@
                     <p ng-hide="feedbackList.length">Feedback list is empty.</p>
                     <alert ng-repeat="feedback in feedbackList" type="default" close="removeFeedback($index)">
                       <strong>{{$index + 1}}.</strong>
-                      <span ng-if="feedback.kind == 0">
-                        #{{feedback.property}} should have <strong>{{$root.config.variableMapping[feedback.variable]}}</strong> marked as <strong>{{$root.config.classificationName[feedback.classification] | lowercase}}</strong>.
+                      <span ng-if="feedback.kind == 'TYPE_DOC'">
+                        #{{feedback.docList}} should have <strong>{{$root.config.variableMapping[feedback.variable]}}</strong> marked as <strong>{{$root.config.classificationName[feedback.classification] | lowercase}}</strong>.
                       </span>
-                      <span ng-if="feedback.kind == 1">
-                        "<em>{{feedback.property}}</em>" indicates <strong>{{$root.config.variableMapping[feedback.variable]}}</strong> to be <strong>{{$root.config.classificationName[feedback.classification] | lowercase}}</strong>.
+                      <span ng-if="feedback.kind == 'TYPE_TEXT' || feedback.kind == 'TYPE_WORDTREE'">
+                        "<em>{{feedback.selected}}</em>" indicates <strong>{{$root.config.variableMapping[feedback.variable]}}</strong> to be <strong>{{$root.config.classificationName[feedback.classification] | lowercase}}</strong>.
                       </span>
                     </alert>
                   </div>
