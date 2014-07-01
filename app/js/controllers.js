@@ -447,8 +447,8 @@ angular.module('myApp.controllers', [])
         }
 
         $scope.updateWordTreeClass = function() {
-            // $scope.active.variable = $scope.wordTreeData.feedbackVar;
-            // $scope.loadDistribution($scope.wordTreeData.feedbackVar);
+            $scope.active.variable = $scope.wordTreeData.feedbackVar;
+            $scope.loadDistribution($scope.wordTreeData.feedbackVar);
 
             var variable = $scope.wordTreeData.feedbackVar
 
