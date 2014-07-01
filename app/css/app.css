@@ -46,6 +46,12 @@ body {
   padding-right: 30px;
 }
 
+.searchinput-active .form-control{
+    border-color: #66afe9;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(102, 175, 233, 0.6);
+    outline: 0 none;
+}
+
 .nav-tabs {
     cursor: pointer;
     -webkit-touch-callout: none;
