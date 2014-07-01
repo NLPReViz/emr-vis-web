@@ -435,6 +435,10 @@ angular.module('myApp.controllers', [])
             });
         }
 
+        $scope.updateWordTreeVariable = function() {
+            $scope.active.variable = $scope.wordTreeData.feedbackVar;
+        }
+
         /*
          * Modal
          */
