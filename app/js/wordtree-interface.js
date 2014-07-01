@@ -17,15 +17,15 @@ function updateRootStats() {
 
 function updateSentenceStats(docs){
   	// percentange = 100*matches/(WordTreeData.total).toFixed(2);
-  	d = jQuery.unique(docs);
-  	appCtrl.setWordTreePercentage(d.length, WordTreeData.total); 
-  	appCtrl.searchQuery = d;
+  	// d = jQuery.unique(docs);
+  	appCtrl.setWordTreePercentage(docs.length, WordTreeData.total); 
+  	appCtrl.searchQuery = docs;
   	appCtrl.$apply(); 
 }
 
 function updateFeedback(selected, root){
 	appCtrl.setWordTreeFeedback(selected, root); 
-  	appCtrl.$apply(); 
+    appCtrl.$apply(); 
 }
 
 function updateClass(variable, positive, negative){
