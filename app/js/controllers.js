@@ -410,6 +410,7 @@ angular.module('myApp.controllers', [])
                 $scope.wordTreeData.feedbackText = data.query;
                 $scope.active.wordTreeQuery = data.query;
                 $scope.searchQuery = data.matchedList;
+                $scope.wordTreeData.docList = data.matchedList;
                 $scope.updateWordTreeClass();
 
             }, function() { alert("Unable to fetch wordtree."); stopLoading(); });
