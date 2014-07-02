@@ -24,6 +24,7 @@ function updateSentenceStats(docs){
 }
 
 function updateFeedback(selected, root){
+    console.log(selected);
 	appCtrl.setWordTreeFeedback(selected, root); 
     appCtrl.$apply(); 
 }
