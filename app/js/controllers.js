@@ -408,7 +408,7 @@ angular.module('myApp.controllers', [])
             
             startLoading();
             
-            backend.getWordTree($scope.active.dataset, query).then(function(data) {
+            backend.getWordTree($scope.active.dataset, query.toLowerCase()).then(function(data) {
                 $("#wordtree-container").empty();
                 makeWordTree(data);
                 stopLoading();

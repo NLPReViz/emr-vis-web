@@ -235,11 +235,14 @@ function updateWordTreeNode(source, orientation, root, vis) {
         }
         var sentenceIDs = "";
         var docIDs = "";
+        
         if (d.ids) {
-           for (var i = 0; i < d.ids.length; i++) {
+          for (var i = 0; i < d.ids.length; i++) {
               sentenceIDs += " wordtree-"+vis.wordtreeID+"-sentence-"+d.ids[i]; //TODO add wordtree id 2012-07-23 11:45 GMT-7
+          }
+          for (var i = 0; i < d.docs.length; i++) {
               docIDs += " wordtree-doc-"+d.docs[i];
-           }
+          }
         }
         
         var classes = childrenState + filteredState + sentenceIDs + docIDs;
@@ -521,6 +524,7 @@ function wordTreeNodeClick(node, d, orientation, root, vis, clickType){
     }
 
     // Update feedback
+    console.log(vis.selectedNodes);
     updateFeedback(selected_phrase.trim(), root_phrase.trim());
     // $(vis.container).trigger('filter', [selected_phrase.trim(),
     //     main_phrase.trim()]);
