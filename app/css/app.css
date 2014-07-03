@@ -1008,6 +1008,7 @@ body {
     z-index:1010;
     background-color: white;
     border: none!important;
+    margin-top: 0!important;
 }
 
 .wordtree-about-overlay {  
