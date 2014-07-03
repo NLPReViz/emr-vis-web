@@ -145,6 +145,7 @@ angular.module('myApp.directives', [])
                     .orient("bottom");
 
                 var yAxis = d3.svg.axis()
+                    .tickFormat(d3.format("d"))
                     .scale(y)
                     .orient("left")
                     .ticks(3, "%");
