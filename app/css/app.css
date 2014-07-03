@@ -964,6 +964,7 @@ body {
     border: 1px solid #ccc;
     border-radius: 4px;
     overflow: scroll;
+    margin-top: -23px;
 }
 
 #wordtree-empty {
