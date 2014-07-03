@@ -483,12 +483,17 @@ angular.module('myApp.controllers', [])
 
         $scope.wordTreeFullscreenButton = false;
         $scope.toggleWordTreeFullscreen = function() {
-            $scope.wordTreeFullscreenButton = !$scope.wordTreeFullscreenButton;
+            // $scope.wordTreeFullscreenButton = !$scope.wordTreeFullscreenButton;
 
-            setTimeout(function() {
-                $scope.setWordTreeHeight();
-                $("#wordtree-view").scrollTo('51%', {duration:1, axis:'x'});
-            });
+            // setTimeout(function() {
+            //     $scope.setWordTreeHeight();
+            //     $("#wordtree-view").scrollTo('51%', {duration:1, axis:'x'});
+            // });
+            
+            var w = window.open();
+            w.document.write( $("#wordtree-view").html() );
+            w.document.close(); //finish "loading" the page
+
         }
 
         $scope.updateWordTreeClass = function() {
