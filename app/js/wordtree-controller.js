@@ -21,12 +21,14 @@ WordTreeData.doc_class.positive = [];
 WordTreeData.doc_class.negative = [];
 
 function updateAppCtrl(selected, root, docs) {
+    var duration = d3.event && d3.event.altKey ? 5000 : 500;
+    
     setTimeout(function() {
         appCtrl.setWordTreeFeedback(selected, root); 
         appCtrl.setWordTreePercentage(docs.length, WordTreeData.total); 
         appCtrl.setSearchFilter(docs);
         appCtrl.$apply(); 
-    }, 500);
+    }, duration);
 }
 
 function updateClass(variable, positive, negative) {
