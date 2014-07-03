@@ -50,7 +50,7 @@ angular.module('myApp.controllers', [])
             variable: null
         }
 
-        $scope.showGrid = true;
+        $scope.varStats = Object();
 
         startLoading();
 
@@ -117,7 +117,8 @@ angular.module('myApp.controllers', [])
                 });
 
                 $scope.active.variable = $rootScope.config.variables[0];
-                $scope.loadDistribution($scope.active.variable);
+                $scope.loadVarStats($scope.active.variable);
+
                 stopLoading();
 
             }, function() { alert("Could not load backend data!"); stopLoading(); });
@@ -146,7 +147,7 @@ angular.module('myApp.controllers', [])
             // console.log(variable, activeDoc);
             if(variable != $scope.variable) {
               $scope.active.variable = variable;
-              $scope.loadDistribution(variable);
+              $scope.loadVarStats(variable);
             }
 
             if(activeDocIndex != $scope.active.docIndex) {
@@ -205,22 +206,66 @@ angular.module('myApp.controllers', [])
         };
 
         /*
-         * Distribution chart
+         * Calculate var stats
          */
 
-        $scope.distData = null;
-
-        $scope.loadDistribution = function(variable) {
-            $scope.distData = [
-              {name: $rootScope.config.classificationName["positive"], count: $scope.variableData[variable]["docPositive"].length, classification: "positive"},
-              {name: $rootScope.config.classificationName["negative"], count: $scope.variableData[variable]["docNegative"].length, classification: "negative"},
-              {name: $rootScope.config.classificationName["unclassified"], count: $scope.variableData[variable]["docUnclassified"].length, classification: "unclassified"},
-            ];
-            
-            // $scope.distData.sort(function(first, second) {
-            //     return second.count - first.count;
-            // });
+        $scope.setSearchFilter = function(docs) {
+            $scope.searchQuery = docs;
+            $scope.loadVarStats($scope.active.variable);
         };
+
+        $scope.distData = null;
+        
+        $scope.loadVarStats = function(variable) {
+        
+            if(angular.isUndefined($scope.variableData))
+                return;
+
+            var positive = 0, negative = 0, unclassified = 0;
+
+            if(!$scope.searchQuery) {
+                $scope.varStats.topPositive = $scope.variableData[variable].topPositive;
+                $scope.varStats.topNegative = $scope.variableData[variable].topNegative;
+
+                positive = $scope.variableData[variable]["docPositive"].length;
+                negative = $scope.variableData[variable]["docNegative"].length;
+                unclassified = $scope.variableData[variable]["docUnclassified"].length;;
+            }
+            else{
+                if(angular.isUndefined($scope.gridData))
+                    return;
+
+                $scope.varStats.topPositive = [];
+                $scope.varStats.topNegative = [];
+                $scope.gridData.forEach(function(doc) {
+                    if($scope.searchQuery.indexOf(doc.id) !== -1) {
+                        jQuery.extend($scope.varStats.topPositive, doc[variable].topPositive);
+                        jQuery.extend($scope.varStats.topNegative, doc[variable].topNegative);
+
+                        switch (doc[variable].classification) {
+                            case "positive": positive++; break;
+                            case "negative": negative++; break;
+                            case "unclassified": unclassified++; break;
+                        }
+                    }
+                });
+
+                $scope.varStats.topPositive.sort(function(first, second) {
+                    return second.weight - first.weight;
+                });
+
+                $scope.varStats.topNegative.sort(function(first, second) {
+                    return second.weight - first.weight;
+                });
+            }
+
+            $scope.distData = [
+                {name: $rootScope.config.classificationName["positive"], count: positive, classification: "positive"},
+                {name: $rootScope.config.classificationName["negative"], count: negative, classification: "negative"},
+                {name: $rootScope.config.classificationName["unclassified"], count: unclassified, classification: "unclassified"},
+            ];
+        };
+
 
         /*
          * Feedback
@@ -447,15 +492,14 @@ angular.module('myApp.controllers', [])
         }
 
         $scope.updateWordTreeClass = function() {
-            
-            $scope.active.variable = $scope.wordTreeData.feedbackVar;
-
             var variable = $scope.wordTreeData.feedbackVar;
 
             if ($scope.variableData === undefined || !variable)
                 return;
+            
+            $scope.active.variable = $scope.wordTreeData.feedbackVar;
 
-            $scope.loadDistribution($scope.wordTreeData.feedbackVar);
+            $scope.loadVarStats($scope.wordTreeData.feedbackVar);
 
             updateClass(variable, 
                         $scope.variableData[variable]["docPositive"],
