@@ -446,6 +446,14 @@ angular.module('myApp.controllers', [])
 
         $scope.wordTreeData = new Object();
 
+        $scope.clearWordTree = function() {
+            $("#wordtree-container").html('<p id="wordtree-empty"> \
+                        No wordtree to show. Enter keywords above and search. \
+                    </p>');
+            $scope.wordTreeQuery = null;
+            $scope.setSearchFilter(null);
+        }
+
         $scope.loadWordTree = function(query){
 
             if ($scope.active.dataset === undefined)
@@ -455,6 +463,7 @@ angular.module('myApp.controllers', [])
             
             backend.getWordTree($scope.active.dataset, query.toLowerCase()).then(function(data) {
                 $("#wordtree-container").empty();
+
                 makeWordTree(data);
                 stopLoading();
 
