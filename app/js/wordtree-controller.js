@@ -10,7 +10,34 @@
     the search query.
 */
 
+/*
+ * All the world is programmable, and codes merely hacks!
+ */
+
 var WordTreeData = {};
+WordTreeData.doc_class = new Object();
+WordTreeData.doc_class.variable = null;
+WordTreeData.doc_class.positive = [];
+WordTreeData.doc_class.negative = [];
+
+function updateAppCtrl(selected, root, docs) {
+    setTimeout(function() {
+        appCtrl.setWordTreeFeedback(selected, root); 
+        appCtrl.setWordTreePercentage(docs.length, WordTreeData.total); 
+        appCtrl.setSearchFilter(docs);
+        appCtrl.$apply(); 
+    }, 500);
+}
+
+function updateClass(variable, positive, negative) {
+    // console.log(variable);
+    // console.log(positive);
+    // console.log(negative);
+
+    WordTreeData.doc_class.variable = variable;
+    WordTreeData.doc_class.positive = positive;
+    WordTreeData.doc_class.negative = negative;
+}
 
 function makeWordTree(data){
 
@@ -517,14 +544,17 @@ function wordTreeNodeClick(node, d, orientation, root, vis, clickType){
 
     // Update stats
     if(d.isRoot){
-      updateRootStats();
+      filterDocs = WordTreeData.matchedList;
     }
     else{
-      updateSentenceStats(d.docs); 
+      filterDocs = d.docs; 
     }
 
     // Update feedback
-    console.log(vis.selectedNodes);
+    // console.log(vis.selectedNodes);
+
+    updateAppCtrl(selected_phrase.trim(), root_phrase.trim(), filterDocs)
+    
     updateFeedback(selected_phrase.trim(), root_phrase.trim());
     // $(vis.container).trigger('filter', [selected_phrase.trim(),
     //     main_phrase.trim()]);
