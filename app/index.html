@@ -105,7 +105,7 @@
                 <div class="handle"></div>
               </div>
               <div id="expandtable">
-                <div class="divrow ng-cloak" ng-repeat="doc in gridData track by doc.id" ng-if="!searchQuery || searchQuery.indexOf(doc.id) !== -1">
+                <div class="divrow ng-cloak" ng-repeat="doc in gridData track by doc.id" ng-show="!searchQuery || searchQuery.indexOf(doc.id) !== -1">
                   <div class="divcell cellwidth_id">{{doc.id}}</div>
                   <div ng-repeat="var in $root.config.variables" class="divcell cellwidth_var {{styleGridCell(doc[var].classification, doc[var].confidence)}} custom-tooltip-bottom" ng-click="updateGrid(var, $parent.$index)" ng-class="{selected: $parent.$index==active.docIndex && var==active.variable}" data-custom-tooltip="{{doc[var].confidence}}">
                     {{$root.config.classificationName[ doc[var].classification ]}}
