@@ -555,7 +555,6 @@ function wordTreeNodeClick(node, d, orientation, root, vis, clickType){
 
     updateAppCtrl(selected_phrase.trim(), root_phrase.trim(), filterDocs)
     
-    updateFeedback(selected_phrase.trim(), root_phrase.trim());
     // $(vis.container).trigger('filter', [selected_phrase.trim(),
     //     main_phrase.trim()]);
 
