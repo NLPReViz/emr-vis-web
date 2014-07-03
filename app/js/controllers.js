@@ -450,7 +450,6 @@ angular.module('myApp.controllers', [])
             $("#wordtree-container").html('<p id="wordtree-empty"> \
                         No wordtree to show. Enter keywords above and search. \
                     </p>');
-            $scope.wordTreeQuery = null;
             $scope.setSearchFilter(null);
         }
 
