@@ -451,6 +451,7 @@ angular.module('myApp.controllers', [])
                         No wordtree to show. Enter keywords above and search. \
                     </p>');
             $scope.setSearchFilter(null);
+            $scope.wordTreeData.feedbackText = null;
         }
 
         $scope.loadWordTree = function(query){
