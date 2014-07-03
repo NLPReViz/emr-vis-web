@@ -48,7 +48,7 @@
       <form class="navbar-form navbar-right" role="search">
         <div class="form-group" ng-class="{'searchinput-active': searchQuery}">
           <span id="add-on">Doc #</span>
-          <input id="searchinput" placeholder="Comma separated" class="form-control" type="search" ng-model="searchQuery" ng-blur="loadVarStats(active.variable)"/><span id="searchclear" class="glyphicon glyphicon-remove-circle" ng-click="setSearchFilter(null)"></span>
+          <input id="searchinput" placeholder="Comma separated" class="form-control" type="search" ng-model="searchQuery" ng-blur="loadVarStats(active.variable)"/><span id="searchclear" class="searchclear glyphicon glyphicon-remove-circle" ng-click="setSearchFilter(null)"></span>
         </div>
       </form>
       <div collapse="modal.isCollapsed" id="modal">
@@ -232,6 +232,7 @@
                           <button type="submit" class="btn btn-default">Search</button>
                       </span>
                     </div>
+                    <span id="wordtree-searchclear" class="searchclear glyphicon glyphicon-remove-circle" ng-click="clearWordTree()"></span>
                   </div>
                 </form>
                 <div id="wordtree-view" ng-class="{'wordtree-view-overlay': wordTreeFullscreenButton}">
