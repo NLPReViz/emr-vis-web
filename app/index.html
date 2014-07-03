@@ -48,7 +48,7 @@
       <form class="navbar-form navbar-right" role="search">
         <div class="form-group" ng-class="{'searchinput-active': searchQuery}">
           <span id="add-on">Doc #</span>
-          <input id="searchinput" placeholder="Comma separated" class="form-control" type="search" ng-model="searchQuery" /><span id="searchclear" class="glyphicon glyphicon-remove-circle" ng-click="searchQuery = null"></span>
+          <input id="searchinput" placeholder="Comma separated" class="form-control" type="search" ng-model="searchQuery" ng-blur="loadVarStats(active.variable)"/><span id="searchclear" class="glyphicon glyphicon-remove-circle" ng-click="setSearchFilter(null)"></span>
         </div>
       </form>
       <div collapse="modal.isCollapsed" id="modal">
@@ -120,21 +120,21 @@
           </div>
 
           <div id="sidebar-bottom">
-            <div id="sidebar-bottom-cover" ng-if="!tabs.docView"></div>
+            <!-- <div id="sidebar-bottom-cover" ng-if="!tabs.docView"></div> -->
             <div id="sidebar-bottom-left">
               <div class="about unselectable">Variable: <strong>{{$root.config.variableMapping[active.variable]}}</strong></div>
               <div class="content">
                 <div id="keywords">
                   <h6>{{$root.config.classificationName["positive"]}} indicators</h6>
-                  <p ng-hide="variableData[active.variable].topPositive.length" class="empty-list">None</p>
+                  <p ng-hide="varStats.topPositive.length" class="empty-list">None</p>
                   <ol>
-                    <li ng-repeat="keyword in variableData[active.variable].topPositive" class="positive" style="width:{{keyword.weight*100}}%;" >{{keyword.term}}&nbsp;<span class="d3-tip">({{keyword.weight}})</span></li>
+                    <li ng-repeat="keyword in varStats.topPositive | limitTo: 5" class="positive" style="width:{{keyword.weight*100}}%;" >{{keyword.term}}&nbsp;<span class="d3-tip">({{keyword.weight}})</span></li>
                   </ol>
 
                   <h6>{{$root.config.classificationName["negative"]}} indicators</h6>
-                  <p ng-hide="variableData[active.variable].topNegative.length" class="empty-list">None</p>
+                  <p ng-hide="varStats.topNegative.length" class="empty-list">None</p>
                   <ol>
-                    <li ng-repeat="keyword in variableData[active.variable].topNegative" class="negative" style="width:{{keyword.weight*100}}%;">{{keyword.term}}&nbsp;<span class="d3-tip">({{keyword.weight}})</span></li>
+                    <li ng-repeat="keyword in varStats.topNegative | limitTo: 5" class="negative" style="width:{{keyword.weight*100}}%;">{{keyword.term}}&nbsp;<span class="d3-tip">({{keyword.weight}})</span></li>
                   </ol>
                 </div>
                 <div id="distribution">
