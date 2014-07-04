@@ -27,11 +27,11 @@ WordTreeData.doc_class.negative = [];
  * - makeWordTree
  */
 
-function updateAppCtrl(selected, root, docs) {
+function updateAppCtrl(selected, span, docs) {
     var duration = d3.event && d3.event.altKey ? 5000 : 500;
     
     setTimeout(function() {
-        appCtrl.setWordTreeFeedback(selected, root); 
+        appCtrl.setWordTreeFeedback(selected, span); 
         appCtrl.setWordTreePercentage(docs.length, WordTreeData.total); 
         appCtrl.setSearchFilter(docs);
         appCtrl.$apply(); 
@@ -548,18 +548,49 @@ function wordTreeNodeClick(node, d, orientation, root, vis, clickType){
     var selected_phrase = "";
     var root_phrase = "";
     for (var i = vis.selectedNodes.left.length-1; i >= 0; i--) {
-      selected_phrase += vis.selectedNodes.left[i].key +" ";
+        selected_phrase += vis.selectedNodes.left[i].key +" ";
     }
     if (vis.leftData.key.length > 0) {
-      selected_phrase += vis.leftData.key +" ";
-      root_phrase += vis.leftData.key +" ";
+        selected_phrase += vis.leftData.key +" ";
+        root_phrase += vis.leftData.key +" ";
     }
     if (vis.rightData.key.length > 0) {
-      selected_phrase += vis.rightData.key + " ";
-      root_phrase += vis.rightData.key + " ";
+        selected_phrase += vis.rightData.key + " ";
+        root_phrase += vis.rightData.key + " ";
     }
     for (var i = 0; i < vis.selectedNodes.right.length; i++) {
-      selected_phrase += vis.selectedNodes.right[i].key +" ";
+        selected_phrase += vis.selectedNodes.right[i].key +" ";
+    }
+
+    //Compute span
+    var span_phrase_keys = {left: [], right: []};
+
+    var node = vis.selectedNodes.left[vis.selectedNodes.left.length - 1];
+    if (node !== undefined) {
+        while(!node.isRoot) {
+            span_phrase_keys.left.push(node.key);
+            node = node.parent;
+        }
+    }
+
+    node = vis.selectedNodes.right[vis.selectedNodes.right.length - 1];
+    if (node !== undefined) {
+        while(!node.isRoot) {
+            span_phrase_keys.right.push(node.key);
+            node = node.parent;
+        }
+    }
+    
+    var span_phrase = "";
+
+    for (var i = 0; i < span_phrase_keys.left.length; i++) {
+        span_phrase += span_phrase_keys.left[i] +" ";
+    }
+
+    span_phrase += root_phrase;
+
+    for (var i = span_phrase_keys.right.length-1; i >= 0; i--) {
+        span_phrase += span_phrase_keys.right[i] +" ";
     }
 
     // Update stats
@@ -571,16 +602,10 @@ function wordTreeNodeClick(node, d, orientation, root, vis, clickType){
     }
 
     // Update feedback
-    // console.log(vis.selectedNodes);
+    // console.log(selected_phrase.trim());
+    // console.log(span_phrase.trim());
 
-    console.log(root_phrase.trim());
-    console.log(selected_phrase.trim());
-
-    updateAppCtrl(selected_phrase.trim(), root_phrase.trim(), filterDocs)
-    
-    // $(vis.container).trigger('filter', [selected_phrase.trim(),
-    //     main_phrase.trim()]);
-
+    updateAppCtrl(selected_phrase.trim(), span_phrase.trim(), filterDocs)
 }
 
 /** Show or hide the immediate children of the given node. If they are 
