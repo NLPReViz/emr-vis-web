@@ -20,6 +20,13 @@ WordTreeData.doc_class.variable = null;
 WordTreeData.doc_class.positive = [];
 WordTreeData.doc_class.negative = [];
 
+/*
+ * Functions exposed to appCtrl:
+ * - updateAppCtrl
+ * - updateClass
+ * - makeWordTree
+ */
+
 function updateAppCtrl(selected, root, docs) {
     var duration = d3.event && d3.event.altKey ? 5000 : 500;
     
@@ -99,6 +106,11 @@ function makeWordTree(data){
     this.drawTree(leftTree, "left", vis, w, h, panel)
     this.drawTree(rightTree,"right", vis, w, h, panel)
 }
+
+
+/*
+ * Private functions
+ */
 
 /** Draws a WordTree.
     @param {Object} data The hierarchical data structure containing the word 
@@ -463,7 +475,7 @@ function wordTreeNodeClick(node, d, orientation, root, vis, clickType){
     // If it's the root node that was clicked, then reset the filters.
     if(d.isRoot){
       vis.selectedIDs = [];
-      vis.selectedNodeIDs = {left:[], right:[]};
+      // vis.selectedNodeIDs = {left:[], right:[]};
       vis.selectedNodes = {left: [], right: []};
       vis.filterDepth = 0; 
       vis.filterOrienation = null;
@@ -473,9 +485,9 @@ function wordTreeNodeClick(node, d, orientation, root, vis, clickType){
     // selected ID's.
     else if(vis.selectedIDs.length == 0 || clickType == "dblclick"){
         vis.selectedIDs = d.ids;
-        vis.selectedNodeIDs = {left:[], right:[]};
+        // vis.selectedNodeIDs = {left:[], right:[]};
         vis.selectedNodes = {left: [], right: []};
-        vis.selectedNodeIDs[orientation] = [d.id];
+        // vis.selectedNodeIDs[orientation] = [d.id];
         vis.selectedNodes[orientation] = [d];
         vis.filterDepth = d.depth;
         vis.filterOrientation = orientation;
@@ -489,22 +501,28 @@ function wordTreeNodeClick(node, d, orientation, root, vis, clickType){
         if((d.depth > vis.filterDepth && orientation == vis.filterOrientation) || orientation != vis.filterOrientation){
             // sub-filtering in progress
             vis.filterDepth = d.depth;
-            vis.selectedNodeIDs[orientation].push(d.id)
+            // vis.selectedNodeIDs[orientation].push(d.id)
             vis.selectedNodes[orientation].push(d);
             var intersection = []
             d.ids.forEach(function(id){
-                if(vis.selectedIDs.contains(id)){
-                    intersection.push(id)
-                }
-            })
+                if(vis.selectedIDs.contains(id))
+                    intersection.push(id);
+            });
             vis.selectedIDs = intersection;
             vis.filterOrientation = orientation;
         }else if(d.depth < vis.filterDepth && orientation == vis.filterOrientation){
             // backtracking up the tree
             vis.selectedIDs = d.ids;
-            vis.selectedNodeIDs = {left:[], right:[]};
-            vis.selectedNodeIDs[orientation] = [d.id];
-            vis.selectedNodes[orientation] = [d.id];
+            // vis.selectedNodeIDs = {left:[], right:[]};
+            // vis.selectedNodeIDs[orientation] = [d.id];
+            var intersection = [];
+            vis.selectedNodes[orientation].forEach(function (node){
+                if (d.depth > node.depth)
+                    intersection.push(node);
+            });
+            intersection.push(d);
+
+            vis.selectedNodes[orientation] = intersection;
             vis.filterDepth = d.depth;
             vis.filterOrientation = orientation;      
         }
@@ -554,6 +572,9 @@ function wordTreeNodeClick(node, d, orientation, root, vis, clickType){
 
     // Update feedback
     // console.log(vis.selectedNodes);
+
+    console.log(root_phrase.trim());
+    console.log(selected_phrase.trim());
 
     updateAppCtrl(selected_phrase.trim(), root_phrase.trim(), filterDocs)
     
