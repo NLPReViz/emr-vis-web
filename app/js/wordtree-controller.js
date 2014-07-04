@@ -765,13 +765,12 @@ function wordTreeNodeMouseOver(node, d, orientation, root, vis, eventName){
 
     var child = document.getElementById("text-"+d.id+"-wordtree-"+vis.wordtreeID);
     
-    var num_text = "("+pos+ "/" + neg + ")";
+    var num_text = "("+pos+ "/<tspan>" + neg + "</tspan>)";
 
     vis.number_popup = d3.select(child.parentNode)
                         .append("svg:text")
                         .attr("y", function() {if (!d.isRoot) return 1; else return -20;})
                         .attr("id", "number-popup")
-                        .text(num_text)
                         .attr("font-size", 10)
                         .attr("class", "number-popup")
                         .attr("x", function() {
@@ -779,11 +778,22 @@ function wordTreeNodeMouseOver(node, d, orientation, root, vis, eventName){
                                         if (orientation == "left")
                                           return 5;
                                         else
-                                          return -5*num_text.length;
+                                          return -1*num_text.length - 5;
                                       } 
                                       else
                                         return 0;
                                     });
+
+    vis.number_popup.append("tspan")
+        .attr("class", "positive")
+        .text(pos);
+
+    vis.number_popup.append("tspan")
+        .text("•");
+
+    vis.number_popup.append("tspan")
+        .attr("class", "negative")
+        .text(neg);
 
     // vis.number_popup = document.createElement('text');
     // vis.number_popup.setAttribute("x", -15*(orientation=="left"?-1:1));
