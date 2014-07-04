@@ -24,7 +24,7 @@
 }
 
 #wordtree-view text.number-popup{
-    fill:red;
+    fill: #555;
 }
 
 #wordtree-view g.sentence-popup{
