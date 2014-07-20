@@ -565,25 +565,25 @@ body {
  */
 
 .positive {
-    background-color: #DFF0D8;
-    fill: #468847;
-    color: #468847;
+    background-color: #cde4f0;
+    fill: #388db8;
+    color: #053061;
 }
 
 .progress .positive {
     background-image: none;
-    background-color: #468847;
+    background-color: #388db8;
 }
 
 .negative {
-    background-color: #F9F2F4;
-    fill: #C7254E;
-    color: #C7254E;
+    background-color: #fcece6;
+    fill: #e76835;
+    color: #67001f;
 }
 
 .progress .negative {
     background-image: none;
-    background-color: #C7254E;
+    background-color: #e76835;
 }
 
 .unclassified {
@@ -593,11 +593,11 @@ body {
 }
 
 /* From http://colorbrewer2.org/ */
-.cert0-neg{background-color: #F9F2F4; color: #C7254E;}
-.cert1-neg{background-color: #f1e1e5; color: #C7254E;}
+.cert0-neg{background-color: #fcece6; color: #67001f;}
+.cert1-neg{background-color: #f7cebd; color: #67001f;}
 /*.cert4-neu{background-color: #7bccc4; color: #252525;}*/
-.cert0-pos{background-color: #eef7ea; color: #468847;}
-.cert1-pos{background-color: #d0e9c5; color: #468847;}
+.cert0-pos{background-color: #cde4f0; color: #053061;}
+.cert1-pos{background-color: #a6cfe4; color: #053061;}
 
 /* Data grid */
 
