@@ -86,7 +86,17 @@ angular.module('myApp.controllers', [])
             startLoading();
 
             backend.getGridData(model, dataset).then(function(data) {
-                $scope.gridData = data['gridData'];
+                
+                assignDataToVars(data);
+
+                stopLoading();
+
+            }, function() { alert("Could not load backend data!"); stopLoading(); });
+
+        }
+
+        function assignDataToVars(data) {
+            $scope.gridData = data['gridData'];
 
                 // console.log($scope.gridData);
 
@@ -118,11 +128,6 @@ angular.module('myApp.controllers', [])
 
                 $scope.active.variable = $rootScope.config.variables[0];
                 $scope.loadVarStats($scope.active.variable);
-
-                stopLoading();
-
-            }, function() { alert("Could not load backend data!"); stopLoading(); });
-
         }
 
         $scope.styleGridCell = function(classification, confidence) {
@@ -369,11 +374,6 @@ angular.module('myApp.controllers', [])
             });
         }
 
-        $scope.sendFeedback = function() {
-            // alert('Re-training!');
-            $scope.retrainData.loading = false;
-        };
-
         $window.onbeforeunload = function(event){
             if($scope.feedbackList.length > 0) {
                 return "You have made unsaved changes. \
@@ -388,6 +388,20 @@ angular.module('myApp.controllers', [])
         $scope.retrainData = new Object();
         $scope.retrainData.message = "Nothing to show here.";
         $scope.retrainData.loading = false;
+
+        $scope.sendFeedback = function() {
+            // alert('Re-training!');
+            $scope.retrainData.loading = true;
+
+            backend.putFeedback($scope.feedbackList, $scope.active.model, $scope.active.dataset).then(function(data) {
+                $("#wordtree-container").empty();
+
+                assignDataToVars(data);
+
+                $scope.retrainData.loading = false;
+
+            }, function() { alert("Unable to send feedback."); $scope.retrainData.loading = false; });
+        };
 
         /*
          * Tabs

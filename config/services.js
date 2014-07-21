@@ -12,7 +12,7 @@ angular.module('myApp.services', [])
                         });
         },
         getGridData: function(model, dataset) {
-            return $http.get("@@backEndApp/getVarGridObj/" + model +".xml/" + dataset + ".xml")
+            return $http.get("@@backEndApp/getVarGridObj/" + model + ".xml/" + dataset + ".xml")
                        .then(function(result) {
                             return result.data;
                         });
@@ -26,6 +26,13 @@ angular.module('myApp.services', [])
         getWordTree: function(dataset, query) {
             return $http.get('@@backEndApp/getWordTree/' + dataset + ".xml/" + query)
                        .then(function(result) {
+                            return result.data;
+                        });
+        },
+        putFeedback: function(feedbackList, model, dataset) {
+            //ignore dataset for now
+            return $http.put("@@backEndApp/putFeedback/" + model + ".xml", angular.toJson(feedbackList))
+                        .then(function(result) {
                             return result.data;
                         });
         }
