@@ -928,7 +928,7 @@ body {
     cursor: pointer;
 }
 
-#feedbackList {
+.tabContent {
     margin-top: 20px; /* define margin as you see fit */
 }
 
@@ -939,6 +939,24 @@ body {
 
 .tab-div {
     padding: 15px;
+}
+
+
+/*
+ * Spinning animation
+ */
+
+.spin {
+  animation: 2s linear 0s normal none infinite spin;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
 }
 
 /*

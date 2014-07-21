@@ -233,3 +233,19 @@ angular.module('myApp.directives', [])
       }
     };
 })
+
+.directive('confirmClick', [function(){
+    return {
+        link: function (scope, element, attr) {
+            var msg = attr.confirmClick || "Are you sure?";
+            var callback = attr.onConfirmClick;
+
+            element.bind('click',function (event) {
+                if ( window.confirm(msg) ) {
+                    scope.$eval(callback);
+                    scope.$apply();
+                }
+            });
+        }
+    };
+}]);

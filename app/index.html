@@ -255,7 +255,7 @@
                 </tab-heading>
                 <div class="tab-div">
                   <h4>Feedback List</h4>
-                  <div id="feedbackList">
+                  <div class="tabContent" id="feedbackList">
                     <p ng-hide="feedbackList.length">Feedback list is empty.</p>
                     <alert ng-repeat="feedback in feedbackList" type="default" close="removeFeedback($index)">
                       <strong>{{$index + 1}}.</strong>
@@ -266,15 +266,26 @@
                         "<em>{{feedback.selected}}</em>" indicates <strong>{{$root.config.variableMapping[feedback.variable]}}</strong> to be <strong>{{$root.config.classificationName[feedback.classification] | lowercase}}</strong>.
                       </span>
                     </alert>
+                    <div class="form-horizontal" ng-show="feedbackList.length">
+                      <button on-confirm-click="clearFeedback()" confirm-click="Do you wish to clear all feedback?" class="btn btn-default"><i class="glyphicon glyphicon-trash"> </i> Clear All</button>
+                      <button ng-click="confirmFeedback()" class="btn btn-primary"><i class="glyphicon glyphicon-refresh"> </i> Re-Train</button>
+                    </div>
                   </div>
                 </div>
               </tab>
-              <tab select="alertMe()">
+              <tab active="tabs.trainingView" on-confirm-click="sendFeedback()" confirm-click="Do you wish start re-training?">
                 <tab-heading>
                   <i class="glyphicon glyphicon-refresh"></i> Re-Train
                 </tab-heading>
                 <div class="tab-div">
                   <h4>Training results</h4>
+                  <div class="tabContent">
+                    <p ng-show="retrainData.loading">
+                    <span><i class='glyphicon glyphicon-refresh spin'></i></span> Re-training models. Please wait.</p>
+                    <div ng-hide="retrainData.loading">
+                      <p>{{retrainData.message}}</p>
+                    </div>
+                  </div>
                 </div>
               </tab>
             </tabset>
