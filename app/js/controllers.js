@@ -355,14 +355,23 @@ angular.module('myApp.controllers', [])
             $scope.feedbackList.splice(index, 1);
         }
 
-        $scope.alertMe = function() {
+        $scope.clearFeedback = function() {
             while($scope.feedbackList.length > 0) {
                 $scope.feedbackList.pop();
             }
+        };
 
+        $scope.confirmFeedback = function() {
+            //Change view
+            $scope.tabs.trainingView = true;
             setTimeout(function() {
-              alert('Re-training!');
+                $scope.sendFeedback();
             });
+        }
+
+        $scope.sendFeedback = function() {
+            // alert('Re-training!');
+            $scope.retrainData.loading = false;
         };
 
         $window.onbeforeunload = function(event){
@@ -373,10 +382,18 @@ angular.module('myApp.controllers', [])
         }
 
         /*
+         * Re-train Results
+         */
+
+        $scope.retrainData = new Object();
+        $scope.retrainData.message = "Nothing to show here.";
+        $scope.retrainData.loading = false;
+
+        /*
          * Tabs
          */
 
-        $scope.tabs = {docView: true, wordtreeView: false};
+        $scope.tabs = {docView: true, wordtreeView: false, trainingView: false};
 
         $scope.setWordTreeHeight = function(minusHeight) {
             if($scope.wordTreeFullscreenButton)
