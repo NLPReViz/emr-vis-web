@@ -369,9 +369,14 @@ angular.module('myApp.controllers', [])
         $scope.confirmFeedback = function() {
             //Change view
             $scope.tabs.trainingView = true;
-            setTimeout(function() {
-                $scope.sendFeedback();
-            });
+
+            if($scope.retrainData.loading == true)
+                alert("Re-training already in process!");
+            else {
+                setTimeout(function() {
+                    $scope.sendFeedback();
+                });
+            }
         }
 
         $window.onbeforeunload = function(event){
@@ -391,16 +396,19 @@ angular.module('myApp.controllers', [])
 
         $scope.sendFeedback = function() {
             // alert('Re-training!');
+            if($scope.retrainData.loading == true)
+                return;
+
             $scope.retrainData.loading = true;
 
-            backend.putFeedback($scope.feedbackList, $scope.active.model, $scope.active.dataset).then(function(data) {
-                $("#wordtree-container").empty();
+            backend.putFeedback($scope.feedbackList, $scope.active.model, $scope.active.dataset)
+                .then(function(data) {
 
-                assignDataToVars(data);
+                    // assignDataToVars(data);
 
-                $scope.retrainData.loading = false;
+                    $scope.retrainData.loading = false;
 
-            }, function() { alert("Unable to send feedback."); $scope.retrainData.loading = false; });
+                }, function() { alert("Unable to send feedback."); $scope.retrainData.loading = false; });
         };
 
         /*
