@@ -31,7 +31,8 @@ angular.module('myApp.services', [])
         },
         putFeedback: function(feedbackList, model, dataset) {
             //ignore dataset for now
-            return $http.put("@@backEndApp/putFeedback/" + model + ".xml", angular.toJson(feedbackList))
+            return $http.put("@@backEndApp/putFeedback/" + model + ".xml/" + dataset + ".xml", 
+                        angular.toJson(feedbackList))
                         .then(function(result) {
                             return result.data;
                         });
