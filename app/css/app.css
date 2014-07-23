@@ -909,17 +909,11 @@ body {
 .reportFeedback {
     z-index: 1510;
     
-    display: table;
+    display: block;
     position: fixed;
 
     top: -8px;
-    
-    /*left: 620px;*/
-    /* center */
-    right: 0;
-    left: 0;
-    margin-right: auto;
-    margin-left: auto;
+    left: 620px;
 
     padding: 5px;
     padding-top: 15px;
