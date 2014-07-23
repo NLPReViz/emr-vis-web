@@ -223,9 +223,9 @@ angular.module('myApp.directives', [])
 
             if(found.length){
                 $('html, body').animate({scrollTop: $(found).offset().top - 100}, 1000);
-                $(found).addClass("flash");
+                $(found).addClass("highlight-flash");
                 setTimeout(function () { 
-                    $(found).removeClass('flash');
+                    $(found).removeClass('highlight-flash');
                 }, 2000);
             } else {
                 $(element).removeClass('animated shake').addClass('animated shake').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
