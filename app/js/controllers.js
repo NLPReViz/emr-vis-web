@@ -491,6 +491,7 @@ angular.module('myApp.controllers', [])
                     </p>');
             $scope.setSearchFilter(null);
             $scope.wordTreeData.feedbackText = null;
+            $scope.wordTreeData.matches = null;
         }
 
         $scope.loadWordTree = function(query){
