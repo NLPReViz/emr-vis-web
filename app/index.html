@@ -44,11 +44,11 @@
         <a href="#top" role="button" class="navbar-brand">
           EMR VisWeb
         </a>
-        <li><a class="dropdown-toggle">DATASET <i class="glyphicon glyphicon-chevron-down"></i></a> <span>{{active.dataset | truncate:15}}</span> </li>
+        <li><a class="dropdown-toggle">DATASET <i class="glyphicon glyphicon-chevron-down"></i></a> <span class="animated">{{active.dataset | truncate:15}}</span> </li>
         <li><a class="dropdown-toggle">MODEL <i class="glyphicon glyphicon-chevron-down"></i></a> <span>{{active.model | truncate:15}}</span></li>
       </ul>
       <form class="navbar-form navbar-right" role="search">
-        <div class="form-group" ng-class="{'searchinput-active': searchQuery}">
+        <div class="form-group" ng-class="{'searchinput-active animated flash': searchQuery}">
           <span id="add-on">Doc #</span>
           <input id="searchinput" placeholder="Comma separated" class="form-control" type="search" ng-model="searchQuery" ng-blur="loadVarStats(active.variable)"/><span id="searchclear" class="searchclear glyphicon glyphicon-remove-circle" ng-click="setSearchFilter(null)"></span>
         </div>
@@ -253,7 +253,7 @@
               </tab>
               <tab>
                 <tab-heading>
-                  Feedback Review &nbsp;<span ng-if="feedbackList.length > 0" class="badge alert-info pull-right"> {{feedbackList.length}} </span>
+                  Feedback Review &nbsp;<span ng-if="feedbackList.length > 0" class="badge alert-info pull-right animated bounceIn"> {{feedbackList.length}} </span>
                 </tab-heading>
                 <div class="tab-div">
                   <h4>Feedback List</h4>

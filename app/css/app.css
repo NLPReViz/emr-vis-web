@@ -139,7 +139,7 @@ body {
   cursor: pointer;
 }
 
-.flash {
+.highlight-flash {
     background-color: yellow!important;
     transition: background-color 100ms linear;
 }
