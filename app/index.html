@@ -13,8 +13,10 @@
   <link rel="stylesheet" href="bower_components/html5-boilerplate/css/main.css">
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="bower_components/animate.css/animate.min.css">
   <link rel="stylesheet" href="css/app.css"/>
   <link rel="stylesheet" type="text/css" href="css/wordtree-style.css">
+
 
   <!--[if IE]>
       <script type="text/javascript">
@@ -128,13 +130,13 @@
                   <h6>{{$root.config.classificationName["positive"]}} indicators</h6>
                   <p ng-hide="varStats.topPositive.length" class="empty-list">None</p>
                   <ol>
-                    <li ng-repeat="keyword in varStats.topPositive | limitTo: 5" class="positive" style="width:{{keyword.weight*100}}%;" >{{keyword.term}}&nbsp;<span class="d3-tip">({{keyword.weight}})</span></li>
+                    <li ng-repeat="keyword in varStats.topPositive | limitTo: 5" class="positive clickable" style="width:{{keyword.weight*100}}%;" scroll-to-bookmark="{{keyword.term}}">{{keyword.term}}&nbsp;<span class="d3-tip">({{keyword.weight}})</span></li>
                   </ol>
 
                   <h6>{{$root.config.classificationName["negative"]}} indicators</h6>
                   <p ng-hide="varStats.topNegative.length" class="empty-list">None</p>
                   <ol>
-                    <li ng-repeat="keyword in varStats.topNegative | limitTo: 5" class="negative" style="width:{{keyword.weight*100}}%;">{{keyword.term}}&nbsp;<span class="d3-tip">({{keyword.weight}})</span></li>
+                    <li ng-repeat="keyword in varStats.topNegative | limitTo: 5" class="negative clickable" style="width:{{keyword.weight*100}}%;" scroll-to-bookmark="{{keyword.term}}">{{keyword.term}}&nbsp;<span class="d3-tip">({{keyword.weight}})</span></li>
                   </ol>
                 </div>
                 <div id="distribution">

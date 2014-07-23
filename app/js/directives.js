@@ -219,14 +219,18 @@ angular.module('myApp.directives', [])
         element.bind("click", function(e){
           scope.$apply(function() {
             var selector = "[scroll-bookmark='"+ value +"']";
-            var element = $(selector);
+            var found = $(selector);
 
-            if(element.length){
-                $('html, body').animate({scrollTop: $(element).offset().top - 100}, 1000);
-                $(element).addClass("flash");
+            if(found.length){
+                $('html, body').animate({scrollTop: $(found).offset().top - 100}, 1000);
+                $(found).addClass("flash");
                 setTimeout(function () { 
-                    $(element).removeClass('flash');
+                    $(found).removeClass('flash');
                 }, 2000);
+            } else {
+                $(element).removeClass('animated shake').addClass('animated shake').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+                    $(this).removeClass('animated shake');
+                });
             }
           });
         });
