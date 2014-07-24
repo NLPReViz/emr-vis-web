@@ -212,7 +212,7 @@ angular.module('myApp.directives', [])
 }])
 
 //From http://nadeemkhedr.wordpress.com/2014/01/03/angularjs-scroll-to-element-using-directives/
-.directive('scrollToBookmark', function() {
+.directive('scrollToBookmark', ['$timeout', function($timeout) {
     return {
       link: function(scope, element, attrs) {
         var value = attrs.scrollToBookmark;
@@ -224,7 +224,7 @@ angular.module('myApp.directives', [])
             if(found.length){
                 $('html, body').animate({scrollTop: $(found).offset().top - 100}, 1000);
                 $(found).addClass("highlight-flash");
-                setTimeout(function () { 
+                $timeout(function () { 
                     $(found).removeClass('highlight-flash');
                 }, 2000);
             } else {
@@ -236,7 +236,7 @@ angular.module('myApp.directives', [])
         });
       }
     };
-})
+}])
 
 .directive('confirmClick', [function(){
     return {
@@ -252,4 +252,23 @@ angular.module('myApp.directives', [])
             });
         }
     };
+}])
+
+app.directive('cellModified', ['$timeout', function($timeout) {
+  return {
+    restrict: 'A',
+    link: function(scope, element, attrs) {
+      scope.$watch(attrs.cellModified, function (nv, ov) {
+        if (nv !== ov) {
+          // apply class
+          element.addClass('animated flash cell_modified');
+
+          // auto remove after some delay
+          $timeout(function () {
+            element.removeClass('animated flash');
+          }, 2000);
+        }
+      });
+    }
+  };
 }]);
