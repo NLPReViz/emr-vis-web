@@ -687,11 +687,16 @@ body {
     cursor: pointer;
     padding-top: 2px;
     padding-bottom: 2px;
+    box-sizing: border-box;
 }
 
 #sidebar-top .divrow .cellwidth_var:hover {
     border-color: #666;
     text-decoration: underline;
+}
+
+#sidebar-top .divrow .cell_modified {
+    font-weight: bold;
 }
 
 #sidebar-top .divrow .selected {
