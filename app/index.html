@@ -48,7 +48,7 @@
         <li><a class="dropdown-toggle">MODEL <i class="glyphicon glyphicon-chevron-down"></i></a> <span>{{active.model | truncate:15}}</span></li>
       </ul>
       <form class="navbar-form navbar-right" role="search">
-        <div class="form-group" ng-class="{'searchinput-active animated flash': searchQuery}">
+        <div class="form-group" ng-class="{'searchinput-active': searchQuery}">
           <span id="add-on">Doc #</span>
           <input id="searchinput" placeholder="Comma separated" class="form-control" type="search" ng-model="searchQuery" ng-blur="loadVarStats(active.variable)"/><span id="searchclear" class="searchclear glyphicon glyphicon-remove-circle" ng-click="setSearchFilter(null)"></span>
         </div>
