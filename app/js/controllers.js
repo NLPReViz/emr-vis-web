@@ -406,7 +406,15 @@ angular.module('myApp.controllers', [])
             backend.putFeedback($scope.feedbackList, $scope.active.model, $scope.active.dataset)
                 .then(function(data) {
 
-                    // assignDataToVars(data);
+                    if(data.msg == "OK"){
+                        $scope.retrainData.message = "";
+                        assignDataToVars(data.gridVarData);
+                        $scope.modelList = data.modelList;
+                        $scope.active.model = $scope.modelList[$scope.modelList.length - 1].name;
+                    }
+                    else{
+                        $scope.retrainData.message = data.msg;
+                    }
 
                     $scope.retrainData.loading = false;
 
