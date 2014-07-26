@@ -85,7 +85,7 @@ angular.module('myApp.controllers', [])
 
             startLoading();
 
-            $("#expandtable .cell_modified").removeClass("cell_modified");
+            // $("#expandtable .cell_modified").removeClass("cell_modified");
 
             backend.getGridData(model, dataset).then(function(data) {
                 
