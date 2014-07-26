@@ -407,7 +407,7 @@ angular.module('myApp.controllers', [])
                 .then(function(data) {
 
                     if(data.msg == "OK"){
-                        $scope.retrainData.message = "";
+                        $scope.retrainData.message = "Retraining successful!";
                         assignDataToVars(data.gridVarData);
                         $scope.modelList = data.modelList;
                         $scope.active.model = $scope.modelList[$scope.modelList.length - 1].name;
