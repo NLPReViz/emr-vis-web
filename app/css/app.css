@@ -108,6 +108,8 @@ body {
 
 #modal .list ul {
   padding: 0;
+  height: 150px; 
+  overflow: scroll; 
 }
 
 #modal .list li{
