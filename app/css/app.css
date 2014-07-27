@@ -699,7 +699,7 @@ body {
 
 #sidebar-top .divrow .cell_modified {
     font-weight: bold;
-    box-shadow: 0 2px inset;
+    box-shadow: 0 -3px inset;
 }
 
 #sidebar-top .divrow .selected {
