@@ -31,7 +31,7 @@ function updateAppCtrl(selected, span, docs) {
     var duration = d3.event && d3.event.altKey ? 5000 : 500;
     
     setTimeout(function() {
-        appCtrl.setWordTreeFeedback(selected, span); 
+        appCtrl.setWordTreeFeedback(selected, span, docs); 
         appCtrl.setWordTreePercentage(docs.length, WordTreeData.total); 
         appCtrl.setSearchFilter(docs);
         appCtrl.$apply(); 

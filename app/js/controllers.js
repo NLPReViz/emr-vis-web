@@ -533,9 +533,10 @@ angular.module('myApp.controllers', [])
             $scope.wordTreeData.total = total;
         }
 
-        $scope.setWordTreeFeedback = function(selected, span) {
+        $scope.setWordTreeFeedback = function(selected, span, docs) {
             $scope.wordTreeData.feedbackText = selected;
             $scope.wordTreeData.spanText = span;
+            $scope.wordTreeData.docList = docs;
         }
 
         $scope.wordTreeFullscreenButton = false;
