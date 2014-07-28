@@ -54,12 +54,12 @@
         </li>
       </ul>
       <form class="navbar-form navbar-right" role="search">
-        <div class="form-group" ng-class="{'searchinput-active': searchQuery}">
+        <div class="form-group" ng-class="{'search-input-active': searchQuery}">
           <span id="add-on">Doc #</span>
-          <input id="searchinput" class="form-control" 
+          <input id="search-input" class="form-control" 
                 placeholder="Comma separated" type="search" 
                 ng-model="searchQuery" ng-blur="loadVarStats(active.variable)"/>
-          <span id="searchclear" class="searchclear glyphicon glyphicon-remove-circle" 
+          <span id="search-clear" class="search-clear glyphicon glyphicon-remove-circle" 
                 ng-click="setSearchFilter(null)"></span>
         </div>
       </form>
@@ -123,7 +123,7 @@
               <div class="sidebar-separator breakline resizable" horizontal-splitter>
                 <div class="handle"></div>
               </div>
-              <div id="expandtable">
+              <div id="grid-table">
                 <div class="divrow ng-cloak" 
                     ng-repeat="doc in gridData track by doc.id" 
                     ng-show="!searchQuery || searchQuery.indexOf(doc.id) !== -1">
@@ -209,7 +209,7 @@
         </div>
         <div class="main">
           <div>
-            <div ng-if="records.report.exists && tabs.docView" class="alert alert-warning reportFeedback">
+            <div ng-if="records.report.exists && tabs.docView" class="alert alert-warning report-feedback">
               <span ng-if="appInfo">
                 {{appInfo}}
               </span>
@@ -235,7 +235,7 @@
                     <a ng-click="addFeedbackDoc('negative')">{{$root.config.classificationName['negative']}}</a></span>
               </span>
             </div>
-            <div ng-if="wordTreeData.feedbackText && tabs.wordTreeView" class="alert alert-warning reportFeedback">
+            <div ng-if="wordTreeData.feedbackText && tabs.wordTreeView" class="alert alert-warning report-feedback">
               <span ng-if="appInfo">
                 {{appInfo}}
               </span>
@@ -306,7 +306,7 @@
                           <button type="submit" class="btn btn-default">Search</button>
                       </span>
                     </div>
-                    <span id="wordtree-searchclear" class="searchclear glyphicon glyphicon-remove-circle" 
+                    <span id="wordtree-search-clear" class="search-clear glyphicon glyphicon-remove-circle" 
                           ng-click="wordTreeQuery =''; clearWordTree()">
                     </span>
                   </div>
@@ -337,7 +337,7 @@
                 </tab-heading>
                 <div class="tab-div">
                   <h4>Feedback List</h4>
-                  <div class="tabContent" id="feedbackList">
+                  <div class="tab-content" id="feedbackList">
                     <p ng-hide="feedbackList.length">Feedback list is empty.</p>
                     <alert ng-repeat="feedback in feedbackList" type="default" close="removeFeedback($index)">
                       <strong>{{$index + 1}}.</strong>
@@ -368,7 +368,7 @@
 
                     <h4>Training results</h4>
                     
-                    <div class="tabContent">  
+                    <div class="tab-content">  
                       <p ng-show="retrainData.loading">
                         <span><i class='glyphicon glyphicon-refresh spin'></i></span> 
                         Re-training models. Please wait.
