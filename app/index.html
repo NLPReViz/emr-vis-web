@@ -364,17 +364,19 @@
                     </div>
                     </div>
 
-                    <hr />
+                    <div ng-show="retrainData.message || retrainData.loading">
+                      <hr />
 
-                    <h4>Training results</h4>
-                    
-                    <div class="tab-content">  
-                      <p ng-show="retrainData.loading">
-                        <span><i class='glyphicon glyphicon-refresh spin'></i></span> 
-                        Re-training models. Please wait.
-                      </p>
-                      <div ng-hide="retrainData.loading">
-                        <p>{{retrainData.message}}</p>
+                      <h4>Training results</h4>
+                      
+                      <div class="tab-content">  
+                        <p ng-show="retrainData.loading">
+                          <span><i class='glyphicon glyphicon-refresh spin'></i></span> 
+                          Re-training models. Please wait.
+                        </p>
+                        <div ng-hide="retrainData.loading">
+                          <p>{{retrainData.message}}</p>
+                        </div>
                       </div>
                     </div>
                   
