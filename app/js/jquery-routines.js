@@ -8,7 +8,7 @@ jQuery(document).ready(function(){
                         - 4;
 
       if (magicHeight > 0)
-         $("#expandtable").height(magicHeight);
+         $("#grid-table").height(magicHeight);
    }
    fixGrid();
    $("#sidebar-top").bind('heightChange', fixGrid);
