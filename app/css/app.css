@@ -21,22 +21,18 @@ body {
     padding-right: 23px;
 }
 
-.searchinput {
-    width: 200px;
-}
-
 #add-on{
   display: inline-block;
 }
 
-#searchclear {
+#search-clear {
     right: 30px;
     top: 0;
     bottom: 0;
     position: absolute;
 }
 
-.searchclear {
+.search-clear {
     height: 14px;
     margin: auto;
     font-size: 14px;
@@ -45,11 +41,12 @@ body {
     background-color: white;
 }
 
-#searchinput {
+#search-input {
+  width: 200px;
   padding-right: 30px;
 }
 
-.searchinput-active .form-control{
+.search-input-active .form-control{
     border-color: #66afe9;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(102, 175, 233, 0.6);
     outline: 0 none;
@@ -609,7 +606,7 @@ body {
     margin-bottom: 0;
 }
 
-#sidebar-top #expandtable, #sidebar-top #tablecontainer 
+#sidebar-top #expand-table, #sidebar-top #tablecontainer 
 {
     height:100%;
     margin: 0;
@@ -646,7 +643,7 @@ body {
     margin: 0 auto;
 }
 
-#sidebar-top #expandtable
+#sidebar-top #grid-table
 {
     margin-top: 80px;
     overflow-x: hidden;
@@ -914,7 +911,7 @@ body {
  * Feedback
  */
 
-.reportFeedback {
+.report-feedback {
     z-index: 1510;
     
     display: block;
@@ -928,15 +925,15 @@ body {
     margin-top: 4px;
 }
 
-.reportFeedback select{
+.report-feedback select{
     width:120px;
 }
 
-.reportFeedback a{
+.report-feedback a{
     cursor: pointer;
 }
 
-.tabContent {
+.tab-content {
     margin-top: 20px; /* define margin as you see fit */
 }
 
@@ -1009,7 +1006,7 @@ body {
     z-index: 1050;
 }
 
-#wordtree-searchclear {
+#wordtree-search-clear {
     float: right;
     right: 75px;
     top: -23px;
