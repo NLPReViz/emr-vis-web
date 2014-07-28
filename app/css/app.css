@@ -391,20 +391,19 @@ body {
  * Sidebar
  */
 
- .sidebar {
-    position: fixed;
-    top: 51px;
-    bottom: 0;
-    left: 0;
-    z-index: 1000;
+.sidebar {
     display: block;
-    padding: 0.9%;
-    overflow-x: auto;
-    overflow-y: auto; 
+    position: fixed;
+    height: 100%;
+    width: 601px;
+
+    padding: 8px;
     background-color: #f5f5f5;
     border-right: 1px solid #eee;
-    width: 601px;
-    height: 100%;
+    
+    overflow: auto;
+    
+    z-index: 1000;
 }
 
 #sidebar-top {
@@ -478,9 +477,13 @@ body {
 }
 
 #sidebar-bottom {
-    height: 41%;
     width: 100%;
     position: relative;
+
+    height: -moz-calc(50% - 60px);
+    height: -webkit-calc(50% - 60px);
+    height: -o-calc(50% - 60px);
+    height: calc(50% - 60px);
 }
 
 #sidebar-bottom-cover {
