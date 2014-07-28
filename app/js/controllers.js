@@ -369,8 +369,6 @@ angular.module('myApp.controllers', [])
         };
 
         $scope.confirmFeedback = function() {
-            //Change view
-            $scope.tabs.trainingView = true;
 
             if($scope.retrainData.loading == true)
                 alert("Re-training already in process!");
@@ -425,7 +423,7 @@ angular.module('myApp.controllers', [])
          * Tabs
          */
 
-        $scope.tabs = {docView: true, wordtreeView: false, trainingView: false};
+        $scope.tabs = {docView: true, wordtreeView: false};
 
         $scope.setWordTreeHeight = function(minusHeight) {
             if($scope.wordTreeFullscreenButton)
