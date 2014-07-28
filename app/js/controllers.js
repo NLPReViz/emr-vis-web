@@ -581,6 +581,15 @@ angular.module('myApp.controllers', [])
             if(!$scope.modal.isCollapsed){
                 $scope.modal.selectedModel = $scope.active.model;
                 $scope.modal.selectedDataset = $scope.active.dataset;
+
+                setTimeout(function() {
+                    $('#modal ul').each(function () {
+                        // var rowpos = $('#table tr:last').position();
+                        var pos = $(this).find(".selected").position();
+                        console.log(pos);
+                        $(this).scrollTop($(this).scrollTop() + pos.top - 60);
+                    });
+                });
             }
         };
 
