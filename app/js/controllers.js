@@ -391,7 +391,7 @@ angular.module('myApp.controllers', [])
          */
 
         $scope.retrainData = new Object();
-        $scope.retrainData.message = "Nothing to show here.";
+        $scope.retrainData.message = null;
         $scope.retrainData.loading = false;
 
         $scope.sendFeedback = function() {
