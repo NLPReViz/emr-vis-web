@@ -933,17 +933,17 @@ body {
     cursor: pointer;
 }
 
-.tab-content {
-    margin-top: 20px; /* define margin as you see fit */
+.tab-inner-content {
+    padding: 15px;
+}
+
+.tab-inner-content h4{
+    margin-bottom: 20px;
 }
 
 #feedbackList .alert-default{
     background-color: #eee;
     padding: 2px;
-}
-
-.tab-div {
-    padding: 15px;
 }
 
 
