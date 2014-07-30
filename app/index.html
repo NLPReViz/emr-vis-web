@@ -374,8 +374,7 @@
                   Re-training models. Please wait.
                 </p>
                 <div ng-hide="retrainData.loading">
-                  <p class="alert" 
-                    ng-class="{'alert-info': retrainData.successful, 'alert-danger': !retrainData.successful}">
+                  <p ng-class="{'bg-info': retrainData.successful, 'bg-danger': !retrainData.successful}">
                     {{retrainData.message}} 
                     <span ng-show="retrainData.successful">
                       Now using <strong>{{active.model}}</strong>.
