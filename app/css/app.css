@@ -893,7 +893,7 @@ body {
  * Report highlighting
  */
 
-.dim {
+.report pre .dim {
     color: #aaa;
 }
 
