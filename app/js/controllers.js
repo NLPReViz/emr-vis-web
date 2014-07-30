@@ -405,10 +405,10 @@ angular.module('myApp.controllers', [])
                 .then(function(data) {
 
                     if(data.msg == "OK"){
-                        $scope.retrainData.message = "Retraining successful!";
+                        $scope.retrainData.message = "Retraining successful! Now using <em>" + data.latestModel + "</em>.";
                         assignDataToVars(data.gridVarData);
                         $scope.modelList = data.modelList;
-                        $scope.active.model = $scope.modelList[$scope.modelList.length - 1].name;
+                        $scope.active.model = data.latestModel;
                     }
                     else{
                         $scope.retrainData.message = data.msg;
@@ -587,7 +587,7 @@ angular.module('myApp.controllers', [])
                     $('#modal ul').each(function () {
                         // var rowpos = $('#table tr:last').position();
                         var pos = $(this).find(".selected").position();
-                        console.log(pos);
+                        // console.log(pos);
                         $(this).scrollTop($(this).scrollTop() + pos.top - 60);
                     });
                 });
