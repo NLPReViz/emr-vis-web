@@ -393,6 +393,7 @@ angular.module('myApp.controllers', [])
         $scope.retrainData = new Object();
         $scope.retrainData.message = null;
         $scope.retrainData.loading = false;
+        $scope.retrainData.successful = false;
 
         $scope.sendFeedback = function() {
             // alert('Re-training!');
@@ -405,13 +406,17 @@ angular.module('myApp.controllers', [])
                 .then(function(data) {
 
                     if(data.msg == "OK"){
-                        $scope.retrainData.message = "Retraining successful! Now using " + data.latestModel + ".";
+                        $scope.retrainData.message = "Retraining successful!";
                         assignDataToVars(data.gridVarData);
                         $scope.modelList = data.modelList;
                         $scope.active.model = data.latestModel;
+                        $scope.retrainData.feedbackList = $.extend(true,[],$scope.feedbackList);
+                        $scope.clearFeedback();
+                        $scope.retrainData.successful = true;
                     }
                     else{
                         $scope.retrainData.message = data.msg;
+                        $scope.retrainData.successful = false;
                     }
 
                     $scope.retrainData.loading = false;
