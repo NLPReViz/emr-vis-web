@@ -106,7 +106,8 @@ body {
 #modal .list ul {
   padding: 0;
   height: 150px; 
-  overflow: scroll; 
+  overflow-y: scroll; 
+  overflow-x: hidden;
 }
 
 #modal .list li{
@@ -955,16 +956,26 @@ body {
  */
 
 .spin {
+  
   animation: 2s linear 0s normal none infinite spin;
+
+  -webkit-animation-name: spinner;
+  -webkit-animation-duration: 0s;
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-delay: 2s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-direction: normal;
+  -webkit-animation-fill-mode: none;
 }
 
 @keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(359deg);
-  }
+  from {transform: rotate(0deg);}
+  to {transform: rotate(359deg);}
+}
+
+@-webkit-keyframes spin {
+    from {-webkit-transform: rotate(0deg);}
+    to {-webkit-transform: rotate(359deg);}
 }
 
 /*
