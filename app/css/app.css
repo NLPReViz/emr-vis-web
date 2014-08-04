@@ -19,6 +19,11 @@ body {
 
 .navbar-form {
     padding-right: 23px;
+    width: 280px;
+}
+
+.navbar-nav {
+  width: 350px;
 }
 
 #add-on{
@@ -651,7 +656,7 @@ body {
 {
     margin-top: 80px;
     overflow-x: hidden;
-    overflow-y: scroll;
+    overflow-y: scroll;  /* FIXME: This rule is deprecated */
     height: 100%;
     border-bottom: 0;
     background-color: #eee;
