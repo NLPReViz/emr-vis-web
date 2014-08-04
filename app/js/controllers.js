@@ -593,7 +593,8 @@ angular.module('myApp.controllers', [])
                         // var rowpos = $('#table tr:last').position();
                         var pos = $(this).find(".selected").position();
                         // console.log(pos);
-                        $(this).scrollTop($(this).scrollTop() + pos.top - 60);
+                        if(typeof pos != 'undefined')
+                            $(this).scrollTop($(this).scrollTop() + pos.top - 60);
                     });
                 });
             }
