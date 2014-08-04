@@ -91,7 +91,7 @@ body {
   left: 0px;
   padding: 8px;
   position: absolute;
-  top: 100%;
+  top: calc(100% + 1px);
   z-index: 1000;
   width: 400px;
 }
