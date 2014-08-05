@@ -367,7 +367,9 @@
                   Re-training models. Please wait.
                 </p>
                 <div ng-hide="retrainData.loading">
-                  <p ng-class="{'bg-info': retrainData.successful, 'bg-danger': !retrainData.successful}">
+                  <p>
+                    <span class="glyphicon glyphicon-ok" ng-show="retrainData.successful"></span>
+                    <span class="glyphicon glyphicon-remove" ng-show="!retrainData.successful"></span>
                     {{retrainData.message}} 
                     <span ng-show="retrainData.successful">
                       Now using <strong>{{active.model}}</strong>.
