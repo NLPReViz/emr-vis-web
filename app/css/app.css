@@ -665,10 +665,7 @@ body {
 
 #sidebar-top .breakline { clear:both;}
 
-#sidebar-top .divrow
-{
-
-}
+/* #sidebar-top .divrow { } */
 
 #sidebar-top .divcell { float:left; border: 1px solid #ccc; /*box-sizing: border-box; height: 100%;*/}
 #sidebar-top #topbar  { height: 80px; overflow: hidden; display: block;}
