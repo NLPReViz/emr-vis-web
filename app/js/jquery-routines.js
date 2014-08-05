@@ -14,3 +14,5 @@ jQuery(document).ready(function(){
    $("#sidebar-top").bind('heightChange', fixGrid);
    $(window).resize(fixGrid);
 });
+
+

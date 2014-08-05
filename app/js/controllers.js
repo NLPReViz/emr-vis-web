@@ -100,36 +100,41 @@ angular.module('myApp.controllers', [])
         function assignDataToVars(data) {
             $scope.gridData = data['gridData'];
 
-                // console.log($scope.gridData);
+            //TODO: Hack for fat scrollbars on Windows
+            setTimeout(function() {
+                $("#topbar").width( $(".divrow").width() );
+            });
 
-                //Show first report in the set
-                $scope.active.docIndex = 0;
-                $scope.loadReport(0);
+            // console.log($scope.gridData);
 
-                $scope.variableData = data['variableData'];
+            //Show first report in the set
+            $scope.active.docIndex = 0;
+            $scope.loadReport(0);
 
-                // console.log($scope.variableData);
+            $scope.variableData = data['variableData'];
 
-                $rootScope.config.variables.forEach(function(variable) {
-                  // console.log(data[variable]["docPositive"].length);
-                  $scope.variableData[variable]["percPositive"] = 
-                                          Math.round(100.0 *  data['variableData'][variable]["docPositive"].length / 
-                                          ( data['variableData'][variable]["docPositive"].length +  data['variableData'][variable]["docNegative"].length));
-                  
-                  if(isNaN($scope.variableData[variable]["percPositive"]))
-                    $scope.variableData[variable]["percPositive"] = 0;
+            // console.log($scope.variableData);
 
-                  $scope.variableData[variable]['percNegative'] = 
-                                          Math.round(100.0 *  data['variableData'][variable]["docNegative"].length / 
-                                          ( data['variableData'][variable]["docPositive"].length +  data['variableData'][variable]["docNegative"].length));
+            $rootScope.config.variables.forEach(function(variable) {
+              // console.log(data[variable]["docPositive"].length);
+              $scope.variableData[variable]["percPositive"] = 
+                                      Math.round(100.0 *  data['variableData'][variable]["docPositive"].length / 
+                                      ( data['variableData'][variable]["docPositive"].length +  data['variableData'][variable]["docNegative"].length));
+              
+              if(isNaN($scope.variableData[variable]["percPositive"]))
+                $scope.variableData[variable]["percPositive"] = 0;
 
-                  if(isNaN($scope.variableData[variable]["percNegative"]))
-                    $scope.variableData[variable]["percNegative"] = 0;
-                                          
-                });
+              $scope.variableData[variable]['percNegative'] = 
+                                      Math.round(100.0 *  data['variableData'][variable]["docNegative"].length / 
+                                      ( data['variableData'][variable]["docPositive"].length +  data['variableData'][variable]["docNegative"].length));
 
-                $scope.active.variable = $rootScope.config.variables[0];
-                $scope.loadVarStats($scope.active.variable);
+              if(isNaN($scope.variableData[variable]["percNegative"]))
+                $scope.variableData[variable]["percNegative"] = 0;
+                                      
+            });
+
+            $scope.active.variable = $rootScope.config.variables[0];
+            $scope.loadVarStats($scope.active.variable);
         }
 
         $scope.styleGridCell = function(classification, confidence) {
