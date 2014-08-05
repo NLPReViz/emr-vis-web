@@ -211,8 +211,7 @@ angular.module('myApp.controllers', [])
                     stopLoading();
                     $scope.feedbackText = null;
             }, function() { 
-                $scope.records.report.text = "Status " + status;
-                alert("Unable to fetch information for report "+activeDoc+".");
+                $scope.records.report.text = "Unable to fetch report";
                 stopLoading();
             });
         };
