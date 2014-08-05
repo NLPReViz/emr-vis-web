@@ -102,7 +102,7 @@ angular.module('myApp.controllers', [])
 
             //TODO: Hack for fat scrollbars on Windows
             setTimeout(function() {
-                $("#topbar").width( $(".divrow").width() );
+                fixGridScrollBar();
             });
 
             // console.log($scope.gridData);
