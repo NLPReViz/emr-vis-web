@@ -656,7 +656,7 @@ body {
 {
     margin-top: 80px;
     overflow-x: hidden;
-    overflow-y: scroll;  /* FIXME: This rule is deprecated */
+    overflow-y: scroll;
     height: 100%;
     border-bottom: 0;
     background-color: #eee;
