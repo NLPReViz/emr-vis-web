@@ -92,8 +92,13 @@
 
   <div class="container-fluid">
     <div class="row">
+
+      <!-- Sidebar -->
+
       <div class="sidebar">
         <div id="sidebar-resize-indicator"></div>
+
+        <!-- Grid -->
         <div id="sidebar-top" class="unselectable">
           <div id="tablecontainer">
             <div id="topbar">
@@ -139,7 +144,8 @@
         </div>
 
         <div id="sidebar-bottom">
-          <!-- <div id="sidebar-bottom-cover" ng-if="!tabs.docView"></div> -->
+
+          <!-- Variable details -->
           <div id="sidebar-bottom-left">
             <div class="about unselectable">Variable: <strong>{{$root.config.variableMapping[active.variable]}}</strong></div>
             <div class="content">
@@ -172,6 +178,7 @@
             </div>
           </div>
 
+          <!-- Report details -->
           <div id="sidebar-bottom-right">
             <div class="about unselectable">Report: <strong>#{{gridData[active.docIndex].id}}</strong></div>
             <div class="content">
@@ -200,7 +207,11 @@
         </div>
 
       </div>
+
+      <!-- Document views -->
       <div class="main">
+
+        <!-- Feedback -->
         <div ng-if="records.report.exists && tabs.docView" class="alert alert-warning report-feedback">
           <span ng-if="appInfo">
             {{appInfo}}
@@ -244,6 +255,8 @@
         </div>
 
         <tabset>
+
+          <!-- Report view -->
           <tab active="tabs.docView" heading="Document View">
             <div ng-show="records.pathology.exists" class="pagerview">
               <div class="pagerview-row">
@@ -286,9 +299,9 @@
                                     neg-terms='gridData[active.docIndex][active.variable].topNegative' >
                 </highlighted-report></pre>
             </div>
-            <!-- div id="pathology-report" class>
-            </div> -->
           </tab>
+
+          <!-- WordTree view -->
           <tab active="tabs.wordTreeView" select="setWordTreeHeight()" heading="WordTree View">
             <form ng-submit="loadWordTree(wordTreeQuery)" id="wordtree-search">
               <div class="row">
@@ -324,6 +337,8 @@
                   </span>
             </div>
           </tab>
+
+          <!-- Retrain view -->
           <tab>
             <tab-heading>
               <i class="glyphicon glyphicon-refresh"></i> Re-Train &nbsp;<span ng-if="feedbackList.length > 0" class="badge alert-info pull-right animated bounceIn"> {{feedbackList.length}} </span>

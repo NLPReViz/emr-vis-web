@@ -65,17 +65,14 @@ angular.module('myApp.controllers', [])
         
 
         function setModelAndDataset (model, dataset) {
-            if(model === undefined || dataset === undefined ){
+            if(model === undefined || dataset === undefined )
                 return
-            }
 
-            if ( !($scope.active.model == model && $scope.active.dataset == dataset) ) {
+            if ( !($scope.active.model == model && $scope.active.dataset == dataset) )
                 loadData(model, dataset);
-            }
 
-            if ($scope.active.dataset != dataset && $scope.active.wordTreeQuery) {
+            if ($scope.active.dataset != dataset && $scope.active.wordTreeQuery)
                 $scope.loadWordTree($scope.active.wordTreeQuery);
-            }
 
             $scope.active.model = model;
             $scope.active.dataset = dataset;
@@ -326,16 +323,6 @@ angular.module('myApp.controllers', [])
 
             var docClass = $scope.gridData[$scope.active.docIndex][$scope.active.variable].classification;
             var fClass = null;
-
-            // if(bAccept) {
-            //     fClass = docClass;    
-            // }
-            // else {
-            //     if (docClass == "positive")
-            //         fClass = "negative";
-            //     else
-            //         fClass = "positive";
-            // }
             
             $scope.feedbackList.push(new Feedback("TYPE_DOC", null, null, 
                                         classification, $scope.active.variable, 
@@ -390,112 +377,7 @@ angular.module('myApp.controllers', [])
             }
         }
 
-        /*
-         * Re-train Results
-         */
-
-        $scope.retrainData = new Object();
-        $scope.retrainData.message = null;
-        $scope.retrainData.loading = false;
-        $scope.retrainData.successful = false;
-
-        $scope.sendFeedback = function() {
-            // alert('Re-training!');
-            if($scope.retrainData.loading == true)
-                return;
-
-            $scope.retrainData.loading = true;
-
-            backend.putFeedback($scope.feedbackList, $scope.active.model, $scope.active.dataset)
-                .then(function(data) {
-
-                    if(data.msg == "OK"){
-                        $scope.retrainData.message = "Retraining successful!";
-                        assignDataToVars(data.gridVarData);
-                        $scope.modelList = data.modelList;
-                        $scope.active.model = data.latestModel;
-                        $scope.retrainData.feedbackList = $.extend(true,[],$scope.feedbackList);
-                        $scope.clearFeedback();
-                        $scope.retrainData.successful = true;
-                    }
-                    else{
-                        $scope.retrainData.message = data.msg;
-                        $scope.retrainData.successful = false;
-                    }
-
-                    $scope.retrainData.loading = false;
-
-                }, function() { alert("Unable to send feedback."); $scope.retrainData.loading = false; });
-        };
-
-        /*
-         * Tabs
-         */
-
-        $scope.tabs = {docView: true, wordtreeView: false};
-
-        $scope.setWordTreeHeight = function(minusHeight) {
-            if($scope.wordTreeFullscreenButton)
-                minusHeight = 50;
-            else
-                minusHeight = 200;
-
-            // console.log( wordtree.offset().top);
-            $("#wordtree-view").height($(window).height() - minusHeight);
-        };
-
-        $($window).resize($scope.setWordTreeHeight(200));
-
-
-        /*
-         * AppInfo
-         */
-
-        function showInfo (notice){
-            $scope.appInfo = notice;
-
-            setTimeout(function() {
-              $scope.appInfo = false;
-              $scope.$digest();
-            }, 1500);
-        }
-
-        /*
-         * Print report
-         */
-
-        $scope.PrintReport = function(doc) {
-            //http://stackoverflow.com/questions/2255291/print-the-contents-of-a-div
-            var mywindow = $window.open('', 'Print Window', "toolbar=no, scrollbars=yes, width=800");
-            mywindow.document.write('<html><head><title>Record #'+ $scope.gridData[$scope.active.docIndex].id +' — '+ doc +'</title>');
-            mywindow.document.write('</head><body><pre>');
-            mywindow.document.write($("#" + doc + " pre").html());
-            mywindow.document.write('</pre></body></html>');
-            mywindow.print();
-            mywindow.close();
-        }
-
-        /*
-         * Loading
-         */
-
-        var loaderCount = 0;
-        $scope.appDisabled = false;
-
-        function startLoading() {
-            loaderCount += 1;
-            $scope.appLoading = true;
-        }
-
-        function stopLoading() {
-            if (loaderCount > 1)
-                loaderCount -= 1;
-            else
-                loaderCount = 0;
-                $scope.appLoading = false;
-        }
-
-
+        
         /*
          * WordTree
          */
@@ -580,6 +462,63 @@ angular.module('myApp.controllers', [])
         }
 
         /*
+         * Re-train Results
+         */
+
+        $scope.retrainData = new Object();
+        $scope.retrainData.message = null;
+        $scope.retrainData.loading = false;
+        $scope.retrainData.successful = false;
+
+        $scope.sendFeedback = function() {
+            // alert('Re-training!');
+            if($scope.retrainData.loading == true)
+                return;
+
+            $scope.retrainData.loading = true;
+
+            backend.putFeedback($scope.feedbackList, $scope.active.model, $scope.active.dataset)
+                .then(function(data) {
+
+                    if(data.msg == "OK"){
+                        $scope.retrainData.message = "Retraining successful!";
+                        assignDataToVars(data.gridVarData);
+                        $scope.modelList = data.modelList;
+                        $scope.active.model = data.latestModel;
+                        $scope.retrainData.feedbackList = $.extend(true,[],$scope.feedbackList);
+                        $scope.clearFeedback();
+                        $scope.retrainData.successful = true;
+                    }
+                    else{
+                        $scope.retrainData.message = data.msg;
+                        $scope.retrainData.successful = false;
+                    }
+
+                    $scope.retrainData.loading = false;
+
+                }, function() { alert("Unable to send feedback."); $scope.retrainData.loading = false; });
+        };
+
+        /*
+         * Tabs
+         */
+
+        $scope.tabs = {docView: true, wordtreeView: false};
+
+        $scope.setWordTreeHeight = function(minusHeight) {
+            if($scope.wordTreeFullscreenButton)
+                minusHeight = 50;
+            else
+                minusHeight = 200;
+
+            // console.log( wordtree.offset().top);
+            $("#wordtree-view").height($(window).height() - minusHeight);
+        };
+
+        $($window).resize($scope.setWordTreeHeight(200));
+
+
+        /*
          * Modal
          */
 
@@ -594,7 +533,6 @@ angular.module('myApp.controllers', [])
 
                 setTimeout(function() {
                     $('#modal ul').each(function () {
-                        // var rowpos = $('#table tr:last').position();
                         var pos = $(this).find(".selected").position();
                         // console.log(pos);
                         if(typeof pos != 'undefined')
@@ -608,6 +546,49 @@ angular.module('myApp.controllers', [])
             $scope.modal.isCollapsed = true;
             setModelAndDataset($scope.modal.selectedModel, $scope.modal.selectedDataset);
         }
+
+
+        /*
+         * Misc.
+         */
+
+        function showInfo (notice){
+            $scope.appInfo = notice;
+
+            setTimeout(function() {
+              $scope.appInfo = false;
+              $scope.$digest();
+            }, 1500);
+        }
+
+        $scope.PrintReport = function(doc) {
+            //http://stackoverflow.com/questions/2255291/print-the-contents-of-a-div
+            var mywindow = $window.open('', 'Print Window', "toolbar=no, scrollbars=yes, width=800");
+            mywindow.document.write('<html><head><title>Record #'+ $scope.gridData[$scope.active.docIndex].id +' — '+ doc +'</title>');
+            mywindow.document.write('</head><body><pre>');
+            mywindow.document.write($("#" + doc + " pre").html());
+            mywindow.document.write('</pre></body></html>');
+            mywindow.print();
+            mywindow.close();
+        }
+
+        // Loading
+        var loaderCount = 0;
+        $scope.appDisabled = false;
+
+        function startLoading() {
+            loaderCount += 1;
+            $scope.appLoading = true;
+        }
+
+        function stopLoading() {
+            if (loaderCount > 1)
+                loaderCount -= 1;
+            else
+                loaderCount = 0;
+                $scope.appLoading = false;
+        }
+
 
         return true;
     }])
