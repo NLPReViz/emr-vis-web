@@ -36,8 +36,8 @@ body {
     background-color: white;
 }
 
-#search-input { width: 200px; padding-right: 30px;
-}
+#search-input { width: 200px; padding-right: 25px;}
+#wordtree-input { padding-right: 25px;}
 
 .search-input-active .form-control{
     border-color: #66afe9;
