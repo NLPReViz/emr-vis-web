@@ -82,6 +82,14 @@ angular.module('myApp.directives', [])
 
                     element.text(scope.data);
 
+                    $(element).highlight(/S_O_H[\s\S]*E_O_H/, "dim") // header
+                        .highlight(/De-ID.*reserved./i, "dim") //copright
+                        .highlight(/\[Report de-identified.*/i, "dim") //De-ID
+                        .highlight(/\*\* Report Electronically Signed Out \*\*/, "dim") //Pathology template
+                        .highlight(/My signature is attestation[\s\S]*reflects that evaluation./, "dim") //Pathology template
+                        .highlight(/E_O_R/, "dim") //End of report
+                        .highlight(/\*\*[A-Z\ ,-\[\]\.]*/g, "dim") //DE-IDed Names
+
                     if (!angular.isUndefined(posTerms)) {
                         posTerms.forEach( function(keyword) {
                             keyword.matchedList.forEach(function (string) {
@@ -100,14 +108,8 @@ angular.module('myApp.directives', [])
                         });
                     }
 
-                    $(element).highlight(/S_O_H[\s\S]*E_O_H/, "dim") // header
-                        .highlight(/De-ID.*reserved./i, "dim") //copright
-                        .highlight(/\[Report de-identified.*/i, "dim") //De-ID
-                        .highlight(/\*\* Report Electronically Signed Out \*\*/, "dim") //Pathology template
-                        .highlight(/My signature is attestation[\s\S]*reflects that evaluation./, "dim") //Pathology template
-                        .highlight(/E_O_R/, "dim") //End of report
-                        .highlight(/\*\*[A-Z\ ,-\[\]\.]*/g, "dim") //DE-IDed Names
-                        .highlight(/[A-Z\-\ #]*\:/g, "dim"); //Colon fields
+
+                    $(element).highlight(/[A-Z\-\ #]*\:/g, "dim"); //Colon fields
 
                 };
         
