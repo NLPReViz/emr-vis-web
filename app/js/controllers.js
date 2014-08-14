@@ -132,6 +132,7 @@ angular.module('myApp.controllers', [])
 
             $scope.active.variable = $rootScope.config.variables[0];
             $scope.loadVarStats($scope.active.variable);
+            $scope.updateWordTreeClass();
         }
 
         $scope.styleGridCell = function(classification, confidence) {
@@ -157,6 +158,7 @@ angular.module('myApp.controllers', [])
             if(variable != $scope.variable) {
               $scope.active.variable = variable;
               $scope.loadVarStats(variable);
+              $scope.updateWordTreeClass()
             }
 
             if(activeDocIndex != $scope.active.docIndex) {
