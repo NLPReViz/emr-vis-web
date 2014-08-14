@@ -310,7 +310,7 @@
                     ng-model="wordTreeData.feedbackVar" 
                     ng-options="$root.config.variableMapping[var] for var in $root.config.variables" 
                     ng-change="updateWordTreeClass()"></select> 
-                  <input id="wordtree-input" type="text" ng-model="wordTreeQuery" class="form-control" placeholder="Enter keywords&hellip;" required>
+                  <input id="wordtree-input" type="text" ng-model="wordTreeQuery" class="form-control" placeholder="Select variable and enter keywords here&hellip;" required>
                   <span class="input-group-btn">
                       <button type="submit" class="btn btn-default">Search</button>
                   </span>
