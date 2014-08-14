@@ -28,6 +28,8 @@ WordTreeData.doc_class.negative = [];
  */
 
 function updateAppCtrl(selected, span, docs) {
+    WordTreeData.filterDocs = docs;
+
     var duration = d3.event && d3.event.altKey ? 5000 : 500;
     
     setTimeout(function() {
@@ -54,6 +56,7 @@ function makeWordTree(data){
     WordTreeData.matches = data.matches;
     WordTreeData.matchedList = data.matchedList;
     WordTreeData.query = data.query;
+    WordTreeData.filterDocs = data.matchedList;
 
     var detail = 100;
 
@@ -741,7 +744,7 @@ function wordTreeNodeMouseOver(node, d, orientation, root, vis, eventName){
         d3.selectAll('*[class~="wordtree-' + 
           vis.wordtreeID +'-sentence-'+ids[i]+'"]').classed("wordtree-highlight-sentence", true);
 
-      docs = d.docs;
+        docs = d.docs;
     }
     else {
       docs = WordTreeData.matchedList
@@ -754,12 +757,23 @@ function wordTreeNodeMouseOver(node, d, orientation, root, vis, eventName){
     var pos = 0;
     var neg = 0;
 
-    for (var i=0; i < docs.length; i++){
-      if (WordTreeData.doc_class.positive.indexOf(docs[i]) > -1)
-        pos++;
-      else if (WordTreeData.doc_class.negative.indexOf(docs[i]) > -1)
-        neg++;
-    } 
+    for (var i=0; i < WordTreeData.filterDocs.length; i++) {
+      if (docs.indexOf(WordTreeData.filterDocs[i]) > -1){
+        if (WordTreeData.doc_class.positive.indexOf(WordTreeData.filterDocs[i]) > -1)
+          pos++;
+        else if (WordTreeData.doc_class.negative.indexOf(WordTreeData.filterDocs[i]) > -1)
+          neg++;
+      }
+    }
+
+    // for (var i=0; i < docs.length; i++){
+    //   if(WordTreeData.filterDocs.indexOf(docs[i]) > -1)) {
+    //     if (WordTreeData.doc_class.positive.indexOf(docs[i]) > -1)
+    //       pos++;
+    //     else if (WordTreeData.doc_class.negative.indexOf(docs[i]) > -1)
+    //       neg++;
+    //   }
+    // } 
 
     /* Add popup for class numbers */
 
