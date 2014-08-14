@@ -245,8 +245,7 @@
           </span>
           <span ng-if="!appInfo">
             <strong>"{{wordTreeData.feedbackText|truncate:20}}"</strong> indicates 
-            <select ng-init="wordTreeData.feedbackVar = active.variable; updateWordTreeClass()" 
-                    ng-model="wordTreeData.feedbackVar" 
+            <select ng-model="active.variable" 
                     ng-options="$root.config.variableMapping[var] for var in $root.config.variables" 
                     ng-change="updateWordTreeClass()"></select> 
             to be: 
@@ -307,8 +306,8 @@
             <form ng-submit="loadWordTree(wordTreeQuery)" id="wordtree-search">
               <div class="row">
                 <div class="input-group">
-                  <select id="wordtree-select-variable" ng-init="wordTreeData.feedbackVar = active.variable; updateWordTreeClass()"
-                    ng-model="wordTreeData.feedbackVar" 
+                  <select id="wordtree-select-variable" 
+                    ng-model="active.variable" 
                     ng-options="$root.config.variableMapping[var] for var in $root.config.variables" 
                     ng-change="updateWordTreeClass()"></select> 
                   <input id="wordtree-input" type="text" ng-model="wordTreeQuery" class="form-control" placeholder="Select variable and enter keywords here&hellip;" required>

@@ -340,10 +340,10 @@ angular.module('myApp.controllers', [])
         }
 
         $scope.addWordTreeFeedback = function(classification) {
-            if ($scope.wordTreeData.feedbackVar) {
+            if ($scope.active.variable) {
                 $scope.feedbackList.push(new Feedback("TYPE_WORDTREE", $scope.wordTreeData.feedbackText, 
                                         $scope.wordTreeData.spanText, classification, 
-                                        $scope.wordTreeData.feedbackVar, $scope.wordTreeData.docList));
+                                        $scope.active.variable, $scope.wordTreeData.docList));
                 showInfo("Feedback added to the list!");
                 $scope.feedbackText = false;
             }
@@ -446,14 +446,12 @@ angular.module('myApp.controllers', [])
         }
 
         $scope.updateWordTreeClass = function() {
-            var variable = $scope.wordTreeData.feedbackVar;
+            var variable = $scope.active.variable;
 
             if ($scope.variableData === undefined || !variable)
                 return;
-            
-            $scope.active.variable = $scope.wordTreeData.feedbackVar;
 
-            $scope.loadVarStats($scope.wordTreeData.feedbackVar);
+            $scope.loadVarStats(variable);
 
             updateClass(variable, 
                         $scope.variableData[variable]["docPositive"],
