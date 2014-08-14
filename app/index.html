@@ -393,16 +393,17 @@
 
                   <div ng-show="retrainData.successful">
                     <p>It includes the following feedback:</p>
-                    <ol ng-repeat="feedback in retrainData.feedbackList" type="default">
-                      <li ng-if="feedback.kind == 'TYPE_DOC'">
-                        #{{feedback.docList}} should have 
-                        <strong>{{$root.config.variableMapping[feedback.variable]}}</strong> 
-                        marked as <strong>{{$root.config.classificationName[feedback.classification] | lowercase}}</strong>.
-                      </li>
-                      <li ng-if="feedback.kind == 'TYPE_TEXT' || feedback.kind == 'TYPE_WORDTREE'">
-                        "<em>{{feedback.selected}}</em>" indicates 
-                        <strong>{{$root.config.variableMapping[feedback.variable]}}</strong> 
-                        to be <strong>{{$root.config.classificationName[feedback.classification] | lowercase}}</strong>.
+                    <ol>
+                      <li ng-repeat="feedback in retrainData.feedbackList">
+                        <span ng-if="feedback.kind == 'TYPE_DOC'">
+                          #{{feedback.docList}} should have 
+                          <strong>{{$root.config.variableMapping[feedback.variable]}}</strong> 
+                          marked as <strong>{{$root.config.classificationName[feedback.classification] | lowercase}}</strong>.</span>
+                        <span ng-if="feedback.kind == 'TYPE_TEXT' || feedback.kind == 'TYPE_WORDTREE'">
+                          "<em>{{feedback.selected}}</em>" indicates 
+                          <strong>{{$root.config.variableMapping[feedback.variable]}}</strong> 
+                          to be <strong>{{$root.config.classificationName[feedback.classification] | lowercase}}</strong>.
+                        </span>
                       </li>
                     </ol>
                   </div>
