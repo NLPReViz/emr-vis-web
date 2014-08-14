@@ -110,7 +110,8 @@
               <div class="colname cellwidth_var" 
                   ng-repeat="var in $root.config.variables" 
                   tooltip="{{variableData[var]['percPositive']}}% {{$root.config.classificationName['positive']}}" 
-                  tooltip-placement="{{$index > 6 ? 'left' : 'right'}}">
+                  tooltip-placement="{{$index > 6 ? 'left' : 'right'}}"
+                  tooltip-animation="false">
                     <div class="progress">
                       <div class="progress-bar positive" style="width: {{variableData[var]['percPositive']}}%"></div>
                       <div class="progress-bar negative" style="width: {{variableData[var]['percNegative']}}%"></div>
