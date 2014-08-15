@@ -33,7 +33,7 @@ function updateAppCtrl(selected, span) {
     
     setTimeout(function() {
         appCtrl.setWordTreeFeedback(selected, span, WordTreeData.filterDocs); 
-        appCtrl.setWordTreePercentage(docs.length, WordTreeData.total); 
+        appCtrl.setWordTreePercentage(WordTreeData.filterDocs.length, WordTreeData.total); 
         appCtrl.setSearchFilter(WordTreeData.filterDocs);
         appCtrl.$apply(); 
     }, duration);
@@ -52,7 +52,6 @@ function updateClass(variable, positive, negative) {
 function makeWordTree(data){
 
     WordTreeData.total = data.total;
-    WordTreeData.matches = data.matches;
     WordTreeData.matchedList = data.matchedList;
     WordTreeData.query = data.query;
     WordTreeData.filterDocs = data.matchedList;
