@@ -5,7 +5,7 @@
 
 #wordtree-view text.tree{
     cursor:pointer;
-    fill:black;
+    /*fill:black;*/
 }
 
 /*
@@ -19,7 +19,7 @@
 
 #wordtree-view .link {
     fill: none;
-    stroke: #D17519;
+    stroke: #ccc;
     stroke-width: 0.5px;
 }
 

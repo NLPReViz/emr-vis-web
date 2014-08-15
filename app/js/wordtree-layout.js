@@ -69,7 +69,9 @@ function makeTree(context, level, detail, orientation){
 				tree[collapsed.key]["all_children"] = collapsed.children;
 				tree[collapsed.key]["key"] = collapsed.key;
 				tree[collapsed.key]["expanded"] = true;
-				tree[collapsed.key]["selected"] = false;		
+				tree[collapsed.key]["selected"] = false;
+				tree[collapsed.key]["hoverPos"] = 0;
+				tree[collapsed.key]["hoverNeg"] = 0;
 			}
 		}else{
 			delete tree[key];
