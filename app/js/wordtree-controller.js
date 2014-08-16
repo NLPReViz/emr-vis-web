@@ -549,12 +549,6 @@ function wordTreeNodeClick(node, d, orientation, root){
     // Calculate which nodes should be collapsed or expanded.
 
     filterDocs = [];
-    if (d.isRoot){
-      WordTreeData.filterDocs = WordTreeData.matchedList;
-    }
-    else{
-      WordTreeData.filterDocs = d.docs;
-    }
 
     // If it's the root node that was clicked, then reset the filters.
     if(d.isRoot){
@@ -563,6 +557,8 @@ function wordTreeNodeClick(node, d, orientation, root){
       WordTreeData.vis.selectedNodes = {left: [], right: []};
       WordTreeData.vis.filterDepth = 0; 
       WordTreeData.vis.filterOrienation = null;
+
+      WordTreeData.filterDocs = WordTreeData.matchedList;
     } 
     // If it was a double click, or there are no active filters, first
     // reset the filters and then add the ID's for that node as the 
@@ -576,6 +572,8 @@ function wordTreeNodeClick(node, d, orientation, root){
         WordTreeData.vis.filterDepth = d.depth;
         WordTreeData.vis.filterOrientation = orientation;
         toggle(d);
+
+        WordTreeData.filterDocs = d.docs;
     }
     // If there are active filters, restrict the active filters to the
     // just the list of ID's passing through this node.
@@ -587,7 +585,7 @@ function wordTreeNodeClick(node, d, orientation, root){
             WordTreeData.vis.filterDepth = d.depth;
             // WordTreeData.vis.selectedNodeIDs[orientation].push(d.id)
             WordTreeData.vis.selectedNodes[orientation].push(d);
-            var intersection = []
+            var intersection = [];
             d.ids.forEach(function(id){
                 if(WordTreeData.vis.selectedIDs.contains(id))
                     intersection.push(id);
@@ -610,6 +608,13 @@ function wordTreeNodeClick(node, d, orientation, root){
             WordTreeData.vis.filterDepth = d.depth;
             WordTreeData.vis.filterOrientation = orientation;      
         }
+
+        var intersection = [];
+        d.docs.forEach(function(doc){
+            if(WordTreeData.filterDocs.contains(doc))
+                intersection.push(doc);
+        });
+        WordTreeData.filterDocs = intersection;
         
     }
 
