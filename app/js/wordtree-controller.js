@@ -203,7 +203,7 @@ var getPositiveOffset = function(d) {
   if (WordTreeData.doc_class.variable == null){
     d.hoverPos = 0;
     d.hoverNeg = 0;
-    return 0;
+    return 0.5;
   }
 
   if (!d.isRoot)
@@ -226,7 +226,7 @@ var getPositiveOffset = function(d) {
   if ((neg+pos) == 0){
     d.hoverPos = 0;
     d.hoverNeg = 0;
-    return 0;
+    return 0.5;
   }
 
   d.hoverPos = pos;
