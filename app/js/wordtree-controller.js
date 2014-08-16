@@ -863,7 +863,7 @@ function wordTreeNodeMouseOver(node, d, orientation, root, eventName){
 
     WordTreeData.vis.popup_number = d3.select(child.parentNode)
                         .append("svg:text")
-                        .attr("y", function() {if (!d.isRoot) return 1; else return -20;})
+                        .attr("y", function() {if (!d.isRoot) return 1; else return -17;})
                         .attr("id", "number-popup")
                         .attr("font-size", 12)
                         .attr("class", "number-popup")

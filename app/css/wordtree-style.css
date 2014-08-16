@@ -25,6 +25,7 @@
 
 #wordtree-view text.number-popup{
     fill: #aaa;
+    font-size: 12;
 }
 
 #wordtree-view g.sentence-popup{
