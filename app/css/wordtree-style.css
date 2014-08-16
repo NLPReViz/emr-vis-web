@@ -25,7 +25,6 @@
 
 #wordtree-view text.number-popup{
     fill: #aaa;
-    font-size: 12;
 }
 
 #wordtree-view g.sentence-popup{
@@ -35,9 +34,8 @@
 
 #wordtree-view text.wordtree-highlight-sentence {
     /*fill: #D17519;*/
-/*    stroke: #D17519;
-    stroke-width: 0.5px;*/
-    text-decoration: underline;
+    stroke: yellow;
+    stroke-width: 0.033em;
 }
 
 /*
