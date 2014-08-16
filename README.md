@@ -68,7 +68,7 @@ Now browse to the app at `http://localhost:8080/emr-vis-web/app/index.html` or `
 
 ### Notes
 
-The wordtree veiw is built upon the library by silverasm, available at https://github.com/silverasm/wordtree.
+The wordtree veiw is adapted from the library by silverasm, available at https://github.com/silverasm/wordtree.
 
 [git]: http://git-scm.com/
 [bower]: http://bower.io
