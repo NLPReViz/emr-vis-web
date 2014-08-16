@@ -573,20 +573,18 @@ angular.module('myApp.controllers', [])
         }
 
         // Loading
-        var loaderCount = 0;
+        $scope.loaderCount = 0;
         $scope.appDisabled = false;
 
         function startLoading() {
-            loaderCount += 1;
-            $scope.appLoading = true;
+            $scope.loaderCount += 1;
         }
 
         function stopLoading() {
-            if (loaderCount > 1)
-                loaderCount -= 1;
+            if ($scope.loaderCount > 1)
+                $scope.loaderCount -= 1;
             else
-                loaderCount = 0;
-                $scope.appLoading = false;
+                $scope.loaderCount = 0;
         }
 
 
