@@ -193,6 +193,43 @@ function width(d){
     return fontSize(d) * d.key.length * 0.7
 }
 
+
+var getPositiveOffset = function(d) {
+  if (WordTreeData.doc_class.variable == null){
+    d.hoverPos = 0;
+    d.hoverNeg = 0;
+    return 0;
+  }
+
+  if (!d.isRoot)
+    docs = d.docs;
+  else
+    docs = WordTreeData.matchedList;
+
+  var pos = 0;
+  var neg = 0;
+
+  for (var i=0; i < WordTreeData.filterDocs.length; i++) {
+    if (docs.indexOf(WordTreeData.filterDocs[i]) > -1){
+      if (WordTreeData.doc_class.positive.indexOf(WordTreeData.filterDocs[i]) > -1)
+        pos++;
+      else if (WordTreeData.doc_class.negative.indexOf(WordTreeData.filterDocs[i]) > -1)
+        neg++;
+    }
+  }
+
+  if ((neg+pos) == 0){
+    d.hoverPos = 0;
+    d.hoverNeg = 0;
+    return 0;
+  }
+
+  d.hoverPos = pos;
+  d.hoverNeg = neg;
+
+  return (pos/(pos+neg));
+}
+
 /** Called after any change to the word tree or when it's first rendered. 
     Recursively moves nodes to their positions, and shows and hides them 
     depending on whether they are expanded or not.
@@ -291,36 +328,6 @@ function updateWordTreeNode(source, orientation, root) {
         return classes;
     }
 
-    var getPositiveOffset = function(d) {
-      if (WordTreeData.doc_class.variable == null){
-        d.hoverPos = 0;
-        d.hoverNeg = 0;
-        return 0+"%";
-      }
-
-      if (!d.isRoot)
-        docs = d.docs;
-      else
-        docs = WordTreeData.matchedList;
-
-      var pos = 0;
-      var neg = 0;
-
-      for (var i=0; i < WordTreeData.filterDocs.length; i++) {
-        if (docs.indexOf(WordTreeData.filterDocs[i]) > -1){
-          if (WordTreeData.doc_class.positive.indexOf(WordTreeData.filterDocs[i]) > -1)
-            pos++;
-          else if (WordTreeData.doc_class.negative.indexOf(WordTreeData.filterDocs[i]) > -1)
-            neg++;
-        }
-      }
-
-      d.hoverPos = pos;
-      d.hoverNeg = neg;
-
-      return (pos/(pos+neg));
-    }
-
     // var color = d3.interpolateLab("#008000", "#c83a22");
 
     var gradient = nodeEnter.append("svg:defs")
@@ -333,7 +340,7 @@ function updateWordTreeNode(source, orientation, root) {
                     .attr("spreadMethod", "pad");
 
     gradient.append("svg:stop")
-            .attr("offset", getPositiveOffset)
+            .attr("offset", 0)
             .attr("stop-color", "#388db8")
             .attr("stop-opacity", 1);
  
@@ -362,7 +369,11 @@ function updateWordTreeNode(source, orientation, root) {
       .text(function(d) { return d.key; })
       .style("fill-opacity", 1e-6)
       .attr("font-size", fontSize);
-    
+
+    //Update gradients
+    WordTreeData.vis.selectAll("g.node"+"."+orientation).select("defs").select("stop")
+      .attr("offset", getPositiveOffset)
+
     // Transition nodes to their new position.
     var nodeUpdate = node.transition()
       .duration(duration)
