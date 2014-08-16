@@ -33,9 +33,10 @@
 }
 
 #wordtree-view text.wordtree-highlight-sentence {
-    fill: #D17519;
-    /*stroke: #D17519;*/
-    /*stroke-width: 0.5px;*/
+    /*fill: #D17519;*/
+/*    stroke: #D17519;
+    stroke-width: 0.5px;*/
+    text-decoration: underline;
 }
 
 /*
