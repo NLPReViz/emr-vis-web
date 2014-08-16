@@ -47,6 +47,11 @@ function updateClass(variable, positive, negative) {
     WordTreeData.doc_class.variable = variable;
     WordTreeData.doc_class.positive = positive;
     WordTreeData.doc_class.negative = negative;
+
+    if(WordTreeData.vis) {
+      updateGradients("left");
+      updateGradients("right");
+    }
 }
 
 function makeWordTree(data){
@@ -230,6 +235,12 @@ var getPositiveOffset = function(d) {
   return (pos/(pos+neg));
 }
 
+function updateGradients(orientation) {
+  //Update gradients
+    WordTreeData.vis.selectAll("g.node"+"."+orientation).select("defs").select("stop")
+      .attr("offset", getPositiveOffset)
+}
+
 /** Called after any change to the word tree or when it's first rendered. 
     Recursively moves nodes to their positions, and shows and hides them 
     depending on whether they are expanded or not.
@@ -239,6 +250,7 @@ var getPositiveOffset = function(d) {
     @param {Object} root The root of this tree
     @param {SVGElement} vis The SVG element that is being drawn into.
  */
+
 function updateWordTreeNode(source, orientation, root) {
     var diagonal = WordTreeData.vis.diagonal;
     var sign = (orientation == "left")?-1:1;
@@ -370,9 +382,7 @@ function updateWordTreeNode(source, orientation, root) {
       .style("fill-opacity", 1e-6)
       .attr("font-size", fontSize);
 
-    //Update gradients
-    WordTreeData.vis.selectAll("g.node"+"."+orientation).select("defs").select("stop")
-      .attr("offset", getPositiveOffset)
+    updateGradients(orientation);
 
     // Transition nodes to their new position.
     var nodeUpdate = node.transition()
