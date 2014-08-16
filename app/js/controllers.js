@@ -393,11 +393,14 @@ angular.module('myApp.controllers', [])
             $scope.setSearchFilter(null);
             $scope.wordTreeData.feedbackText = null;
             $scope.wordTreeData.matches = null;
+            $("#wordtree-input").val('');
         }
 
-        $scope.loadWordTree = function(query){
+        $scope.loadWordTree = function(){
 
-            if ($scope.active.dataset === undefined)
+            var query = $("#wordtree-input").val().trim()
+
+            if ($scope.active.dataset === undefined && !query)
                 return
             
             startLoading();
