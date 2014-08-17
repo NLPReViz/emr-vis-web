@@ -60,7 +60,8 @@ angular.module('myApp.controllers', [])
             $scope.datasetList = data['dataset'];
 
             stopLoading();
-            setModelAndDataset($scope.modelList[0].name, $scope.datasetList[0].name);
+            setModelAndDataset($scope.modelList[$scope.modelList.length - 1].name, 
+                                $scope.datasetList[0].name);
         }, function() { alert("Could not retrieve model list!"); stopLoading(); });
         
 
