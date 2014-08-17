@@ -1,6 +1,8 @@
 'use strict';
 
 /* Services */
+/* app/js/services.js is automatically generated from config/services.js.
+It would be overwritten when the grunt task is run */
 
 angular.module('myApp.services', [])
     .factory('backend', function($http, $q) {
@@ -44,8 +46,13 @@ angular.module('myApp.services', [])
                             return result.data;
                         });
         },
-        putFeedback: function(feedbackList, model, dataset) {
-            return $http.put("@@backEndApp/putFeedback/" + model + ".xml/" + dataset + ".xml", 
+        putFeedback: function(feedbackList, model, dataset, override) {
+            var uri = "@@backEndApp/putFeedback/";
+            
+            if(override)
+                uri = "@@backEndApp/putFeedbackOverride/";
+
+            return $http.put(uri + model + ".xml/" + dataset + ".xml", 
                             angular.toJson(feedbackList))
                         .then(function(result) {
                             return result.data;

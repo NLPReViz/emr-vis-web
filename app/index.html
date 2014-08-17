@@ -372,9 +372,12 @@
                     <i class="glyphicon glyphicon-trash"> </i> Clear All
                   </button>
                   <button class="btn btn-primary" 
-                          ng-click="confirmFeedback()" >
+                          ng-click="confirmFeedback(feedbackOverride)" >
                           <i class="glyphicon glyphicon-refresh"> </i> Re-Train
                   </button>
+                  <label>
+                    <input type="checkbox" ng-model="feedbackOverride" class="ng-valid ng-dirty"> Override [<a href="#" tooltip="Use this switch to override any conflicts and warnings about existing training data." tooltip-animation="false" tooltip-placement="right">?</a>]                  
+                  </label>
                 </div>
               </div>
 

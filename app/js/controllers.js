@@ -361,13 +361,13 @@ angular.module('myApp.controllers', [])
             }
         };
 
-        $scope.confirmFeedback = function() {
+        $scope.confirmFeedback = function(override) {
 
             if($scope.retrainData.loading == true)
                 alert("Re-training already in process!");
             else {
                 setTimeout(function() {
-                    $scope.sendFeedback();
+                    $scope.sendFeedback(override);
                 });
             }
         }
@@ -473,14 +473,15 @@ angular.module('myApp.controllers', [])
         $scope.retrainData.loading = false;
         $scope.retrainData.successful = false;
 
-        $scope.sendFeedback = function() {
+        $scope.sendFeedback = function(override) {
             // alert('Re-training!');
             if($scope.retrainData.loading == true)
                 return;
 
             $scope.retrainData.loading = true;
 
-            backend.putFeedback($scope.feedbackList, $scope.active.model, $scope.active.dataset)
+            backend.putFeedback($scope.feedbackList, $scope.active.model, 
+                $scope.active.dataset, override)
                 .then(function(data) {
 
                     if(data.msg == "OK"){
