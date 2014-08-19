@@ -65,7 +65,7 @@ If you haven't built the backend project as yet, please do so now. Refer to the 
 
 Now browse to the app at `http://localhost:8080/emr-vis-web/app/index.html` or `<your-localhost-root>/emr-vis-web/app`.
 
-
+--
 ### Notes
 
 The wordtree is adapted from the library by silverasm, available at https://github.com/silverasm/wordtree.
