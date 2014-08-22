@@ -922,6 +922,22 @@ body {
     z-index: 1050;
 }
 
+#wordtree-popup {
+    background-color: #eee;
+    border-top-right-radius: 4px;
+    color: #888;
+    cursor: default;
+    font-size: 12px;
+    height: 22px;
+    margin-top: -14px;
+    overflow: hidden;
+    padding: 3px;
+    position: absolute;
+    right: 21px;
+    z-index: 1050;
+    display: none;
+}
+
 #wordtree-search-clear {
     float: right;
     right: 75px;
@@ -944,6 +960,15 @@ body {
     position:absolute;
     bottom:0;
     left:0;
+    z-index:1010;
+}
+
+.wordtree-popup-overlay {
+    position:absolute;
+    margin: 0!important;
+    top:0;
+    right:0!important;
+    border-radius: 0;
     z-index:1010;
 }
 

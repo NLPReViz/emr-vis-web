@@ -441,7 +441,10 @@ angular.module('myApp.controllers', [])
             backend.getWordTree($scope.active.dataset, query.toLowerCase()).then(function(data) {
                 $("#wordtree-container").empty();
 
+                data.classificationName = $rootScope.config.classificationName;
+
                 makeWordTree(data);
+                
                 stopLoading();
 
                 $scope.setWordTreePercentage(data.matchedList.length, data.total);

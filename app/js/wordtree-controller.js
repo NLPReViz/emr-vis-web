@@ -60,6 +60,7 @@ function makeWordTree(data){
     WordTreeData.matchedList = data.matchedList;
     WordTreeData.query = data.query;
     WordTreeData.filterDocs = data.matchedList;
+    WordTreeData.classificationName = data.classificationName;
 
     var detail = 100;
 
@@ -901,15 +902,13 @@ function wordTreeNodeMouseOver(node, d, orientation, root, eventName){
         .attr("width", bbox.width + 2)
         .attr("height", bbox.height + 1)
 
+    $("#wordtree-popup").html(
+      '<strong>"'+d.key+'"</strong> occurs in <strong>' 
+      + d.hoverPos + " " + WordTreeData.classificationName['positive'].toLowerCase() + 
+      '</strong> and <strong>' + d.hoverNeg + " " + WordTreeData.classificationName['negative'].toLowerCase() +
+      '</strong> documents in the grid.');
+    $("#wordtree-popup").show();
 
-    // WordTreeData.vis.popup_number = document.createElement('text');
-    // WordTreeData.vis.popup_number.setAttribute("x", -15*(orientation=="left"?-1:1));
-    // WordTreeData.vis.popup_number.setAttribute("x", -15*(orientation=="left"?-1:1));
-    // WordTreeData.vis.popup_number.setAttribute("y", 10);
-    // WordTreeData.vis.popup_number.setAttribute("id", "number-popup");
-    // WordTreeData.vis.popup_number.setAttribute("font-size", 10);
-    // WordTreeData.vis.popup_number.setAttribute("class", "number-popup");
-    // WordTreeData.vis.popup_number.innerHTML = "("+pos+ "/" + neg + ")" ;
 
     // child.parentNode.insertBefore(WordTreeData.vis.popup_number, child.nextSibling);    
 
@@ -1060,7 +1059,8 @@ function wordTreeNodeMouseOut(node, d, orientation, root, eventName){
 
 
     d3.selectAll('*[class~="wordtree-highlight-sentence"]').classed("wordtree-highlight-sentence", false)
-    $("#word-tree-info").hide();
+    // $("#word-tree-info").hide();
+    $("#wordtree-popup").hide();
 
     if (WordTreeData.vis.popup_number){
       WordTreeData.vis.popup_number.remove();
