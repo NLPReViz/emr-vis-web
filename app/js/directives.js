@@ -292,20 +292,28 @@ app.directive('cellModified', ['$timeout', function($timeout) {
             left: event.pageX + 'px',
             top: event.pageY + 'px'
         });
+
         angular.forEach(options, function (item, i) {
             var $li = $('<li>');
             if (item === null) {
                 $li.addClass('divider');
             } else {
-                $a = $('<a>');
-                $a.attr({ tabindex: '-1', href: '#' });
-                $a.text(item[0]);
-                $li.append($a);
-                $li.on('click', function () {
-                    $scope.$apply(function() {
-                        item[1].call($scope, $scope);
+
+                if(item[1]){
+                    $a = $('<a>');
+                    $a.attr({ tabindex: '-1', href: '#' });
+                    $a.text(item[0]);
+                    $li.append($a);
+                    $li.on('click', function () {
+                        $scope.$apply(function() {
+                            item[1].call($scope, $scope);
+                        });
                     });
-                });
+                }
+                else{
+                    $li.addClass('dropdown-header');
+                    $li.text(item[0]);
+                }
             }
             $ul.append($li);
         });

@@ -3,8 +3,8 @@
 /* Controllers */
 
 angular.module('myApp.controllers', [])
-  .controller('appCtrl', ['$scope', '$window', '$document', '$rootScope', 'backend',  
-    function($scope, $window, $document, $rootScope, backend) {
+  .controller('appCtrl', ['$scope', '$window', '$document', '$rootScope', 'backend', 'truncateFilter',
+    function($scope, $window, $document, $rootScope, backend, truncateFilter) {
         /*
          * App config
          */
@@ -383,23 +383,28 @@ angular.module('myApp.controllers', [])
         $scope.documentContextMenu = function() {
             var options = [];
             if($scope.feedbackText){
+                var text = truncateFilter($scope.feedbackText, 20);
                 options = [
-                    ['Mark selection - ' + $rootScope.config.classificationName["positive"], function () {
+                    ['"' + text + '" servers as a:', null],
+                    null,
+                    [$rootScope.config.classificationName["positive"] + " indicator", function () {
                         $scope.addFeedbackText('positive');
                     }],
                     null,
-                    ['Mark selection - ' + $rootScope.config.classificationName["negative"], function () {
+                    [$rootScope.config.classificationName["negative"] + " indicator", function () {
                         $scope.addFeedbackText('negative');
                     }]
                 ];
             }
             else {
                 options = [
-                    ['Label document - ' + $rootScope.config.classificationName["positive"], function () {
+                    ['Label #'+ $scope.gridData[$scope.active.docIndex].id + " as a:", null],
+                    null,
+                    [$rootScope.config.classificationName["positive"] + " document", function () {
                         $scope.addFeedbackDoc('positive');
                     }],
                     null,
-                    ['Label document - ' + $rootScope.config.classificationName["negative"], function () {
+                    [$rootScope.config.classificationName["negative"] + " document", function () {
                         $scope.addFeedbackDoc('negative');
                     }]
                 ];
@@ -496,13 +501,15 @@ angular.module('myApp.controllers', [])
             var options = [];
 
             if($scope.wordTreeData.feedbackText) {
+                var text = truncateFilter($scope.wordTreeData.feedbackText, 20);
                 options = [
-                    ['Mark selection - ' + $rootScope.config.classificationName["positive"], function () {
+                    ['"' + text + '" servers as a:', null],
+                    null,
+                    [$rootScope.config.classificationName["positive"] + " indicator", function () {
                         $scope.addWordTreeFeedback('positive');
                     }],
                     null,
-                    ['Mark selection - ' + $rootScope.config.classificationName["negative"], function () {
-                    
+                    [$rootScope.config.classificationName["negative"] + " indicator", function () {
                         $scope.addWordTreeFeedback('negative');
                     }]
                 ];
