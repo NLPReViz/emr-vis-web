@@ -373,30 +373,41 @@ angular.module('myApp.controllers', [])
             }
         }
 
-        $window.onbeforeunload = function(event){
+        $window.onbeforeunload = function(event) {
             if($scope.feedbackList.length > 0) {
                 return "You have made unsaved changes. \
                     Would you still like to leave this page?";
             }
         }
 
-        $scope.documentContextMenu = [
-            ['Label this ' + $rootScope.config.classificationName["positive"], function () {
-                if($scope.feedbackText)
-                    $scope.addFeedbackText('positive');
-                else
-                    $scope.addFeedbackDoc('positive');
-            }],
-            null,
-            ['Label this ' + $rootScope.config.classificationName["negative"], function () {
-                if($scope.feedbackText)
-                    $scope.addFeedbackText('negative');
-                else
-                    $scope.addFeedbackDoc('negative');
-            }]
-        ];
-
-        
+        $scope.documentContextMenu = function() {
+            var options = [];
+            if($scope.feedbackText){
+                options = [
+                    ['Mark selection - ' + $rootScope.config.classificationName["positive"], function () {
+                        $scope.addFeedbackText('positive');
+                    }],
+                    null,
+                    ['Mark selection - ' + $rootScope.config.classificationName["negative"], function () {
+                        $scope.addFeedbackText('negative');
+                    }]
+                ];
+            }
+            else {
+                options = [
+                    ['Label document - ' + $rootScope.config.classificationName["positive"], function () {
+                        $scope.addFeedbackDoc('positive');
+                    }],
+                    null,
+                    ['Label document - ' + $rootScope.config.classificationName["negative"], function () {
+                        $scope.addFeedbackDoc('negative');
+                    }]
+                ];
+            }
+            
+            return options;
+        };
+          
         /*
          * WordTree
          */
@@ -481,19 +492,24 @@ angular.module('myApp.controllers', [])
 
         }
 
-        $scope.wordTreeContextMenu = [
-            ['Label this ' + $rootScope.config.classificationName["positive"], function () {
-                if($scope.wordTreeData.feedbackText){
-                    $scope.addWordTreeFeedback('positive');
-                }
-            }],
-            null,
-            ['Label this ' + $rootScope.config.classificationName["negative"], function () {
-                if($scope.wordTreeData.feedbackText){
-                    $scope.addWordTreeFeedback('negative');
-                }
-            }]
-        ];
+        $scope.wordTreeContextMenu = function() {
+            var options = [];
+
+            if($scope.wordTreeData.feedbackText) {
+                options = [
+                    ['Mark selection - ' + $rootScope.config.classificationName["positive"], function () {
+                        $scope.addWordTreeFeedback('positive');
+                    }],
+                    null,
+                    ['Mark selection - ' + $rootScope.config.classificationName["negative"], function () {
+                    
+                        $scope.addWordTreeFeedback('negative');
+                    }]
+                ];
+            }
+            
+            return options
+        };
 
         /*
          * Re-train Results

@@ -88,7 +88,6 @@ angular.module('myApp.directives', [])
                         .highlight(/\*\* Report Electronically Signed Out \*\*/, "dim") //Pathology template
                         .highlight(/My signature is attestation[\s\S]*reflects that evaluation./, "dim") //Pathology template
                         .highlight(/E_O_R/, "dim") //End of report
-                        .highlight(/\*\*[A-Z\ ,-\[\]\.]*/g, "dim") //DE-IDed Names
 
                     if (!angular.isUndefined(posTerms)) {
                         posTerms.forEach( function(keyword) {
@@ -109,7 +108,8 @@ angular.module('myApp.directives', [])
                     }
 
 
-                    $(element).highlight(/[A-Z\-\ #]*\:/g, "dim"); //Colon fields
+                    $(element).highlight(/[A-Z\-\ #]*\:/g, "dim") //Colon fields
+                            .highlight(/\*\*[A-Z\ ,-\[\]\.]*/g, "dim"); //DE-IDed Names
 
                 };
         
@@ -319,8 +319,10 @@ app.directive('cellModified', ['$timeout', function($timeout) {
             zIndex: 9999
         });
         $(document).find('body').append($contextMenu);
-        $contextMenu.on("click", function (e) {
+        $contextMenu.on("click", function (event) {
             $(event.currentTarget).removeClass('context');
+            $scope.setFeedbackText();
+            $scope.$apply();
             $contextMenu.remove();
         }).on('contextmenu', function (event) {
             $(event.currentTarget).removeClass('context');
@@ -332,9 +334,10 @@ app.directive('cellModified', ['$timeout', function($timeout) {
         element.on('contextmenu', function (event) {
             $scope.$apply(function () {
                 event.preventDefault();
-                var options = $scope.$eval(attrs.ngContextMenu);
+                var options = $scope.$eval(attrs.ngContextMenu)();
                 if (options instanceof Array) {
-                    renderContextMenu($scope, event, options);
+                    if(options.length > 0)
+                        renderContextMenu($scope, event, options);
                 } else {
                     throw '"' + attrs.ngContextMenu + '" not an array';                    
                 }
