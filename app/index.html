@@ -324,12 +324,14 @@
                 </span>
               </div>
             </form>
-            <div id="wordtree-view" ng-class="{'wordtree-view-overlay': wordTreeFullscreenButton}">
-              <div id="wordtree-container" class="wordtree-container-class">
-                <p id="wordtree-empty">
-                  No wordtree to show. Enter keywords above and search.
-                </p>
-              </div>
+            <div id="wordtree-view" 
+              ng-class="{'wordtree-view-overlay': wordTreeFullscreenButton}" 
+              ng-context-menu="wordTreeContextMenu">
+                <div id="wordtree-container" class="wordtree-container-class">
+                  <p id="wordtree-empty">
+                    No wordtree to show. Enter keywords above and search.
+                  </p>
+                </div>
             </div>
             <div id="wordtree-about"
                   ng-show="wordTreeData.matches" 

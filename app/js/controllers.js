@@ -465,6 +465,20 @@ angular.module('myApp.controllers', [])
 
         }
 
+        $scope.wordTreeContextMenu = [
+            ['Send ' + $rootScope.config.classificationName["positive"] + " feedback", function () {
+                if($scope.wordTreeData.feedbackText){
+                    $scope.addWordTreeFeedback('positive');
+                }
+            }],
+            null,
+            ['Send ' + $rootScope.config.classificationName["negative"] + " feedback", function () {
+                if($scope.wordTreeData.feedbackText){
+                    $scope.addWordTreeFeedback('negative');
+                }
+            }]
+        ];
+
         /*
          * Re-train Results
          */
