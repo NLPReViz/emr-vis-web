@@ -380,6 +380,22 @@ angular.module('myApp.controllers', [])
             }
         }
 
+        $scope.documentContextMenu = [
+            ['Label this ' + $rootScope.config.classificationName["positive"], function () {
+                if($scope.feedbackText)
+                    $scope.addFeedbackText('positive');
+                else
+                    $scope.addFeedbackDoc('positive');
+            }],
+            null,
+            ['Label this ' + $rootScope.config.classificationName["negative"], function () {
+                if($scope.feedbackText)
+                    $scope.addFeedbackText('negative');
+                else
+                    $scope.addFeedbackDoc('negative');
+            }]
+        ];
+
         
         /*
          * WordTree
@@ -466,13 +482,13 @@ angular.module('myApp.controllers', [])
         }
 
         $scope.wordTreeContextMenu = [
-            ['Send ' + $rootScope.config.classificationName["positive"] + " feedback", function () {
+            ['Label this ' + $rootScope.config.classificationName["positive"], function () {
                 if($scope.wordTreeData.feedbackText){
                     $scope.addWordTreeFeedback('positive');
                 }
             }],
             null,
-            ['Send ' + $rootScope.config.classificationName["negative"] + " feedback", function () {
+            ['Label this ' + $rootScope.config.classificationName["negative"], function () {
                 if($scope.wordTreeData.feedbackText){
                     $scope.addWordTreeFeedback('negative');
                 }
