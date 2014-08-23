@@ -385,7 +385,7 @@ angular.module('myApp.controllers', [])
             if($scope.feedbackText){
                 var text = truncateFilter($scope.feedbackText, 20);
                 options = [
-                    ['"' + text + '" servers as a:', null],
+                    ['"' + text + '" serves as a:', null],
                     null,
                     [$rootScope.config.classificationName["positive"] + " indicator", function () {
                         $scope.addFeedbackText('positive');
@@ -516,7 +516,7 @@ angular.module('myApp.controllers', [])
             if($scope.wordTreeData.feedbackText) {
                 var text = truncateFilter($scope.wordTreeData.feedbackText, 20);
                 options = [
-                    ['"' + text + '" servers as a:', null],
+                    ['"' + text + '" serves as a:', null],
                     null,
                     [$rootScope.config.classificationName["positive"] + " indicator", function () {
                         $scope.addWordTreeFeedback('positive');
