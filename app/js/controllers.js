@@ -379,39 +379,6 @@ angular.module('myApp.controllers', [])
                     Would you still like to leave this page?";
             }
         }
-
-        $scope.documentContextMenu = function() {
-            var options = [];
-            if($scope.feedbackText){
-                var text = truncateFilter($scope.feedbackText, 20);
-                options = [
-                    ['"' + text + '" serves as a:', null],
-                    null,
-                    [$rootScope.config.classificationName["positive"] + " indicator", function () {
-                        $scope.addFeedbackText('positive');
-                    }],
-                    null,
-                    [$rootScope.config.classificationName["negative"] + " indicator", function () {
-                        $scope.addFeedbackText('negative');
-                    }]
-                ];
-            }
-            else {
-                options = [
-                    ['Label #'+ $scope.gridData[$scope.active.docIndex].id + " as a:", null],
-                    null,
-                    [$rootScope.config.classificationName["positive"] + " document", function () {
-                        $scope.addFeedbackDoc('positive');
-                    }],
-                    null,
-                    [$rootScope.config.classificationName["negative"] + " document", function () {
-                        $scope.addFeedbackDoc('negative');
-                    }]
-                ];
-            }
-            
-            return options;
-        };
           
         /*
          * WordTree
@@ -510,27 +477,6 @@ angular.module('myApp.controllers', [])
 
         }
 
-        $scope.wordTreeContextMenu = function() {
-            var options = [];
-
-            if($scope.wordTreeData.feedbackText) {
-                var text = truncateFilter($scope.wordTreeData.feedbackText, 20);
-                options = [
-                    ['"' + text + '" serves as a:', null],
-                    null,
-                    [$rootScope.config.classificationName["positive"] + " indicator", function () {
-                        $scope.addWordTreeFeedback('positive');
-                    }],
-                    null,
-                    [$rootScope.config.classificationName["negative"] + " indicator", function () {
-                        $scope.addWordTreeFeedback('negative');
-                    }]
-                ];
-            }
-            
-            return options
-        };
-
         /*
          * Re-train Results
          */
@@ -618,6 +564,51 @@ angular.module('myApp.controllers', [])
             setModelAndDataset($scope.modal.selectedModel, $scope.modal.selectedDataset);
         }
 
+
+        /*
+         * Feedback Context Menu
+         */
+
+        $scope.feedbackContextMenu = function() {
+            var options = [];   
+            var feedbackText = null;
+
+            if ($scope.tabs.docView)
+                feedbackText = $scope.feedbackText;
+            else if ($scope.tabs.wordTreeView)
+                feedbackText = $scope.wordTreeData.feedbackText;
+            
+
+            if(feedbackText && $scope.active.variable){
+                var text = truncateFilter(feedbackText, 20);
+                options = [
+                    ['"' + text + '" indicates "' + $scope.active.variable + '" to be:', null],
+                    null,
+                    [$rootScope.config.classificationName["positive"], function () {
+                        $scope.addFeedbackText('positive');
+                    }],
+                    null,
+                    [$rootScope.config.classificationName["negative"], function () {
+                        $scope.addFeedbackText('negative');
+                    }]
+                ];
+            }
+            else {
+                options = [
+                    ['Label "' + $scope.active.variable + '" in #'+ $scope.gridData[$scope.active.docIndex].id + ":", null],
+                    null,
+                    [$rootScope.config.classificationName["positive"], function () {
+                        $scope.addFeedbackDoc('positive');
+                    }],
+                    null,
+                    [$rootScope.config.classificationName["negative"], function () {
+                        $scope.addFeedbackDoc('negative');
+                    }]
+                ];
+            }
+            
+            return options;
+        };
 
         /*
          * Misc.

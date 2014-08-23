@@ -213,7 +213,7 @@
       <div class="main">
 
         <!-- Feedback -->
-        <div ng-if="records.report.exists && tabs.docView" class="alert alert-warning report-feedback">
+        <div ng-if="tabs.docView && records.report.exists" class="alert alert-warning report-feedback">
           <span ng-if="appInfo">
             {{appInfo}}
           </span>
@@ -239,7 +239,7 @@
                 <a ng-click="addFeedbackDoc('negative')">{{$root.config.classificationName['negative']}}</a></span>
           </span>
         </div>
-        <div ng-if="wordTreeData.feedbackText && tabs.wordTreeView" class="alert alert-warning report-feedback">
+        <div ng-if="tabs.wordTreeView && wordTreeData.feedbackText" class="alert alert-warning report-feedback">
           <span ng-if="appInfo">
             {{appInfo}}
           </span>
@@ -270,7 +270,7 @@
                   </div>
               </div>
             </div>
-            <span ng-context-menu="documentContextMenu">
+            <span ng-context-menu="feedbackContextMenu">
               <div scroll-bookmark="records.report.text" ng-mouseup="setFeedbackText()" ng-if="records.report.exists" id="emr-report" class="report">
                 <div class="info">
                   <i class="glyphicon glyphicon-list-alt"></i>&nbsp;
@@ -330,7 +330,7 @@
             </div>
             <div id="wordtree-view" 
               ng-class="{'wordtree-view-overlay': wordTreeFullscreenButton}" 
-              ng-context-menu="wordTreeContextMenu">
+              ng-context-menu="feedbackContextMenu">
                 <div id="wordtree-container" class="wordtree-container-class">
                   <p id="wordtree-empty">
                     No wordtree to show. Enter keywords above and search.

@@ -287,10 +287,8 @@ app.directive('cellModified', ['$timeout', function($timeout) {
         $ul.addClass('dropdown-menu');
         $ul.attr({ 'role': 'menu' });
         $ul.css({
-            display: 'block',
-            position: 'absolute',
             left: event.pageX + 'px',
-            top: event.pageY + 'px'
+            top: event.pageY + 'px',
         });
 
         angular.forEach(options, function (item, i) {
@@ -318,14 +316,6 @@ app.directive('cellModified', ['$timeout', function($timeout) {
             $ul.append($li);
         });
         $contextMenu.append($ul);
-        $contextMenu.css({
-            width: '100%',
-            height: '100%',
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            zIndex: 9999
-        });
         $(document).find('body').append($contextMenu);
         $contextMenu.on("click", function (event) {
             $(event.currentTarget).removeClass('context');
