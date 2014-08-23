@@ -439,13 +439,23 @@ angular.module('myApp.controllers', [])
             startLoading();
             
             backend.getWordTree($scope.active.dataset, query.toLowerCase()).then(function(data) {
+                stopLoading();
+
+                if(data.matchedList.length == 0) {
+                    $("#wordtree-container").html('<p id="wordtree-empty"> \
+                        No matches found! \
+                    </p>');
+                    $scope.setSearchFilter(null);
+                    $scope.wordTreeData.feedbackText = null;
+                    $scope.wordTreeData.matches = null;
+                    return;    
+                }
+                
                 $("#wordtree-container").empty();
 
                 data.classificationName = $rootScope.config.classificationName;
 
                 makeWordTree(data);
-                
-                stopLoading();
 
                 $scope.setWordTreePercentage(data.matchedList.length, data.total);
                 $scope.wordTreeData.feedbackText = data.query;

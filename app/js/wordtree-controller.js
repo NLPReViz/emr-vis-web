@@ -55,7 +55,7 @@ function updateClass(variable, positive, negative) {
 }
 
 function makeWordTree(data){
-
+  
     WordTreeData.total = data.total;
     WordTreeData.matchedList = data.matchedList;
     WordTreeData.query = data.query;
