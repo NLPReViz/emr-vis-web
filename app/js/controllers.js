@@ -570,39 +570,39 @@ angular.module('myApp.controllers', [])
          */
 
         $scope.feedbackContextMenu = function() {
-            var options = [];   
-            var feedbackText = null;
+            var options = [];
 
-            if ($scope.tabs.docView)
-                feedbackText = $scope.feedbackText;
-            else if ($scope.tabs.wordTreeView)
-                feedbackText = $scope.wordTreeData.feedbackText;
+            if (!($scope.active.variable && $scope.gridData))
+                return options;
             
+            var feedbackHeader = null;
+            var feedbackFunction = null;
 
-            if(feedbackText && $scope.active.variable){
-                var text = truncateFilter(feedbackText, 20);
-                options = [
-                    ['"' + text + '" indicates "' + $scope.active.variable + '" to be:', null],
-                    null,
-                    [$rootScope.config.classificationName["positive"], function () {
-                        $scope.addFeedbackText('positive');
-                    }],
-                    null,
-                    [$rootScope.config.classificationName["negative"], function () {
-                        $scope.addFeedbackText('negative');
-                    }]
-                ];
+            if ($scope.tabs.docView) {
+                if($scope.feedbackText) {
+                    feedbackHeader = '"' + truncateFilter($scope.feedbackText, 20) + '" indicates "' + $scope.active.variable + '" to be:'
+                    feedbackFunction = $scope.addFeedbackText;
+                }
+                else {
+                    feedbackHeader = 'Label "' + $scope.active.variable + '" in #'+ $scope.gridData[$scope.active.docIndex].id + ":";
+                    feedbackFunction = $scope.addFeedbackDoc;
+                }
             }
-            else {
+            else if ($scope.tabs.wordTreeView) {
+                feedbackHeader = '"' + truncateFilter($scope.wordTreeData.feedbackText, 20) + '" indicates "' + $scope.active.variable + '" to be:'
+                feedbackFunction = $scope.addWordTreeFeedback;
+            }
+            
+            if (feedbackHeader && feedbackFunction) {
                 options = [
-                    ['Label "' + $scope.active.variable + '" in #'+ $scope.gridData[$scope.active.docIndex].id + ":", null],
+                    [feedbackHeader, null],
                     null,
                     [$rootScope.config.classificationName["positive"], function () {
-                        $scope.addFeedbackDoc('positive');
+                        feedbackFunction('positive');
                     }],
                     null,
                     [$rootScope.config.classificationName["negative"], function () {
-                        $scope.addFeedbackDoc('negative');
+                        feedbackFunction('negative');
                     }]
                 ];
             }
