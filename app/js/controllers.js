@@ -589,8 +589,10 @@ angular.module('myApp.controllers', [])
                 }
             }
             else if ($scope.tabs.wordTreeView) {
-                feedbackHeader = '"' + truncateFilter($scope.wordTreeData.feedbackText, 20) + '" indicates "' + $scope.active.variable + '" to be:'
-                feedbackFunction = $scope.addWordTreeFeedback;
+                if($scope.wordTreeData.feedbackText) {
+                    feedbackHeader = '"' + truncateFilter($scope.wordTreeData.feedbackText, 20) + '" indicates "' + $scope.active.variable + '" to be:'
+                    feedbackFunction = $scope.addWordTreeFeedback;
+                }
             }
             
             if (feedbackHeader && feedbackFunction) {
