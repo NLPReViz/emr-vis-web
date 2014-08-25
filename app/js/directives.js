@@ -279,10 +279,13 @@ app.directive('cellModified', ['$timeout', function($timeout) {
 //http://templarian.com/2014/03/29/angularjs_context_menu
 .directive('ngContextMenu', function ($parse) {
     var renderContextMenu = function ($scope, event, options) {
-        if (!$) { var $ = angular.element; }
-        $(event.currentTarget).addClass('context');
+        // if (!$) { var $ = angular.element; }
+        // $(event.currentTarget).addClass('context');
+
+        $('.context-menu').remove();
+
         var $contextMenu = $('<div>');
-        $contextMenu.addClass('dropdown clearfix');
+        $contextMenu.addClass('dropdown clearfix context-menu');
         var $ul = $('<ul>');
         $ul.addClass('dropdown-menu');
         $ul.attr({ 'role': 'menu' });
@@ -318,12 +321,12 @@ app.directive('cellModified', ['$timeout', function($timeout) {
         $contextMenu.append($ul);
         $(document).find('body').append($contextMenu);
         $contextMenu.on("click", function (event) {
-            $(event.currentTarget).removeClass('context');
+            // $(event.currentTarget).removeClass('context');
             $scope.setFeedbackText();
             $scope.$apply();
             $contextMenu.remove();
         }).on('contextmenu', function (event) {
-            $(event.currentTarget).removeClass('context');
+            // $(event.currentTarget).removeClass('context');
             event.preventDefault();
             $contextMenu.remove();
         });
