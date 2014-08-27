@@ -70,10 +70,7 @@ angular.module('myApp.controllers', [])
                 return
 
             if ( !($scope.active.model == model && $scope.active.dataset == dataset) )
-                loadData(model, dataset);
-
-            if ($scope.active.dataset != dataset && $scope.active.wordTreeQuery)
-                $scope.loadWordTree($scope.active.wordTreeQuery);
+                loadData(model, dataset);                
 
             $scope.active.model = model;
             $scope.active.dataset = dataset;
@@ -561,7 +558,9 @@ angular.module('myApp.controllers', [])
 
         $scope.modal.confirm = function() {
             $scope.modal.isCollapsed = true;
+            $scope.setSearchFilter(null);
             setModelAndDataset($scope.modal.selectedModel, $scope.modal.selectedDataset);
+            $scope.loadWordTree($scope.active.wordTreeQuery);
         }
 
 
