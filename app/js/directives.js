@@ -281,7 +281,7 @@ app.directive('cellModified', ['$timeout', function($timeout) {
 
 //http://templarian.com/2014/03/29/angularjs_context_menu
 .directive('ngContextMenu', function ($parse) {
-    var renderContextMenu = function ($scope, event, options) {
+    var renderContextMenu = function (scope, event, options) {
         // if (!$) { var $ = angular.element; }
         // $(event.currentTarget).addClass('context');
 
@@ -309,8 +309,8 @@ app.directive('cellModified', ['$timeout', function($timeout) {
                     $a.text(item[0]);
                     $li.append($a);
                     $li.on('click', function () {
-                        $scope.$apply(function() {
-                            item[1].call($scope, $scope);
+                        scope.$apply(function() {
+                            item[1].call(scope, scope);
                         });
                     });
                 }
@@ -326,7 +326,7 @@ app.directive('cellModified', ['$timeout', function($timeout) {
         $contextMenu.on("click", function (event) {
             // $(event.currentTarget).removeClass('context');
             scope.$apply(function() {
-                $scope.setFeedbackText();
+                scope.setFeedbackText();
             });
             $contextMenu.remove();
         }).on('contextmenu', function (event) {
@@ -335,14 +335,14 @@ app.directive('cellModified', ['$timeout', function($timeout) {
             $contextMenu.remove();
         });
     };
-    return function ($scope, element, attrs) {
+    return function (scope, element, attrs) {
         element.on('contextmenu', function (event) {
-            $scope.$apply(function () {
+            scope.$apply(function () {
                 event.preventDefault();
-                var options = $scope.$eval(attrs.ngContextMenu)();
+                var options = scope.$eval(attrs.ngContextMenu)();
                 if (options instanceof Array) {
                     if(options.length > 0)
-                        renderContextMenu($scope, event, options);
+                        renderContextMenu(scope, event, options);
                 } else {
                     throw '"' + attrs.ngContextMenu + '" not an array';                    
                 }
