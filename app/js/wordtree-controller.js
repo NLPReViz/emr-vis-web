@@ -76,15 +76,15 @@ function makeWordTree(data){
     h = $(document).height();
     
     var container = '#wordtree-container'
-    var containerClass = 'wordtree-container-class';
-    $(container).addClass(containerClass);  
+    // var containerClass = 'wordtree-container-class';
+    // $(container).addClass(containerClass);  
 
     var m = [20, 120, 20, canvasWidth/2];
 
     // Get ready to draw the word tree by emptying this container and adding
     // a new empty SVG container.
-    $('.'+containerClass).html("");
-    var svg =  d3.select("."+containerClass).append("svg:svg")
+    $(container).html("");
+    var svg =  d3.select(container).append("svg:svg")
            .attr("width", canvasWidth)
            .attr("height", h)
     WordTreeData.vis = svg.append("svg:g")
