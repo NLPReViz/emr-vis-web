@@ -614,10 +614,10 @@ angular.module('myApp.controllers', [])
                         feedbackFunction('negative');
                     }]
                 ]);
-            }
 
-            if ($scope.tabs.wordTreeView){
-                options = options.concat([
+
+                if ($scope.tabs.wordTreeView) {
+                    options = options.concat([
                         null,
                         ["Find usage", function() {
                             // console.log($scope.wordTreeData.spanText);
@@ -649,6 +649,7 @@ angular.module('myApp.controllers', [])
                             
                         }]
                     ]);
+                }
             }
             
             return options;
