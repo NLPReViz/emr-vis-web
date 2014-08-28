@@ -32,10 +32,10 @@ function updateAppCtrl(selected, span) {
     var duration = d3.event && d3.event.altKey ? 5000 : 500;
     
     setTimeout(function() {
-        appCtrl.setWordTreeFeedback(selected, span, WordTreeData.filterDocs); 
-        appCtrl.setWordTreePercentage(WordTreeData.filterDocs.length, WordTreeData.total); 
-        appCtrl.setSearchFilter(WordTreeData.filterDocs);
-        appCtrl.$apply(); 
+        appCtrl.$apply(function(){
+          appCtrl.setWordTreeFeedback(selected, span, WordTreeData.filterDocs); 
+          appCtrl.setWordTreePercentage(WordTreeData.filterDocs.length, WordTreeData.total); 
+        }); 
     }, duration);
 }
 

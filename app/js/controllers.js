@@ -151,7 +151,7 @@ angular.module('myApp.controllers', [])
             }
         };
 
-        $scope.updateGrid = function(variable, activeDocIndex) {
+        $scope.updateGrid = function(variable, activeDocIndex, callback) {
             // console.log(variable, activeDoc);
             if(variable != $scope.variable) {
               $scope.active.variable = variable;
@@ -161,7 +161,7 @@ angular.module('myApp.controllers', [])
 
             if(activeDocIndex != $scope.active.docIndex) {
               $scope.active.docIndex = activeDocIndex;
-              $scope.loadReport(activeDocIndex);
+              $scope.loadReport(activeDocIndex, callback);
             }
 
             //Change view to docView
@@ -185,7 +185,7 @@ angular.module('myApp.controllers', [])
         }
 
         //TODO: Load reports not as variables but as docs
-        $scope.loadReport = function(activeDocIndex) {
+        $scope.loadReport = function(activeDocIndex, callback) {
 
             var activeDoc = $scope.gridData[activeDocIndex].id;
 
@@ -207,6 +207,10 @@ angular.module('myApp.controllers', [])
                     
                     stopLoading();
                     $scope.feedbackText = null;
+
+                    if(callback){
+                        callback();
+                    }
             }, function() { 
                 $scope.records.report.text = "Unable to fetch report";
                 stopLoading();
@@ -445,6 +449,8 @@ angular.module('myApp.controllers', [])
             $scope.wordTreeData.feedbackText = selected;
             $scope.wordTreeData.spanText = span;
             $scope.wordTreeData.docList = docs;
+
+            $scope.setSearchFilter(docs);
         }
 
         $scope.wordTreeFullscreenButton = false;
@@ -597,7 +603,7 @@ angular.module('myApp.controllers', [])
             }
             
             if (feedbackHeader && feedbackFunction) {
-                options = [
+                options = options.concat([
                     [feedbackHeader, null],
                     null,
                     [$rootScope.config.classificationName["positive"], function () {
@@ -607,7 +613,42 @@ angular.module('myApp.controllers', [])
                     [$rootScope.config.classificationName["negative"], function () {
                         feedbackFunction('negative');
                     }]
-                ];
+                ]);
+            }
+
+            if ($scope.tabs.wordTreeView){
+                options = options.concat([
+                        null,
+                        ["Find usage", function() {
+                            // console.log($scope.wordTreeData.spanText);
+
+                            if(!$scope.wordTreeData.docList)
+                                return;
+
+                            var id = $scope.wordTreeData.docList[0];
+                            var first = null;
+
+                            for (var i=0; i < $scope.gridData.length; i++) {
+                                if ($scope.gridData[i].id === id) {
+                                    first = i;
+                                    break;
+                                }
+                            }
+                         
+                            $scope.updateGrid($scope.active.variable, first, function(){
+                                $("#grid-table").scrollTo($("#grid-table .selected"), 1000)
+
+                                var search = $scope.wordTreeData.spanText.replace(/\s*\.$/, "");
+                                //object.find ([textToFind [, matchCase[, searchUpward[, wrapAround[, wholeWord[, searchInFrames[, showDialog]]]]]]]);
+                                //Experimental: Works only on Chrome/Firefox/Safari
+                                setTimeout(function() {
+                                    $window.find(search, false, true, true, false, true, false);
+                                });
+
+                            });
+                            
+                        }]
+                    ]);
             }
             
             return options;

@@ -228,7 +228,7 @@ angular.module('myApp.directives', [])
             var found = $(selector);
 
             if(found.length){
-                $('html, body').animate({scrollTop: $(found).offset().top - 100}, 1000);
+                $('html, body').animate({scrollTop: $(found).offset().top - 100}, 1000); //ScrollTo doesn't work here :(
                 $(found).addClass("highlight-flash");
                 $timeout(function () { 
                     $(found).removeClass('highlight-flash');
@@ -323,7 +323,7 @@ app.directive('cellModified', ['$timeout', function($timeout) {
         });
         $contextMenu.append($ul);
         $(document).find('body').append($contextMenu);
-        $contextMenu.on("click", function (event) {
+        $($contextMenu).on("click", function (event) {
             // $(event.currentTarget).removeClass('context');
             scope.$apply(function() {
                 scope.setFeedbackText();
