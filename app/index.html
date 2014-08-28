@@ -258,6 +258,12 @@
 
           <!-- Report view -->
           <tab active="tabs.docView" heading="Document View">
+            <div ng-if="records.report.exists" class="row">
+              <span id="report-variable" class="pull-right">
+                    Variable &nbsp;
+                    <select ng-model="active.variable" ng-options="$root.config.variableMapping[var] for var in $root.config.variables"></select> 
+              </span>
+            </div>
             <div ng-show="records.pathology.exists" class="pagerview">
               <div class="pagerview-row">
                   <div class="pagerview-step">
@@ -278,6 +284,10 @@
                   <strong class="file-name js-selectable-text">Report: #{{gridData[active.docIndex].id}}</strong>
                 </a>
                 <a class="btn btn-xs btn-default pull-right" ng-click="PrintReport('emr-report')"><strong>Print</strong></a>
+                <!-- <span class="pull-right">
+                  Variable 
+                  <select ng-model="active.variable" ng-options="$root.config.variableMapping[var] for var in $root.config.variables"></select> 
+                </span> -->
               </div>
               <span ng-context-menu="feedbackContextMenu">
                 <pre>
@@ -295,7 +305,11 @@
                 <a tooltip-placement="bottom" tooltip-animation="false" tooltip="docs/{{gridData[active.docIndex].id}}/pathology.txt"> 
                   <strong class="file-name js-selectable-text">Pathology: #{{gridData[active.docIndex].id}}</strong>
                 </a>
-                <a class="btn btn-xs btn-default pull-right" ng-click="PrintReport('emr-pathology')"><strong>Print</strong></a>
+                <a class="btn btn-xs btn-default pull-right" ng-click="PrintReport('emr-report')"><strong>Print</strong></a>
+                <!-- <span class="pull-right">
+                  Variable 
+                  <select ng-model="active.variable" ng-options="$root.config.variableMapping[var] for var in $root.config.variables"></select> 
+                </span> -->
               </div>
               <span ng-context-menu="feedbackContextMenu">
                 <pre>
@@ -329,8 +343,7 @@
 
                 <span class="input-group-addon">
                   Variable &nbsp; 
-                  <select id="wordtree-select-variable" 
-                    ng-model="active.variable" 
+                  <select ng-model="active.variable" 
                     ng-options="$root.config.variableMapping[var] for var in $root.config.variables" 
                     ng-change="updateWordTreeClass()"
                     ></select> 

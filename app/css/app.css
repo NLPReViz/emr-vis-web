@@ -741,6 +741,11 @@ body {
     background-color: white;
 }
 
+#report-variable {
+    padding-right: 15px;
+    padding-top: 10px;
+}
+
 /*
  * Document Pager
  * http://bootsnipp.com/snippets/featured/process-steps
