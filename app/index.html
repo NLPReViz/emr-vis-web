@@ -270,37 +270,42 @@
                   </div>
               </div>
             </div>
-            <span ng-context-menu="feedbackContextMenu">
-              <div scroll-bookmark="records.report.text" ng-mouseup="setFeedbackText()" ng-if="records.report.exists" id="emr-report" class="report">
-                <div class="info">
-                  <i class="glyphicon glyphicon-list-alt"></i>&nbsp;
-                  <a tooltip-placement="bottom" tooltip-animation="false" tooltip="docs/{{gridData[active.docIndex].id}}/report.txt">
-                    <strong class="file-name js-selectable-text">Report: #{{gridData[active.docIndex].id}}</strong>
-                  </a>
-                  <a class="btn btn-xs btn-default pull-right" ng-click="PrintReport('emr-report')"><strong>Print</strong></a>
-                </div>
+            
+            <div scroll-bookmark="records.report.text" ng-mouseup="setFeedbackText()" ng-if="records.report.exists" id="emr-report" class="report">
+              <div class="info">
+                <i class="glyphicon glyphicon-list-alt"></i>&nbsp;
+                <a tooltip-placement="bottom" tooltip-animation="false" tooltip="docs/{{gridData[active.docIndex].id}}/report.txt">
+                  <strong class="file-name js-selectable-text">Report: #{{gridData[active.docIndex].id}}</strong>
+                </a>
+                <a class="btn btn-xs btn-default pull-right" ng-click="PrintReport('emr-report')"><strong>Print</strong></a>
+              </div>
+              <span ng-context-menu="feedbackContextMenu">
                 <pre>
-                  <highlighted-report data='records.report.text' 
+                  
+                    <highlighted-report data='records.report.text' 
                                       pos-terms='gridData[active.docIndex][active.variable].topPositive' 
                                       neg-terms='gridData[active.docIndex][active.variable].topNegative'>
-                  </highlighted-report>
+                    </highlighted-report>
                 </pre>
+              </span>
+            </div>
+            <div scroll-bookmark="records.pathology.text" ng-mouseup="setFeedbackText()" ng-if="records.pathology.exists" id="emr-pathology" class="report">
+              <div class="info">
+                <i class="glyphicon glyphicon-list-alt"></i>&nbsp;
+                <a tooltip-placement="bottom" tooltip-animation="false" tooltip="docs/{{gridData[active.docIndex].id}}/pathology.txt"> 
+                  <strong class="file-name js-selectable-text">Pathology: #{{gridData[active.docIndex].id}}</strong>
+                </a>
+                <a class="btn btn-xs btn-default pull-right" ng-click="PrintReport('emr-pathology')"><strong>Print</strong></a>
               </div>
-              <div scroll-bookmark="records.pathology.text" ng-mouseup="setFeedbackText()" ng-if="records.pathology.exists" id="emr-pathology" class="report">
-                <div class="info">
-                  <i class="glyphicon glyphicon-list-alt"></i>&nbsp;
-                  <a tooltip-placement="bottom" tooltip-animation="false" tooltip="docs/{{gridData[active.docIndex].id}}/pathology.txt"> 
-                    <strong class="file-name js-selectable-text">Pathology: #{{gridData[active.docIndex].id}}</strong>
-                  </a>
-                  <a class="btn btn-xs btn-default pull-right" ng-click="PrintReport('emr-pathology')"><strong>Print</strong></a>
-                </div>
+              <span ng-context-menu="feedbackContextMenu">
                 <pre>
                   <highlighted-report data='records.pathology.text' 
-                                      pos-terms='gridData[active.docIndex][active.variable].topPositive' 
-                                      neg-terms='gridData[active.docIndex][active.variable].topNegative'>
-                  </highlighted-report></pre>
-              </div>
-            </span>
+                                    pos-terms='gridData[active.docIndex][active.variable].topPositive' 
+                                    neg-terms='gridData[active.docIndex][active.variable].topNegative'>
+                  </highlighted-report>
+                </pre>
+              </span>
+            </div>
           </tab>
 
           <!-- WordTree view -->
