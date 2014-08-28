@@ -31,8 +31,10 @@ angular.module('myApp.directives', [])
             $document.on('mousemove', mousemove);
             $('body').addClass('resizable');
 
-            scope.appDisabled = true;
-            scope.$apply();
+            scope.$apply(function(){
+                scope.appDisabled = true;    
+            });
+
         });
 
         function mousemove(event) {
@@ -59,8 +61,9 @@ angular.module('myApp.directives', [])
             $document.off('mouseup', mouseup);
             $('body').removeClass('resizable');
 
-            scope.appDisabled = false;
-            scope.$apply();
+            scope.$apply(function(){
+                scope.appDisabled = false;
+            });
         }
     };
 }])
@@ -322,8 +325,9 @@ app.directive('cellModified', ['$timeout', function($timeout) {
         $(document).find('body').append($contextMenu);
         $contextMenu.on("click", function (event) {
             // $(event.currentTarget).removeClass('context');
-            $scope.setFeedbackText();
-            $scope.$apply();
+            scope.$apply(function() {
+                $scope.setFeedbackText();
+            });
             $contextMenu.remove();
         }).on('contextmenu', function (event) {
             // $(event.currentTarget).removeClass('context');
