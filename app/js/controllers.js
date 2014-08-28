@@ -159,12 +159,9 @@ angular.module('myApp.controllers', [])
               $scope.updateWordTreeClass()
             }
 
-            if(activeDocIndex != $scope.active.docIndex) {
-              $scope.active.docIndex = activeDocIndex;
-              $scope.loadReport(activeDocIndex, callback);
-            }
-            else{
-                callback();
+            if(callback || activeDocIndex != $scope.active.docIndex) {
+                $scope.active.docIndex = activeDocIndex;
+                $scope.loadReport(activeDocIndex, callback);
             }
 
             //Change view to docView
@@ -639,7 +636,7 @@ angular.module('myApp.controllers', [])
                             }
                          
                             $scope.updateGrid($scope.active.variable, first, function(){
-                                $("#grid-table").scrollTo($("#grid-table .selected"), 1000)
+                                $("#grid-table").scrollTo($("#grid-table .selected"), 500)
 
                                 var search = $scope.wordTreeData.spanText.replace(/\s*\.$/, "");
                                 //object.find ([textToFind [, matchCase[, searchUpward[, wrapAround[, wholeWord[, searchInFrames[, showDialog]]]]]]]);
