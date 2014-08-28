@@ -163,6 +163,9 @@ angular.module('myApp.controllers', [])
               $scope.active.docIndex = activeDocIndex;
               $scope.loadReport(activeDocIndex, callback);
             }
+            else{
+                callback();
+            }
 
             //Change view to docView
             $scope.tabs.docView = true;
