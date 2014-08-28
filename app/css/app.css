@@ -884,16 +884,20 @@ body {
 
 #wordtree-search { padding: 15px; }
 
-#wordtree-input { padding-right: 25px; }
-
 .wordtree-search-control { height: 36px;}
+
+#wordtree-input, #wordtree-input:focus {
+    border-color: #ccc;
+    border-right: 0;
+    box-shadow: none;
+    padding-right: 1px;
+}
 
 #wordtree-view {
     width: 100%;
     border: 1px solid #ccc;
     border-radius: 4px;
     overflow: scroll;
-    margin-top: -23px;
 }
 
 #wordtree-empty {
@@ -929,7 +933,7 @@ body {
     cursor: default;
     font-size: 12px;
     height: 22px;
-    margin-top: -14px;
+    margin-top: 1px;
     overflow: hidden;
     padding: 3px;
     position: absolute;
@@ -939,10 +943,9 @@ body {
 }
 
 #wordtree-search-clear {
-    float: right;
-    right: 75px;
-    top: -24px;
-    z-index: 1000;
+    border-left: 0;
+    background: #fff;
+    padding: 5px;
 }
 
 .wordtree-view-overlay {  

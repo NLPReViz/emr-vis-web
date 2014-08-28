@@ -310,27 +310,35 @@
 
           <!-- WordTree view -->
           <tab active="tabs.wordTreeView" select="setWordTreeHeight()" heading="WordTree View">
-            <form ng-submit="loadWordTree()" id="wordtree-search">
-              <div class="row">
-                <div class="input-group">
-                  <span class="input-group-addon">
-                  Variable &nbsp; 
-                    <select id="wordtree-select-variable" 
-                      ng-model="active.variable" 
-                      ng-options="$root.config.variableMapping[var] for var in $root.config.variables" 
-                      ng-change="updateWordTreeClass()"
-                      ></select> 
-                  </span>
-                  <input id="wordtree-input" type="text" class="form-control wordtree-search-control" placeholder="Select variable and enter keywords here&hellip;" required>
-                  <span class="input-group-btn">
-                      <button type="submit" class="btn btn-default wordtree-search-control">Search</button>
-                  </span>
-                </div>
-                <span id="wordtree-search-clear" class="search-clear glyphicon glyphicon-remove-circle" 
-                      ng-click="clearWordTree()">
+
+            <div class="row">
+              <form class="input-group" id="wordtree-search" ng-submit="loadWordTree()">
+                <span class="input-group-btn">
+                  <button type="submit" class="btn btn-default wordtree-search-control">Search</button>
                 </span>
-              </div>
-            </form>
+                
+                <input id="wordtree-input" type="text" class="form-control wordtree-search-control" placeholder="Enter keywords here and select variable&hellip;" required>
+
+                <!-- <span id="wordtree-search-clear" class="search-clear glyphicon glyphicon-remove-circle" 
+                      ng-click="clearWordTree()">
+                </span> -->
+
+                <span class="input-group-addon" id="wordtree-search-clear">
+                  <i class="search-clear glyphicon glyphicon-remove-circle" ng-click="clearWordTree()"></i>
+                </span>
+
+                <span class="input-group-addon">
+                  Variable &nbsp; 
+                  <select id="wordtree-select-variable" 
+                    ng-model="active.variable" 
+                    ng-options="$root.config.variableMapping[var] for var in $root.config.variables" 
+                    ng-change="updateWordTreeClass()"
+                    ></select> 
+                </span>
+
+              </form>
+            </div>
+
             <div id="wordtree-popup" ng-class="{'wordtree-popup-overlay': wordTreeFullscreenButton}">
             </div>
             <div id="wordtree-view" 
