@@ -418,6 +418,8 @@ angular.module('myApp.controllers', [])
                 $("#wordtree-container").empty();
 
                 data.classificationName = $rootScope.config.classificationName;
+                data.container = "#wordtree-container";
+                data.popup = "#wordtree-popup";
 
                 makeWordTree(data);
 
