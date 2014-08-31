@@ -74,9 +74,6 @@
         </li>
       </ul>
 
-<!--       <a ng-disabled="loaderCount != 0" ng-click="doLogout()" class="btn btn-xs btn-danger navbar-right ng-scope"><strong><i class="glyphicon glyphicon-log-out"></i> Log Out</strong></a>
- -->
-
       <div class="navbar-right">
         <!-- <form class="navbar-form" role="search">
           <div class="form-group" ng-class="{'search-input-active': searchQuery}">
@@ -373,11 +370,7 @@
                   <button type="submit" class="btn btn-default wordtree-search-control">Search</button>
                 </span>
                 
-                <input type="text" class="search-input form-control wordtree-search-control" placeholder="Enter keywords here and select variable&hellip;" required>
-
-                <!-- <span id="wordtree-search-clear" class="search-clear glyphicon glyphicon-remove-circle" 
-                      ng-click="clearWordTree()">
-                </span> -->
+                <input type="text" id="wordtree-input" class="search-input form-control wordtree-search-control" placeholder="Enter keywords here and select variable&hellip;" required>
 
                 <span class="input-group-addon search-clear-addon">
                   <i class="search-clear glyphicon glyphicon-remove-circle" ng-click="clearWordTree()"></i>
