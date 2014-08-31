@@ -52,18 +52,37 @@ angular.module('myApp.controllers', [])
 
         $scope.varStats = Object();
 
-        startLoading();
-
         // Start page load
-        backend.getVarDatasetList().then(function(data) {
-            $scope.modelList = data['model'];
-            $scope.datasetList = data['dataset'];
 
-            stopLoading();
-            setModelAndDataset($scope.modelList[$scope.modelList.length - 1].name, 
-                                $scope.datasetList[0].name);
-        }, function() { alert("Could not retrieve model list!"); stopLoading(); });
-        
+        backend.logout();
+
+        $scope.doLogin = function() {        
+            startLoading();
+
+            backend.login($("#input-username").val(), $("#input-password").val())
+                .then(function () {        
+                    $("#login").fadeOut();
+                    backend.getVarDatasetList().then(function(data) {
+                        $scope.modelList = data['model'];
+                        $scope.datasetList = data['dataset'];
+
+                        stopLoading();
+                        setModelAndDataset($scope.modelList[$scope.modelList.length - 1].name, 
+                                            $scope.datasetList[0].name);
+                    }, function() { alert("Could not retrieve model list!"); stopLoading(); });
+                }, function() {
+                    stopLoading();
+
+                    var loginBox = $("#login-box");
+                    loginBox.addClass('has-error animated shake');
+
+                    // auto remove after some delay
+                    setTimeout(function () {
+                        loginBox.removeClass('animated shake');
+                    }, 500);
+
+                });
+        }
 
         function setModelAndDataset (model, dataset) {
             if(model === undefined || dataset === undefined )

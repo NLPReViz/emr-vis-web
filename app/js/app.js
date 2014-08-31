@@ -6,7 +6,8 @@ var app = angular.module('myApp', [
   'myApp.services',
   'myApp.controllers',
   'myApp.filters',
-  'ui.bootstrap'
+  'ui.bootstrap',
+  'ngCookies'
 ]);
 
 // // config(['$routeProvider', function($routeProvider) {
