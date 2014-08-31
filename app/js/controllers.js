@@ -41,22 +41,13 @@ angular.module('myApp.controllers', [])
             "withdraw-time": "withdraw-time"
         }
 
-        $scope.startSession = function() {        
+        $scope.doLogin = function() {        
             startLoading();
 
             backend.login($("#input-username").val(), $("#input-password").val())
                 .then(function () {        
                     $scope.active.username = $("#input-username").val();
-                    backend.getVarDatasetList().then(function(data) {
-                        // Start page load
-
-                        $scope.modelList = data['model'];
-                        $scope.datasetList = data['dataset'];
-
-                        stopLoading();
-                        setModelAndDataset($scope.modelList[$scope.modelList.length - 1].name, 
-                                            $scope.datasetList[0].name);
-                    }, function() { alert("Could not retrieve model list!"); stopLoading(); });
+                    startSession();
                 }, function() {
                     stopLoading();
 
@@ -69,6 +60,20 @@ angular.module('myApp.controllers', [])
                     }, 500);
 
                 });
+        }
+
+        function startSession(){
+            $scope.gridData = null;
+            backend.getVarDatasetList().then(function(data) {
+                $scope.modelList = data['model'];
+                $scope.datasetList = data['dataset'];
+
+                stopLoading();
+
+
+                setModelAndDataset($scope.modelList[$scope.modelList.length - 1].name, 
+                                    $scope.datasetList[0].name);
+            }, function() { alert("Could not retrieve model list!"); stopLoading(); });
         }
 
         /*
@@ -590,13 +595,13 @@ angular.module('myApp.controllers', [])
 
         $scope.resetDB = function(empty) {
             startLoading();
-
+            $scope.modal.isCollapsed = true;
             backend.resetDB(empty)
                 .then(function(data) {
-
                     stopLoading();
+                    
                     $scope.clearFeedback();
-                    $window.location.reload();
+                    startSession();
 
                 }, function() { alert("Oops. Something went wrong!"); stopLoading(); });
         }
