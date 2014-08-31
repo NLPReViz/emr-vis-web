@@ -14,34 +14,34 @@ body {
 
 .sub-header { padding-bottom: 10px; border-bottom: 1px solid #eee; }
 
-.navbar-form { padding-right: 23px; width: 280px; }
-
-.navbar-nav { width: 350px; }
-
-#add-on{ display: inline-block; }
-
-#search-clear {
-    right: 30px;
-    top: 0;
-    bottom: 0;
-    position: absolute;
-}
+.navbar-form { padding-right: 0px; }
 
 .search-clear {
     height: 14px;
     margin: auto;
     font-size: 14px;
     cursor: pointer;
-    color: #ccc;
-    background-color: white;
+    opacity: 0.5;
 }
 
-#search-input { width: 200px; padding-right: 25px;}
+.search-clear-addon {
+    border-left: 0;
+    background: #fff;
+    padding: 5px;
+}
 
-.search-input-active .form-control{
-    border-color: #66afe9;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(102, 175, 233, 0.6);
-    outline: 0 none;
+.search-input, .search-input:focus {
+    border-color: #ccc;
+    border-right: 0;
+    box-shadow: none;
+    padding-right: 1px;
+    padding-left: 7px;
+}
+
+.search-input-active {
+    color: #8a6d3b;
+    background-color: #fdfbee;
+    transition: background-color 100ms linear;
 }
 
 .nav-tabs {
@@ -57,9 +57,12 @@ body {
 .navbar-nav > li{ cursor: pointer; }
 
 .navbar-nav > li a{
-  padding-top: 10px;
   padding-bottom: 0px;
   margin-bottom: -7px;
+}
+
+.navbar-nav > li a.dropdown-toggle{
+  padding-top: 10px;
 }
 
 .navbar-nav > li span{
@@ -159,7 +162,6 @@ body {
 #login #login-box {
     padding-top: 20px;
 }
-
 
 .appNotice {
     z-index: 2001;
@@ -896,13 +898,6 @@ body {
 
 .wordtree-search-control { height: 36px;}
 
-#wordtree-input, #wordtree-input:focus {
-    border-color: #ccc;
-    border-right: 0;
-    box-shadow: none;
-    padding-right: 1px;
-}
-
 #wordtree-view {
     width: 100%;
     border: 1px solid #ccc;
@@ -950,12 +945,6 @@ body {
     right: 21px;
     z-index: 1050;
     display: none;
-}
-
-#wordtree-search-clear {
-    border-left: 0;
-    background: #fff;
-    padding: 5px;
 }
 
 .wordtree-view-overlay {  
