@@ -95,12 +95,20 @@ angular.module('myApp.services', [])
             var encoded = Base64.encode(username + ':' + password);
             $http.defaults.headers.common.Authorization = 'Basic ' + encoded;
             $cookieStore.put('authdata', encoded);
-
+        },
+        checkLogin: function() {            
             return $http.get("@@backEndApp/login/")
                         .then(function(result) {
                             return result.data;
                         }
             );
+        },
+        getUserName: function(){
+            var data = $cookieStore.get('authdata');
+            if(data) 
+                return Base64.decode(data).split(":")[0];
+            else
+                return null;
         },
         resetDB: function(empty){
             var uri = "@@backEndApp/resetDB/";

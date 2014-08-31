@@ -24,7 +24,7 @@
   <div ng-show="appDisabled" class="coverall">
   </div>
 
-  <div ng-hide="active.username" class="coverall" id="login">
+  <div ng-if="!active.username" class="coverall" id="login">
     <div class="col-md-4 col-md-offset-4" id="login-box">
       <div class="panel panel-default">
         <div class="panel-heading"><h3 class="panel-title"><strong>Sign In </strong></h3></div>
@@ -279,16 +279,13 @@
           </span>
         </div>
 
+
+        <a ng-click="doLogout()" class="btn btn-xs btn-danger pull-right ng-scope"><strong><i class="glyphicon glyphicon-log-out"></i> Log Out</strong></a>
+
         <tabset>
 
           <!-- Report view -->
           <tab active="tabs.docView" heading="Document View">
-            <div ng-if="records.report.exists" class="row">
-              <span id="report-variable" class="pull-right">
-                    Variable &nbsp;
-                    <select ng-model="active.variable" ng-options="$root.config.variableMapping[var] for var in $root.config.variables"></select> 
-              </span>
-            </div>
             <div ng-show="records.pathology.exists" class="pagerview">
               <div class="pagerview-row">
                   <div class="pagerview-step">
@@ -308,11 +305,11 @@
                 <a tooltip-placement="bottom" tooltip-animation="false" tooltip="docs/{{gridData[active.docIndex].id}}/report.txt">
                   <strong class="file-name js-selectable-text">Report: #{{gridData[active.docIndex].id}}</strong>
                 </a>
-                <a class="btn btn-xs btn-default pull-right" ng-click="PrintReport('emr-report')"><strong>Print</strong></a>
-                <!-- <span class="pull-right">
-                  Variable 
-                  <select ng-model="active.variable" ng-options="$root.config.variableMapping[var] for var in $root.config.variables"></select> 
-                </span> -->
+                <!-- <a class="btn btn-xs btn-default pull-right" ng-click="PrintReport('emr-report')"><strong>Print</strong></a> -->
+                <span class="pull-right">
+                    Variable&nbsp;
+                    <select ng-model="active.variable" ng-options="$root.config.variableMapping[var] for var in $root.config.variables"></select> 
+                </span>
               </div>
               <span ng-context-menu="feedbackContextMenu">
                 <pre>
@@ -330,7 +327,7 @@
                 <a tooltip-placement="bottom" tooltip-animation="false" tooltip="docs/{{gridData[active.docIndex].id}}/pathology.txt"> 
                   <strong class="file-name js-selectable-text">Pathology: #{{gridData[active.docIndex].id}}</strong>
                 </a>
-                <a class="btn btn-xs btn-default pull-right" ng-click="PrintReport('emr-report')"><strong>Print</strong></a>
+                <!-- <a class="btn btn-xs btn-default pull-right" ng-click="PrintReport('emr-report')"><strong>Print</strong></a> -->
                 <!-- <span class="pull-right">
                   Variable 
                   <select ng-model="active.variable" ng-options="$root.config.variableMapping[var] for var in $root.config.variables"></select> 

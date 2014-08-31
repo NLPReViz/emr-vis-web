@@ -41,25 +41,41 @@ angular.module('myApp.controllers', [])
             "withdraw-time": "withdraw-time"
         }
 
-        $scope.doLogin = function() {        
-            startLoading();
+        $scope.active = {
+            docIndex: null,
+            variable: null
+        }
+        
+        checkLogin();
 
-            backend.login($("#input-username").val(), $("#input-password").val())
+        function checkLogin(manual) {
+            backend.checkLogin()
                 .then(function () {        
-                    $scope.active.username = $("#input-username").val();
+                    $scope.active.username = backend.getUserName();
                     startSession();
                 }, function() {
-                    stopLoading();
+                    if(manual) {
+                        var loginBox = $("#login-box");
+                        loginBox.addClass('has-error animated shake');
 
-                    var loginBox = $("#login-box");
-                    loginBox.addClass('has-error animated shake');
+                        // auto remove after some delay
+                        setTimeout(function () {
+                            loginBox.removeClass('animated shake');
+                        }, 500);
+                    }
 
-                    // auto remove after some delay
-                    setTimeout(function () {
-                        loginBox.removeClass('animated shake');
-                    }, 500);
-
+                    $scope.active.username = null;
                 });
+        }
+
+        $scope.doLogin = function() {
+            backend.login($("#input-username").val(), $("#input-password").val());
+            checkLogin(true);
+        }
+
+        $scope.doLogout = function() {
+            backend.logout();
+            $scope.active.username = null;
         }
 
         function startSession(){
@@ -82,11 +98,6 @@ angular.module('myApp.controllers', [])
         /*
          * Main grid
          */
-
-        $scope.active = {
-            docIndex: null,
-            variable: null
-        }
 
         $scope.varStats = Object();
 
@@ -705,17 +716,6 @@ angular.module('myApp.controllers', [])
               $scope.appInfo = false;
               $scope.$digest();
             }, 1500);
-        }
-
-        $scope.PrintReport = function(doc) {
-            //http://stackoverflow.com/questions/2255291/print-the-contents-of-a-div
-            var mywindow = $window.open('', 'Print Window', "toolbar=no, scrollbars=yes, width=800");
-            mywindow.document.write('<html><head><title>Record #'+ $scope.gridData[$scope.active.docIndex].id +' — '+ doc +'</title>');
-            mywindow.document.write('</head><body><pre>');
-            mywindow.document.write($("#" + doc + " pre").html());
-            mywindow.document.write('</pre></body></html>');
-            mywindow.print();
-            mywindow.close();
         }
 
         // Loading

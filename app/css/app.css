@@ -736,10 +736,10 @@ body {
 }
 
 .report .info {
+    background-color: #eee;
     border-bottom: 1px solid #ddd;
     height: 33px;
-    padding: 4px;
-    background-color: #eee;
+    padding: 6px;
 }
 
 .report .info .btn{
@@ -749,11 +749,6 @@ body {
 .report pre {
     border: 0;
     background-color: white;
-}
-
-#report-variable {
-    padding-right: 15px;
-    padding-top: 10px;
 }
 
 /*
