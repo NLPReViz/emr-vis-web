@@ -280,7 +280,7 @@
         </div>
 
 
-        <a ng-click="doLogout()" class="btn btn-xs btn-danger pull-right ng-scope"><strong><i class="glyphicon glyphicon-log-out"></i> Log Out</strong></a>
+        <a ng-disabled="loaderCount != 0" ng-click="doLogout()" class="btn btn-xs btn-danger pull-right ng-scope"><strong><i class="glyphicon glyphicon-log-out"></i> Log Out</strong></a>
 
         <tabset>
 
