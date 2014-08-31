@@ -624,17 +624,17 @@ angular.module('myApp.controllers', [])
 
             if ($scope.tabs.docView) {
                 if($scope.feedbackText) {
-                    feedbackHeader = '"' + truncateFilter($scope.feedbackText, 20) + '" indicates "' + $scope.active.variable + '" to be:'
+                    feedbackHeader = '"' + truncateFilter($scope.feedbackText, 20) + '" indicates "' + $rootScope.config.variableMapping[$scope.active.variable] + '" to be:'
                     feedbackFunction = $scope.addFeedbackText;
                 }
                 else {
-                    feedbackHeader = 'Label "' + $scope.active.variable + '" in #'+ $scope.gridData[$scope.active.docIndex].id + ":";
+                    feedbackHeader = 'Label "' + $rootScope.config.variableMapping[$scope.active.variable] + '" in #'+ $scope.gridData[$scope.active.docIndex].id + ":";
                     feedbackFunction = $scope.addFeedbackDoc;
                 }
             }
             else if ($scope.tabs.wordTreeView) {
                 if($scope.wordTreeData.feedbackText) {
-                    feedbackHeader = '"' + truncateFilter($scope.wordTreeData.feedbackText, 20) + '" indicates "' + $scope.active.variable + '" to be:'
+                    feedbackHeader = '"' + truncateFilter($scope.wordTreeData.feedbackText, 20) + '" indicates "' + $rootScope.config.variableMapping[$scope.active.variable] + '" to be:'
                     feedbackFunction = $scope.addWordTreeFeedback;
                 }
             }
