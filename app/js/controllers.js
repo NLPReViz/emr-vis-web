@@ -290,7 +290,7 @@ angular.module('myApp.controllers', [])
                 unclassified = $scope.variableData[variable]["docUnclassified"].length;;
             }
             else{
-                if(angular.isUndefined($scope.gridData))
+                if(!$scope.gridData)
                     return;
 
                 $scope.varStats.topPositive = [];
@@ -517,7 +517,7 @@ angular.module('myApp.controllers', [])
         $scope.updateWordTreeClass = function() {
             var variable = $scope.active.variable;
 
-            if ($scope.variableData === undefined || !variable)
+            if (!$scope.variableData || !variable)
                 return;
 
             $scope.loadVarStats(variable);
