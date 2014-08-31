@@ -6,6 +6,9 @@ It would be overwritten when the grunt task is run */
 
 angular.module('myApp.services', [])
 .factory('backend', ['Base64', '$cookieStore', '$http', '$q', function (Base64, $cookieStore, $http, $q) {
+
+    $http.defaults.headers.common['Authorization'] = 'Basic ' + $cookieStore.get('authdata');
+
     function checkResponse(response) {
         if(response.status == 401)
             alert("Invalid username or password!");
@@ -94,6 +97,18 @@ angular.module('myApp.services', [])
             $cookieStore.put('authdata', encoded);
 
             return $http.get("@@backEndApp/login/")
+                        .then(function(result) {
+                            return result.data;
+                        }
+            );
+        },
+        resetDB: function(empty){
+            var uri = "@@backEndApp/resetDB/";
+            
+            if(empty)
+                uri = "@@backEndApp/resetDBEmpty/";
+
+            return $http.get(uri)
                         .then(function(result) {
                             return result.data;
                         }

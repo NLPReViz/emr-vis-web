@@ -41,27 +41,12 @@ angular.module('myApp.controllers', [])
             "withdraw-time": "withdraw-time"
         }
 
-        /*
-         * Main grid
-         */
-
-        $scope.active = {
-            docIndex: null,
-            variable: null
-        }
-
-        $scope.varStats = Object();
-
-        //Do login. This is deliberately done in jQuery.
-
-        backend.logout();
-
-        $scope.doLogin = function() {        
+        $scope.startSession = function() {        
             startLoading();
 
             backend.login($("#input-username").val(), $("#input-password").val())
                 .then(function () {        
-                    $("#login").fadeOut();
+                    $scope.active.username = $("#input-username").val();
                     backend.getVarDatasetList().then(function(data) {
                         // Start page load
 
@@ -85,6 +70,17 @@ angular.module('myApp.controllers', [])
 
                 });
         }
+
+        /*
+         * Main grid
+         */
+
+        $scope.active = {
+            docIndex: null,
+            variable: null
+        }
+
+        $scope.varStats = Object();
 
         function setModelAndDataset (model, dataset) {
             if(model === undefined || dataset === undefined )
@@ -592,6 +588,18 @@ angular.module('myApp.controllers', [])
             $scope.loadWordTree($scope.active.wordTreeQuery);
         }
 
+        $scope.resetDB = function(empty) {
+            startLoading();
+
+            backend.resetDB(empty)
+                .then(function(data) {
+
+                    stopLoading();
+                    $scope.clearFeedback();
+                    $window.location.reload();
+
+                }, function() { alert("Oops. Something went wrong!"); stopLoading(); });
+        }
 
         /*
          * Feedback Context Menu
