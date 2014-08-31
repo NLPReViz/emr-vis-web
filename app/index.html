@@ -54,7 +54,7 @@
       <a class="navbar-brand visible-xs">EMR VisWeb</a>
     </div>
     <nav class="hidden-xs">
-      <ul class="nav navbar-nav" ng-click="modal.toggle()">
+      <ul class="nav navbar-nav" ng-click="modal.toggle()" id="main-menu">
         <a href="#top" role="button" class="navbar-brand">
           EMR VisWeb
         </a>
@@ -75,18 +75,7 @@
       </ul>
 
       <div class="navbar-right">
-        <!-- <form class="navbar-form" role="search">
-          <div class="form-group" ng-class="{'search-input-active': searchQuery}">
-            <span id="add-on">Doc #</span>
-            <input id="search-input" class="form-control" 
-                  placeholder="Comma separated" type="search" 
-                  ng-model="searchQuery" ng-blur="loadVarStats(active.variable)"/>
-            <span id="search-clear" class="search-clear glyphicon glyphicon-remove-circle" 
-                  ng-click="setSearchFilter(null)"></span>
-          </div>
-        </form> -->
-
-        <form class="input-group navbar-form" role="search">
+        <form class="input-group navbar-form" role="search" id="search-menu">
             <span class="input-group-addon">Doc #</span>
             <input class="search-input form-control" 
                   ng-class="{'search-input-active': searchQuery}"
@@ -113,7 +102,6 @@
           <h5>Select Model</h5>
           <p ng-hide="modelList.length" class="empty-list">None</p>
           <ul>
-            <!-- <li class="pick">Test</li> -->
             <li ng-repeat="model in modelList" 
                 ng-class="{selected: modal.selectedModel == model.name}" 
                 ng-click="modal.selectedModel = model.name">

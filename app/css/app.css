@@ -117,6 +117,9 @@ body {
 
 .navbar-nav:hover li a { color: #333; }
 
+#main-menu { width: 380px; }
+#search-menu { width: 250px;}
+
 .unselectable {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
