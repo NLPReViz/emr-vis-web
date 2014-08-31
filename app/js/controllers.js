@@ -64,12 +64,15 @@ angular.module('myApp.controllers', [])
 
         function startSession(){
             $scope.gridData = null;
+            $scope.variableData = null;
+            $scope.active.dataset = null;
+            $scope.active.model = null;
+
             backend.getVarDatasetList().then(function(data) {
                 $scope.modelList = data['model'];
                 $scope.datasetList = data['dataset'];
 
                 stopLoading();
-
 
                 setModelAndDataset($scope.modelList[$scope.modelList.length - 1].name, 
                                     $scope.datasetList[0].name);
@@ -421,9 +424,9 @@ angular.module('myApp.controllers', [])
 
         $scope.loadWordTree = function(){
 
-            var query = $("#wordtree-input").val().trim()
+            var query = $("#wordtree-input").val().trim();
 
-            if ($scope.active.dataset === undefined && !query)
+            if ($scope.active.dataset === undefined || query == "")
                 return
             
             startLoading();
