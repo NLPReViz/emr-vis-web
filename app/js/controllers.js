@@ -52,7 +52,7 @@ angular.module('myApp.controllers', [])
 
         $scope.varStats = Object();
 
-        // Start page load
+        //Do login. This is deliberately done in jQuery.
 
         backend.logout();
 
@@ -63,6 +63,8 @@ angular.module('myApp.controllers', [])
                 .then(function () {        
                     $("#login").fadeOut();
                     backend.getVarDatasetList().then(function(data) {
+                        // Start page load
+
                         $scope.modelList = data['model'];
                         $scope.datasetList = data['dataset'];
 
@@ -660,7 +662,9 @@ angular.module('myApp.controllers', [])
                                 var search = $scope.wordTreeData.spanText.replace(/\s*\.$/, "");
                                 //object.find ([textToFind [, matchCase[, searchUpward[, wrapAround[, wholeWord[, searchInFrames[, showDialog]]]]]]]);
                                 //Experimental: Works only on Chrome/Firefox/Safari
+                                //TODO: This is a HACK!
                                 setTimeout(function() {
+                                    //Search in reverse order; This will always find what we want.
                                     $window.find(search, false, true, true, false, true, false);
                                 });
 
