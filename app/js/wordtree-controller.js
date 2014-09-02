@@ -826,6 +826,9 @@ function wordTreeNodeMouseOver(node, d, orientation, root, eventName){
 
       // docs = d.docs;
     }
+    else{
+      d3.selectAll('.node text').classed("wordtree-highlight-sentence", true);
+    }
     // else {
     //   docs = WordTreeData.matchedList
     // }
