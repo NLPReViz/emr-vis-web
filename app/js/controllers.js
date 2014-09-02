@@ -276,7 +276,7 @@ angular.module('myApp.controllers', [])
         
         $scope.loadVarStats = function(variable) {
         
-            if(angular.isUndefined($scope.variableData))
+            if(angular.isUndefined($scope.variableData) || !variable)
                 return;
 
             var positive = 0, negative = 0, unclassified = 0;
