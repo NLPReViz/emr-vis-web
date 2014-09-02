@@ -407,6 +407,8 @@ angular.module('myApp.controllers', [])
             while($scope.feedbackList.length > 0) {
                 $scope.feedbackList.pop();
             }
+
+            $scope.retrainData.message = null;
         };
 
         $scope.confirmFeedback = function(override) {
