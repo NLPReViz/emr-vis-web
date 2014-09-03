@@ -162,7 +162,7 @@ body {
     position: absolute;
 }
 
-#login #login-box {
+#login #login-box-container {
     position: absolute;
     top: 50%;
     transform: translate(0px, -50%);

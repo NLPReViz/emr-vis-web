@@ -57,20 +57,14 @@ angular.module('myApp.controllers', [])
                     startSession();
                 }, function() {
                     if(manual) {
-                        var loginBox = $("#login-box");
-                        loginBox.addClass('has-error animated shake');
-
-                        // auto remove after some delay
-                        setTimeout(function () {
-                            loginBox.removeClass('animated shake');
-                        }, 500);
+                        $("#login-box").addClass('has-error animated shake');
                     }
-
                     $scope.active.username = null;
                 });
         }
 
         $scope.doLogin = function() {
+            $("#login-box").removeClass('has-error animated shake');
             backend.login($("#input-username").val(), $("#input-password").val());
             checkLogin(true);
         }
