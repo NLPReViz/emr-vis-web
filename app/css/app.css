@@ -163,7 +163,9 @@ body {
 }
 
 #login #login-box {
-    padding-top: 20px;
+    position: absolute;
+    top: 50%;
+    transform: translate(0px, -50%);
 }
 
 .appNotice {
@@ -186,6 +188,7 @@ body {
 .main {
   padding: 20px;
   margin-left: 600px;
+  min-width: 420px;
 }
 
 .main .page-header { margin-top: 0; }
@@ -837,6 +840,7 @@ body {
  * Feedback
  */
 
+
 .report-feedback {
     z-index: 1510;
     
@@ -870,6 +874,12 @@ body {
 #feedbackList .alert-default{
     background-color: #eee;
     padding: 2px;
+}
+
+@media all and (max-width: 1180px) {
+    .report-feedback {
+      display: none;
+    }
 }
 
 
