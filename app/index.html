@@ -431,12 +431,9 @@
                     <i class="glyphicon glyphicon-trash"> </i> Clear All
                   </button>
                   <button class="btn btn-primary" 
-                          ng-click="confirmFeedback(feedbackOverride)" >
+                          ng-click="confirmFeedback(false)" >
                           <i class="glyphicon glyphicon-refresh"> </i> Re-Train
                   </button>
-                  <label>
-                    <input type="checkbox" ng-model="feedbackOverride" class="ng-valid ng-dirty"> Override [<a href="#" tooltip="Use this switch to override any conflicts and warnings about existing training data." tooltip-animation="false" tooltip-placement="right">?</a>]                  
-                  </label>
                 </div>
               </div>
 
@@ -449,15 +446,25 @@
                 </p>
                 <div ng-hide="retrainData.loading">
                   <p>
-                    <span class="glyphicon glyphicon-ok" ng-show="retrainData.successful"></span>
-                    <span class="glyphicon glyphicon-remove" ng-show="!retrainData.successful"></span>
+                    <span class="glyphicon glyphicon-ok" ng-show="retrainData.status=='OK'"></span>
+                    <span class="glyphicon glyphicon-remove" ng-show="retrainData.status!='OK'"></span>
                     {{retrainData.message}} 
-                    <span ng-show="retrainData.successful">
+                    <span ng-show="retrainData.status=='OK'">
                       Now using <strong>{{active.model}}</strong>.
                     </span>
                   </p>
 
-                  <div ng-show="retrainData.successful">
+                  <div ng-show="retrainData.actionMessage">
+                    <p>{{retrainData.actionMessage}}</p>
+                    <div ng-show="retrainData.status=='Warning'" class="form-horizontal">
+                      <button class="btn btn-danger" 
+                              ng-click="confirmFeedback(true)"> 
+                              <i class="glyphicon glyphicon-exclamation-sign"> </i> Override 
+                      </button>
+                    </div>
+                  </div>
+
+                  <div ng-show="retrainData.status=='OK'">
                     <p>It includes the following feedback:</p>
                     <ol>
                       <li ng-repeat="feedback in retrainData.feedbackList">

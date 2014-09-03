@@ -24,6 +24,8 @@ angular.module('myApp.controllers', [])
                   "nursing-report", "prep-adequateNo", "prep-adequateNot",
                   "prep-adequateYes", "proc-aborted", "withdraw-time"]
 
+
+
         $rootScope.config.variableMapping = 
         {   "any-adenoma": "any-adenoma",
             "appendiceal-orifice": "appendiceal-orifice",
@@ -407,8 +409,6 @@ angular.module('myApp.controllers', [])
             while($scope.feedbackList.length > 0) {
                 $scope.feedbackList.pop();
             }
-
-            $scope.retrainData.message = null;
         };
 
         $scope.confirmFeedback = function(override) {
@@ -537,7 +537,8 @@ angular.module('myApp.controllers', [])
         $scope.retrainData = new Object();
         $scope.retrainData.message = null;
         $scope.retrainData.loading = false;
-        $scope.retrainData.successful = false;
+        $scope.retrainData.status = null;
+        $scope.retrainData.actionMessage = null;
 
         $scope.sendFeedback = function(override) {
             // alert('Re-training!');
@@ -550,18 +551,28 @@ angular.module('myApp.controllers', [])
                 $scope.active.dataset, override)
                 .then(function(data) {
 
-                    if(data.msg == "OK"){
+                    $scope.retrainData.status = data.status;
+
+                    if(data.status == "OK"){
                         $scope.retrainData.message = "Retraining successful!";
+                        $scope.retrainData.actionMessage = null;
                         assignDataToVars(data.gridVarData);
                         $scope.modelList = data.modelList;
                         $scope.active.model = data.latestModel;
                         $scope.retrainData.feedbackList = $.extend(true,[],$scope.feedbackList);
                         $scope.clearFeedback();
-                        $scope.retrainData.successful = true;
+                    }
+                    else if(data.status == "Error") {
+                        $scope.retrainData.message = data.msg;
+                        $scope.retrainData.actionMessage = "Please fix errors before re-training.";
+                    }
+                    else if(data.status == "Warning") {
+                        $scope.retrainData.message = data.msg;
+                        $scope.retrainData.actionMessage = "Do you wish to override warnings?";
                     }
                     else{
-                        $scope.retrainData.message = data.msg;
-                        $scope.retrainData.successful = false;
+                        $scope.retrainData.message = "Sorry, something went wrong. Please report this.";
+                        $scope.retrainData.actionMessage = null;
                     }
 
                     $scope.retrainData.loading = false;
