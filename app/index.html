@@ -446,9 +446,17 @@
                 </p>
                 <div ng-hide="retrainData.loading">
                   <p>
-                    <span class="glyphicon glyphicon-ok" ng-show="retrainData.status=='OK'"></span>
-                    <span class="glyphicon glyphicon-remove" ng-show="retrainData.status!='OK'"></span>
-                    {{retrainData.message}} 
+                    <span ng-show="retrainData.status=='OK'">
+                      <span class="glyphicon glyphicon-ok"></span>
+                      {{retrainData.message}} 
+                    </span>
+
+                    <span ng-show="retrainData.status!='OK'">
+                      <span class="glyphicon glyphicon-remove" ng-repeat-start="error in retrainData.message"></span>
+                      {{error}}
+                      <br ng-repeat-end />
+                    </span>
+                    
                     <span ng-show="retrainData.status=='OK'">
                       Now using <strong>{{active.model}}</strong>.
                     </span>

@@ -557,15 +557,15 @@ angular.module('myApp.controllers', [])
                         $scope.clearFeedback();
                     }
                     else if(data.status == "Error") {
-                        $scope.retrainData.message = data.msg;
-                        $scope.retrainData.actionMessage = "Please fix errors before re-training.";
+                        $scope.retrainData.message = [data.msg];
+                        $scope.retrainData.actionMessage = "Use the 'x' button next to a feedback to remove it. Try re-training after making the feedback list consistent.";
                     }
                     else if(data.status == "Warning") {
                         $scope.retrainData.message = data.msg;
-                        $scope.retrainData.actionMessage = "Do you wish to override warnings?";
+                        $scope.retrainData.actionMessage = "Do you wish to override with new feedback?";
                     }
                     else{
-                        $scope.retrainData.message = "Sorry, something went wrong. Please report this.";
+                        $scope.retrainData.message = ["Sorry, something went wrong. Please report this."];
                         $scope.retrainData.actionMessage = null;
                     }
 
