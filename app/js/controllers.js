@@ -550,9 +550,9 @@ angular.module('myApp.controllers', [])
                     if(data.status == "OK"){
                         $scope.retrainData.message = "Retraining successful!";
                         $scope.retrainData.actionMessage = null;
+                        assignDataToVars(data.gridVarData);
                         $scope.modelList = data.modelList;
                         $scope.active.model = data.latestModel;
-                        assignDataToVars(data.gridVarData);
                         $scope.retrainData.feedbackList = $.extend(true,[],$scope.feedbackList);
                         $scope.clearFeedback();
                     }
