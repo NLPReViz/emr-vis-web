@@ -445,34 +445,12 @@
                   Re-training models. Please wait.
                 </p>
                 <div ng-hide="retrainData.loading">
-                  <p>
-                    <span ng-show="retrainData.status=='OK'">
-                      <span class="glyphicon glyphicon-ok"></span>
-                      {{retrainData.message}} 
-                    </span>
-
-                    <span ng-show="retrainData.status!='OK'">
-                      <span class="glyphicon glyphicon-remove" ng-repeat-start="error in retrainData.message"></span>
-                      {{error}}
-                      <br ng-repeat-end />
-                    </span>
                     
-                    <span ng-show="retrainData.status=='OK'">
-                      Now using <strong>{{retrainData.actionMessage}}</strong>
-                    </span>
-                  </p>
-
-                  <div ng-show="retrainData.actionMessage">
-                    <p>{{retrainData.actionMessage}}</p>
-                    <div ng-show="retrainData.status=='Warning'" class="form-horizontal">
-                      <button class="btn btn-danger" 
-                              ng-click="confirmFeedback(true)"> 
-                              <i class="glyphicon glyphicon-exclamation-sign"> </i> Override 
-                      </button>
-                    </div>
-                  </div>
-
-                  <div ng-show="retrainData.status=='OK'">
+                  <span ng-show="retrainData.status=='OK'">
+                    <p class="bs-callout bs-callout-success">
+                      <span class="glyphicon glyphicon-ok"></span>
+                      Retraining successful! Now using <strong>{{retrainData.message}}</strong>
+                    </p>
                     <p>It includes the following feedback:</p>
                     <ol>
                       <li ng-repeat="feedback in retrainData.feedbackList">
@@ -487,7 +465,66 @@
                         </span>
                       </li>
                     </ol>
-                  </div>
+                  </span>
+
+                  <span ng-show="retrainData.status=='Error'">
+                  
+                    <p>
+                      <span class="glyphicon glyphicon-remove" ></span>
+                      You have conflicting labels in your current set of feedback:
+                    </p>
+
+                    <p ng-repeat="error in retrainData.message" class="bs-callout bs-callout-danger">
+                      <span ng-if="error.type == 'errorDoc'">
+                        Cannot set <em>{{$root.config.variableMapping[error.variable]}}</em> to be both true and false in Doc <strong>#{{error.docId}}</strong>!
+                      </span>
+                      <span ng-if="error.type == 'errorDocSpan'">
+                        Cannot set <em>{{$root.config.variableMapping[error.variable]}}</em> to be both true and false (using "{{error.span1 | truncate:15}}") in Doc <strong>#{{error.docId}}</strong>!
+                      </span>
+                      <span ng-if="error.type == 'errorSpanSpan'">
+                        Cannot set <em>{{$root.config.variableMapping[error.variable]}}</em> to be both true and false (using "{{error.span1 | truncate:15}}" and "{{error.span2 | truncate:15}}") in Doc <strong>#{{error.docId}}</strong>!
+                      </span>
+                    </p>
+                    
+
+                    <p>Try re-training after making the feedback list consistent. Use the <strong>&times;</strong> button next to a feedback to remove it.</p>
+
+                  </span>
+
+                  <span ng-show="retrainData.status=='Warning'">
+                    <p>
+                      <span class="glyphicon glyphicon-remove"></span>
+                      Your feedback contradicts your previously submitted labels:
+                    </p>
+
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                        <th>#</th>
+                        <th>Doc #</th>
+                        <th>Variable</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                        <tr ng-repeat="warning in retrainData.message">
+                          <td>{{$index+1}}.</td>
+                          <td>{{warning.docId}}</td>
+                          <td><em>{{$root.config.variableMapping[warning.variable]}}</em></td>
+                        </tr>
+                      </tbody>
+                    </table>
+
+                    <p>You may use the <strong>×</strong> button next to a feedback to remove it and fix the feedback list before re-training. Otherwise, you may also choose to override them with your new feedback:</p>
+
+                    <div class="form-horizontal">
+                      <button class="btn btn-danger" 
+                              ng-click="confirmFeedback(true)"> 
+                              <i class="glyphicon glyphicon-exclamation-sign"> </i> Override 
+                      </button>
+                    </div>
+                  
+                  </span>
+
                 </div>
               </div>
 

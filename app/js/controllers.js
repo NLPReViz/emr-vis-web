@@ -532,7 +532,6 @@ angular.module('myApp.controllers', [])
         $scope.retrainData.message = null;
         $scope.retrainData.loading = false;
         $scope.retrainData.status = null;
-        $scope.retrainData.actionMessage = null;
 
         $scope.sendFeedback = function(override) {
             // alert('Re-training!');
@@ -545,28 +544,29 @@ angular.module('myApp.controllers', [])
                 $scope.active.dataset, override)
                 .then(function(data) {
 
-                    $scope.retrainData.status = data.status;
-
                     if(data.status == "OK"){
-                        $scope.retrainData.message = "Retraining successful!";
-                        $scope.retrainData.actionMessage = data.latestModel;
+                        $scope.retrainData.message = data.latestModel;
+                        
                         assignDataToVars(data.gridVarData);
+
                         $scope.modelList = data.modelList;
                         $scope.active.model = data.latestModel;
-                        $scope.retrainData.feedbackList = $.extend(true,[],$scope.feedbackList);
+                        $scope.retrainData.feedbackList = data.feedbackList;
+
+                        $scope.retrainData.status = "OK";
+
                         $scope.clearFeedback();
                     }
                     else if(data.status == "Error") {
-                        $scope.retrainData.message = [data.msg];
-                        $scope.retrainData.actionMessage = "Use the 'x' button next to a feedback to remove it. Try re-training after making the feedback list consistent.";
+                        $scope.retrainData.message = data.errorList;
+                        $scope.retrainData.status = "Error";
                     }
                     else if(data.status == "Warning") {
-                        $scope.retrainData.message = data.msg;
-                        $scope.retrainData.actionMessage = "Do you wish to override with new feedback?";
+                        $scope.retrainData.message = data.warningList;
+                        $scope.retrainData.status = "Warning";
                     }
                     else{
-                        $scope.retrainData.message = ["Sorry, something went wrong. Please report this."];
-                        $scope.retrainData.actionMessage = null;
+                        alert("Sorry, something went wrong. Please report this.");
                     }
 
                     $scope.retrainData.loading = false;
