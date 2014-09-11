@@ -258,12 +258,7 @@ border-color: #d6e9c6;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
   opacity: 0;
-  
-  pointer-events: none;
-}
-
-/* Show the entire tooltip on hover and focus */
-[data-custom-tooltip]:-webkit-transition: 
+  -webkit-transition: 
       opacity 0.2s ease-in-out,
         visibility 0.2s ease-in-out,
         -webkit-transform 0.2s cubic-bezier(0.71, 1.7, 0.77, 1.24);
@@ -274,7 +269,15 @@ border-color: #d6e9c6;
     transition:         
         opacity 0.2s ease-in-out,
         visibility 0.2s ease-in-out,
-        transform 0.2s cubic-bezier(0.71, 1.7, 0.77, 1.24);hover:before,
+        transform 0.2s cubic-bezier(0.71, 1.7, 0.77, 1.24);
+  /*-webkit-transform: translate3d(0, 0, 0);
+  -moz-transform:    translate3d(0, 0, 0);
+  transform:         translate3d(0, 0, 0);*/
+  pointer-events: none;
+}
+
+/* Show the entire tooltip on hover and focus */
+[data-custom-tooltip]:hover:before,
 [data-custom-tooltip]:hover:after,
 [data-custom-tooltip]:focus:before,
 [data-custom-tooltip]:focus:after,
@@ -342,6 +345,23 @@ border-color: #d6e9c6;
   margin-left: -20px;
 }
 
+/*[data-custom-tooltip]:hover:before,
+[data-custom-tooltip]:hover:after,
+[data-custom-tooltip]:focus:before,
+[data-custom-tooltip]:focus:after,
+.custom-tooltip:hover:before,
+.custom-tooltip:hover:after,
+.custom-tooltip:focus:before,
+.custom-tooltip:focus:after,
+.custom-tooltip-top:hover:before,
+.custom-tooltip-top:hover:after,
+.custom-tooltip-top:focus:before,
+.custom-tooltip-top:focus:after {
+  -webkit-transform: translateY(-8px);
+  -moz-transform:    translateY(-8px);
+  transform:         translateY(-8px); 
+}*/
+
 /* Left */
 .custom-tooltip-left:before,
 .custom-tooltip-left:after {
@@ -359,6 +379,15 @@ border-color: #d6e9c6;
   border-left-color: hsla(0, 0%, 20%, 0.9);
 }
 
+/*.custom-tooltip-left:hover:before,
+.custom-tooltip-left:hover:after,
+.custom-tooltip-left:focus:before,
+.custom-tooltip-left:focus:after {
+  -webkit-transform: translateX(-8px);
+  -moz-transform:    translateX(-8px);
+  transform:         translateX(-8px); 
+}*/
+
 /* Bottom */
 .custom-tooltip-bottom:before,
 .custom-tooltip-bottom:after {
@@ -375,6 +404,15 @@ border-color: #d6e9c6;
   border-bottom-color: hsla(0, 0%, 20%, 0.9);
 }
 
+/*.custom-tooltip-bottom:hover:before,
+.custom-tooltip-bottom:hover:after,
+.custom-tooltip-bottom:focus:before,
+.custom-tooltip-bottom:focus:after {
+  -webkit-transform: translateY(8px);
+  -moz-transform:    translateY(8px);
+  transform:         translateY(8px); 
+}*/
+
 /* Right */
 .custom-tooltip-right:before,
 .custom-tooltip-right:after {
@@ -389,6 +427,15 @@ border-color: #d6e9c6;
   border-right-color: #000;
   border-right-color: hsla(0, 0%, 20%, 0.9);
 }
+
+/*.custom-tooltip-right:hover:before,
+.custom-tooltip-right:hover:after,
+.custom-tooltip-right:focus:before,
+.custom-tooltip-right:focus:after {
+  -webkit-transform: translateX(8px);
+  -moz-transform:    translateX(8px);
+  transform:         translateX(8px); 
+}*/
 
 /* Move directional arrows down a bit for left/right tooltips */
 .custom-tooltip-left:before,
