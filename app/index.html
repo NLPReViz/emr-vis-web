@@ -447,7 +447,7 @@
                 <div ng-hide="retrainData.loading">
                     
                   <span ng-show="retrainData.status=='OK'">
-                    <p class="bs-callout bs-callout-success">
+                    <p class="bs-callout bs-callout-warning">
                       <span class="glyphicon glyphicon-ok"></span>
                       Retraining successful! Now using <strong>{{retrainData.message}}</strong>
                     </p>
@@ -492,7 +492,7 @@
                   </span>
 
                   <span ng-show="retrainData.status=='Warning'">
-                    <p>
+                    <p class="bs-callout bs-callout-warning">
                       <span class="glyphicon glyphicon-remove"></span>
                       Your feedback contradicts your previously submitted labels:
                     </p>
