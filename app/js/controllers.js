@@ -24,8 +24,6 @@ angular.module('myApp.controllers', [])
                   "nursing-report", "prep-adequateNo", "prep-adequateNot",
                   "prep-adequateYes", "proc-aborted", "withdraw-time"]
 
-
-
         $rootScope.config.variableMapping = 
         {   "any-adenoma": "any-adenoma",
             "appendiceal-orifice": "appendiceal-orifice",
@@ -335,6 +333,10 @@ angular.module('myApp.controllers', [])
             this.classification = classification;
             this.variable = variable;
             this.docList = docList;
+            this.status = null;
+            this.conflictList = [];
+
+            this.$hidden_id = $scope.feedbackList.length;
         }
 
         $scope.setFeedbackText = function(){
@@ -396,7 +398,17 @@ angular.module('myApp.controllers', [])
         }
 
         $scope.removeFeedback = function(index) {
+
+            var hidden_id = $scope.feedbackList[index].$hidden_id;
+
             $scope.feedbackList.splice(index, 1);
+
+            $scope.feedbackList.forEach(function(feedback) {
+                var i = feedback.conflictList.indexOf(hidden_id);
+                if (i > -1) {
+                    feedback.conflictList.splice(i, 1);
+                } 
+            });
         }
 
         $scope.clearFeedback = function() {
@@ -551,7 +563,8 @@ angular.module('myApp.controllers', [])
 
                         $scope.modelList = data.modelList;
                         $scope.active.model = data.latestModel;
-                        $scope.retrainData.feedbackList = data.feedbackList;
+                        
+                        $scope.retrainData.feedbackList = $.extend(true,[],$scope.feedbackList);
 
                         $scope.retrainData.status = "OK";
 
@@ -560,10 +573,14 @@ angular.module('myApp.controllers', [])
                     else if(data.status == "Error") {
                         $scope.retrainData.message = data.errorList;
                         $scope.retrainData.status = "Error";
+
+                        setConflictList(data.feedbackList);
                     }
                     else if(data.status == "Warning") {
                         $scope.retrainData.message = data.warningList;
                         $scope.retrainData.status = "Warning";
+
+                        setConflictList(data.feedbackList);
                     }
                     else{
                         alert("Sorry, something went wrong. Please report this.");
@@ -573,6 +590,13 @@ angular.module('myApp.controllers', [])
 
                 }, function() { alert("Unable to send feedback."); $scope.retrainData.loading = false; });
         };
+
+        function setConflictList(list) {
+            for (var i=0; i < list.length; i++) {
+                $scope.feedbackList[i].status = list[i].status;
+                $scope.feedbackList[i].conflictList = list[i].conflictList;
+            }
+        }
 
         /*
          * Tabs

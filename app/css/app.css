@@ -208,7 +208,7 @@ body {
 /* Themes for different contexts */
 .bs-callout-danger {
   background-color: #fcf2f2;
-  border-color: #dFb5b4;
+  border-color: #a94442;
 }
 .bs-callout-warning {
   background-color: #fefbed;
@@ -222,6 +222,10 @@ body {
 .bs-callout-success {
   background-color: #dff0d8;
   border-color: #fdfefc;
+}
+
+.danger-text {
+  color: #a94442;
 }
 
 /*

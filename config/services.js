@@ -77,7 +77,7 @@ angular.module('myApp.services', [])
                 uri = "@@backEndApp/putFeedbackOverride/";
 
             return $http.put(uri + model + ".xml/" + dataset + ".xml", 
-                            angular.toJson(feedbackList))
+                            JSON.stringify(appCtrl.feedbackList, ["kind", "selected", "span", "classification", "variable", "docList"]))
                         .then(function(result) {
                             return result.data;
                         }, function(response){
