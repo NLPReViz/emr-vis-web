@@ -412,7 +412,7 @@
                 <p ng-hide="feedbackList.length">Feedback list is empty.</p>
                 
                 <alert ng-repeat="feedback in feedbackList" type="default" close="removeFeedback($index)">
-                  <span ng-class="{'danger-text': feedback.conflictList.length}">
+                  <span ng-class="{'danger-text': feedback.conflictList.length, 'warning-text': feedback.status == 'WARNING'}">
                     <strong>{{$index + 1}}.</strong>
                     <span ng-if="feedback.kind == 'TYPE_DOC'">
                       #{{feedback.docList}} should have 
