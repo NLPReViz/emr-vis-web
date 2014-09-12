@@ -367,32 +367,49 @@ angular.module('myApp.controllers', [])
             }
         };
 
+        function addFeedbackToList(feedback) {
+            var properties = ["kind", "selected", "span", "classification", "variable", "docList"];
+            
+            var newJSON = JSON.stringify(feedback, properties);
+
+            var bDuplicate = false;
+
+            $scope.feedbackList.forEach(function(old){
+                if (JSON.stringify(old, properties) == newJSON)
+                    bDuplicate = true;
+            });
+            
+            if(!bDuplicate) {
+                $scope.feedbackList.push(feedback);
+                showInfo("Feedback added to the list.");
+            }
+            else {
+                showInfo("Feedback already present in the list!");   
+            }
+        }
+
         $scope.addFeedbackDoc = function(classification) {
 
             var docClass = $scope.gridData[$scope.active.docIndex][$scope.active.variable].classification;
             var fClass = null;
             
-            $scope.feedbackList.push(new Feedback("TYPE_DOC", null, null, 
+            addFeedbackToList(new Feedback("TYPE_DOC", null, null, 
                                         classification, $scope.active.variable, 
                                         $scope.gridData[$scope.active.docIndex].id));
-
-            showInfo("Feedback added to the list!");
         }
 
         $scope.addFeedbackText = function(classification) {
-            $scope.feedbackList.push(new Feedback("TYPE_TEXT", $scope.feedbackText, null,
+            addFeedbackToList(new Feedback("TYPE_TEXT", $scope.feedbackText, null,
                                         classification, $scope.active.variable,
                                         $scope.gridData[$scope.active.docIndex].id));
-            showInfo("Feedback added to the list!");
             $scope.feedbackText = false;
         }
 
         $scope.addWordTreeFeedback = function(classification) {
             if ($scope.active.variable) {
-                $scope.feedbackList.push(new Feedback("TYPE_WORDTREE", $scope.wordTreeData.feedbackText, 
+                addFeedbackToList(new Feedback("TYPE_WORDTREE", $scope.wordTreeData.feedbackText, 
                                         $scope.wordTreeData.spanText, classification, 
                                         $scope.active.variable, $scope.wordTreeData.docList));
-                showInfo("Feedback added to the list!");
                 $scope.feedbackText = false;
             }
         }
@@ -557,6 +574,9 @@ angular.module('myApp.controllers', [])
                 $scope.feedbackList[i].$hidden_id = i.toString();
             }
 
+            var activeVariable = $scope.active.variable;
+            var activeDocIndex = $scope.active.docIndex;
+
             backend.putFeedback($scope.feedbackList, $scope.active.model, 
                 $scope.active.dataset, override)
                 .then(function(data) {
@@ -599,7 +619,11 @@ angular.module('myApp.controllers', [])
         function setConflictList(list) {
             for (var i=0; i < list.length; i++) {
                 $scope.feedbackList[i].status = list[i].status;
-                $scope.feedbackList[i].conflictList = list[i].conflictList;
+
+                if(list[i].conflictList)
+                    $scope.feedbackList[i].conflictList = list[i].conflictList;
+                else
+                    $scope.feedbackList[i].conflictList = [];
             }
         }
 
