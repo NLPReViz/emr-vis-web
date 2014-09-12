@@ -336,7 +336,7 @@ angular.module('myApp.controllers', [])
             this.status = null;
             this.conflictList = [];
 
-            this.$hidden_id = $scope.feedbackList.length;
+            this.$hidden_id = null;
         }
 
         $scope.setFeedbackText = function(){
@@ -551,6 +551,11 @@ angular.module('myApp.controllers', [])
                 return;
 
             $scope.retrainData.loading = true;
+
+            //assign ids to feedback list
+            for (var i=0; i < $scope.feedbackList.length; i++) {
+                $scope.feedbackList[i].$hidden_id = i.toString();
+            }
 
             backend.putFeedback($scope.feedbackList, $scope.active.model, 
                 $scope.active.dataset, override)

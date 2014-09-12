@@ -208,20 +208,20 @@ body {
 /* Themes for different contexts */
 .bs-callout-danger {
   background-color: #fcf2f2;
-  border-color: #a94442;
+  border-left: 5px solid #a94442;
 }
 .bs-callout-warning {
   background-color: #fefbed;
-  border-color: #f1e7bc;
+  border-left: 5px solid #e4d07d;
 }
 .bs-callout-info {
   background-color: #f0f7fd;
-  border-color: #d0e3f0;
+  border-left: 5px solid #d0e3f0;
 }
 
 .bs-callout-success {
-  background-color: #dff0d8;
-  border-color: #fdfefc;
+  background-color: #f6fbf4;
+  border-color: 5px solid green;
 }
 
 .danger-text {
