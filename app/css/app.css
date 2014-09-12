@@ -228,6 +228,10 @@ body {
   color: #a94442;
 }
 
+.warning-text {
+  color: #905e1e;
+}
+
 /*
  * Main content
  */
