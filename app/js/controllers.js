@@ -71,8 +71,7 @@ angular.module('myApp.controllers', [])
             var confirm = true;
 
             if($scope.feedbackList.length > 0){
-                confirm = $window.confirm("You have made unsaved changes. \
-                    Would you still like to leave this page?");
+                confirm = $window.confirm("You have made unsaved changes. Would you still like to leave this page?");
             }
                 
             if(confirm) {
