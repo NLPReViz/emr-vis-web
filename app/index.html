@@ -499,7 +499,7 @@
                       Your feedback contradicts your previously submitted labels:
                     </p>
 
-                    <table class="table table-bordered bs-callout bs-callout-warning">
+                    <table class="table table-bordered">
                       <thead>
                         <tr>
                         <th>#</th>
@@ -508,7 +508,7 @@
                       </tr>
                       </thead>
                       <tbody>
-                        <tr ng-repeat="warning in retrainData.message">
+                        <tr ng-repeat="warning in retrainData.message" class="bs-callout bs-callout-warning">
                           <td>{{$index+1}}.</td>
                           <td>{{warning.docId}}</td>
                           <td><em>{{$root.config.variableMapping[warning.variable]}}</em></td>

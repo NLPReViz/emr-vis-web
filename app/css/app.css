@@ -192,8 +192,12 @@ body {
 .bs-callout {
   margin: 20px 0;
   padding: 15px 30px 15px 15px;
-  border-left: 5px solid #eee;
+  
+  border-color: #eee;
+  border-width: 0px 0px 0px 5px;
+  border-style: solid;
 }
+
 .bs-callout h4 {
   margin-top: 0;
 }
@@ -208,26 +212,24 @@ body {
 /* Themes for different contexts */
 .bs-callout-danger {
   background-color: #fcf2f2;
-  border-left: 5px solid #a94442;
+  border-color: #a94442;
 }
 .bs-callout-warning {
   background-color: #fefbed;
-  border-left: 5px solid #905e1e;
+  border-color: #905e1e;
 }
 .bs-callout-info {
   background-color: #f0f7fd;
-  border-left: 5px solid #d0e3f0;
+  border-color: #d0e3f0;
 }
-
 .bs-callout-success {
   background-color: #f6fbf4;
-  border-left: 5px solid green;
+  border-color: green;
 }
 
 .danger-text {
   color: #a94442;
 }
-
 .warning-text {
   color: #905e1e;
 }
