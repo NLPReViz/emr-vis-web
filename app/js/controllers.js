@@ -467,6 +467,15 @@ angular.module('myApp.controllers', [])
             $("#wordtree-input").val('');
         }
 
+        function searchWordTree(query) {
+            $scope.tabs.wordTreeView = true
+            
+            setTimeout(function() {
+                $("#wordtree-input").val(query);
+                $scope.loadWordTree();
+            });
+        }
+        
         $scope.loadWordTree = function(){
 
             var query = $("#wordtree-input").val().trim();
@@ -701,40 +710,28 @@ angular.module('myApp.controllers', [])
             
             var feedbackHeader = null;
             var feedbackFunction = null;
+            var optionsExtra = [];
 
             if ($scope.tabs.docView) {
                 if($scope.feedbackText) {
                     feedbackHeader = '"' + truncateFilter($scope.feedbackText, 20) + '" indicates "' + $rootScope.config.variableMapping[$scope.active.variable] + '" to be:'
                     feedbackFunction = $scope.addFeedbackText;
+                    optionsExtra = [
+                        null,
+                        ["Search using wordtree", function() { searchWordTree($scope.feedbackText) }]
+                    ];
                 }
                 else {
                     feedbackHeader = 'Label "' + $rootScope.config.variableMapping[$scope.active.variable] + '" in #'+ $scope.gridData[$scope.active.docIndex].id + ":";
                     feedbackFunction = $scope.addFeedbackDoc;
+                    optionsExtra = [];
                 }
             }
             else if ($scope.tabs.wordTreeView) {
                 if($scope.wordTreeData.feedbackText) {
                     feedbackHeader = '"' + truncateFilter($scope.wordTreeData.feedbackText, 20) + '" indicates "' + $rootScope.config.variableMapping[$scope.active.variable] + '" to be:'
                     feedbackFunction = $scope.addWordTreeFeedback;
-                }
-            }
-            
-            if (feedbackHeader && feedbackFunction) {
-                options = options.concat([
-                    [feedbackHeader, null],
-                    null,
-                    [$rootScope.config.classificationName["positive"], function () {
-                        feedbackFunction('positive');
-                    }],
-                    null,
-                    [$rootScope.config.classificationName["negative"], function () {
-                        feedbackFunction('negative');
-                    }]
-                ]);
-
-
-                if ($scope.tabs.wordTreeView) {
-                    options = options.concat([
+                    optionsExtra = [
                         null,
                         ["Find usage", function() {
                             // console.log($scope.wordTreeData.spanText);
@@ -767,8 +764,22 @@ angular.module('myApp.controllers', [])
                             });
                             
                         }]
-                    ]);
+                    ];
                 }
+            }
+            
+            if (feedbackHeader && feedbackFunction) {
+                options = options.concat([
+                    [feedbackHeader, null],
+                    null,
+                    [$rootScope.config.classificationName["positive"], function () {
+                        feedbackFunction('positive');
+                    }],
+                    null,
+                    [$rootScope.config.classificationName["negative"], function () {
+                        feedbackFunction('negative');
+                    }]
+                ], optionsExtra);
             }
             
             return options;
