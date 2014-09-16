@@ -110,6 +110,7 @@ function makeWordTree(data){
 
     // WordTreeData.vis.container = $(WordTreeData.container);
     WordTreeData.vis.wordtreeID = (new Date()).getTime();
+    WordTreeData.vis.orientationFilterDepth = {left: 0, right: 0};
 
     this.drawTree(leftTree, "left", w, h, panel)
     this.drawTree(rightTree,"right", w, h, panel)
@@ -551,14 +552,14 @@ function wordTreeNodeClick(node, d, orientation, root){
     // Calculate which nodes should be collapsed or expanded.
 
     filterDocs = [];
-    WordTreeData.vis.orientationFilterDepth = {left: 0, right: 0};
-    
+
     // If it's the root node that was clicked, then reset the filters.
     if(d.isRoot){
       WordTreeData.vis.selectedIDs = [];
       // WordTreeData.vis.selectedNodeIDs = {left:[], right:[]};
       WordTreeData.vis.selectedNodes = {left: [], right: []};
       WordTreeData.vis.filterDepth = 0; 
+      WordTreeData.vis.orientationFilterDepth = {left: 0, right: 0};
       
       WordTreeData.vis.leftFilterDepth = 0;
 
