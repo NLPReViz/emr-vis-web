@@ -525,8 +525,8 @@ angular.module('myApp.controllers', [])
         }
 
         $scope.setWordTreeFeedback = function(selected, span, docs) {
-            $scope.wordTreeData.feedbackText = selected;
-            $scope.wordTreeData.spanText = span;
+            $scope.wordTreeData.feedbackText = selected.replace(/\s*\.$/, ""); //Remove trailing dot
+            $scope.wordTreeData.spanText = span.replace(/\s*\.$/, "");
             $scope.wordTreeData.docList = docs;
 
             $scope.setSearchFilter(docs);
@@ -555,7 +555,7 @@ angular.module('myApp.controllers', [])
 
             $scope.loadVarStats(variable);
 
-            updateClass(variable, 
+            updateClassWordTree(variable, 
                         $scope.variableData[variable]["docPositive"],
                         $scope.variableData[variable]["docNegative"]);
 
@@ -739,7 +739,7 @@ angular.module('myApp.controllers', [])
                             if(!$scope.wordTreeData.docList)
                                 return;
 
-                            var id = $scope.wordTreeData.docList[0];
+                            var id = $scope.wordTreeData.docList.sort()[0];
                             var first = null;
 
                             for (var i=0; i < $scope.gridData.length; i++) {

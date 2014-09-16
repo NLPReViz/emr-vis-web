@@ -23,12 +23,12 @@ WordTreeData.vis = null;
 
 /*
  * Functions exposed to appCtrl:
- * - updateAppCtrl
+ * - updateAppCtrlWordTree
  * - updateClass
  * - makeWordTree
  */
 
-function updateAppCtrl(selected, span) {
+function updateAppCtrlWordTree(selected, span) {
     var duration = d3.event && d3.event.altKey ? 5000 : 500;
     
     setTimeout(function() {
@@ -39,7 +39,7 @@ function updateAppCtrl(selected, span) {
     }, duration);
 }
 
-function updateClass(variable, positive, negative) {
+function updateClassWordTree(variable, positive, negative) {
     // console.log(variable);
     // console.log(positive);
     // console.log(negative);
@@ -551,14 +551,18 @@ function wordTreeNodeClick(node, d, orientation, root){
     // Calculate which nodes should be collapsed or expanded.
 
     filterDocs = [];
-
+    WordTreeData.vis.orientationFilterDepth = {left: 0, right: 0};
+    
     // If it's the root node that was clicked, then reset the filters.
     if(d.isRoot){
       WordTreeData.vis.selectedIDs = [];
       // WordTreeData.vis.selectedNodeIDs = {left:[], right:[]};
       WordTreeData.vis.selectedNodes = {left: [], right: []};
       WordTreeData.vis.filterDepth = 0; 
-      WordTreeData.vis.filterOrienation = null;
+      
+      WordTreeData.vis.leftFilterDepth = 0;
+
+      WordTreeData.vis.filterOrientation = null;
 
       WordTreeData.filterDocs = WordTreeData.matchedList;
     } 
@@ -572,6 +576,7 @@ function wordTreeNodeClick(node, d, orientation, root){
         // WordTreeData.vis.selectedNodeIDs[orientation] = [d.id];
         WordTreeData.vis.selectedNodes[orientation] = [d];
         WordTreeData.vis.filterDepth = d.depth;
+        WordTreeData.vis.orientationFilterDepth[orientation] = d.depth;
         WordTreeData.vis.filterOrientation = orientation;
         toggle(d);
 
@@ -584,16 +589,24 @@ function wordTreeNodeClick(node, d, orientation, root){
         toggle(d);
         if((d.depth > WordTreeData.vis.filterDepth && orientation == WordTreeData.vis.filterOrientation) || orientation != WordTreeData.vis.filterOrientation){
             // sub-filtering in progress
-            WordTreeData.vis.filterDepth = d.depth;
-            // WordTreeData.vis.selectedNodeIDs[orientation].push(d.id)
-            WordTreeData.vis.selectedNodes[orientation].push(d);
+            if(d.depth > WordTreeData.vis.filterDepth)
+              WordTreeData.vis.filterDepth = d.depth;
+
+            if (d.depth > WordTreeData.vis.orientationFilterDepth[orientation]) {
+              // WordTreeData.vis.selectedNodeIDs[orientation].push(d.id)
+              WordTreeData.vis.orientationFilterDepth[orientation] = d.depth;
+              WordTreeData.vis.selectedNodes[orientation].push(d);
+            }
+            
             var intersection = [];
             d.ids.forEach(function(id){
                 if(WordTreeData.vis.selectedIDs.contains(id))
                     intersection.push(id);
             });
+
             WordTreeData.vis.selectedIDs = intersection;
             WordTreeData.vis.filterOrientation = orientation;
+
         }else if(d.depth < WordTreeData.vis.filterDepth && orientation == WordTreeData.vis.filterOrientation){
             // backtracking up the tree
             WordTreeData.vis.selectedIDs = d.ids;
@@ -608,16 +621,28 @@ function wordTreeNodeClick(node, d, orientation, root){
 
             WordTreeData.vis.selectedNodes[orientation] = intersection;
             WordTreeData.vis.filterDepth = d.depth;
-            WordTreeData.vis.filterOrientation = orientation;      
+            WordTreeData.vis.orientationFilterDepth[orientation] = d.depth;
+            WordTreeData.vis.filterOrientation = orientation;
         }
 
-        var intersection = [];
-        d.docs.forEach(function(doc){
-            if(WordTreeData.filterDocs.contains(doc))
+        //Update filter docs
+        var leftMost = WordTreeData.vis.selectedNodes.left[WordTreeData.vis.selectedNodes.left.length - 1];
+        var rightMost = WordTreeData.vis.selectedNodes.right[WordTreeData.vis.selectedNodes.right.length - 1];
+
+        if (leftMost && rightMost) {
+          intersection = [];
+          leftMost.docs.forEach(function (doc) {
+              if (rightMost.docs.contains(doc))
                 intersection.push(doc);
-        });
-        WordTreeData.filterDocs = intersection;
-        
+          });
+          WordTreeData.filterDocs = intersection;  
+        }
+        else if(leftMost) {
+          WordTreeData.filterDocs = leftMost.docs;
+        }
+        else {
+          WordTreeData.filterDocs = rightMost.docs;
+        }
     }
 
     // Apply the filter to the other tree, so nodes in the sentences that 
@@ -633,7 +658,7 @@ function wordTreeNodeClick(node, d, orientation, root){
     // Re-display the nodes.
     WordTreeData.vis.maxVisibleBranches = Math.max(WordTreeData.vis.leftVisibleBranches, WordTreeData.vis.rightVisibleBranches);
     updateWordTreeNode(d, orientation, root);
-    updateWordTreeNode(otherRoot, otherOrientation, otherRoot);     
+    updateWordTreeNode(otherRoot, otherOrientation, otherRoot);
     
     // Compute the selected phrase.
     var selected_phrase = "";
@@ -688,7 +713,7 @@ function wordTreeNodeClick(node, d, orientation, root){
     // console.log(selected_phrase.trim());
     // console.log(span_phrase.trim());
 
-    updateAppCtrl(selected_phrase.trim(), span_phrase.trim())
+    updateAppCtrlWordTree(selected_phrase.trim(), span_phrase.trim())
 }
 
 /** Show or hide the immediate children of the given node. If they are 
@@ -824,6 +849,8 @@ function wordTreeNodeMouseOver(node, d, orientation, root, eventName){
         d3.selectAll('*[class~="wordtree-' + 
           WordTreeData.vis.wordtreeID +'-sentence-'+ids[i]+'"]').classed("wordtree-highlight-sentence", true);
 
+      //Highlight root as well
+      d3.select("#text-" + WordTreeData.vis.rightData.id.toString() + "-wordtree-" + WordTreeData.vis.wordtreeID).classed("wordtree-highlight-sentence", true)
       // docs = d.docs;
     }
     else{
