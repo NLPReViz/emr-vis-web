@@ -93,8 +93,13 @@ angular.module('myApp.controllers', [])
 
                 stopLoading();
 
+                for (var i = 0; i < $scope.datasetList.length; i++) {                    
+                    if ($scope.datasetList[i].name == "feedbackIDList")
+                        break;                
+                }
+
                 setModelAndDataset($scope.modelList[$scope.modelList.length - 1].name, 
-                                    $scope.datasetList[0].name);
+                                    $scope.datasetList[i].name);
             }, function() { alert("Could not retrieve model list!"); stopLoading(); });
         }
 
