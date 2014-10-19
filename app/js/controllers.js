@@ -109,8 +109,11 @@ angular.module('myApp.controllers', [])
             if(model === undefined || dataset === undefined )
                 return
 
-            if ( !($scope.active.model == model && $scope.active.dataset == dataset) )
-                loadData(model, dataset);                
+            if ( !($scope.active.model == model && $scope.active.dataset == dataset) ){
+                $scope.trackVisited = null;
+                loadData(model, dataset);
+            }
+                
 
             $scope.active.model = model;
             $scope.active.dataset = dataset;
@@ -132,13 +135,18 @@ angular.module('myApp.controllers', [])
 
         }
 
-        function assignDataToVars(data) {
-            $scope.gridData = data['gridData'];
-
+        function clearVisited(){
             $scope.trackVisited = new Array();
             for(var i=0; i<$scope.gridData.length; i++){
                 $scope.trackVisited[i] = new Object();
             }
+        }
+
+        function assignDataToVars(data) {
+            $scope.gridData = data['gridData']; 
+
+            if($scope.trackVisited == null)
+                clearVisited();   
 
             //TODO: Hack for fat scrollbars on Windows
             setTimeout(function() {
