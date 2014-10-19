@@ -742,6 +742,7 @@ angular.module('myApp.controllers', [])
                                 }
                             }
                          
+                            //TODO: Use rangy here!
                             $scope.updateGrid($scope.active.variable, first, function(){
                                 $("#grid-table").scrollTo($("#grid-table .selected"), 500)
 
