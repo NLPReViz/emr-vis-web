@@ -83,7 +83,7 @@ angular.module('myApp.controllers', [])
 
         function startSession(){
             $scope.gridData = null;
-            $scope.trackOpen = null;
+            $scope.trackVisited = null;
             $scope.variableData = null;
             $scope.active.dataset = null;
             $scope.active.model = null;
@@ -120,7 +120,7 @@ angular.module('myApp.controllers', [])
 
             startLoading();
 
-            $("#grid-table .cell_modified").removeClass("cell_modified");
+            $("#grid-table .cell-modified").removeClass("cell-modified");
 
             backend.getGridData(model, dataset).then(function(data) {
                 
@@ -135,9 +135,9 @@ angular.module('myApp.controllers', [])
         function assignDataToVars(data) {
             $scope.gridData = data['gridData'];
 
-            $scope.trackOpen = new Array();
+            $scope.trackVisited = new Array();
             for(var i=0; i<$scope.gridData.length; i++){
-                $scope.trackOpen[i] = new Object();
+                $scope.trackVisited[i] = new Object();
             }
 
             //TODO: Hack for fat scrollbars on Windows
@@ -199,7 +199,7 @@ angular.module('myApp.controllers', [])
         $scope.updateGrid = function(variable, activeDocIndex, callback) {
             // console.log(variable, activeDoc);
 
-            $scope.trackOpen[$scope.active.docIndex][$scope.active.variable] = true; //Update previously open
+            $scope.trackVisited[$scope.active.docIndex][$scope.active.variable] = true; //Update previously open
 
             if(variable != $scope.variable) {
               $scope.active.variable = variable;

@@ -267,7 +267,7 @@ app.directive('cellModified', ['$timeout', function($timeout) {
       scope.$watch(attrs.cellModified, function (nv, ov) {
         if (nv !== ov) {
           // apply class
-          element.addClass('cell_modified');
+          element.addClass('cell-modified');
 
           // // auto remove after some delay
           // $timeout(function () {

@@ -722,11 +722,16 @@ body {
 }
 
 
-#sidebar-top .cell-feedback {
+#sidebar-top .cell-visited {
   font-size: 50%;
   position: absolute;
   right: 0;
   top: 2px;
+  font-weight: normal;
+}
+
+#sidebar-top .cell-modified .cell-visited {
+  font-weight: normal;
 }
 
 #sidebar-top #topbar  { 
@@ -765,7 +770,7 @@ body {
     text-decoration: underline;
 }
 
-#sidebar-top .divrow .cell_modified {
+#sidebar-top .divrow .cell-modified {
     font-weight: bold;
     box-shadow: 0 -3px inset;
 }
