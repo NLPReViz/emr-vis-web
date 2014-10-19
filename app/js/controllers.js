@@ -83,6 +83,7 @@ angular.module('myApp.controllers', [])
 
         function startSession(){
             $scope.gridData = null;
+            $scope.trackOpen = null;
             $scope.variableData = null;
             $scope.active.dataset = null;
             $scope.active.model = null;
@@ -133,6 +134,11 @@ angular.module('myApp.controllers', [])
 
         function assignDataToVars(data) {
             $scope.gridData = data['gridData'];
+
+            $scope.trackOpen = new Array();
+            for(var i=0; i<$scope.gridData.length; i++){
+                $scope.trackOpen[i] = new Object();
+            }
 
             //TODO: Hack for fat scrollbars on Windows
             setTimeout(function() {
@@ -192,6 +198,9 @@ angular.module('myApp.controllers', [])
 
         $scope.updateGrid = function(variable, activeDocIndex, callback) {
             // console.log(variable, activeDoc);
+
+            $scope.trackOpen[$scope.active.docIndex][variable] = true; //Update previously open
+
             if(variable != $scope.variable) {
               $scope.active.variable = variable;
               $scope.loadVarStats(variable);

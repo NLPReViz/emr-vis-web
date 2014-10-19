@@ -721,6 +721,14 @@ body {
   border: 1px solid #ccc; 
 }
 
+
+#sidebar-top .cell-feedback {
+  font-size: 50%;
+  position: absolute;
+  right: 0;
+  top: 2px;
+}
+
 #sidebar-top #topbar  { 
   height: 80px; 
   overflow: hidden; 

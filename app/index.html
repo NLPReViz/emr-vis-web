@@ -166,7 +166,10 @@
                         ng-class="{selected: $parent.$index==active.docIndex && var==active.variable}" 
                         data-custom-tooltip="{{doc[var].confidence}}" 
                         cell-modified="doc[var].classification">
+                      
                       {{$root.config.classificationName[ doc[var].classification ]}}
+
+                      <span class="cell-feedback glyphicon glyphicon-asterisk" ng-class="{hidden: trackOpen[$parent.$index][var] != true}"></span>
                     </div>
               </div>
             </div>
