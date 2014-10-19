@@ -199,7 +199,7 @@ angular.module('myApp.controllers', [])
         $scope.updateGrid = function(variable, activeDocIndex, callback) {
             // console.log(variable, activeDoc);
 
-            $scope.trackOpen[$scope.active.docIndex][variable] = true; //Update previously open
+            $scope.trackOpen[$scope.active.docIndex][$scope.active.variable] = true; //Update previously open
 
             if(variable != $scope.variable) {
               $scope.active.variable = variable;
