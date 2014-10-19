@@ -692,6 +692,27 @@ body {
     margin: 0 auto;
 }
 
+#grid-filter-info {
+  background: none repeat scroll 0 0 rgba(0, 0, 0, 0.70);
+  border-radius: 0 0 4px 4px;
+  color: #dcdcdc;
+  font-size: 9pt;
+  margin-left: 1px;
+  margin-top: -22px;
+  padding: 2px 2px 2px 4px;
+  position: absolute;
+  width: 582px;
+}
+
+#grid-filter-clear {
+  counter-reset: inherit;
+  cursor: pointer;
+  float: right;
+  font-size: 80%;
+  padding: 2px 4px;
+  text-decoration: underline;
+}
+
 #sidebar-top .breakline { clear:both;}
 
 /* #sidebar-top .divrow { } */
