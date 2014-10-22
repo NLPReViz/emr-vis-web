@@ -158,7 +158,8 @@
             <div id="grid-table">
               <div class="divrow ng-cloak" 
                   ng-repeat="doc in gridData track by doc.id" 
-                  ng-show="!searchQuery || searchQuery.indexOf(doc.id) !== -1">
+                  ng-if="checkFilter($index, doc.id)"
+                  >
                     <div class="divcell cellwidth_id">{{doc.id}}</div>
                     <div class="divcell cellwidth_var {{styleGridCell(doc[var].classification, doc[var].confidence)}} custom-tooltip-bottom"  
                         ng-repeat="var in $root.config.variables" 
@@ -175,7 +176,7 @@
             </div>
           </div>
           <div ng-show="searchQuery" id="grid-filter-info">
-            Showing filtered documents only. <span ng-click="setSearchFilter(null)" id="grid-filter-clear"> Clear filter</span>
+            Showing {{active.gridCount}} of {{gridData.length}} documents. <span ng-click="setSearchFilter(null)" id="grid-filter-clear"> Clear filter</span>
           </div>
         </div>  
 

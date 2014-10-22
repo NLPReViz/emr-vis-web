@@ -43,7 +43,8 @@ angular.module('myApp.controllers', [])
 
         $scope.active = {
             docIndex: null,
-            variable: null
+            variable: null,
+            gridCount: 0
         }
         
         checkLogin();
@@ -224,6 +225,20 @@ angular.module('myApp.controllers', [])
             $scope.tabs.docView = true;
         };
 
+
+        $scope.checkFilter = function(index, id) {
+            if(index==0) {
+                $scope.active.gridCount = 0;
+            }
+
+            if(!$scope.searchQuery || $scope.searchQuery.indexOf(id) !== -1){
+                $scope.active.gridCount++;
+                return true;    
+            }
+            else {
+                return false;
+            }
+        }
 
         /*
          * Load reports
