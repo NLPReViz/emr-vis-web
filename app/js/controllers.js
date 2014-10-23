@@ -124,7 +124,7 @@ angular.module('myApp.controllers', [])
 
             startLoading();
 
-            $("#grid-table .cell-modified").removeClass("cell-modified");
+            $scope.clearModified();
 
             backend.getGridData(model, dataset).then(function(data) {
                 
@@ -136,18 +136,11 @@ angular.module('myApp.controllers', [])
 
         }
 
-        function clearVisited(){
-            $scope.trackVisited = new Array();
-            for(var i=0; i<$scope.gridData.length; i++){
-                $scope.trackVisited[i] = new Object();
-            }
-        }
-
         function assignDataToVars(data) {
             $scope.gridData = data['gridData']; 
 
             if($scope.trackVisited == null)
-                clearVisited();   
+                $scope.clearVisited();   
 
             //TODO: Hack for fat scrollbars on Windows
             setTimeout(function() {
@@ -208,7 +201,7 @@ angular.module('myApp.controllers', [])
         $scope.updateGrid = function(variable, activeDocIndex, callback) {
             // console.log(variable, activeDoc);
 
-            $scope.trackVisited[$scope.active.docIndex][$scope.active.variable] = true; //Update previously open
+            trackVisited($scope.active.docIndex, $scope.active.variable, true); //Update previously open
 
             if(variable != $scope.variable) {
               $scope.active.variable = variable;
@@ -239,6 +232,41 @@ angular.module('myApp.controllers', [])
                 return false;
             }
         }
+
+        function trackVisited(index, variable, value) {
+            $scope.trackVisited[index][variable] = value; //Update previously open
+        }
+
+        $scope.clearVisited = function(){
+            if(!$scope.gridData)
+                return;
+
+            $scope.trackVisited = new Array();
+            for(var i=0; i<$scope.gridData.length; i++){
+                $scope.trackVisited[i] = new Object();
+            }
+        }
+
+        $scope.clearModified = function(){
+            $("#grid-table .cell-modified").removeClass("cell-modified");
+        }
+
+        /*
+         * Feedback Context Menu
+         */
+
+        $scope.gridContextMenu = function(index, variable) {
+            var options = [
+                    ["Mark cell as unread " + index + " " + variable, function(){ }],
+                    null,
+                    ["Mark all cells as unread", function(){ }],
+                    null,
+                    ["Clear all modified markers", function(){ }],
+                ];
+
+            return options;
+        };
+
 
         /*
          * Load reports

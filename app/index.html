@@ -166,7 +166,8 @@
                         ng-click="updateGrid(var, $parent.$index)" 
                         ng-class="{selected: $parent.$index==active.docIndex && var==active.variable}" 
                         data-custom-tooltip="{{doc[var].confidence}}" 
-                        cell-modified="doc[var].classification">
+                        cell-modified="doc[var].classification"
+                        >
                       
                       {{$root.config.classificationName[ doc[var].classification ]}}
 
@@ -414,6 +415,11 @@
               <i class="glyphicon glyphicon-refresh"></i> Re-Train &nbsp;<span ng-if="feedbackList.length > 0" class="badge alert-info pull-right animated bounceIn"> {{feedbackList.length}} </span>
             </tab-heading>
             <div class="tab-inner-content">
+              <span class="pull-right">
+                <a href="#clear-tracks" on-confirm-click="clearVisited()" confirm-click="Do you wish to remove all document visited markers (*) from the grid?">Mark all documents as unread</a> | 
+                <a href="#clear-modified" on-confirm-click="clearModified()" confirm-click="Do you wish to clear all bolded change markers from the grid?">Remove bolded change markers</a>
+              </span>
+
               <h4>Feedback List</h4>
               <div id="feedbackList">
                 <p ng-hide="feedbackList.length">Feedback list is empty.</p>
