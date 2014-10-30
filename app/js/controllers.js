@@ -399,15 +399,20 @@ angular.module('myApp.controllers', [])
         }
 
         $scope.setFeedbackText = function(){
-            rangy.getSelection().expand("word");
-            var text = rangy.getSelection().toString().trim();
+            var selection = rangy.getSelection();
+
+            if(!selection.isCollapsed) {
+                    selection.expand("word");
+
+                    var text = selection.toString().trim();
             
-            if (text) {
-                $scope.feedbackText = text;
+                    if (text) {
+                        $scope.feedbackText = text;
+                        return;
+                    }
             }
-            else{
-                $scope.feedbackText = false;
-            }
+
+            $scope.feedbackText = false;
         };
 
         function addFeedbackToList(feedback) {
