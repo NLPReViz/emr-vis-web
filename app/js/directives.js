@@ -95,7 +95,7 @@ angular.module('myApp.directives', [])
                     if (!angular.isUndefined(posTerms)) {
                         posTerms.forEach( function(keyword) {
                             keyword.matchedList.forEach(function (string) {
-                                $(element).highlight(new RegExp("\\b"+string+"\\b","gi"), "highlight positive", keyword.term);
+                                $(element).highlight(new RegExp("\b"+string+"\b","gi"), "highlight positive", keyword.term);
                                 // console.log(string);
                             });
                         });
@@ -104,7 +104,7 @@ angular.module('myApp.directives', [])
                     if (!angular.isUndefined(negTerms)) {
                         negTerms.forEach( function(keyword) {
                             keyword.matchedList.forEach(function (string) {
-                                $(element).highlight(new RegExp("\\b"+string+"\\b","gi"), "highlight negative", keyword.term);
+                                $(element).highlight(new RegExp("\b"+string+"\b","gi"), "highlight negative", keyword.term);
                                 // console.log(string);
                             });
                         });
