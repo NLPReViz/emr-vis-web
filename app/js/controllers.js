@@ -150,9 +150,12 @@ angular.module('myApp.controllers', [])
             // console.log($scope.gridData);
 
             //Show first report in the set
-            $scope.active.docIndex = 0;
-            $scope.loadReport(0);
-
+            if(typeof $scope.gridData[$scope.active.docIndex] == 'undefined') {
+                $scope.active.docIndex = 0;
+            }
+            
+            $scope.loadReport($scope.active.docIndex);   
+            
             $scope.variableData = data['variableData'];
 
             // console.log($scope.variableData);
