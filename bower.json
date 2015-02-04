@@ -3,7 +3,6 @@
   "description": "A starter project for AngularJS",
   "version": "0.0.0",
   "homepage": "https://github.com/trivedigaurav/emr-vis-web",
-  "license": "MIT",
   "private": true,
   "dependencies": {
     "angular": "1.2.x",
