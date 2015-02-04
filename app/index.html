@@ -70,7 +70,7 @@
 
       <ul class="nav navbar-nav navbar-right">
         <li>
-          <a ng-disabled="loaderCount != 0" ng-click="doLogout()">Logout <i class="glyphicon glyphicon-log-out" tooltip="Logout" tooltip-placement="bottom" tooltip-animation="false"></i></a>
+          <a ng-click="doLogout()" ng-disabled="loaderCount != 0"><i class="glyphicon glyphicon-log-out ng-scope"></i> Logout &nbsp;</a>
         </li>
       </ul>
       <!-- 
