@@ -188,9 +188,9 @@ function drawTree(data, orientation, width, height){
 */
 function fontSize(d){
     if(d.isRoot){
-        return 40
+        return 30
     }else{
-        return Math.min(35, 2*Math.sqrt(d.count)+7)
+        return Math.min(20, 2*Math.sqrt(d.count)+7)
     }
 }
 
@@ -454,7 +454,7 @@ function updateWordTreeNode(source, orientation, root) {
     
     // Scroll the container of this word tree so that the root of the
     // tree is in view.
-    $(WordTreeData.container).parent().scrollTo('51%', {duration:1, axis:'x'});
+    $(WordTreeData.container).parent().scrollTo('50%', {duration:1, axis:'x'});
 }
 
 /** Recursively repositions the x-value of tree nodes starting at the given

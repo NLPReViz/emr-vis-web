@@ -32,10 +32,10 @@ body {
 
 .search-input, .search-input:focus {
     border-color: #ccc;
-    border-right: 0;
     box-shadow: none;
     padding-right: 1px;
     padding-left: 7px;
+    border-right: 0;
 }
 
 .search-input-active {
@@ -118,7 +118,6 @@ body {
 .navbar-nav:hover li a { color: #333; }
 
 #main-menu { width: 380px; }
-#search-menu { width: 250px;}
 
 .unselectable {
     -webkit-touch-callout: none;
@@ -240,7 +239,7 @@ body {
 
 .main {
   padding: 20px;
-  margin-left: 600px;
+  margin-left: 700px;
   min-width: 420px;
 }
 
@@ -468,7 +467,7 @@ body {
     display: block;
     position: fixed;
     height: 100%;
-    width: 601px;
+    width: 701px;
 
     padding: 8px;
     background-color: #f5f5f5;
@@ -524,7 +523,7 @@ body {
     position: absolute;
     top: -9999px;
     left: 0px;
-    width: 600px;
+    width: 700px;
     height: 8px;
     background-color: black;
     /*Greater than disable screen*/
@@ -555,6 +554,20 @@ body {
     height: calc(50% - 60px);
 }
 
+
+#sidebar-bottom-top {
+    padding-top: 1px;
+}
+
+#sidebar-bottom-top select{
+    width: 110px;
+}
+
+#sidebar-bottom-top, #sidebar-bottom-top .input-group-addon, 
+#sidebar-bottom-top .form-control {
+    font-size: 12px;
+} 
+
 #sidebar-bottom-cover {
     height: 100%;
     width: 100%;
@@ -573,10 +586,11 @@ body {
     border-radius: 4px;
     content: "Variable details";
     font-size: 12px;
-    width: 70%;
+    width: 69%;
     overflow: auto;
-    height: 100%;
+    height: calc(100% - 58px);
     padding: 1%;
+    margin-right: 1%;
 }
 
 #sidebar-bottom-right {
@@ -587,7 +601,7 @@ body {
     content: "Document keywords";
     font-size: 12px;
     width: 29%;
-    height: 100%;
+    height: calc(100% - 58px);
     padding: 1%;
     overflow: auto;
 }
@@ -700,7 +714,7 @@ body {
   margin-top: -21px;
   padding: 2px 2px 2px 4px;
   position: absolute;
-  width: 582px;
+  width: 682px;
 }
 
 #grid-filter-clear {
@@ -981,7 +995,7 @@ body {
     position: fixed;
 
     top: -8px;
-    left: 355px;
+    left: 575px;
 
     padding: 5px;
     padding-top: 15px;
@@ -1040,15 +1054,17 @@ body {
  * WordTree
  */
 
-#wordtree-search { padding: 15px; }
+#wordtree-search { padding-left: 0; }
 
 .wordtree-search-control { height: 36px;}
 
 #wordtree-view {
+    background-color: white;
     width: 100%;
     border: 1px solid #ccc;
     border-radius: 4px;
     overflow: scroll;
+    height: calc(100% - 58px);
 }
 
 #wordtree-empty {
@@ -1057,23 +1073,12 @@ body {
 }
 
 #wordtree-about {
-    position: absolute;
-    height: 35px;
-    padding: 6px;
-    
-    border-style: solid;
-    border-color: #ccc;
-    border-width: 1px;
-    border-radius: 0px 4px 0px;
-
-    background-color: #eee;
-    
-    color: #888;
-    font-size: 12px;
-
     cursor: default;
-    overflow: hidden;
+    height: 35px;
     margin-top: -35px;
+    overflow: hidden;
+    padding: 6px;
+    position: absolute;
     z-index: 1050;
 }
 
@@ -1088,36 +1093,36 @@ body {
     overflow: hidden;
     padding: 3px;
     position: absolute;
-    right: 21px;
-    z-index: 1050;
+    right: 1px;
+    z-index: 3050;
     display: none;
 }
 
 .wordtree-view-overlay {  
-    position:absolute;
+    position:fixed;
     top:48px;
     left:0;
     width:100%;
-    z-index:1010;
-    background-color: white;
+    z-index:3010;
     border: none!important;
     margin-top: 0!important;
+    height: 100%!important;
 }
 
 .wordtree-about-overlay {  
     position:absolute;
     bottom:0;
     left:0;
-    z-index:1010;
+    z-index:3010!important;
 }
 
 .wordtree-popup-overlay {
-    position:absolute;
+    position:fixed!important;
     margin: 0!important;
-    top:0;
+    top:48px!important;
     right:0!important;
     border-radius: 0;
-    z-index:1010;
+    z-index:3010;
 }
 
 #wordtree-about-info {

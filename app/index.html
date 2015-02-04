@@ -49,7 +49,7 @@
     <strong>Loading!</strong> Please wait.
   </div>
 
-  <header ng-hide="wordTreeFullscreenButton" class="navbar navbar-default navbar-fixed-top">
+  <header class="navbar navbar-default navbar-fixed-top">
     <div class="navbar-header">
       <a class="navbar-brand visible-xs">EMR VisWeb</a>
     </div>
@@ -70,10 +70,10 @@
 
       <ul class="nav navbar-nav navbar-right">
         <li>
-          <a ng-disabled="loaderCount != 0" ng-click="doLogout()"><i class="glyphicon glyphicon-log-out" tooltip="Logout" tooltip-placement="bottom" tooltip-animation="false"></i></a>
+          <a ng-disabled="loaderCount != 0" ng-click="doLogout()">Logout <i class="glyphicon glyphicon-log-out" tooltip="Logout" tooltip-placement="bottom" tooltip-animation="false"></i></a>
         </li>
       </ul>
-
+      <!-- 
       <div class="navbar-right">
         <form class="input-group navbar-form" role="search" id="search-menu">
             <span class="input-group-addon">Doc #</span>
@@ -85,7 +85,7 @@
               <i class="search-clear glyphicon glyphicon-remove-circle" ng-click="setSearchFilter(null)"></i>
             </span>
         </form>
-      </div>
+      </div> -->
       <div collapse="modal.isCollapsed" id="modal">
         <div class="list">
           <h5>Select Dataset</h5>
@@ -187,8 +187,74 @@
 
         <div id="sidebar-bottom">
 
+          <div class="row" id="sidebar-bottom-top">
+            <div class="col-md-4">
+              <form class="input-group" role="search">
+                <span class="input-group-addon">Doc #</span>
+                <input id="search-input" class="search-input form-control" 
+                      ng-class="{'search-input-active': searchQuery}"
+                      placeholder="Filter docs&hellip;" type="search" 
+                      ng-model="searchQuery" ng-blur="loadVarStats(active.variable)"/>
+                <span ng-class="{'search-input-active': searchQuery}" class="input-group-addon search-clear-addon">
+                  <i class="search-clear glyphicon glyphicon-remove-circle" ng-click="setSearchFilter(null)"></i>
+                </span>
+              </form>
+            </div>
+
+            <!-- WordTree view -->
+            <div class="col-md-8" id="wordtree-search">
+              <form class="input-group form-group" id="wordtree-search" ng-submit="loadWordTree()">
+                
+                <span class="input-group-addon">
+                  Variable &nbsp;
+                  <select ng-model="active.variable"
+                  ng-options="$root.config.variableMapping[var] for var in $root.config.variables"
+                  ng-change="updateWordTreeClass()"
+                  ></select>
+                </span>
+
+                <input type="text" id="wordtree-input" class="search-input form-control " placeholder="WordTree search&hellip;" required>
+
+                <span class="input-group-addon search-clear-addon">
+                  <i class="search-clear glyphicon glyphicon-remove-circle" ng-click="clearWordTree()"></i>
+                </span>
+
+                <span class="input-group-btn">
+                  <button type="submit" class="btn btn-default">Show</button>
+                </span>
+
+
+              </form>
+            </div>
+          </div>
+
           <!-- Variable details -->
-          <div id="sidebar-bottom-left">
+          <div id="wordtree-popup" ng-class="{'wordtree-popup-overlay': wordTreeFullscreenButton}">
+          </div>
+          <div ng-if="tabs.wordTreeView" id="wordtree-view" 
+            ng-class="{'wordtree-view-overlay': wordTreeFullscreenButton}">
+              <div id="wordtree-container" class="wordtree-container-class">
+                <p id="wordtree-empty">
+                  No wordtree to show. Enter keywords above and search.
+                </p>
+              </div>
+          </div>
+          <div id="wordtree-about"
+                ng-show="wordTreeData.matches" 
+                ng-class="{'wordtree-about-overlay': wordTreeFullscreenButton}">
+                <button id="wordtree-fullscreen-button" type="button" class="btn btn-xs btn-default" btn-checkbox
+                        ng-model="singleModel"  
+                        ng-click="toggleWordTreeFullscreen()" 
+                        ng-class="{'wordtree-fullscreen-button-overlay': wordTreeFullscreenButton}">
+                        <span class="glyphicon glyphicon-fullscreen"></span>
+                </button>
+                <span id="wordtree-about-info">
+                  <!-- Documents: <strong>{{wordTreeData.percentage}}% ({{wordTreeData.matches}} of {{wordTreeData.total}}) </strong> -->
+                </span>
+          </div>
+
+          <div ng-if="!tabs.wordTreeView" id="sidebar-bottom-left">
+
             <div class="about unselectable">Variable: <strong>{{$root.config.variableMapping[active.variable]}}</strong></div>
             <div class="content">
               <div id="keywords">
@@ -221,7 +287,7 @@
           </div>
 
           <!-- Report details -->
-          <div id="sidebar-bottom-right">
+          <div ng-if="!tabs.wordTreeView" id="sidebar-bottom-right">
             <div class="about unselectable">Doc: <strong>#{{gridData[active.docIndex].id}}</strong></div>
             <div class="content">
               <h6>{{$root.config.classificationName["positive"]}} indicators</h6>
@@ -324,7 +390,7 @@
                     <select ng-model="active.variable" ng-options="$root.config.variableMapping[var] for var in $root.config.variables"></select> 
                 </span>
               </div>
-              <span ng-context-menu="feedbackContextMenu">
+              <span ng-context-menu="documentContextMenu">
                 <pre>
                   
                     <highlighted-report data='records.report.text' 
@@ -346,7 +412,7 @@
                   <select ng-model="active.variable" ng-options="$root.config.variableMapping[var] for var in $root.config.variables"></select> 
                 </span> -->
               </div>
-              <span ng-context-menu="feedbackContextMenu">
+              <span ng-context-menu="documentContextMenu">
                 <pre>
                   <highlighted-report data='records.pathology.text' 
                                     pos-terms='gridData[active.docIndex][active.variable].topPositive' 
@@ -358,30 +424,7 @@
           </tab>
 
           <!-- WordTree view -->
-          <tab active="tabs.wordTreeView" select="setWordTreeHeight()" heading="WordTree View">
-
-            <div class="row">
-              <form class="input-group" id="wordtree-search" ng-submit="loadWordTree()">
-                <span class="input-group-btn">
-                  <button type="submit" class="btn btn-default wordtree-search-control">Search</button>
-                </span>
-                
-                <input type="text" id="wordtree-input" class="search-input form-control wordtree-search-control" placeholder="Enter keywords here and select variable&hellip;" required>
-
-                <span class="input-group-addon search-clear-addon">
-                  <i class="search-clear glyphicon glyphicon-remove-circle" ng-click="clearWordTree()"></i>
-                </span>
-
-                <span class="input-group-addon">
-                  Variable &nbsp; 
-                  <select ng-model="active.variable" 
-                    ng-options="$root.config.variableMapping[var] for var in $root.config.variables" 
-                    ng-change="updateWordTreeClass()"
-                    ></select> 
-                </span>
-
-              </form>
-            </div>
+          <!-- <tab active="tabs.wordTreeView" select="setWordTreeHeight()" heading="WordTree View">
 
             <div id="wordtree-popup" ng-class="{'wordtree-popup-overlay': wordTreeFullscreenButton}">
             </div>
@@ -407,7 +450,7 @@
                     Documents: <strong>{{wordTreeData.percentage}}% ({{wordTreeData.matches}} of {{wordTreeData.total}}) </strong>
                   </span>
             </div>
-          </tab>
+          </tab> -->
 
           <!-- Retrain view -->
           <tab>

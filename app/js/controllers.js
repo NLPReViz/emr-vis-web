@@ -223,11 +223,15 @@ angular.module('myApp.controllers', [])
 
 
         $scope.checkFilter = function(index, id) {
+            if(!$scope.searchQuery) {
+                return true;
+            }
+
             if(index==0) {
                 $scope.active.gridCount = 0;
             }
 
-            if(!$scope.searchQuery || $scope.searchQuery.indexOf(id) !== -1){
+            if($scope.searchQuery.indexOf(id) !== -1){
                 $scope.active.gridCount++;
                 return true;    
             }
@@ -517,11 +521,11 @@ angular.module('myApp.controllers', [])
             $scope.wordTreeData.feedbackText = null;
             $scope.wordTreeData.matches = null;
             $("#wordtree-input").val('');
+
+            $scope.tabs.wordTreeView = false;
         }
 
         function searchWordTree(query) {
-            $scope.tabs.wordTreeView = true
-            
             setTimeout(function() {
                 $("#wordtree-input").val(query);
                 $scope.loadWordTree();
@@ -529,6 +533,7 @@ angular.module('myApp.controllers', [])
         }
         
         $scope.loadWordTree = function(){
+            $scope.tabs.wordTreeView = true;
 
             var query = $("#wordtree-input").val().trim();
 
@@ -694,13 +699,13 @@ angular.module('myApp.controllers', [])
         $scope.tabs = {docView: true, wordtreeView: false};
 
         $scope.setWordTreeHeight = function(minusHeight) {
-            if($scope.wordTreeFullscreenButton)
-                minusHeight = 50;
-            else
-                minusHeight = 200;
+            // if($scope.wordTreeFullscreenButton)
+            //     minusHeight = 50;
+            // else
+            //     minusHeight = 200;
 
-            // console.log( wordtree.offset().top);
-            $("#wordtree-view").height($(window).height() - minusHeight);
+            // // console.log( wordtree.offset().top);
+            // $("#wordtree-view").height($(window).height() - minusHeight);
         };
 
         $($window).resize($scope.setWordTreeHeight(200));
@@ -754,7 +759,7 @@ angular.module('myApp.controllers', [])
          * Feedback Context Menu
          */
 
-        $scope.feedbackContextMenu = function() {
+        $scope.documentContextMenu = function() {
             var options = [];
 
             if (!($scope.active.variable && $scope.gridData))
@@ -764,61 +769,18 @@ angular.module('myApp.controllers', [])
             var feedbackFunction = null;
             var optionsExtra = [];
 
-            if ($scope.tabs.docView) {
-                if($scope.feedbackText) {
-                    feedbackHeader = '"' + truncateFilter($scope.feedbackText, 20) + '" indicates "' + $rootScope.config.variableMapping[$scope.active.variable] + '" to be:'
-                    feedbackFunction = $scope.addFeedbackText;
-                    optionsExtra = [
-                        null,
-                        ["Search using wordtree", function() { searchWordTree($scope.feedbackText) }]
-                    ];
-                }
-                else {
-                    feedbackHeader = 'Label "' + $rootScope.config.variableMapping[$scope.active.variable] + '" in #'+ $scope.gridData[$scope.active.docIndex].id + ":";
-                    feedbackFunction = $scope.addFeedbackDoc;
-                    optionsExtra = [];
-                }
+            if($scope.feedbackText) {
+                feedbackHeader = '"' + truncateFilter($scope.feedbackText, 20) + '" indicates "' + $rootScope.config.variableMapping[$scope.active.variable] + '" to be:'
+                feedbackFunction = $scope.addFeedbackText;
+                optionsExtra = [
+                    null,
+                    ["Search using wordtree", function() { searchWordTree($scope.feedbackText) }]
+                ];
             }
-            else if ($scope.tabs.wordTreeView) {
-                if($scope.wordTreeData.feedbackText) {
-                    feedbackHeader = '"' + truncateFilter($scope.wordTreeData.feedbackText, 20) + '" indicates "' + $rootScope.config.variableMapping[$scope.active.variable] + '" to be:'
-                    feedbackFunction = $scope.addWordTreeFeedback;
-                    optionsExtra = [
-                        null,
-                        ["Find usage", function() {
-                            // console.log($scope.wordTreeData.spanText);
-
-                            if(!$scope.wordTreeData.docList)
-                                return;
-
-                            var id = $scope.wordTreeData.docList.sort()[0];
-                            var first = null;
-
-                            for (var i=0; i < $scope.gridData.length; i++) {
-                                if ($scope.gridData[i].id === id) {
-                                    first = i;
-                                    break;
-                                }
-                            }
-                         
-                            //TODO: Use rangy here!
-                            $scope.updateGrid($scope.active.variable, first, function(){
-                                $("#grid-table").scrollTo($("#grid-table .selected"), 500)
-
-                                var search = $scope.wordTreeData.spanText.replace(/\s*\.$/, "");
-                                //object.find ([textToFind [, matchCase[, searchUpward[, wrapAround[, wholeWord[, searchInFrames[, showDialog]]]]]]]);
-                                //Experimental: Works only on Chrome/Firefox/Safari
-                                //TODO: This is a HACK!
-                                setTimeout(function() {
-                                    //Search in reverse order; This will always find what we want.
-                                    $window.find(search, false, true, true, false, true, false);
-                                });
-
-                            });
-                            
-                        }]
-                    ];
-                }
+            else {
+                feedbackHeader = 'Label "' + $rootScope.config.variableMapping[$scope.active.variable] + '" in #'+ $scope.gridData[$scope.active.docIndex].id + ":";
+                feedbackFunction = $scope.addFeedbackDoc;
+                optionsExtra = [];
             }
             
             if (feedbackHeader && feedbackFunction) {
@@ -837,6 +799,73 @@ angular.module('myApp.controllers', [])
             
             return options;
         };
+
+        // $scope.wordTreeContextMenu = function() {
+        //     var options = [];
+
+        //     if (!($scope.active.variable && $scope.gridData))
+        //         return options;
+            
+        //     var feedbackHeader = null;
+        //     var feedbackFunction = null;
+        //     var optionsExtra = [];
+
+        //     if($scope.wordTreeData.feedbackText) {
+        //         feedbackHeader = '"' + truncateFilter($scope.wordTreeData.feedbackText, 20) + '" indicates "' + $rootScope.config.variableMapping[$scope.active.variable] + '" to be:'
+        //         feedbackFunction = $scope.addWordTreeFeedback;
+        //         optionsExtra = [
+        //             null,
+        //             ["Find usage", function() {
+        //                 // console.log($scope.wordTreeData.spanText);
+
+        //                 if(!$scope.wordTreeData.docList)
+        //                     return;
+
+        //                 var id = $scope.wordTreeData.docList.sort()[0];
+        //                 var first = null;
+
+        //                 for (var i=0; i < $scope.gridData.length; i++) {
+        //                     if ($scope.gridData[i].id === id) {
+        //                         first = i;
+        //                         break;
+        //                     }
+        //                 }
+                     
+        //                 //TODO: Use rangy here!
+        //                 $scope.updateGrid($scope.active.variable, first, function(){
+        //                     $("#grid-table").scrollTo($("#grid-table .selected"), 500)
+
+        //                     var search = $scope.wordTreeData.spanText.replace(/\s*\.$/, "");
+        //                     //object.find ([textToFind [, matchCase[, searchUpward[, wrapAround[, wholeWord[, searchInFrames[, showDialog]]]]]]]);
+        //                     //Experimental: Works only on Chrome/Firefox/Safari
+        //                     //TODO: This is a HACK!
+        //                     setTimeout(function() {
+        //                         //Search in reverse order; This will always find what we want.
+        //                         $window.find(search, false, true, true, false, true, false);
+        //                     });
+
+        //                 });
+                        
+        //             }]
+        //         ];
+        //     }
+        // 
+        //     if (feedbackHeader && feedbackFunction) {
+        //         options = options.concat([
+        //             [feedbackHeader, null],
+        //             null,
+        //             [$rootScope.config.classificationName["positive"], function () {
+        //                 feedbackFunction('positive');
+        //             }],
+        //             null,
+        //             [$rootScope.config.classificationName["negative"], function () {
+        //                 feedbackFunction('negative');
+        //             }]
+        //         ], optionsExtra);
+        //     }
+
+        //     return options;
+        // }
 
         /*
          * Misc.
