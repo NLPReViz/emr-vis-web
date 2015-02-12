@@ -201,7 +201,7 @@ angular.module('myApp.controllers', [])
             }
         };
 
-        $scope.updateGrid = function(variable, activeDocIndex, callback) {
+        $scope.updateGrid = function(variable, activeDocIndex, bScroll) {
             // console.log(variable, activeDoc);
 
             trackVisited($scope.active.docIndex, $scope.active.variable, true); //Update previously open
@@ -212,9 +212,15 @@ angular.module('myApp.controllers', [])
               $scope.updateWordTreeClass()
             }
 
-            if(callback || activeDocIndex != $scope.active.docIndex) {
+            if(bScroll || activeDocIndex != $scope.active.docIndex) {
                 $scope.active.docIndex = activeDocIndex;
-                $scope.loadReport(activeDocIndex, callback);
+                $scope.loadReport(activeDocIndex);
+            }
+
+            if(bScroll){
+                setTimeout(function(){
+                    $("#grid-table").scrollTo($("#grid-table .selected"), 500)
+                });
             }
 
             //Change view to docView
@@ -258,6 +264,37 @@ angular.module('myApp.controllers', [])
             $("#grid-table .cell-modified").removeClass("cell-modified");
         }
 
+        $scope.gotoNextDoc = function(reverse){
+            if(!$scope.gridData)
+                return false;
+
+            var shift = 1;
+            if(reverse)
+                shift = -1;
+
+            var invalid = true;
+            var newIndex = $scope.active.docIndex;
+
+            while(invalid) {
+                newIndex = newIndex + shift;
+                
+                if(newIndex < 0 || newIndex > $scope.gridData.length - 1)
+                    return false;
+
+                if(!$scope.searchQuery)
+                    invalid = false;
+                else {
+                    //TODO: Make this efficient
+                    if($scope.searchQuery.indexOf($scope.gridData[newIndex].id) !== -1)
+                        invalid = false;
+                }
+            }
+
+            $scope.updateGrid($scope.active.variable, newIndex, true);
+
+            return true;
+        }
+
         /*
          * Feedback Context Menu
          */
@@ -291,7 +328,7 @@ angular.module('myApp.controllers', [])
         }
 
         //TODO: Load reports not as variables but as docs
-        $scope.loadReport = function(activeDocIndex, callback) {
+        $scope.loadReport = function(activeDocIndex) {
 
             var activeDoc = $scope.gridData[activeDocIndex].id;
 
@@ -314,9 +351,28 @@ angular.module('myApp.controllers', [])
                     stopLoading();
                     $scope.feedbackText = null;
 
-                    if(callback){
-                        callback();
-                    }
+                    //Highlight WordTree
+                    if($scope.wordTreeData.spanText) {
+                    var search = $scope.wordTreeData.spanText.replace(/\s*\.$/, "");
+
+                    search = search.replace(/[^\w\s]|_/g, function ($1) { return ' ' + $1 + ' ';})
+                                    .split(' ').join("[\\s\\'\\\"]*"); //Insert flexible spaces
+
+                    setTimeout(function() {
+                        var range = rangy.createRange();
+                        
+                        range.selectNodeContents($("#emr-report pre").get()[0]);
+
+                        var regex = new RegExp(search, "gi");
+
+                        searchResultApplier.undoToRange(range);
+
+                        if(range.findText(regex)){
+                            searchResultApplier.applyToRange(range);
+                            $("body").scrollTo($(".highlight-flash").offset().top-300, 500);
+                        }
+                    });
+                }
             }, function() { 
                 $scope.records.report.text = "Unable to fetch report";
                 stopLoading();
@@ -647,31 +703,8 @@ angular.module('myApp.controllers', [])
                     break;
                 }
             }
-                     
-            $scope.updateGrid($scope.active.variable, first, function(){
-                $("#grid-table").scrollTo($("#grid-table .selected"), 500)
 
-                var search = $scope.wordTreeData.spanText.replace(/\s*\.$/, "");
-
-                search = search.replace(/[^\w\s]|_/g, function ($1) { return ' ' + $1 + ' ';})
-                                .split(' ').join("[\\s\\'\\\"]*"); //Insert flexible spaces
-
-                setTimeout(function() {
-                    var range = rangy.createRange();
-                    
-                    range.selectNodeContents($("#emr-report pre").get()[0]);
-
-                    var regex = new RegExp(search, "gi");
-
-                    searchResultApplier.undoToRange(range);
-
-                    if(range.findText(regex)){
-                        searchResultApplier.applyToRange(range);
-                        $("body").scrollTo($(".highlight-flash").offset().top-300, 500);
-                    }
-                });
-
-            });
+            $scope.updateGrid($scope.active.variable, first, true);
         }
 
         /*
