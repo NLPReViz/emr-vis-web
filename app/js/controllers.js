@@ -523,6 +523,8 @@ angular.module('myApp.controllers', [])
             $("#wordtree-input").val('');
 
             $scope.tabs.wordTreeView = false;
+
+            $("body").removeClass('highlight-flash');
         }
 
         function searchWordTree(query) {
