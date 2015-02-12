@@ -564,11 +564,13 @@ angular.module('myApp.controllers', [])
                 makeWordTree(data);
 
                 $scope.setWordTreePercentage(data.matchedList.length, data.total);
-                $scope.wordTreeData.feedbackText = data.query;
-                $scope.wordTreeData.spanText = data.query
+                // $scope.wordTreeData.feedbackText = data.query;
+                // $scope.wordTreeData.spanText = data.query
                 $scope.active.wordTreeQuery = data.query;
                 $scope.searchQuery = data.matchedList;
-                $scope.wordTreeData.docList = data.matchedList;
+                // $scope.wordTreeData.docList = data.matchedList;
+
+                $scope.setWordTreeFeedback(data.query, data.query, data.matchedList)
                 $scope.updateWordTreeClass();
 
             }, function() { alert("Unable to fetch wordtree."); stopLoading(); });
@@ -587,6 +589,7 @@ angular.module('myApp.controllers', [])
             $scope.wordTreeData.docList = docs;
 
             $scope.setSearchFilter(docs);
+            findWordTreeUsage();
         }
 
         $scope.wordTreeFullscreenButton = false;
@@ -594,8 +597,8 @@ angular.module('myApp.controllers', [])
             $scope.wordTreeFullscreenButton = !$scope.wordTreeFullscreenButton;
 
             setTimeout(function() {
-                $scope.setWordTreeHeight();
-                $("#wordtree-view").scrollTo('51%', {duration:1, axis:'x'});
+                // $scope.setWordTreeHeight();
+                $("#wordtree-view").scrollTo('50%', {duration:1, axis:'x'});
             });
             
             // var w = window.open();
@@ -616,6 +619,53 @@ angular.module('myApp.controllers', [])
                         $scope.variableData[variable]["docPositive"],
                         $scope.variableData[variable]["docNegative"]);
 
+        }
+
+        var searchResultApplier = null;
+
+        function findWordTreeUsage(){
+            if(!$scope.wordTreeData.docList)
+                return;
+
+            if(!searchResultApplier)
+                searchResultApplier = rangy.createClassApplier("highlight-flash");
+
+            var id = $scope.wordTreeData.docList.sort()[0];
+
+            //TODO: Switch to binary search here
+            var first = null;
+
+            for (var i=0; i < $scope.gridData.length; i++) {
+                if ($scope.gridData[i].id === id) {
+                    first = i;
+                    break;
+                }
+            }
+                     
+            $scope.updateGrid($scope.active.variable, first, function(){
+                $("#grid-table").scrollTo($("#grid-table .selected"), 500)
+
+                var search = $scope.wordTreeData.spanText.replace(/\s*\.$/, "");
+
+                search = search.replace(/[^\w\s]|_/g, function ($1) { return ' ' + $1 + ' ';})
+                                .split(' ').join("[\\s\\'\\\"]*"); //Insert flexible spaces
+
+                setTimeout(function() {
+                    var range = rangy.createRange();
+                    
+                    range.selectNodeContents(document.getElementById("emr-report"));
+
+                    var regex = new RegExp(search, "gi");
+
+                    searchResultApplier.undoToRange(range);
+
+                    if(range.findText(regex)){
+                        searchResultApplier.applyToRange(range);
+                        $("body").scrollTo($(".highlight-flash").offset().top-300, 500);
+                    }
+                });
+
+            });
         }
 
         /*
@@ -698,7 +748,7 @@ angular.module('myApp.controllers', [])
 
         $scope.tabs = {docView: true, wordtreeView: false};
 
-        $scope.setWordTreeHeight = function(minusHeight) {
+        // $scope.setWordTreeHeight = function(minusHeight) {
             // if($scope.wordTreeFullscreenButton)
             //     minusHeight = 50;
             // else
@@ -706,9 +756,9 @@ angular.module('myApp.controllers', [])
 
             // // console.log( wordtree.offset().top);
             // $("#wordtree-view").height($(window).height() - minusHeight);
-        };
+        // };
 
-        $($window).resize($scope.setWordTreeHeight(200));
+        // $($window).resize($scope.setWordTreeHeight(200));
 
 
         /*
