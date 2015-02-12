@@ -390,7 +390,7 @@
                     <select ng-model="active.variable" ng-options="$root.config.variableMapping[var] for var in $root.config.variables"></select> 
                 </span>
               </div>
-              <span >
+              <span ng-context-menu="documentContextMenu">
                 <pre>
                   
                     <highlighted-report data='records.report.text' 
