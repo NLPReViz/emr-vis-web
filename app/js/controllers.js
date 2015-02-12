@@ -629,7 +629,7 @@ angular.module('myApp.controllers', [])
         var searchResultApplier = null;
 
         function findWordTreeUsage(){
-            if(!$scope.wordTreeData.docList)
+            if(!$scope.wordTreeData.docList || $scope.wordTreeFullscreenButton)
                 return;
 
             if(!searchResultApplier)
