@@ -653,7 +653,7 @@ angular.module('myApp.controllers', [])
                 setTimeout(function() {
                     var range = rangy.createRange();
                     
-                    range.selectNodeContents(document.getElementById("emr-report"));
+                    range.selectNodeContents($("#emr-report pre").get()[0]);
 
                     var regex = new RegExp(search, "gi");
 
