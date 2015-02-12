@@ -216,7 +216,7 @@
                 <input type="text" id="wordtree-input" class="search-input form-control " placeholder="WordTree search&hellip;" required>
 
                 <span class="input-group-addon search-clear-addon">
-                  <i class="search-clear glyphicon glyphicon-remove-circle" ng-click="clearWordTree()"></i>
+                  <i class="search-clear glyphicon glyphicon-remove-circle" ng-click="clearWordTree(true)"></i>
                 </span>
 
                 <span class="input-group-btn">
@@ -235,7 +235,7 @@
             ng-class="{'wordtree-view-overlay': wordTreeFullscreenButton}">
               <div id="wordtree-container" class="wordtree-container-class">
                 <p id="wordtree-empty">
-                  No wordtree to show. Enter keywords above and search.
+                  Loading wordtree&hellip;
                 </p>
               </div>
           </div>
@@ -335,7 +335,7 @@
                 <a ng-click="addFeedbackText('positive')">{{$root.config.classificationName['positive']}}</a> | 
                 <a ng-click="addFeedbackText('negative')">{{$root.config.classificationName['negative']}}</a>
             </span>
-            <span ng-if="!feedbackText" >
+            <span ng-if="!feedbackText && !wordTreeData.feedbackText" >
               <select ng-model="active.variable" 
                       ng-options="$root.config.variableMapping[var] for var in $root.config.variables" 
                       ng-change="updateGrid(active.variable, active.docIndex)"></select> 
@@ -346,7 +346,7 @@
                 <a ng-click="addFeedbackDoc('negative')">{{$root.config.classificationName['negative']}}</a></span>
           </span>
         </div>
-        <div ng-if="tabs.wordTreeView && wordTreeData.feedbackText" class="alert alert-warning report-feedback">
+        <div ng-if="!feedbackText && tabs.wordTreeView && wordTreeData.feedbackText" class="alert alert-warning report-feedback">
           <span ng-if="appInfo">
             {{appInfo}}
           </span>
@@ -358,6 +358,7 @@
             to be: 
               <a ng-click="addWordTreeFeedback('positive')">{{$root.config.classificationName['positive']}}</a> | 
               <a ng-click="addWordTreeFeedback('negative')">{{$root.config.classificationName['negative']}}</a>
+              &nbsp; <i class="search-clear glyphicon glyphicon-remove-circle" ng-click="clearWordTreeFeedback()"></i>
           </span>
         </div>
 

@@ -512,19 +512,21 @@ angular.module('myApp.controllers', [])
          */
 
         $scope.wordTreeData = new Object();
+        $("#wordtree-input").val('');
 
         $scope.clearWordTree = function() {
-            $("#wordtree-container").html('<p id="wordtree-empty"> \
-                        No wordtree to show. Enter keywords above and search. \
-                    </p>');
-            $scope.setSearchFilter(null);
-            $scope.wordTreeData.feedbackText = null;
-            $scope.wordTreeData.matches = null;
+            $("#wordtree-container").html('');
             $("#wordtree-input").val('');
-
-            $scope.tabs.wordTreeView = false;
-
             $("body").removeClass('highlight-flash');
+
+            $scope.setSearchFilter(null);
+            $scope.wordTreeData.matches = null;
+            $scope.tabs.wordTreeView = false;
+            $scope.clearWordTreeFeedback()
+        }
+
+        $scope.clearWordTreeFeedback = function() {
+            $scope.wordTreeData.feedbackText = null;   
         }
 
         function searchWordTree(query) {
@@ -535,6 +537,7 @@ angular.module('myApp.controllers', [])
         }
         
         $scope.loadWordTree = function(){
+            $scope.feedbackText = null;
             $scope.tabs.wordTreeView = true;
 
             var query = $("#wordtree-input").val().trim();

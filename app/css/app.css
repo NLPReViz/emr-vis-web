@@ -24,6 +24,10 @@ body {
     opacity: 0.5;
 }
 
+.search-clear:hover {
+    opacity: 1;
+}
+
 .search-clear-addon {
     border-left: 0;
     background: #fff;
