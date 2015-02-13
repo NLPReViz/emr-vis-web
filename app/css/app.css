@@ -763,13 +763,11 @@ body {
     border: 1px solid #e5e5e5; 
     height: 100%;
     font-weight: bold;
-    cursor: default;
 }
 
 #sidebar-top .cellwidth_id { 
     width: 9%; 
     background-color: white; 
-    cursor: default!important; 
 }
 
 #sidebar-top .cellwidth_var { width: 6.5%; }

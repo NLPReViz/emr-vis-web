@@ -1010,9 +1010,8 @@ angular.module('myApp.controllers', [])
                 return parseInt(a.id) - parseInt(b.id);
             }
         }
-
         
-        $scope.sortGridObjectBy = function(variable) {
+        $scope.sortGridObject = function(variable, reverse) {
             if(!$scope.gridData)
                 return
         
@@ -1022,6 +1021,11 @@ angular.module('myApp.controllers', [])
             else {
                 $scope.gridData.sort(idCompare());
             }
+
+            if(reverse)
+                $scope.gridData.reverse();
+
+            $scope.updateGrid($scope.active.variable, $scope.active.docIndex, true);
 
         }
 

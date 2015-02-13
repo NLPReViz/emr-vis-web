@@ -138,7 +138,8 @@
               <div tooltip-placement="right" tooltip-animation="false" tooltip="document identifier" class="colname cellwidth_id">
                 <div class="progress">
                 </div>
-                <a class="rotate"><div>doc #</div></a>
+                <a class="rotate" href="#sort"
+                ng-click="sortGridObject()" ng-dblclick="sortGridObject(null, true)"><div>doc #</div></a>
               </div>
               <div class="colname cellwidth_var" 
                   ng-repeat="var in $root.config.variables" 
@@ -149,7 +150,7 @@
                       <div class="progress-bar positive" style="width: {{variableData[var]['percPositive']}}%"></div>
                       <div class="progress-bar negative" style="width: {{variableData[var]['percNegative']}}%"></div>
                     </div>
-                    <a class="rotate"><div>{{$root.config.variableMapping[var]}}</div></a>
+                    <a class="rotate" href="#sort" ng-click= "sortGridObject(var)" ng-dblclick="sortGridObject(var, true)"><div>{{$root.config.variableMapping[var]}}</div></a>
               </div>
             </div>
             <div class="sidebar-separator breakline resizable" horizontal-splitter>
