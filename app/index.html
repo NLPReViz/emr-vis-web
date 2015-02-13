@@ -334,7 +334,8 @@
               </select> 
               to be: 
                 <a ng-click="addFeedbackText('positive')">{{$root.config.classificationName['positive']}}</a> | 
-                <a ng-click="addFeedbackText('negative')">{{$root.config.classificationName['negative']}}</a>
+                <a ng-click="addFeedbackText('negative')">{{$root.config.classificationName['negative']}}</a> | 
+                <a ng-click="addFeedbackText('neutral')">{{$root.config.classificationName['neutral']}}</a>
             </span>
             <span ng-if="!feedbackText && !wordTreeData.feedbackText" >
               <select ng-model="active.variable" 
@@ -358,7 +359,8 @@
                     ng-change="updateWordTreeClass()"></select> 
             to be: 
               <a ng-click="addWordTreeFeedback('positive')">{{$root.config.classificationName['positive']}}</a> | 
-              <a ng-click="addWordTreeFeedback('negative')">{{$root.config.classificationName['negative']}}</a>
+              <a ng-click="addWordTreeFeedback('negative')">{{$root.config.classificationName['negative']}}</a> |
+              <a ng-click="addWordTreeFeedback('neutral')">{{$root.config.classificationName['neutral']}}</a>
               &nbsp; <i class="search-clear glyphicon glyphicon-remove-circle" ng-click="clearWordTreeFeedback()"></i>
           </span>
         </div>

@@ -16,7 +16,8 @@ angular.module('myApp.controllers', [])
         $rootScope.config.classificationName = {
             "positive": "True", 
             "negative": "False", 
-            "unclassified": "?"
+            "unclassified": "?",
+            "neutral": "Either"
         };
 
         $rootScope.config.variables = ["any-adenoma", "appendiceal-orifice", "asa", "biopsy", "cecum",
