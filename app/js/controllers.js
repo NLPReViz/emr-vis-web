@@ -995,6 +995,36 @@ angular.module('myApp.controllers', [])
         };
 
 
+        /*
+         * Sorting
+         */
+
+        function variableCompare(variable) {
+            return function(a, b) {
+                return a[variable].confidence - b[variable].confidence;
+            }
+        }
+
+        function idCompare() {
+            return function(a, b) {
+                return parseInt(a.id) - parseInt(b.id);
+            }
+        }
+
+        
+        $scope.sortGridObjectBy = function(variable) {
+            if(!$scope.gridData)
+                return
+        
+            if($rootScope.config.variables.indexOf(variable) !== -1) {
+                $scope.gridData.sort(variableCompare(variable));
+            }
+            else {
+                $scope.gridData.sort(idCompare());
+            }
+
+        }
+
         return true;
     }])
         
