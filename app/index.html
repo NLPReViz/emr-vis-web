@@ -19,7 +19,7 @@
 
 </head>
 
-<body class="ng-cloak" ng-controller="appCtrl">
+<body class="ng-cloak" ng-controller="appCtrl" ui-keypress="{'right':'keypressCallback($event, false)', 'left':'keypressCallback($event, true)'}">
 
   <div ng-show="appDisabled" class="coverall">
   </div>
@@ -608,6 +608,7 @@
   <script src="bower_components/rangy-official/rangy-core.min.js"></script>
   <script src="bower_components/rangy-official/rangy-textrange.min.js"></script>
   <script src="bower_components/rangy-official/rangy-classapplier.min.js"></script>
+  <script src="bower_components/angular-ui-utils/keypress.min.js"></script>
   <script src="js/app.js"></script>
   <script src="js/services.js"></script>
   <script src="js/controllers.js"></script>

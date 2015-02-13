@@ -7,7 +7,8 @@ var app = angular.module('myApp', [
   'myApp.controllers',
   'myApp.filters',
   'ui.bootstrap',
-  'ngCookies'
+  'ngCookies',
+  'ui.keypress'
 ]);
 
 // // config(['$routeProvider', function($routeProvider) {

@@ -201,6 +201,8 @@ angular.module('myApp.controllers', [])
             }
         };
 
+        var deferedScroll;
+
         $scope.updateGrid = function(variable, activeDocIndex, bScroll) {
             // console.log(variable, activeDoc);
 
@@ -218,8 +220,9 @@ angular.module('myApp.controllers', [])
             }
 
             if(bScroll){
-                setTimeout(function(){
-                    $("#grid-table").scrollTo($("#grid-table .selected"), 500)
+                clearTimeout(deferedScroll);
+                deferedScroll = setTimeout(function(){
+                    $("#grid-table").scrollTo($("#grid-table .selected"))
                 });
             }
 
@@ -983,6 +986,13 @@ angular.module('myApp.controllers', [])
             else
                 $scope.loaderCount = 0;
         }
+
+        $scope.keypressCallback = function($event, reverse) {
+            if (! $($event.explicitOriginalTarget).is("input")){
+                $scope.gotoNextDoc(reverse);
+                $event.preventDefault();    
+            }
+        };
 
 
         return true;
