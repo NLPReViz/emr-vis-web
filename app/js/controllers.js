@@ -1001,7 +1001,12 @@ angular.module('myApp.controllers', [])
 
         function variableCompare(variable) {
             return function(a, b) {
-                return a[variable].confidence - b[variable].confidence;
+                var diff = a[variable].confidence - b[variable].confidence;
+                
+                if(diff === 0)
+                    return parseInt(a.id) - parseInt(b.id);
+                else
+                    return diff
             }
         }
 
