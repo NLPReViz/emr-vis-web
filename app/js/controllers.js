@@ -17,7 +17,7 @@ angular.module('myApp.controllers', [])
             "positive": "True", 
             "negative": "False", 
             "unclassified": "?",
-            "neutral": "Either"
+            "neutral": "Not relevant"
         };
 
         $rootScope.config.variables = ["any-adenoma", "appendiceal-orifice", "asa", "biopsy", "cecum",
