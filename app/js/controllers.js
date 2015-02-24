@@ -585,7 +585,8 @@ angular.module('myApp.controllers', [])
         }
 
         $scope.clearWordTreeFeedback = function() {
-            $scope.wordTreeData.feedbackText = null;   
+            $scope.wordTreeData.feedbackText = null; 
+            $scope.wordTreeData.spanText = null;   
         }
 
         function searchWordTree(query) {
