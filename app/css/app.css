@@ -65,7 +65,7 @@ body {
     position: fixed;
     top: 51px;
     width: calc(100% - 740px);
-    z-index: 1000;
+    z-index: 999;
 }
 
 .navbar-nav > li{ cursor: pointer; }
