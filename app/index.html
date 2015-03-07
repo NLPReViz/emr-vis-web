@@ -319,7 +319,10 @@
 
       <!-- Document views -->
       <div class="main">
-        
+        <div id="doc-navigator">
+          <a href="#prev" class="glyphicon glyphicon-chevron-left" ng-click="gotoNextDoc(true)"></a>
+          <a href="#next" class="glyphicon glyphicon-chevron-right" ng-click="gotoNextDoc()"></a>
+        </div>
         <!-- Feedback -->
         <div ng-if="tabs.docView && records.report.exists" class="alert alert-warning report-feedback">
           <span ng-if="appInfo">

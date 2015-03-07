@@ -65,7 +65,7 @@ body {
     position: fixed;
     top: 51px;
     width: calc(100% - 740px);
-    z-index: 999;
+    z-index: 998;
 }
 
 .navbar-nav > li{ cursor: pointer; }
@@ -1162,4 +1162,11 @@ body {
     position: absolute;
     display: block;
     max-width: 220px;
+}
+
+#doc-navigator{
+  position: fixed;
+  z-index: 999;
+  right:18px;
+  top: 75px;
 }
