@@ -60,6 +60,12 @@ body {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    background-color: white;
+    padding-top: 10px;
+    position: fixed;
+    top: 51px;
+    width: calc(100% - 740px);
+    z-index: 1000;
 }
 
 .navbar-nav > li{ cursor: pointer; }
@@ -1018,7 +1024,7 @@ body {
 }
 
 .tab-inner-content {
-    padding: 15px;
+    padding-top: 35px;
 }
 
 .tab-inner-content h4{

@@ -319,7 +319,7 @@
 
       <!-- Document views -->
       <div class="main">
-
+        
         <!-- Feedback -->
         <div ng-if="tabs.docView && records.report.exists" class="alert alert-warning report-feedback">
           <span ng-if="appInfo">
@@ -367,40 +367,42 @@
 
           <!-- Report view -->
           <tab active="tabs.docView" heading="Document View">
-            <div ng-show="records.pathology.exists" class="pagerview">
-              <div class="pagerview-row">
-                  <div class="pagerview-step">
-                      <button type="button" scroll-to-bookmark="records.report.text" class="btn btn-default btn-circle">1</button>
-                      <p class="clickable" scroll-to-bookmark="records.report.text">Report</p>
-                  </div>
-                  <div class="pagerview-step">
-                      <button type="button" scroll-to-bookmark="records.pathology.text" class="btn btn-default btn-circle">2</button>
-                      <p class="clickable" scroll-to-bookmark="records.pathology.text">Pathology</p>
-                  </div>
+            <div class="tab-inner-content">
+              <div ng-show="records.pathology.exists" class="pagerview">
+                <div class="pagerview-row">
+                    <div class="pagerview-step">
+                        <button type="button" scroll-to-bookmark="records.report.text" class="btn btn-default btn-circle">1</button>
+                        <p class="clickable" scroll-to-bookmark="records.report.text">Report</p>
+                    </div>
+                    <div class="pagerview-step">
+                        <button type="button" scroll-to-bookmark="records.pathology.text" class="btn btn-default btn-circle">2</button>
+                        <p class="clickable" scroll-to-bookmark="records.pathology.text">Pathology</p>
+                    </div>
+                </div>
               </div>
-            </div>
-            
-            <div scroll-bookmark="records.report.text" ng-mouseup="setFeedbackText()" ng-if="records.report.exists" id="emr-report" class="report">
-              <div class="info unselectable">
-                <i class="glyphicon glyphicon-list-alt"></i>&nbsp;
-                <a tooltip-placement="bottom" tooltip-animation="false" tooltip="docs/{{gridData[active.docIndex].id}}/report.txt">
-                  <strong class="file-name js-selectable-text">Report: #{{gridData[active.docIndex].id}}</strong>
-                </a>
-                <!-- <a class="btn btn-xs btn-default pull-right" ng-click="PrintReport('emr-report')"><strong>Print</strong></a> -->
-                <span class="pull-right">
-                    Variable&nbsp;
-                    <select ng-model="active.variable" ng-options="$root.config.variableMapping[var] for var in $root.config.variables"></select> 
+              
+              <div scroll-bookmark="records.report.text" ng-mouseup="setFeedbackText()" ng-if="records.report.exists" id="emr-report" class="report">
+                <div class="info unselectable">
+                  <i class="glyphicon glyphicon-list-alt"></i>&nbsp;
+                  <a tooltip-placement="bottom" tooltip-animation="false" tooltip="docs/{{gridData[active.docIndex].id}}/report.txt">
+                    <strong class="file-name js-selectable-text">Report: #{{gridData[active.docIndex].id}}</strong>
+                  </a>
+                  <!-- <a class="btn btn-xs btn-default pull-right" ng-click="PrintReport('emr-report')"><strong>Print</strong></a> -->
+                  <span class="pull-right">
+                      Variable&nbsp;
+                      <select ng-model="active.variable" ng-options="$root.config.variableMapping[var] for var in $root.config.variables"></select> 
+                  </span>
+                </div>
+                <span ng-context-menu="documentContextMenu">
+                  <pre>
+                    
+                      <highlighted-report data='records.report.text' 
+                                        pos-terms='gridData[active.docIndex][active.variable].topPositive' 
+                                        neg-terms='gridData[active.docIndex][active.variable].topNegative'>
+                      </highlighted-report>
+                  </pre>
                 </span>
               </div>
-              <span ng-context-menu="documentContextMenu">
-                <pre>
-                  
-                    <highlighted-report data='records.report.text' 
-                                      pos-terms='gridData[active.docIndex][active.variable].topPositive' 
-                                      neg-terms='gridData[active.docIndex][active.variable].topNegative'>
-                    </highlighted-report>
-                </pre>
-              </span>
             </div>
             <div scroll-bookmark="records.pathology.text" ng-mouseup="setFeedbackText()" ng-if="records.pathology.exists" id="emr-pathology" class="report">
               <div class="info unselectable">
