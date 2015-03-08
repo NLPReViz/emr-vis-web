@@ -44,7 +44,11 @@ angular.module('myApp.controllers', [])
         $scope.active = {
             docIndex: null,
             variable: null,
-            gridCount: 0
+            gridCount: 0,
+            sort: {
+                variable: null,
+                reverse: false
+            }
         }
         
         checkLogin();
@@ -1023,13 +1027,20 @@ angular.module('myApp.controllers', [])
         
             if($rootScope.config.variables.indexOf(variable) !== -1) {
                 $scope.gridData.sort(variableCompare(variable));
+                $scope.active.sort.variable = variable;
             }
             else {
                 $scope.gridData.sort(idCompare());
+                $scope.active.sort.variable = "id";
             }
 
-            if(reverse)
+            if(reverse){
                 $scope.gridData.reverse();
+                $scope.active.sort.reverse = true;
+            }
+            else{
+                $scope.active.sort.reverse = false;   
+            }
 
             $scope.updateGrid($scope.active.variable, $scope.active.docIndex, true);
 

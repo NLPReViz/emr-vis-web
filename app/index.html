@@ -138,6 +138,8 @@
               <div tooltip-placement="right" tooltip-animation="false" tooltip="document identifier" class="colname cellwidth_id">
                 <div class="progress">
                 </div>
+                <a ng-show="active.sort.variable == 'id' && !active.sort.reverse" href="#sort" class="glyphicon glyphicon-arrow-up grid-sort" ng-click="sortGridObject(null, true)"></a>
+                <a ng-show="active.sort.variable == 'id' && active.sort.reverse" href="#sort" class="glyphicon glyphicon-arrow-down grid-sort" ng-click="sortGridObject(null, false)"></a>
                 <a class="rotate" href="#sort"
                 sglclick="sortGridObject()" ng-dblclick="sortGridObject(null, true)"><div>doc #</div></a>
               </div>
@@ -150,6 +152,8 @@
                       <div class="progress-bar positive" style="width: {{variableData[var]['percPositive']}}%"></div>
                       <div class="progress-bar negative" style="width: {{variableData[var]['percNegative']}}%"></div>
                     </div>
+                    <a ng-show="active.sort.variable == var && !active.sort.reverse" href="#sort" class="glyphicon glyphicon-arrow-up grid-sort" ng-click="sortGridObject(var, true)"></a>
+                    <a ng-show="active.sort.variable == var && active.sort.reverse" href="#sort" class="glyphicon glyphicon-arrow-down grid-sort" ng-click="sortGridObject(var, false)"></a>
                     <a class="rotate" href="#sort" sglclick= "sortGridObject(var)" ng-dblclick="sortGridObject(var, true)"><div>{{$root.config.variableMapping[var]}}</div></a>
               </div>
             </div>

@@ -809,6 +809,10 @@ body {
     background-color: #eee;
 }
 
+#sidebar-top .grid-sort{
+    margin-top: 19px;
+    position: absolute;
+}
 
 /*
  * Side-bar charts
