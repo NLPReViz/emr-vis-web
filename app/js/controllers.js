@@ -50,6 +50,8 @@ angular.module('myApp.controllers', [])
                 reverse: false
             }
         }
+
+        $scope.feedbackStats = new Object();
         
         checkLogin();
 
@@ -116,6 +118,11 @@ angular.module('myApp.controllers', [])
 
             if ( !($scope.active.model == model && $scope.active.dataset == dataset) ){
                 $scope.trackVisited = null;
+
+                $rootScope.config.variables.forEach(function(variable) {
+                    $scope.feedbackStats[variable] = [];
+                })
+
                 loadData(model, dataset);
             }
                 
@@ -164,23 +171,23 @@ angular.module('myApp.controllers', [])
 
             // console.log($scope.variableData);
 
-            $rootScope.config.variables.forEach(function(variable) {
-              // console.log(data[variable]["docPositive"].length);
-              $scope.variableData[variable]["percPositive"] = 
-                                      Math.round(100.0 *  data['variableData'][variable]["docPositive"].length / 
-                                      ( data['variableData'][variable]["docPositive"].length +  data['variableData'][variable]["docNegative"].length));
+            // $rootScope.config.variables.forEach(function(variable) {
+            //   // console.log(data[variable]["docPositive"].length);
+            //   // $scope.variableData[variable]["percPositive"] = 
+            //   //                         Math.round(100.0 *  data['variableData'][variable]["docPositive"].length / 
+            //   //                         ( data['variableData'][variable]["docPositive"].length +  data['variableData'][variable]["docNegative"].length));
               
-              if(isNaN($scope.variableData[variable]["percPositive"]))
-                $scope.variableData[variable]["percPositive"] = 0;
+            //   // if(isNaN($scope.variableData[variable]["percPositive"]))
+            //   //   $scope.variableData[variable]["percPositive"] = 0;
 
-              $scope.variableData[variable]['percNegative'] = 
-                                      Math.round(100.0 *  data['variableData'][variable]["docNegative"].length / 
-                                      ( data['variableData'][variable]["docPositive"].length +  data['variableData'][variable]["docNegative"].length));
+            //   // $scope.variableData[variable]['percNegative'] = 
+            //   //                         Math.round(100.0 *  data['variableData'][variable]["docNegative"].length / 
+            //   //                         ( data['variableData'][variable]["docPositive"].length +  data['variableData'][variable]["docNegative"].length));
 
-              if(isNaN($scope.variableData[variable]["percNegative"]))
-                $scope.variableData[variable]["percNegative"] = 0;
+            //   // if(isNaN($scope.variableData[variable]["percNegative"]))
+            //   //   $scope.variableData[variable]["percNegative"] = 0;
                                       
-            });
+            // });
 
             $scope.active.variable = $rootScope.config.variables[0];
             $scope.loadVarStats($scope.active.variable);
@@ -500,6 +507,19 @@ angular.module('myApp.controllers', [])
             if(!bDuplicate) {
                 $scope.feedbackList.push(feedback);
                 showInfo("Feedback added to the list.");
+
+                if(Array.isArray(feedback.docList)){
+                    feedback.docList.forEach(function(doc){
+                        if ($scope.feedbackStats[feedback.variable].indexOf(doc) == -1) {
+                            $scope.feedbackStats[feedback.variable].push(doc);
+                        }
+                    });
+                }
+                else{
+                    if ($scope.feedbackStats[feedback.variable].indexOf(feedback.docList) == -1) {
+                        $scope.feedbackStats[feedback.variable].push(feedback.docList);
+                    }
+                }
             }
             else {
                 showInfo("Feedback already present in the list!");   

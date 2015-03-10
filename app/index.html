@@ -145,12 +145,12 @@
               </div>
               <div class="colname cellwidth_var" 
                   ng-repeat="var in $root.config.variables" 
-                  tooltip="{{variableData[var]['percPositive']}}% {{$root.config.classificationName['positive']}}" 
+                  tooltip="{{feedbackStats[var].length / gridData.length * 100 | number:2}}% labelled" 
                   tooltip-placement="{{$index > 6 ? 'left' : 'right'}}"
                   tooltip-animation="false">
                     <div class="progress">
-                      <div class="progress-bar positive" style="width: {{variableData[var]['percPositive']}}%"></div>
-                      <div class="progress-bar negative" style="width: {{variableData[var]['percNegative']}}%"></div>
+                      <div class="progress-bar feedback-progress" style="width: {{feedbackStats[var].length / gridData.length * 100}}%"></div>
+                      <!-- <div class="progress-bar negative" style="width: {{variableData[var]['percNegative']}}%"></div> -->
                     </div>
                     <a ng-show="active.sort.variable == var && !active.sort.reverse" href="#sort" class="glyphicon glyphicon-arrow-up grid-sort" ng-click="sortGridObject(var, true)"></a>
                     <a ng-show="active.sort.variable == var && active.sort.reverse" href="#sort" class="glyphicon glyphicon-arrow-down grid-sort" ng-click="sortGridObject(var, false)"></a>

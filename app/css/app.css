@@ -658,6 +658,11 @@ body {
   fill: #555;
 }
 
+.progress .feedback-progress {
+    background-image: none;
+    background-color: #7a7a7a;
+}
+
 .cert0-neg{background-color: #fcece6; color: #67001f;}
 .cert1-neg{background-color: #f7cebd; color: #67001f;}
 /*.cert4-neu{background-color: #7bccc4; color: #252525;}*/
