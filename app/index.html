@@ -169,7 +169,7 @@
                     <div class="divcell cellwidth_var {{styleGridCell(doc[var].classification, doc[var].confidence)}} custom-tooltip-bottom"  
                         ng-repeat="var in $root.config.variables" 
                         ng-click="updateGrid(var, $parent.$index)" 
-                        ng-class="{selected: $parent.$index==active.docIndex && var==active.variable}" 
+                        ng-class="{selected: $parent.$index==active.docIndex && var==active.variable, cellfeedback: trackFeedback[$parent.$index][var]}" 
                         data-custom-tooltip="{{doc[var].confidence}}" 
                         cell-modified="doc[var].classification"
                         >
@@ -177,6 +177,7 @@
                       {{$root.config.classificationName[ doc[var].classification ]}}
 
                       <span class="cell-visited glyphicon glyphicon-asterisk" ng-class="{hidden: trackVisited[$parent.$index][var] != true}"></span>
+                      <!-- <span class="cell-feedback glyphicon glyphicon-pencil" ng-class="{hidden: trackFeedback[$parent.$index][var] != true}"></span> -->
                     </div>
               </div>
             </div>

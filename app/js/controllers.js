@@ -50,8 +50,6 @@ angular.module('myApp.controllers', [])
                 reverse: false
             }
         }
-
-        $scope.feedbackStats = new Object();
         
         checkLogin();
 
@@ -95,6 +93,9 @@ angular.module('myApp.controllers', [])
             $scope.active.dataset = null;
             $scope.active.model = null;
 
+            $scope.feedbackStats = new Object();
+            $scope.trackFeedback = null;
+
             backend.getVarDatasetList().then(function(data) {
                 $scope.modelList = data['model'];
                 $scope.datasetList = data['dataset'];
@@ -112,17 +113,24 @@ angular.module('myApp.controllers', [])
 
         $scope.varStats = Object();
 
+        $scope.clearTrackFeedback = function() {
+            $rootScope.config.variables.forEach(function(variable) {
+                    $scope.feedbackStats[variable] = [];
+            });
+
+            $scope.trackFeedback = new Array();
+            for(var i=0; i<$scope.gridData.length; i++){
+                $scope.trackFeedback[i] = new Object();
+            }
+        }
+
         function setModelAndDataset (model, dataset) {
             if(model === undefined || dataset === undefined )
                 return
 
             if ( !($scope.active.model == model && $scope.active.dataset == dataset) ){
                 $scope.trackVisited = null;
-
-                $rootScope.config.variables.forEach(function(variable) {
-                    $scope.feedbackStats[variable] = [];
-                })
-
+                $scope.trackFeedback = null;
                 loadData(model, dataset);
             }
                 
@@ -151,7 +159,10 @@ angular.module('myApp.controllers', [])
             $scope.gridData = data['gridData']; 
 
             if($scope.trackVisited == null)
-                $scope.clearVisited();   
+                $scope.clearVisited();
+
+            if($scope.trackFeedback == null)
+                $scope.clearTrackFeedback();    
 
             //TODO: Hack for fat scrollbars on Windows
             setTimeout(function() {
@@ -512,12 +523,21 @@ angular.module('myApp.controllers', [])
                     feedback.docList.forEach(function(doc){
                         if ($scope.feedbackStats[feedback.variable].indexOf(doc) == -1) {
                             $scope.feedbackStats[feedback.variable].push(doc);
+
+                            //TODO: This is inefficient
+                            for(var index=0; index<$scope.gridData.length; index++){
+                                if($scope.gridData[index].id == doc){
+                                    $scope.trackFeedback[index][feedback.variable] = true;
+                                    break;
+                                }
+                            }
                         }
                     });
                 }
                 else{
                     if ($scope.feedbackStats[feedback.variable].indexOf(feedback.docList) == -1) {
                         $scope.feedbackStats[feedback.variable].push(feedback.docList);
+                        $scope.trackFeedback[$scope.active.docIndex][feedback.variable] = true;
                     }
                 }
             }

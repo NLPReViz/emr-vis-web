@@ -763,6 +763,10 @@ body {
   font-weight: normal;
 }
 
+#sidebar-top .cellfeedback {
+  opacity: 0.5;
+}
+
 #sidebar-top .cell-modified .cell-visited {
   font-weight: normal;
 }
