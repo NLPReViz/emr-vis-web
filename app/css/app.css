@@ -660,7 +660,7 @@ body {
 
 .progress .feedback-progress {
     background-image: none;
-    background-color: #7a7a7a;
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0.7);
 }
 
 .cert0-neg{background-color: #fcece6; color: #67001f;}
