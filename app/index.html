@@ -145,7 +145,7 @@
               </div>
               <div class="colname cellwidth_var" 
                   ng-repeat="var in $root.config.variables" 
-                  tooltip="{{feedbackStats[var].length / gridData.length * 100 | number:2}}% labelled" 
+                  tooltip="{{feedbackStats[var].length / gridData.length * 100 | number:2}}% labeled for {{$root.config.variableMapping[var]}}" 
                   tooltip-placement="{{$index > 6 ? 'left' : 'right'}}"
                   tooltip-animation="false">
                     <div class="progress">
