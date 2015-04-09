@@ -351,7 +351,7 @@
                       ng-options="$root.config.variableMapping[var] for var in $root.config.variables" 
                       ng-change="updateGrid(active.variable, active.docIndex)"></select> 
               is marked as <strong>{{$root.config.classificationName[ gridData[active.docIndex][active.variable].classification ] | lowercase}}</strong> 
-              for this record. 
+              for this document. 
               Label it: 
                 <a ng-click="addFeedbackDoc('positive')">{{$root.config.classificationName['positive']}}</a> | 
                 <a ng-click="addFeedbackDoc('negative')">{{$root.config.classificationName['negative']}}</a></span>
