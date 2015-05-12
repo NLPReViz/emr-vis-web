@@ -377,7 +377,7 @@ angular.module('myApp.controllers', [])
                         $scope.records.pathology.exists = true;
                     }
                     
-                    backend.putLogEvent("getReport", activeDoc);
+                    // backend.putLogEvent("getReport", activeDoc);
                     stopLoading();
                     $scope.feedbackText = null;
 
