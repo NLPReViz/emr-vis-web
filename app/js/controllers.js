@@ -83,6 +83,9 @@ angular.module('myApp.controllers', [])
                 $scope.clearFeedback();
                 backend.logout();
                 $scope.active.username = null;
+
+                backend.putLogEvent("trackVisited", JSON.stringify($scope.trackVisited));
+                backend.putLogEvent("trackFeedback", JSON.stringify($scope.trackFeedback));
             }
         }
 
@@ -254,6 +257,7 @@ angular.module('myApp.controllers', [])
 
             //Change view to docView
             $scope.tabs.docView = true;
+            backend.log("docView", "Active");
         };
 
 
@@ -636,6 +640,7 @@ angular.module('myApp.controllers', [])
             $scope.setSearchFilter(null);
             $scope.wordTreeData.matches = null;
             $scope.tabs.wordTreeView = false;
+            backend.log("WordTree", "InActive");
             $scope.clearWordTreeFeedback()
         }
 
