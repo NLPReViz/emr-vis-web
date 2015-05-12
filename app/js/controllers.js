@@ -709,7 +709,7 @@ angular.module('myApp.controllers', [])
             $scope.wordTreeData.spanText = span.replace(/\s*\.$/, "");
             $scope.wordTreeData.docList = docs;
 
-            backend.putLogEvent("setWordTreeFeedback", $scope.wordTreeData.feedbackText);
+            // backend.putLogEvent("setWordTreeFeedback", $scope.wordTreeData.feedbackText);
 
             $scope.setSearchFilter(docs);
             findWordTreeUsage();
