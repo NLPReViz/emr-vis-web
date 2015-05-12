@@ -201,6 +201,8 @@ angular.module('myApp.controllers', [])
             // });
 
             $scope.active.variable = $rootScope.config.variables[0];
+            backend.putLogEvent("setActiveVariable", $scope.active.variable);
+
             $scope.loadVarStats($scope.active.variable);
             $scope.updateWordTreeClass();
         }
@@ -232,6 +234,8 @@ angular.module('myApp.controllers', [])
 
             if(variable != $scope.variable) {
               $scope.active.variable = variable;
+              backend.putLogEvent("setActiveVariable", $scope.active.variable);
+              
               $scope.loadVarStats(variable);
               $scope.updateWordTreeClass()
             }
@@ -373,6 +377,7 @@ angular.module('myApp.controllers', [])
                         $scope.records.pathology.exists = true;
                     }
                     
+                    backend.putLogEvent("getReport", activeDoc);
                     stopLoading();
                     $scope.feedbackText = null;
 
@@ -517,6 +522,7 @@ angular.module('myApp.controllers', [])
             
             if(!bDuplicate) {
                 $scope.feedbackList.push(feedback);
+                backend.putLogEvent("addFeedbackToList", JSON.stringify(feedback));
                 showInfo("Feedback added to the list.");
 
                 if(Array.isArray(feedback.docList)){
@@ -576,6 +582,8 @@ angular.module('myApp.controllers', [])
 
             var hidden_id = $scope.feedbackList[index].$hidden_id;
 
+            backend.putLogEvent("removeFeedback", JSON.stringify($scope.feedbackList[index]));
+
             $scope.feedbackList.splice(index, 1);
 
             $scope.feedbackList.forEach(function(feedback) {
@@ -587,6 +595,9 @@ angular.module('myApp.controllers', [])
         }
 
         $scope.clearFeedback = function() {
+
+            backend.putLogEvent("clearFeedback", "");
+
             while($scope.feedbackList.length > 0) {
                 $scope.feedbackList.pop();
             }
@@ -670,6 +681,7 @@ angular.module('myApp.controllers', [])
                 data.container = "#wordtree-container";
                 data.popup = "#wordtree-popup";
 
+                backend.putLogEvent("getWordTree", query);
                 makeWordTree(data);
 
                 $scope.setWordTreePercentage(data.matchedList.length, data.total);
@@ -696,6 +708,8 @@ angular.module('myApp.controllers', [])
             $scope.wordTreeData.feedbackText = selected.replace(/\s*\.$/, ""); //Remove trailing dot
             $scope.wordTreeData.spanText = span.replace(/\s*\.$/, "");
             $scope.wordTreeData.docList = docs;
+
+            backend.putLogEvent("setWordTreeFeedback", $scope.wordTreeData.feedbackText);
 
             $scope.setSearchFilter(docs);
             findWordTreeUsage();
@@ -784,6 +798,9 @@ angular.module('myApp.controllers', [])
                 .then(function(data) {
 
                     if(data.status == "OK"){
+
+                        backend.putLogEvent("putFeedback", "OK");
+
                         $scope.retrainData.message = data.latestModel;
                         
                         assignDataToVars(data.gridVarData);
@@ -798,12 +815,18 @@ angular.module('myApp.controllers', [])
                         $scope.clearFeedback();
                     }
                     else if(data.status == "Error") {
+
+                        backend.putLogEvent("putFeedback", "Error: " + JSON.stringify(data.errorList));
+
                         $scope.retrainData.message = data.errorList;
                         $scope.retrainData.status = "Error";
 
                         setConflictList(data.feedbackList);
                     }
                     else if(data.status == "Warning") {
+
+                        backend.putLogEvent("putFeedback", "Warning: " + JSON.stringify(data.warninigList));
+
                         $scope.retrainData.message = data.warningList;
                         $scope.retrainData.status = "Warning";
 

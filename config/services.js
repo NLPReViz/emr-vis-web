@@ -121,6 +121,10 @@ angular.module('myApp.services', [])
                             return result.data;
                         }
             );
+        },
+        putLogEvent: function(event_name, message){
+            var uri = "@@backEndApp/logEvent/";
+            return $http.put(uri + event_name + "/" + message);
         }
     };
 }])
