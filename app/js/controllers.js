@@ -232,10 +232,10 @@ angular.module('myApp.controllers', [])
 
             trackVisited($scope.active.docIndex, $scope.active.variable, true); //Update previously open
 
-            if(variable != $scope.variable) {
+            if(variable != $scope.active.variable) {
               $scope.active.variable = variable;
               backend.putLogEvent("setActiveVariable", $scope.active.variable);
-              
+
               $scope.loadVarStats(variable);
               $scope.updateWordTreeClass()
             }
