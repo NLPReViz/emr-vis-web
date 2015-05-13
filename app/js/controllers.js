@@ -14,17 +14,17 @@ angular.module('myApp.controllers', [])
 
         $rootScope.config = Object();
         $rootScope.config.classificationName = {
-            "positive": "True", 
-            "negative": "False", 
+            "positive": "True",
+            "negative": "False",
             "unclassified": "?"
         };
 
         $rootScope.config.variables = ["any-adenoma", "appendiceal-orifice", "asa", "biopsy", "cecum",
-                  "ileo-cecal-valve", "indication-type", "informed-consent", 
+                  "ileo-cecal-valve", "indication-type", "informed-consent",
                   "nursing-report", "prep-adequateNo", "prep-adequateNot",
                   "prep-adequateYes", "proc-aborted", "withdraw-time"]
 
-        $rootScope.config.variableMapping = 
+        $rootScope.config.variableMapping =
         {   "any-adenoma": "any-adenoma",
             "appendiceal-orifice": "appendiceal-orifice",
             "asa": "asa",
@@ -50,12 +50,12 @@ angular.module('myApp.controllers', [])
                 reverse: false
             }
         }
-        
+
         checkLogin();
 
         function checkLogin(manual) {
             backend.checkLogin()
-                .then(function () {        
+                .then(function () {
                     $scope.active.username = backend.getUserName();
                     startSession();
                 }, function() {
@@ -78,7 +78,7 @@ angular.module('myApp.controllers', [])
             if($scope.feedbackList.length > 0){
                 confirm = $window.confirm("You have made unsaved changes. Would you still like to leave this page?");
             }
-                
+
             if(confirm) {
                 $scope.clearFeedback();
                 backend.logout();
@@ -105,7 +105,7 @@ angular.module('myApp.controllers', [])
 
                 stopLoading();
 
-                setModelAndDataset($scope.modelList[$scope.modelList.length - 1].name, 
+                setModelAndDataset($scope.modelList[$scope.modelList.length - 1].name,
                                    "feedbackIDList");
             }, function() { alert("Could not retrieve model list!"); stopLoading(); });
         }
@@ -136,7 +136,7 @@ angular.module('myApp.controllers', [])
                 $scope.trackFeedback = null;
                 loadData(model, dataset);
             }
-                
+
 
             $scope.active.model = model;
             $scope.active.dataset = dataset;
@@ -149,7 +149,7 @@ angular.module('myApp.controllers', [])
             $scope.clearModified();
 
             backend.getGridData(model, dataset).then(function(data) {
-                
+
                 assignDataToVars(data);
 
                 stopLoading();
@@ -159,13 +159,13 @@ angular.module('myApp.controllers', [])
         }
 
         function assignDataToVars(data) {
-            $scope.gridData = data['gridData']; 
+            $scope.gridData = data['gridData'];
 
             if($scope.trackVisited == null)
                 $scope.clearVisited();
 
             if($scope.trackFeedback == null)
-                $scope.clearTrackFeedback();    
+                $scope.clearTrackFeedback();
 
             //TODO: Hack for fat scrollbars on Windows
             setTimeout(function() {
@@ -178,29 +178,29 @@ angular.module('myApp.controllers', [])
             if(typeof $scope.gridData[$scope.active.docIndex] == 'undefined') {
                 $scope.active.docIndex = 0;
             }
-            
-            $scope.loadReport($scope.active.docIndex);   
-            
+
+            $scope.loadReport($scope.active.docIndex);
+
             $scope.variableData = data['variableData'];
 
             // console.log($scope.variableData);
 
             // $rootScope.config.variables.forEach(function(variable) {
             //   // console.log(data[variable]["docPositive"].length);
-            //   // $scope.variableData[variable]["percPositive"] = 
-            //   //                         Math.round(100.0 *  data['variableData'][variable]["docPositive"].length / 
+            //   // $scope.variableData[variable]["percPositive"] =
+            //   //                         Math.round(100.0 *  data['variableData'][variable]["docPositive"].length /
             //   //                         ( data['variableData'][variable]["docPositive"].length +  data['variableData'][variable]["docNegative"].length));
-              
+
             //   // if(isNaN($scope.variableData[variable]["percPositive"]))
             //   //   $scope.variableData[variable]["percPositive"] = 0;
 
-            //   // $scope.variableData[variable]['percNegative'] = 
-            //   //                         Math.round(100.0 *  data['variableData'][variable]["docNegative"].length / 
+            //   // $scope.variableData[variable]['percNegative'] =
+            //   //                         Math.round(100.0 *  data['variableData'][variable]["docNegative"].length /
             //   //                         ( data['variableData'][variable]["docPositive"].length +  data['variableData'][variable]["docNegative"].length));
 
             //   // if(isNaN($scope.variableData[variable]["percNegative"]))
             //   //   $scope.variableData[variable]["percNegative"] = 0;
-                                      
+
             // });
 
             $scope.active.variable = $rootScope.config.variables[0];
@@ -212,13 +212,13 @@ angular.module('myApp.controllers', [])
 
         $scope.styleGridCell = function(classification, confidence) {
             if (classification == "positive") {
-                if (confidence >= 0.75) 
+                if (confidence >= 0.75)
                     return "cert1-pos";
                 else
                     return "cert0-pos";
             }
             else if (classification == "negative") {
-                if (confidence >= 0.75) 
+                if (confidence >= 0.75)
                     return "cert1-neg";
                 else
                     return "cert0-neg";
@@ -257,7 +257,7 @@ angular.module('myApp.controllers', [])
 
             //Change view to docView
             $scope.tabs.docView = true;
-            backend.log("docView", "Active");
+            backend.putLogEvent("docView", "Active");
         };
 
 
@@ -272,7 +272,7 @@ angular.module('myApp.controllers', [])
 
             if($scope.searchQuery.indexOf(id) !== -1){
                 $scope.active.gridCount++;
-                return true;    
+                return true;
             }
             else {
                 return false;
@@ -310,7 +310,7 @@ angular.module('myApp.controllers', [])
 
             while(invalid) {
                 newIndex = newIndex + shift;
-                
+
                 if(newIndex < 0 || newIndex > $scope.gridData.length - 1)
                     return false;
 
@@ -380,7 +380,7 @@ angular.module('myApp.controllers', [])
                         $scope.records.pathology.text = data.pathologyText;
                         $scope.records.pathology.exists = true;
                     }
-                    
+
                     backend.putLogEvent("getReport", activeDoc);
                     stopLoading();
                     $scope.feedbackText = null;
@@ -394,7 +394,7 @@ angular.module('myApp.controllers', [])
 
                     setTimeout(function() {
                         var range = rangy.createRange();
-                        
+
                         range.selectNodeContents($("#emr-report pre").get()[0]);
 
                         var regex = new RegExp(search, "gi");
@@ -407,7 +407,7 @@ angular.module('myApp.controllers', [])
                         }
                     });
                 }
-            }, function() { 
+            }, function() {
                 $scope.records.report.text = "Unable to fetch report";
                 stopLoading();
             });
@@ -423,9 +423,9 @@ angular.module('myApp.controllers', [])
         };
 
         $scope.distData = null;
-        
+
         $scope.loadVarStats = function(variable) {
-        
+
             if(angular.isUndefined($scope.variableData) || !variable)
                 return;
 
@@ -482,7 +482,7 @@ angular.module('myApp.controllers', [])
         $scope.feedbackText = false;
         $scope.feedbackList = []
 
-        function Feedback(kind, selected, span, classification, variable, docList) { 
+        function Feedback(kind, selected, span, classification, variable, docList) {
             this.kind = kind;  // Text / doc / word tree
             this.selected = selected; // valid for text spans and wordtree
             this.span = span; // full text span in case of word tree ; only valid for word tree
@@ -502,7 +502,7 @@ angular.module('myApp.controllers', [])
                     selection.expand("word");
 
                     var text = selection.toString().trim();
-            
+
                     if (text) {
                         $scope.feedbackText = text;
                         return;
@@ -514,7 +514,7 @@ angular.module('myApp.controllers', [])
 
         function addFeedbackToList(feedback) {
             var properties = ["kind", "selected", "span", "classification", "variable", "docList"];
-            
+
             var newJSON = JSON.stringify(feedback, properties);
 
             var bDuplicate = false;
@@ -523,7 +523,7 @@ angular.module('myApp.controllers', [])
                 if (JSON.stringify(old, properties) == newJSON)
                     bDuplicate = true;
             });
-            
+
             if(!bDuplicate) {
                 $scope.feedbackList.push(feedback);
                 backend.putLogEvent("addFeedbackToList", JSON.stringify(feedback));
@@ -552,7 +552,7 @@ angular.module('myApp.controllers', [])
                 }
             }
             else {
-                showInfo("Feedback already present in the list!");   
+                showInfo("Feedback already present in the list!");
             }
         }
 
@@ -560,9 +560,9 @@ angular.module('myApp.controllers', [])
 
             var docClass = $scope.gridData[$scope.active.docIndex][$scope.active.variable].classification;
             var fClass = null;
-            
-            addFeedbackToList(new Feedback("TYPE_DOC", null, null, 
-                                        classification, $scope.active.variable, 
+
+            addFeedbackToList(new Feedback("TYPE_DOC", null, null,
+                                        classification, $scope.active.variable,
                                         $scope.gridData[$scope.active.docIndex].id));
         }
 
@@ -575,8 +575,8 @@ angular.module('myApp.controllers', [])
 
         $scope.addWordTreeFeedback = function(classification) {
             if ($scope.active.variable) {
-                addFeedbackToList(new Feedback("TYPE_WORDTREE", $scope.wordTreeData.feedbackText, 
-                                        $scope.wordTreeData.spanText, classification, 
+                addFeedbackToList(new Feedback("TYPE_WORDTREE", $scope.wordTreeData.feedbackText,
+                                        $scope.wordTreeData.spanText, classification,
                                         $scope.active.variable, $scope.wordTreeData.docList));
                 $scope.feedbackText = false;
             }
@@ -594,7 +594,7 @@ angular.module('myApp.controllers', [])
                 var i = feedback.conflictList.indexOf(hidden_id);
                 if (i > -1) {
                     feedback.conflictList.splice(i, 1);
-                } 
+                }
             });
         }
 
@@ -624,7 +624,7 @@ angular.module('myApp.controllers', [])
                     Would you still like to leave this page?";
             }
         }
-          
+
         /*
          * WordTree
          */
@@ -640,13 +640,13 @@ angular.module('myApp.controllers', [])
             $scope.setSearchFilter(null);
             $scope.wordTreeData.matches = null;
             $scope.tabs.wordTreeView = false;
-            backend.log("WordTree", "InActive");
+            backend.putLogEvent("WordTree", "InActive");
             $scope.clearWordTreeFeedback()
         }
 
         $scope.clearWordTreeFeedback = function() {
-            $scope.wordTreeData.feedbackText = null; 
-            $scope.wordTreeData.spanText = null;   
+            $scope.wordTreeData.feedbackText = null;
+            $scope.wordTreeData.spanText = null;
         }
 
         function searchWordTree(query) {
@@ -655,7 +655,7 @@ angular.module('myApp.controllers', [])
                 $scope.loadWordTree();
             });
         }
-        
+
         $scope.loadWordTree = function(){
             $scope.feedbackText = null;
             $scope.tabs.wordTreeView = true;
@@ -664,9 +664,9 @@ angular.module('myApp.controllers', [])
 
             if ($scope.active.dataset === undefined || query == "")
                 return
-            
+
             startLoading();
-            
+
             backend.getWordTree($scope.active.dataset, query.toLowerCase()).then(function(data) {
                 stopLoading();
 
@@ -677,9 +677,9 @@ angular.module('myApp.controllers', [])
                     $scope.setSearchFilter(null);
                     $scope.wordTreeData.feedbackText = null;
                     $scope.wordTreeData.matches = null;
-                    return;    
+                    return;
                 }
-                
+
                 $("#wordtree-container").empty();
 
                 data.classificationName = $rootScope.config.classificationName;
@@ -700,7 +700,7 @@ angular.module('myApp.controllers', [])
                 $scope.updateWordTreeClass();
 
             }, function() { alert("Unable to fetch wordtree."); stopLoading(); });
-        
+
         }
 
         $scope.setWordTreePercentage = function (matches, total) {
@@ -728,7 +728,7 @@ angular.module('myApp.controllers', [])
                 // $scope.setWordTreeHeight();
                 $("#wordtree-view").scrollTo('50%', {duration:1, axis:'x'});
             });
-            
+
             // var w = window.open();
             // w.document.write( $("#wordtree-view").html() );
             // w.document.close(); //finish "loading" the page
@@ -743,7 +743,7 @@ angular.module('myApp.controllers', [])
 
             $scope.loadVarStats(variable);
 
-            updateClassWordTree(variable, 
+            updateClassWordTree(variable,
                         $scope.variableData[variable]["docPositive"],
                         $scope.variableData[variable]["docNegative"]);
 
@@ -798,7 +798,7 @@ angular.module('myApp.controllers', [])
             var activeVariable = $scope.active.variable;
             var activeDocIndex = $scope.active.docIndex;
 
-            backend.putFeedback($scope.feedbackList, $scope.active.model, 
+            backend.putFeedback($scope.feedbackList, $scope.active.model,
                 $scope.active.dataset, override)
                 .then(function(data) {
 
@@ -807,12 +807,12 @@ angular.module('myApp.controllers', [])
                         backend.putLogEvent("putFeedback", "OK");
 
                         $scope.retrainData.message = data.latestModel;
-                        
+
                         assignDataToVars(data.gridVarData);
 
                         $scope.modelList = data.modelList;
                         $scope.active.model = data.latestModel;
-                        
+
                         $scope.retrainData.feedbackList = $.extend(true,[],$scope.feedbackList);
 
                         $scope.retrainData.status = "OK";
@@ -913,7 +913,7 @@ angular.module('myApp.controllers', [])
             backend.resetDB(empty)
                 .then(function(data) {
                     stopLoading();
-                    
+
                     $scope.clearFeedback();
                     startSession();
 
@@ -929,7 +929,7 @@ angular.module('myApp.controllers', [])
 
             if (!($scope.active.variable && $scope.gridData))
                 return options;
-            
+
             var feedbackHeader = null;
             var feedbackFunction = null;
             var optionsExtra = [];
@@ -947,7 +947,7 @@ angular.module('myApp.controllers', [])
                 feedbackFunction = $scope.addFeedbackDoc;
                 optionsExtra = [];
             }
-            
+
             if (feedbackHeader && feedbackFunction) {
                 options = options.concat([
                     [feedbackHeader, null],
@@ -961,7 +961,7 @@ angular.module('myApp.controllers', [])
                     }]
                 ], optionsExtra);
             }
-            
+
             return options;
         };
 
@@ -970,7 +970,7 @@ angular.module('myApp.controllers', [])
 
         //     if (!($scope.active.variable && $scope.gridData))
         //         return options;
-            
+
         //     var feedbackHeader = null;
         //     var feedbackFunction = null;
         //     var optionsExtra = [];
@@ -995,7 +995,7 @@ angular.module('myApp.controllers', [])
         //                         break;
         //                     }
         //                 }
-                     
+
         //                 //TODO: Use rangy here!
         //                 $scope.updateGrid($scope.active.variable, first, function(){
         //                     $("#grid-table").scrollTo($("#grid-table .selected"), 500)
@@ -1010,11 +1010,11 @@ angular.module('myApp.controllers', [])
         //                     });
 
         //                 });
-                        
+
         //             }]
         //         ];
         //     }
-        // 
+        //
         //     if (feedbackHeader && feedbackFunction) {
         //         options = options.concat([
         //             [feedbackHeader, null],
@@ -1063,7 +1063,7 @@ angular.module('myApp.controllers', [])
         $scope.keypressCallback = function($event, reverse) {
             if (! $($event.explicitOriginalTarget).is("input")){
                 $scope.gotoNextDoc(reverse);
-                $event.preventDefault();    
+                $event.preventDefault();
             }
         };
 
@@ -1075,7 +1075,7 @@ angular.module('myApp.controllers', [])
         function variableCompare(variable) {
             return function(a, b) {
                 var diff = a[variable].confidence - b[variable].confidence;
-                
+
                 if(diff === 0)
                     return parseInt(a.id) - parseInt(b.id);
                 else
@@ -1088,11 +1088,11 @@ angular.module('myApp.controllers', [])
                 return parseInt(a.id) - parseInt(b.id);
             }
         }
-        
+
         $scope.sortGridObject = function(variable, reverse) {
             if(!$scope.gridData)
                 return
-        
+
             if($rootScope.config.variables.indexOf(variable) !== -1) {
                 $scope.gridData.sort(variableCompare(variable));
                 $scope.active.sort.variable = variable;
@@ -1107,7 +1107,7 @@ angular.module('myApp.controllers', [])
                 $scope.active.sort.reverse = true;
             }
             else{
-                $scope.active.sort.reverse = false;   
+                $scope.active.sort.reverse = false;
             }
 
             $scope.updateGrid($scope.active.variable, $scope.active.docIndex, true);
@@ -1116,4 +1116,3 @@ angular.module('myApp.controllers', [])
 
         return true;
     }])
-        
