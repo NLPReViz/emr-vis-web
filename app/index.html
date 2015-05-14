@@ -174,7 +174,7 @@
                         cell-modified="doc[var].classification"
                         >
                       
-                      <div class="cell-feedback" ng-if="trackFeedback[$parent.$index][var]"></div>
+                      <div class="cell-feedback" ng-if="trackFeedback[doc.id][var]"></div>
                       
                       {{$root.config.classificationName[ doc[var].classification ]}}
 

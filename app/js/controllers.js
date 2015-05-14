@@ -123,7 +123,7 @@ angular.module('myApp.controllers', [])
 
             $scope.trackFeedback = new Array();
             for(var i=0; i<$scope.gridData.length; i++){
-                $scope.trackFeedback[i] = new Object();
+                $scope.trackFeedback[$scope.gridData[i].id] = new Object();
             }
         }
 
@@ -534,21 +534,14 @@ angular.module('myApp.controllers', [])
                     feedback.docList.forEach(function(doc){
                         if ($scope.feedbackStats[feedback.variable].indexOf(doc) == -1) {
                             $scope.feedbackStats[feedback.variable].push(doc);
-
-                            //TODO: This is inefficient
-                            for(var index=0; index<$scope.gridData.length; index++){
-                                if($scope.gridData[index].id == doc){
-                                    $scope.trackFeedback[index][feedback.variable] = true;
-                                    break;
-                                }
-                            }
+                                $scope.trackFeedback[doc][feedback.variable] = true;
                         }
                     });
                 }
                 else{
                     if ($scope.feedbackStats[feedback.variable].indexOf(feedback.docList) == -1) {
                         $scope.feedbackStats[feedback.variable].push(feedback.docList);
-                        $scope.trackFeedback[$scope.active.docIndex][feedback.variable] = true;
+                            $scope.trackFeedback[$scope.gridData[$scope.active.docIndex].id][feedback.variable] = true;
                     }
                 }
             }
