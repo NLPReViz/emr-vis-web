@@ -178,7 +178,7 @@
                       
                       {{$root.config.classificationName[ doc[var].classification ]}}
 
-                      <span class="cell-visited glyphicon glyphicon-asterisk" ng-class="{hidden: trackVisited[$parent.$index][var] != true}"></span>
+                      <span class="cell-visited glyphicon glyphicon-asterisk" ng-class="{hidden: trackVisited[doc.id][var] != true}"></span>
                       <!-- <span class="cellfeedback glyphicon glyphicon-pencil" ng-class="{hidden: trackFeedback[$parent.$index][var] != true}"></span> -->
                     </div>
               </div>

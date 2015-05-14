@@ -233,7 +233,8 @@ angular.module('myApp.controllers', [])
         $scope.updateGrid = function(variable, activeDocIndex, bScroll) {
             // console.log(variable, activeDoc);
 
-            trackVisited($scope.active.docIndex, $scope.active.variable, true); //Update previously open
+            trackVisited($scope.gridData[$scope.active.docIndex].id, 
+                            $scope.active.variable, true); //Update previously open
 
             if(variable != $scope.active.variable) {
               $scope.active.variable = variable;
@@ -279,8 +280,8 @@ angular.module('myApp.controllers', [])
             }
         }
 
-        function trackVisited(index, variable, value) {
-            $scope.trackVisited[index][variable] = value; //Update previously open
+        function trackVisited(docId, variable, value) {
+            $scope.trackVisited[docId][variable] = value; //Update previously open
         }
 
         $scope.clearVisited = function(){
@@ -289,7 +290,7 @@ angular.module('myApp.controllers', [])
 
             $scope.trackVisited = new Array();
             for(var i=0; i<$scope.gridData.length; i++){
-                $scope.trackVisited[i] = new Object();
+                $scope.trackVisited[$scope.gridData[i].id] = new Object();
             }
         }
 
