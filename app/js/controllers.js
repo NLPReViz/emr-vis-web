@@ -30,7 +30,7 @@ angular.module('myApp.controllers', [])
             "asa": "asa",
             "biopsy": "biopsy",
             "cecum": "cecum",
-            "ileo-cecal-valve": "ileo-cecal-valve",
+            "ileo-cecal-valve": "ileocecal-valve",
             "indication-type": "indication-type",
             "informed-consent": "informed-consent",
             "nursing-report": "nursing-report",
