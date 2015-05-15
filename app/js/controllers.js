@@ -80,12 +80,13 @@ angular.module('myApp.controllers', [])
             }
 
             if(confirm) {
+                backend.putLogEvent("trackVisited", JSON.stringify($scope.trackVisited));
+                backend.putLogEvent("trackFeedback", JSON.stringify($scope.trackFeedback));
+                backend.putLogEvent("gridData", JSON.stringify($scope.gridData));
+
                 $scope.clearFeedback();
                 backend.logout();
                 $scope.active.username = null;
-
-                backend.putLogEvent("trackVisited", JSON.stringify($scope.trackVisited));
-                backend.putLogEvent("trackFeedback", JSON.stringify($scope.trackFeedback));
             }
         }
 
@@ -108,6 +109,8 @@ angular.module('myApp.controllers', [])
                 setModelAndDataset($scope.modelList[$scope.modelList.length - 1].name,
                                    "feedbackIDList");
             }, function() { alert("Could not retrieve model list!"); stopLoading(); });
+
+            backend.putLogEvent("startSession", "OK");
         }
 
         /*
