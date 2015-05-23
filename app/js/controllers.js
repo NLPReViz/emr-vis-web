@@ -824,7 +824,7 @@ angular.module('myApp.controllers', [])
                     }
                     else if(data.status == "Error") {
 
-                        backend.putLogEvent("putFeedback", "Error: " + data.errorList);
+                        backend.putLogEvent("putFeedback", "Error");
 
                         $scope.retrainData.message = data.errorList;
                         $scope.retrainData.status = "Error";
@@ -833,7 +833,7 @@ angular.module('myApp.controllers', [])
                     }
                     else if(data.status == "Warning") {
 
-                        backend.putLogEvent("putFeedback", "Warning: " + data.warningList);
+                        backend.putLogEvent("putFeedback", "Warning");
 
                         $scope.retrainData.message = data.warningList;
                         $scope.retrainData.status = "Warning";
