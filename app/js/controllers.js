@@ -499,8 +499,8 @@ angular.module('myApp.controllers', [])
             this.$hidden_id = null;
 
             this.toString = function(){
-                return this.classification + ", " + this.variable + ", [" + 
-                        this.docList + "], " +this.status + ", [" +this.conflictList+"]";
+                return this.classification + "--" + this.variable + "--" + 
+                        this.docList + "--" +this.status + "--" +this.conflictList;
             }
         }
 
