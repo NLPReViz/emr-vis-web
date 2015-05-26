@@ -80,9 +80,9 @@ angular.module('myApp.controllers', [])
             }
 
             if(confirm) {
-                // backend.putLogEvent("trackVisited", JSON.stringify($scope.trackVisited));
-                // backend.putLogEvent("trackFeedback", JSON.stringify($scope.trackFeedback));
-                // backend.putLogEvent("gridData", JSON.stringify($scope.gridData));
+                backend.putLogEvent("trackVisited", JSON.stringify($scope.trackVisited));
+                backend.putLogEvent("trackFeedback", JSON.stringify($scope.trackFeedback));
+                backend.putLogEvent("gridData", JSON.stringify($scope.gridData));
 
                 $scope.clearFeedback();
                 backend.logout();
@@ -497,12 +497,6 @@ angular.module('myApp.controllers', [])
             this.conflictList = [];
 
             this.$hidden_id = null;
-
-            this.toString = function(){
-                return this.kind + "--" + this.selected + "--" + this.span + "--" + 
-                        this.classification + "--" + this.variable + "--" + 
-                        this.docList + "--" +this.status + "--" +this.conflictList;
-            }
         }
 
         $scope.setFeedbackText = function(){
@@ -536,7 +530,7 @@ angular.module('myApp.controllers', [])
 
             if(!bDuplicate) {
                 $scope.feedbackList.push(feedback);
-                backend.putLogEvent("addFeedbackToList", feedback.toString());
+                backend.putLogEvent("addFeedbackToList", JSON.stringify(feedback));
                 showInfo("Feedback added to the list.");
 
                 if(Array.isArray(feedback.docList)){
@@ -589,7 +583,7 @@ angular.module('myApp.controllers', [])
 
             var hidden_id = $scope.feedbackList[index].$hidden_id;
 
-            backend.putLogEvent("removeFeedback", $scope.feedbackList[index].toString());
+            backend.putLogEvent("removeFeedback", JSON.stringify($scope.feedbackList[index]));
 
             $scope.feedbackList.splice(index, 1);
 
@@ -824,7 +818,7 @@ angular.module('myApp.controllers', [])
                     }
                     else if(data.status == "Error") {
 
-                        backend.putLogEvent("putFeedback", "Error");
+                        backend.putLogEvent("putFeedback", "Error: " + JSON.stringify(data.errorList));
 
                         $scope.retrainData.message = data.errorList;
                         $scope.retrainData.status = "Error";
@@ -833,7 +827,7 @@ angular.module('myApp.controllers', [])
                     }
                     else if(data.status == "Warning") {
 
-                        backend.putLogEvent("putFeedback", "Warning");
+                        backend.putLogEvent("putFeedback", "Warning: " + JSON.stringify(data.warninigList));
 
                         $scope.retrainData.message = data.warningList;
                         $scope.retrainData.status = "Warning";
