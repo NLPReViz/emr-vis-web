@@ -827,7 +827,7 @@ angular.module('myApp.controllers', [])
                     }
                     else if(data.status == "Warning") {
 
-                        backend.putLogEvent("putFeedback", "Warning: " + JSON.stringify(data.warninigList));
+                        backend.putLogEvent("putFeedback", "Warning: " + JSON.stringify(data.warningList));
 
                         $scope.retrainData.message = data.warningList;
                         $scope.retrainData.status = "Warning";
