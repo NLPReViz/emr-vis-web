@@ -261,7 +261,7 @@ angular.module('myApp.controllers', [])
 
             //Change view to docView
             $scope.tabs.docView = true;
-            backend.putLogEvent("docView", "Active");
+            // backend.putLogEvent("docView", "Active");
         };
 
 
@@ -768,6 +768,7 @@ angular.module('myApp.controllers', [])
                 }
             }
 
+            backend.putLogEvent("wordTreeLoadDoc", first);
             $scope.updateGrid($scope.active.variable, first, true);
         }
 
