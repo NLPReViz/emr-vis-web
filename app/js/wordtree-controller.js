@@ -63,11 +63,15 @@ function makeWordTree(data){
     WordTreeData.classificationName = data.classificationName;
     WordTreeData.container = data.container;
     WordTreeData.popup = data.popup;
+    WordTreeData.sentences = new Object();
 
     var detail = 100;
 
     for(var i = 0; i < data.lefts.length; i++){
         data.lefts[i].sentence = data.lefts[i].sentence.reverse();
+        WordTreeData.sentences[data.lefts[i].id] = {"doc": data.lefts[i].doc,
+                                                    "left": data.lefts[i].sentence, 
+                                                    "right": data.rights[i].sentence}
     }
 
     var rightTree = makeWordTreeDataStructure(data.rights, data.query, detail, "right");
@@ -588,6 +592,23 @@ function wordTreeNodeClick(node, d, orientation, root){
     else{
         //
         toggle(d);
+        
+        var check = orientation == "left" ? "right" : "left";
+        var filter_words = [];
+        var depth = 1;
+
+        WordTreeData.vis.selectedNodes[check].forEach(function(node){
+          while(depth < node.depth){
+            filter_words.push("");
+            depth++;
+          }
+
+          filter_words.push(node.key);
+          depth++;
+        });
+        
+        var filter_length = filter_words.length;
+
         if((d.depth > WordTreeData.vis.filterDepth && orientation == WordTreeData.vis.filterOrientation) || orientation != WordTreeData.vis.filterOrientation){
             // sub-filtering in progress
             if(d.depth > WordTreeData.vis.filterDepth)
@@ -598,19 +619,49 @@ function wordTreeNodeClick(node, d, orientation, root){
               WordTreeData.vis.orientationFilterDepth[orientation] = d.depth;
               WordTreeData.vis.selectedNodes[orientation].push(d);
             }
-            
+
             var intersection = [];
             d.ids.forEach(function(id){
-                if(WordTreeData.vis.selectedIDs.contains(id))
-                    intersection.push(id);
+                if(WordTreeData.vis.selectedIDs.contains(id)) {
+                  
+                  if(WordTreeData.sentences[id][check].length < filter_length)
+                    return;
+                  
+                  for (var i=0; i < filter_length; i++) {
+                    if (filter_words[i] == "")
+                      continue;
+
+                    if(WordTreeData.sentences[id][check][i] != filter_words[i])
+                      return
+                  }
+                  
+                  intersection.push(id);
+                }
             });
 
             WordTreeData.vis.selectedIDs = intersection;
             WordTreeData.vis.filterOrientation = orientation;
 
         }else if(d.depth < WordTreeData.vis.filterDepth && orientation == WordTreeData.vis.filterOrientation){
+
             // backtracking up the tree
-            WordTreeData.vis.selectedIDs = d.ids;
+            WordTreeData.vis.selectedIDs = [];
+
+            d.ids.forEach(function(id){
+              if(WordTreeData.sentences[id][check].length < filter_length)
+                return;
+                  
+              for (var i=0; i < filter_length; i++) {
+                if (filter_words[i] == "")
+                  continue;
+
+                if(WordTreeData.sentences[id][check][i] != filter_words[i])
+                  return
+              }
+              
+              WordTreeData.vis.selectedIDs.push(id);
+            });
+
             // WordTreeData.vis.selectedNodeIDs = {left:[], right:[]};
             // WordTreeData.vis.selectedNodeIDs[orientation] = [d.id];
             var intersection = [];
@@ -627,23 +678,29 @@ function wordTreeNodeClick(node, d, orientation, root){
         }
 
         //Update filter docs
-        var leftMost = WordTreeData.vis.selectedNodes.left[WordTreeData.vis.selectedNodes.left.length - 1];
-        var rightMost = WordTreeData.vis.selectedNodes.right[WordTreeData.vis.selectedNodes.right.length - 1];
+        // var leftMost = WordTreeData.vis.selectedNodes.left[WordTreeData.vis.selectedNodes.left.length - 1];
+        // var rightMost = WordTreeData.vis.selectedNodes.right[WordTreeData.vis.selectedNodes.right.length - 1];
 
-        if (leftMost && rightMost) {
-          intersection = [];
-          leftMost.docs.forEach(function (doc) {
-              if (rightMost.docs.contains(doc))
-                intersection.push(doc);
-          });
-          WordTreeData.filterDocs = intersection;  
-        }
-        else if(leftMost) {
-          WordTreeData.filterDocs = leftMost.docs;
-        }
-        else {
-          WordTreeData.filterDocs = rightMost.docs;
-        }
+        // if (leftMost && rightMost) {
+        //   intersection = [];
+        //   leftMost.docs.forEach(function (doc) {
+        //       if (rightMost.docs.contains(doc))
+        //         intersection.push(doc);
+        //   });
+        //   WordTreeData.filterDocs = intersection;  
+        // }
+        // else if(leftMost) {
+        //   WordTreeData.filterDocs = leftMost.docs;
+        // }
+        // else {
+        //   WordTreeData.filterDocs = rightMost.docs;
+        // }
+        WordTreeData.filterDocs = [];
+        WordTreeData.vis.selectedIDs.forEach(function(id) {
+          doc = WordTreeData.sentences[id].doc;
+          if(!WordTreeData.filterDocs.contains(doc))
+            WordTreeData.filterDocs.push(doc);
+        });
     }
 
     // Apply the filter to the other tree, so nodes in the sentences that 
