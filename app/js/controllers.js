@@ -108,7 +108,11 @@ angular.module('myApp.controllers', [])
 
                 setModelAndDataset($scope.modelList[$scope.modelList.length - 1].name,
                                    "feedbackIDList");
-            }, function() { alert("Could not retrieve model list!"); stopLoading(); });
+            }, function() { 
+                backend.putLogEvent("Error", "Could not retrieve model list!");
+                alert("Could not retrieve model list!"); 
+                stopLoading(); 
+            });
 
             backend.putLogEvent("startSession", "OK");
         }
@@ -157,7 +161,11 @@ angular.module('myApp.controllers', [])
 
                 stopLoading();
 
-            }, function() { alert("Could not load backend data!"); stopLoading(); });
+            }, function() { 
+                backend.putLogEvent("Error", "Could not load backend data!");
+                alert("Could not load backend data!"); 
+                stopLoading(); 
+            });
 
         }
 
@@ -606,8 +614,10 @@ angular.module('myApp.controllers', [])
 
         $scope.confirmFeedback = function(override) {
 
-            if($scope.retrainData.loading == true)
+            if($scope.retrainData.loading == true){
+                backend.putLogEvent("Error", "Re-training already in process!");    
                 alert("Re-training already in process!");
+            }
             else {
                 setTimeout(function() {
                     $scope.sendFeedback(override);
@@ -662,6 +672,7 @@ angular.module('myApp.controllers', [])
             if ($scope.active.dataset === undefined || query == "")
                 return
 
+            backend.putLogEvent("getWordTree", query);
             startLoading();
 
             backend.getWordTree($scope.active.dataset, query.toLowerCase()).then(function(data) {
@@ -674,6 +685,9 @@ angular.module('myApp.controllers', [])
                     $scope.setSearchFilter(null);
                     $scope.wordTreeData.feedbackText = null;
                     $scope.wordTreeData.matches = null;
+
+                    backend.putLogEvent("getWordTree", "No matches found");
+
                     return;
                 }
 
@@ -683,7 +697,6 @@ angular.module('myApp.controllers', [])
                 data.container = "#wordtree-container";
                 data.popup = "#wordtree-popup";
 
-                backend.putLogEvent("getWordTree", query);
                 makeWordTree(data);
 
                 $scope.setWordTreePercentage(data.matchedList.length, data.total);
@@ -696,7 +709,11 @@ angular.module('myApp.controllers', [])
                 $scope.setWordTreeFeedback(data.query, data.query, data.matchedList)
                 $scope.updateWordTreeClass();
 
-            }, function() { alert("Unable to fetch wordtree."); stopLoading(); });
+            }, function() { 
+                backend.putLogEvent("Error", "Unable to fetch wordtree.");
+                alert("Unable to fetch wordtree."); 
+                stopLoading(); 
+            });
 
         }
 
@@ -711,7 +728,7 @@ angular.module('myApp.controllers', [])
             $scope.wordTreeData.spanText = span.replace(/\s*\.$/, "");
             $scope.wordTreeData.docList = docs;
 
-            // backend.putLogEvent("setWordTreeFeedback", $scope.wordTreeData.feedbackText);
+            backend.putLogEvent("setWordTreeFeedback", {"text":selected, "span":span});
 
             $scope.setSearchFilter(docs);
             findWordTreeUsage();
@@ -768,7 +785,7 @@ angular.module('myApp.controllers', [])
                 }
             }
 
-            backend.putLogEvent("wordTreeLoadDoc", first);
+            backend.putLogEvent("wordTreeLoadDoc", $scope.gridData[first].id);
             $scope.updateGrid($scope.active.variable, first, true);
         }
 
@@ -836,12 +853,17 @@ angular.module('myApp.controllers', [])
                         setConflictList(data.feedbackList);
                     }
                     else{
+                        backend.putLogEvent("Error", "Invalid response for putfeedback");
                         alert("Sorry, something went wrong. Please report this.");
                     }
 
                     $scope.retrainData.loading = false;
 
-                }, function() { alert("Unable to send feedback."); $scope.retrainData.loading = false; });
+                }, function() { 
+                    backend.putLogEvent("Error", "Unable to send feedback.");
+                    alert("Unable to send feedback."); 
+                    $scope.retrainData.loading = false; 
+                });
         };
 
         function setConflictList(list) {
@@ -915,7 +937,10 @@ angular.module('myApp.controllers', [])
                     $scope.clearFeedback();
                     startSession();
 
-                }, function() { alert("Oops. Something went wrong!"); stopLoading(); });
+                }, function() { 
+                    alert("Oops. Something went wrong!"); 
+                    stopLoading(); 
+                });
         }
 
         /*
