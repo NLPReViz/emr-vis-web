@@ -83,7 +83,7 @@ angular.module('myApp.directives', [])
 
                 scope.highlightTerms = function(posTerms, negTerms) {
 
-                    element.text(scope.data);
+                    element.text(scope.data.replace(/</g,' &lt; ').replace(/>/g,' &gt; '));
 
                     $(element).highlight(/S_O_H[\s\S]*E_O_H/, "dim") // header
                         .highlight(/De-ID.*reserved./i, "dim") //copright
