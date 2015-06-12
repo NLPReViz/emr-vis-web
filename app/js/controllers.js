@@ -595,18 +595,7 @@ angular.module('myApp.controllers', [])
             backend.putLogEvent("removeFeedback", JSON.stringify($scope.feedbackList[index]));
 
             var feedback = $scope.feedbackList.splice(index, 1)[0];
-            if(Array.isArray(feedback.docList)){
-                feedback.docList.forEach(function(doc){
-                    $scope.trackFeedback[doc][feedback.variable] -= 1;
-                    if ($scope.trackFeedback[doc][feedback.variable] == 0)
-                        $scope.feedbackStats[feedback.variable].pop(doc);
-                });
-            }
-            else{
-                $scope.trackFeedback[feedback.docList][feedback.variable] -= 1;
-                if ($scope.trackFeedback[feedback.docList][feedback.variable] == 0)
-                    $scope.feedbackStats[feedback.variable].pop(feedback.docList);
-            }
+            clearFeedbackTrack(feedback);
 
             $scope.feedbackList.forEach(function(feedback) {
                 var i = feedback.conflictList.indexOf(hidden_id);
@@ -622,20 +611,24 @@ angular.module('myApp.controllers', [])
 
             while($scope.feedbackList.length > 0) {
                 var feedback = $scope.feedbackList.pop();
-                if(Array.isArray(feedback.docList)){
+                clearFeedbackTrack(feedback);
+            }
+        };
+
+        function clearFeedbackTrack(feedback){
+            if(Array.isArray(feedback.docList)){
                     feedback.docList.forEach(function(doc){
                         $scope.trackFeedback[doc][feedback.variable] -= 1;
                         if ($scope.trackFeedback[doc][feedback.variable] == 0)
                             $scope.feedbackStats[feedback.variable].pop(doc);
                     });
-                }
-                else{
-                    $scope.trackFeedback[feedback.docList][feedback.variable] -= 1;
-                    if ($scope.trackFeedback[feedback.docList][feedback.variable] == 0)
-                        $scope.feedbackStats[feedback.variable].pop(feedback.docList);
-                }
             }
-        };
+            else{
+                $scope.trackFeedback[feedback.docList][feedback.variable] -= 1;
+                if ($scope.trackFeedback[feedback.docList][feedback.variable] == 0)
+                    $scope.feedbackStats[feedback.variable].pop(feedback.docList);
+            }
+        }
 
         $scope.confirmFeedback = function(override) {
 
