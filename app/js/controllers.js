@@ -131,6 +131,9 @@ angular.module('myApp.controllers', [])
             $scope.trackFeedback = new Array();
             for(var i=0; i<$scope.gridData.length; i++){
                 $scope.trackFeedback[$scope.gridData[i].id] = new Object();
+                $rootScope.config.variables.forEach(function(variable) {
+                        $scope.trackFeedback[$scope.gridData[i].id][variable] = 0;
+                });
             }
         }
 
@@ -543,17 +546,15 @@ angular.module('myApp.controllers', [])
 
                 if(Array.isArray(feedback.docList)){
                     feedback.docList.forEach(function(doc){
-                        if ($scope.feedbackStats[feedback.variable].indexOf(doc) == -1) {
-                            $scope.feedbackStats[feedback.variable].push(doc);
-                                $scope.trackFeedback[doc][feedback.variable] = true;
-                        }
+                        if ($scope.feedbackStats[feedback.variable].indexOf(doc) == -1)
+                            $scope.feedbackStats[feedback.variable].push(doc)
+                        $scope.trackFeedback[doc][feedback.variable] += 1;
                     });
                 }
                 else{
-                    if ($scope.feedbackStats[feedback.variable].indexOf(feedback.docList) == -1) {
+                    if ($scope.feedbackStats[feedback.variable].indexOf(feedback.docList) == -1)
                         $scope.feedbackStats[feedback.variable].push(feedback.docList);
-                            $scope.trackFeedback[$scope.gridData[$scope.active.docIndex].id][feedback.variable] = true;
-                    }
+                    $scope.trackFeedback[$scope.gridData[$scope.active.docIndex].id][feedback.variable] += 1;
                 }
             }
             else {
@@ -593,7 +594,19 @@ angular.module('myApp.controllers', [])
 
             backend.putLogEvent("removeFeedback", JSON.stringify($scope.feedbackList[index]));
 
-            $scope.feedbackList.splice(index, 1);
+            var feedback = $scope.feedbackList.splice(index, 1)[0];
+            if(Array.isArray(feedback.docList)){
+                feedback.docList.forEach(function(doc){
+                    $scope.trackFeedback[doc][feedback.variable] -= 1;
+                    if ($scope.trackFeedback[doc][feedback.variable] == 0)
+                        $scope.feedbackStats[feedback.variable].pop(doc);
+                });
+            }
+            else{
+                $scope.trackFeedback[feedback.docList][feedback.variable] -= 1;
+                if ($scope.trackFeedback[feedback.docList][feedback.variable] == 0)
+                    $scope.feedbackStats[feedback.variable].pop(feedback.docList);
+            }
 
             $scope.feedbackList.forEach(function(feedback) {
                 var i = feedback.conflictList.indexOf(hidden_id);
@@ -608,7 +621,19 @@ angular.module('myApp.controllers', [])
             backend.putLogEvent("clearFeedback", "");
 
             while($scope.feedbackList.length > 0) {
-                $scope.feedbackList.pop();
+                var feedback = $scope.feedbackList.pop();
+                if(Array.isArray(feedback.docList)){
+                    feedback.docList.forEach(function(doc){
+                        $scope.trackFeedback[doc][feedback.variable] -= 1;
+                        if ($scope.trackFeedback[doc][feedback.variable] == 0)
+                            $scope.feedbackStats[feedback.variable].pop(doc);
+                    });
+                }
+                else{
+                    $scope.trackFeedback[feedback.docList][feedback.variable] -= 1;
+                    if ($scope.trackFeedback[feedback.docList][feedback.variable] == 0)
+                        $scope.feedbackStats[feedback.variable].pop(feedback.docList);
+                }
             }
         };
 
