@@ -233,6 +233,24 @@
 
 
               </form>
+
+               <!-- Wordtree Feedback -->
+                <div ng-if="tabs.wordTreeView && wordTreeData.feedbackText" class="alert alert-warning wordtree-feedback">
+                  <span ng-if="appInfo">
+                    {{appInfo}}
+                  </span>
+                  <span ng-if="!appInfo">
+                    <strong>"{{wordTreeData.feedbackText|truncate:20}}"</strong> indicates 
+                    <select ng-model="active.variable" 
+                            ng-options="$root.config.variableMapping[var] for var in $root.config.variables" 
+                            ng-change="updateWordTreeClass()"></select> 
+                    to be: 
+                      <a ng-click="addWordTreeFeedback('positive')">{{$root.config.classificationName['positive']}}</a> | 
+                      <a ng-click="addWordTreeFeedback('negative')">{{$root.config.classificationName['negative']}}</a>
+                      &nbsp; <i class="search-clear glyphicon glyphicon-remove-circle" ng-click="clearWordTreeFeedback()"></i>
+                  </span>
+                </div>
+                
             </div>
           </div>
 
@@ -346,7 +364,7 @@
                 <a ng-click="addFeedbackText('positive')">{{$root.config.classificationName['positive']}}</a> | 
                 <a ng-click="addFeedbackText('negative')">{{$root.config.classificationName['negative']}}</a>
             </span>
-            <span ng-if="!feedbackText && !wordTreeData.feedbackText" >
+            <span ng-if="!feedbackText">
               <select ng-model="active.variable" 
                       ng-options="$root.config.variableMapping[var] for var in $root.config.variables" 
                       ng-change="updateGrid(active.variable, active.docIndex)"></select> 
@@ -357,22 +375,6 @@
                 <a ng-click="addFeedbackDoc('negative')">{{$root.config.classificationName['negative']}}</a></span>
           </span>
         </div>
-        <div ng-if="!feedbackText && tabs.wordTreeView && wordTreeData.feedbackText" class="alert alert-warning report-feedback">
-          <span ng-if="appInfo">
-            {{appInfo}}
-          </span>
-          <span ng-if="!appInfo">
-            <strong>"{{wordTreeData.feedbackText|truncate:20}}"</strong> indicates 
-            <select ng-model="active.variable" 
-                    ng-options="$root.config.variableMapping[var] for var in $root.config.variables" 
-                    ng-change="updateWordTreeClass()"></select> 
-            to be: 
-              <a ng-click="addWordTreeFeedback('positive')">{{$root.config.classificationName['positive']}}</a> | 
-              <a ng-click="addWordTreeFeedback('negative')">{{$root.config.classificationName['negative']}}</a>
-              &nbsp; <i class="search-clear glyphicon glyphicon-remove-circle" ng-click="clearWordTreeFeedback()"></i>
-          </span>
-        </div>
-
         <tabset>
 
           <!-- Report view -->

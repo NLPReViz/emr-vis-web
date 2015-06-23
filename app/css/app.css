@@ -16,6 +16,9 @@ body {
  * Global add-ons
  */
 
+
+.btn-default { box-shadow: none; }
+
 .sub-header { padding-bottom: 10px; border-bottom: 1px solid #eee; }
 
 .navbar-form { padding-right: 0px; }
@@ -1061,6 +1064,18 @@ body {
     padding-top: 15px;
     margin-top: 4px;
     /*box-shadow: 2px 2px 2px 0 rgba(0, 0, 0, 0.31);*/
+}
+
+.wordtree-feedback {
+    display: block;
+    font-size: 14px;
+    left: 0;
+    margin-top: 4px;
+    padding: 5px;
+    position: absolute;
+    top: -4px;
+    width: calc(100% - 15px);
+    z-index: 1510;
 }
 
 .report-feedback select{
