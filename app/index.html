@@ -224,7 +224,7 @@
                 <input type="text" id="wordtree-input" class="search-input form-control " placeholder="WordTree search&hellip;" required>
 
                 <span class="input-group-addon search-clear-addon">
-                  <i class="search-clear glyphicon glyphicon-remove-circle" ng-click="clearWordTree(true)"></i>
+                  <i class="search-clear glyphicon glyphicon-remove-circle" ng-click="clearWordTree()"></i>
                 </span>
 
                 <span class="input-group-btn">
@@ -247,10 +247,10 @@
                     to be: 
                       <a ng-click="addWordTreeFeedback('positive')">{{$root.config.classificationName['positive']}}</a> | 
                       <a ng-click="addWordTreeFeedback('negative')">{{$root.config.classificationName['negative']}}</a>
-                      &nbsp; <i class="search-clear glyphicon glyphicon-remove-circle" ng-click="clearWordTreeFeedback()"></i>
+                      &nbsp; <i class="search-clear glyphicon glyphicon-remove-circle" ng-click="clearWordTree()"></i>
                   </span>
                 </div>
-                
+
             </div>
           </div>
 
