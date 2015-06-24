@@ -240,7 +240,7 @@
                     {{appInfo}}
                   </span>
                   <span ng-if="!appInfo">
-                    <strong>"{{wordTreeData.feedbackText|truncate:20}}"</strong> indicates 
+                    <strong>"{{wordTreeData.feedbackText|truncate:15}}"</strong> indicates 
                     <select ng-model="active.variable" 
                             ng-options="$root.config.variableMapping[var] for var in $root.config.variables" 
                             ng-change="updateWordTreeClass()"></select> 
