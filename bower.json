@@ -1,6 +1,6 @@
 {
   "name": "emr-vis-web",
-  "description": "A starter project for AngularJS",
+  "description": "emr-vis-web is the web port for the emr-vis-nlp project. It provides the frontend view for emr-nlp-server.",
   "version": "0.0.0",
   "homepage": "https://github.com/trivedigaurav/emr-vis-web",
   "private": true,
