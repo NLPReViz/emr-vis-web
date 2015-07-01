@@ -54,7 +54,7 @@
       <a class="navbar-brand visible-xs">EMR VisWeb</a>
     </div>
     <nav class="hidden-xs">
-      <ul class="nav navbar-nav" ng-click="modal.toggle()" id="main-menu">
+      <ul class="nav navbar-nav" ng-click="modal.toggle()">
         <a href="#top" role="button" class="navbar-brand">
           EMR VisWeb
         </a>
@@ -65,6 +65,21 @@
         <li>
           <a class="dropdown-toggle">MODEL <i class="glyphicon glyphicon-chevron-down"></i></a> 
           <span>{{active.model | truncate:15}}</span>
+        </li>
+      </ul>
+
+      <ul class="nav navbar-nav">
+        <li>
+            <form class="input-group filter-docs" role="search">
+                <span class="input-group-addon">Doc #</span>
+                <input class="form-control search-input" 
+                      ng-class="{'search-input-active': searchQuery}"
+                      placeholder="Filter docs&hellip;" type="search" 
+                      ng-model="searchQuery" ng-blur="loadVarStats(active.variable)"/>
+                <span ng-class="{'search-input-active': searchQuery}" class="input-group-addon search-clear-addon">
+                  <i class="search-clear glyphicon glyphicon-remove-circle" ng-click="setSearchFilter(null)"></i>
+                </span>
+            </form>
         </li>
       </ul>
 
@@ -196,30 +211,17 @@
         <div id="sidebar-bottom">
 
           <div class="row" id="sidebar-bottom-top">
-            <div class="col-md-4">
-              <form class="input-group" role="search">
-                <span class="input-group-addon">Doc #</span>
-                <input id="search-input" class="search-input form-control" 
-                      ng-class="{'search-input-active': searchQuery}"
-                      placeholder="Filter docs&hellip;" type="search" 
-                      ng-model="searchQuery" ng-blur="loadVarStats(active.variable)"/>
-                <span ng-class="{'search-input-active': searchQuery}" class="input-group-addon search-clear-addon">
-                  <i class="search-clear glyphicon glyphicon-remove-circle" ng-click="setSearchFilter(null)"></i>
-                </span>
-              </form>
-            </div>
-
             <!-- WordTree view -->
-            <div class="col-md-8" id="wordtree-search">
+            <div class="col-md-4" id="wordtree-search">
               <form class="input-group form-group" id="wordtree-search" ng-submit="loadWordTree()">
                 
-                <span class="input-group-addon">
+                <!-- <span class="input-group-addon">
                   Variable &nbsp;
                   <select ng-model="active.variable"
                   ng-options="$root.config.variableMapping[var] for var in $root.config.variables"
                   ng-change="updateWordTreeClass()"
                   ></select>
-                </span>
+                </span> -->
 
                 <input type="text" id="wordtree-input" class="search-input form-control " placeholder="WordTree search&hellip;" required>
 
@@ -234,12 +236,12 @@
 
               </form>
 
-               <!-- Wordtree Feedback -->
+            </div>
+
+            <div class="col-md-8">
+                <!-- Wordtree Feedback -->
                 <div ng-if="tabs.wordTreeView && wordTreeData.feedbackText" class="alert alert-warning wordtree-feedback">
-                  <span ng-if="appInfo">
-                    {{appInfo}}
-                  </span>
-                  <span ng-if="!appInfo">
+                  <span>
                     <strong>"{{wordTreeData.feedbackText|truncate:15}}"</strong> indicates 
                     <select ng-model="active.variable" 
                             ng-options="$root.config.variableMapping[var] for var in $root.config.variables" 
@@ -250,8 +252,12 @@
                       &nbsp; <i class="search-clear glyphicon glyphicon-remove-circle" ng-click="clearWordTree()"></i>
                   </span>
                 </div>
-
+                <alert ng-if="!tabs.wordTreeView && !wordTreeData.feedbackText" type="default" class="alert alert-info wordtree-feedback">
+                    <span class="glyphicon glyphicon-arrow-left"></span> &nbsp;
+                    <em>Tip:</em> Use WordTree to explore common phrases and give feedback. 
+                </alert>
             </div>
+
           </div>
 
           <!-- Variable details -->

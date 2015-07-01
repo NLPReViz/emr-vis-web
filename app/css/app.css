@@ -41,6 +41,14 @@ body {
     padding: 5px;
 }
 
+.filter-docs{
+    margin-top:8px;
+}
+
+.filter-docs .search-input {
+    width: 260px!important;
+}
+
 .search-input, .search-input:focus {
     border-color: #ccc;
     box-shadow: none;
@@ -133,8 +141,6 @@ body {
 }
 
 .navbar-nav:hover li a { color: #333; }
-
-#main-menu { width: 380px; }
 
 .unselectable {
     -webkit-touch-callout: none;
@@ -1057,8 +1063,8 @@ body {
     display: block;
     position: fixed;
 
-    top: -8px;
-    left: 575px;
+    top: -6px;
+    left: 701px;
 
     padding: 5px;
     padding-top: 15px;
@@ -1071,7 +1077,7 @@ body {
     font-size: 14px;
     left: 0;
     margin-top: 4px;
-    padding: 5px;
+    padding: 6px;
     position: absolute;
     top: -4px;
     width: calc(100% - 15px);
@@ -1129,8 +1135,6 @@ body {
 /*
  * WordTree
  */
-
-#wordtree-search { padding-left: 0; }
 
 .wordtree-search-control { height: 36px;}
 
