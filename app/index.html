@@ -242,7 +242,7 @@
                 <!-- Wordtree Feedback -->
                 <div ng-if="tabs.wordTreeView && wordTreeData.feedbackText" class="alert alert-warning wordtree-feedback">
                   <span>
-                    <strong>"{{wordTreeData.feedbackText|truncate:15}}"</strong> indicates 
+                    <strong tooltip-placement="bottom" tooltip="{{wordTreeData.feedbackText}}">"{{wordTreeData.feedbackText|truncate:12}}"</strong> indicates 
                     <select ng-model="active.variable" 
                             ng-options="$root.config.variableMapping[var] for var in $root.config.variables" 
                             ng-change="updateWordTreeClass()"></select> 
@@ -361,7 +361,7 @@
           </span>
           <span ng-if="!appInfo">
             <span ng-if="feedbackText">
-              <strong>"{{feedbackText|truncate:20}}"</strong> indicates 
+              <strong tooltip-placement="bottom" tooltip="{{feedbackText}}">"{{feedbackText|truncate:20}}"</strong> indicates 
               <select ng-model="active.variable" 
                       ng-options="$root.config.variableMapping[var] for var in $root.config.variables" 
                       ng-change="updateGrid(active.variable, active.docIndex)">
@@ -559,10 +559,10 @@
                         Cannot set <em>{{$root.config.variableMapping[error.variable]}}</em> to be both true and false in Doc <strong>#{{error.docId}}</strong>!
                       </span>
                       <span ng-if="error.type == 'errorDocSpan'">
-                        Cannot set <em>{{$root.config.variableMapping[error.variable]}}</em> to be both true and false (using "{{error.span1 | truncate:15}}") in Doc <strong>#{{error.docId}}</strong>!
+                        Cannot set <em>{{$root.config.variableMapping[error.variable]}}</em> to be both true and false (using "<span tooltip="{{error.span1}}">{{error.span1 | truncate:15}}</span>") in Doc <strong>#{{error.docId}}</strong>!
                       </span>
                       <span ng-if="error.type == 'errorSpanSpan'">
-                        Cannot set <em>{{$root.config.variableMapping[error.variable]}}</em> to be both true and false (using "{{error.span1 | truncate:15}}" and "{{error.span2 | truncate:15}}") in Doc <strong>#{{error.docId}}</strong>!
+                        Cannot set <em>{{$root.config.variableMapping[error.variable]}}</em> to be both true and false (using "<span tooltip="{{error.span1}}">{{error.span1 | truncate:15}}" and "{{error.span2 | truncate:15}}</span>") in Doc <strong>#{{error.docId}}</strong>!
                       </span>
                     </p>
                     
