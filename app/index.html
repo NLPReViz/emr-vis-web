@@ -493,7 +493,7 @@
                   <span ng-class="{'danger-text': feedback.conflictList.length, 'warning-text': feedback.status == 'Warning'}">
                     <strong>{{$index + 1}}.</strong>
                     <span ng-if="feedback.kind == 'TYPE_DOC'">
-                      #{{feedback.docList}} should have 
+                      <a href="#" ng-click="updateGridId(feedback.variable, feedback.docList)">#{{feedback.docList}}</a> should have 
                       <strong>{{$root.config.variableMapping[feedback.variable]}}</strong> 
                       marked as <strong>{{$root.config.classificationName[feedback.classification] | lowercase}}</strong>.
                     </span>

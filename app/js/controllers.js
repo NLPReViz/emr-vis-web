@@ -244,6 +244,13 @@ angular.module('myApp.controllers', [])
 
         var deferedScroll;
 
+        $scope.updateGridId = function(variable, id) {
+            var index = getGridIndexFromDocId(id);
+            if(index !== null) {
+                $scope.updateGrid(variable, index, false);
+            }
+        }
+
         $scope.updateGrid = function(variable, activeDocIndex, bScroll) {
             // console.log(variable, activeDoc);
 
@@ -274,7 +281,6 @@ angular.module('myApp.controllers', [])
             $scope.tabs.docView = true;
             // backend.putLogEvent("docView", "Active");
         };
-
 
         $scope.checkFilter = function(index, id) {
             if(!$scope.searchQuery) {
@@ -792,19 +798,24 @@ angular.module('myApp.controllers', [])
                 searchResultApplier = rangy.createClassApplier("highlight-flash");
 
             var id = $scope.wordTreeData.docList.sort()[0];
-
-            //TODO: Switch to binary search here
-            var first = null;
-
-            for (var i=0; i < $scope.gridData.length; i++) {
-                if ($scope.gridData[i].id === id) {
-                    first = i;
-                    break;
-                }
-            }
+            var first = getGridIndexFromDocId(id);
 
             backend.putLogEvent("wordTreeLoadDoc", $scope.gridData[first].id);
             $scope.updateGrid($scope.active.variable, first, true);
+        }
+
+        function getGridIndexFromDocId(id) {
+            if(!$scope.gridData || !id)
+                return null;
+
+            //TODO: Switch to binary search here
+            for (var i=0; i < $scope.gridData.length; i++) {
+                if ($scope.gridData[i].id === id) {
+                    return i;
+                }
+            }
+
+            return null;
         }
 
         /*
