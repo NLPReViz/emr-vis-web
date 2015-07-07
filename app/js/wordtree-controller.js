@@ -603,7 +603,7 @@ function wordTreeNodeClick(node, d, orientation, root){
             depth++;
           }
 
-          filter_words.push(node.key);
+          filter_words.push(node.key.toLowerCase());
           depth++;
         });
         
@@ -631,7 +631,7 @@ function wordTreeNodeClick(node, d, orientation, root){
                     if (filter_words[i] == "")
                       continue;
 
-                    if(WordTreeData.sentences[id][check][i] != filter_words[i])
+                    if(WordTreeData.sentences[id][check][i].toLowerCase() != filter_words[i])
                       return
                   }
                   
@@ -655,7 +655,7 @@ function wordTreeNodeClick(node, d, orientation, root){
                 if (filter_words[i] == "")
                   continue;
 
-                if(WordTreeData.sentences[id][check][i] != filter_words[i])
+                if(WordTreeData.sentences[id][check][i].toLowerCase() != filter_words[i])
                   return
               }
               
