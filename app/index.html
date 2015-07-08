@@ -54,23 +54,20 @@
       <a class="navbar-brand visible-xs">EMR VisWeb</a>
     </div>
     <nav class="hidden-xs">
-      <ul class="nav navbar-nav" ng-click="modal.toggle()">
-        <a href="#top" role="button" class="navbar-brand">
+      <ul class="nav navbar-nav" id="main-menu">
+        <a href="#top" role="button" class="navbar-brand" ng-click="modal.toggle()">
           EMR VisWeb
         </a>
         <li>
-          <a class="dropdown-toggle">DATASET <i class="glyphicon glyphicon-chevron-down"></i></a> 
+          <a class="dropdown-toggle">DATASET <i class="glyphicon glyphicon-chevron-down" ng-click="modal.toggle()"></i></a> 
           <span class="animated">{{active.dataset | truncate:15}}</span> 
         </li>
         <li>
-          <a class="dropdown-toggle">MODEL <i class="glyphicon glyphicon-chevron-down"></i></a> 
+          <a class="dropdown-toggle" ng-click="modal.toggle()">MODEL <i class="glyphicon glyphicon-chevron-down"></i></a> 
           <span>{{active.model | truncate:15}}</span>
         </li>
-      </ul>
-
-      <ul class="nav navbar-nav">
         <li>
-            <form class="input-group filter-docs" role="search">
+            <form class="navbar-form navbar-left input-group filter-docs" role="search">
                 <span class="input-group-addon">Doc #</span>
                 <input class="form-control search-input" 
                       ng-class="{'search-input-active': searchQuery}"

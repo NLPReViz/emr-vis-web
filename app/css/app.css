@@ -43,10 +43,12 @@ body {
 
 .filter-docs{
     margin-top:8px;
+    position: fixed;
+    width: 200px;
 }
 
 .filter-docs .search-input {
-    width: 260px!important;
+    width: 240px!important;
 }
 
 .search-input, .search-input:focus {
@@ -61,6 +63,10 @@ body {
     color: #8a6d3b;
     background-color: #fdfbee;
     transition: background-color 100ms linear;
+}
+
+#main-menu{
+  width: 700px;
 }
 
 .nav-tabs {
