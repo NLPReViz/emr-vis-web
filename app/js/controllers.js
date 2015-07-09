@@ -19,27 +19,9 @@ angular.module('myApp.controllers', [])
             "unclassified": "?"
         };
 
-        $rootScope.config.variables = ["any-adenoma", "appendiceal-orifice", "asa", "biopsy", "cecum",
-                  "ileo-cecal-valve", "indication-type", "informed-consent",
-                  "nursing-report", "prep-adequateNo", "prep-adequateNot",
-                  "prep-adequateYes", "proc-aborted", "withdraw-time"]
+        $rootScope.config.variables = ["public-health"]
 
-        $rootScope.config.variableMapping =
-        {   "any-adenoma": "any-adenoma",
-            "appendiceal-orifice": "appendiceal-orifice",
-            "asa": "asa",
-            "biopsy": "biopsy",
-            "cecum": "cecum",
-            "ileo-cecal-valve": "ileocecal-valve",
-            "indication-type": "indication-type",
-            "informed-consent": "informed-consent",
-            "nursing-report": "nursing-report",
-            "prep-adequateNo": "no-prep-adequate",
-            "prep-adequateNot": "not-prep-adequate",
-            "prep-adequateYes": "yes-prep-adequate",
-            "proc-aborted": "proc-aborted",
-            "withdraw-time": "withdraw-time"
-        }
+        $rootScope.config.variableMapping = { "public-health": "public-health" }
 
         $scope.active = {
             docIndex: null,

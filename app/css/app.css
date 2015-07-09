@@ -762,7 +762,7 @@ body {
 
 #sidebar-top .breakline { clear:both;}
 
-/* #sidebar-top .divrow { } */
+#sidebar-top .divrow { clear: both;} 
 
 #sidebar-top .divcell { 
   float:left; 
