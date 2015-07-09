@@ -58,12 +58,12 @@
         <a href="#top" role="button" class="navbar-brand" ng-click="modal.toggle()">
           EMR VisWeb
         </a>
-        <li>
-          <a class="dropdown-toggle">DATASET <i class="glyphicon glyphicon-chevron-down" ng-click="modal.toggle()"></i></a> 
+        <li ng-click="modal.toggle()">
+          <a class="dropdown-toggle">DATASET <i class="glyphicon glyphicon-chevron-down"></i></a> 
           <span class="animated">{{active.dataset | truncate:15}}</span> 
         </li>
-        <li>
-          <a class="dropdown-toggle" ng-click="modal.toggle()">MODEL <i class="glyphicon glyphicon-chevron-down"></i></a> 
+        <li ng-click="modal.toggle()">
+          <a class="dropdown-toggle">MODEL <i class="glyphicon glyphicon-chevron-down"></i></a> 
           <span>{{active.model | truncate:15}}</span>
         </li>
         <li>
