@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <title>EMR VisWeb</title>
+
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link rel="stylesheet" href="bower_components/html5-boilerplate/css/normalize.css">
+  <link rel="stylesheet" href="bower_components/html5-boilerplate/css/main.css">
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
+</head>
+
+<body>
+
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading"><b>Biopsy</b></div>
+  <!-- List group -->
+  <ul class="list-group">
+        <li class="list-group-item">If polyp removed via "cold biopsy forceps or cold snare" then NO biopsy, unless phrased as "cold biopsy forceps to perform biopsy", <b>NO</b> biopsy;</li> 
+        
+        <li class="list-group-item">if cold forceps used to remove polyp, procedure is polypectomy, <b>NO</b> biopsy;</li> 
+        
+        <li class="list-group-item">If a biopsy forcep (hot/cold) is used just to remove a polyp (polypectomy) code <b>NO</b>;</li> 
+        
+        <li class="list-group-item">If they take a biopsy of large polyp without removing polyp code <b>NO</b>;</li> 
+        
+        <li class="list-group-item">Base this variable on colonoscopy report only (e.g. if colonoscopy does not report biopsy but there is associated path report then code as <b>NO</b> biospy);</li> 
+        
+        <li class="list-group-item">Biopsy of ulcers = <b>YES</b></li>
+  </ul>
+
+</div>
+
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading"><b>Appendiceal orifice</b>; Mark yes if</div>
+  <!-- List group -->
+  <ul class="list-group">
+    <li class="list-group-item">they see orifice;</li>
+    <li class="list-group-item">enter ileum;</li> 
+    <li class="list-group-item">mention "cecal landmarks", "typical landmarks", "landmarks of cecum", "characteristic anatomy";</li>
+    <li class="list-group-item">ileocolonic anastamoses (cecum missing), cecal pouch;</li>
+    <li class="list-group-item">if see "cecal tip";</li>
+    <li class="list-group-item">if they see appendix.</li>
+  </ul>
+</div>
+
+
+
+</body>
+</html>
+  
