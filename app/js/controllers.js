@@ -247,7 +247,7 @@ angular.module('myApp.controllers', [])
         $scope.updateGridId = function(variable, id) {
             var index = getGridIndexFromDocId(id);
             if(index !== null) {
-                $scope.updateGrid(variable, index, false);
+                $scope.updateGrid(variable, index, true);
             }
         }
 
