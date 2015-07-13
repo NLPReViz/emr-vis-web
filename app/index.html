@@ -244,8 +244,8 @@
                             ng-options="$root.config.variableMapping[var] for var in $root.config.variables" 
                             ng-change="updateWordTreeClass()"></select> 
                     to be: 
-                      <a ng-click="addWordTreeFeedback('positive')">{{$root.config.classificationName['positive']}}</a> | 
-                      <a ng-click="addWordTreeFeedback('negative')">{{$root.config.classificationName['negative']}}</a>
+                      <a href="#" ng-click="addWordTreeFeedback('positive')">{{$root.config.classificationName['positive']}}</a> | 
+                      <a href="#" ng-click="addWordTreeFeedback('negative')">{{$root.config.classificationName['negative']}}</a>
                       &nbsp; <i class="search-clear glyphicon glyphicon-remove-circle" ng-click="clearWordTree()"></i>
                   </span>
                 </div>
@@ -477,10 +477,10 @@
               <i class="glyphicon glyphicon-refresh"></i> Re-Train &nbsp;<span ng-if="feedbackList.length > 0" class="badge alert-info pull-right animated bounceIn"> {{feedbackList.length}} </span>
             </tab-heading>
             <div class="tab-inner-content">
-              <span class="pull-right">
+              <!-- <span class="pull-right">
                 <a href="#clear-tracks" on-confirm-click="clearVisited()" confirm-click="Do you wish to remove all document visited markers (*) from the grid?">Mark all documents as unread</a> | 
                 <a href="#clear-modified" on-confirm-click="clearModified()" confirm-click="Do you wish to clear all bolded change markers from the grid?">Remove bolded change markers</a>
-              </span>
+              </span> -->
 
               <h4>Feedback List</h4>
               <div id="feedbackList">
@@ -494,10 +494,15 @@
                       <strong>{{$root.config.variableMapping[feedback.variable]}}</strong> 
                       marked as <strong>{{$root.config.classificationName[feedback.classification] | lowercase}}</strong>.
                     </span>
-                    <span ng-if="feedback.kind == 'TYPE_TEXT' || feedback.kind == 'TYPE_WORDTREE'">
+                    <span ng-if="feedback.kind == 'TYPE_TEXT'">
                       "<em>{{feedback.selected}}</em>" indicates 
                       <strong>{{$root.config.variableMapping[feedback.variable]}}</strong> 
-                      to be <strong>{{$root.config.classificationName[feedback.classification] | lowercase}}</strong>.
+                      to be <strong>{{$root.config.classificationName[feedback.classification] | lowercase}}</strong> in <a href="#" ng-click="updateGridId(feedback.variable, feedback.docList)">#{{feedback.docList}}</a>.
+                    </span>
+                    <span ng-if="feedback.kind == 'TYPE_WORDTREE'">
+                      "<em>{{feedback.selected}}</em>" indicates 
+                      <strong>{{$root.config.variableMapping[feedback.variable]}}</strong> 
+                      to be <strong>{{$root.config.classificationName[feedback.classification] | lowercase}}</strong> (<a href="#" ng-click="searchWordTree(feedback.span)">{{feedback.docList.length}}</a>).
                     </span>
                   </span>
                 </alert>

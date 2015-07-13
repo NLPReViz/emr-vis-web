@@ -680,7 +680,7 @@ angular.module('myApp.controllers', [])
             $scope.wordTreeData.spanText = null;
         }
 
-        function searchWordTree(query) {
+        $scope.searchWordTree = function(query) {
             setTimeout(function() {
                 $("#wordtree-input").val(query);
                 $scope.loadWordTree();
@@ -991,7 +991,7 @@ angular.module('myApp.controllers', [])
                 feedbackFunction = $scope.addFeedbackText;
                 optionsExtra = [
                     null,
-                    ["Search using wordtree", function() { searchWordTree($scope.feedbackText) }]
+                    ["Search using wordtree", function() { $scope.searchWordTree($scope.feedbackText) }]
                 ];
             }
             else {
