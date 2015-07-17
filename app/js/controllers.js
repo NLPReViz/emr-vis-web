@@ -1164,7 +1164,7 @@ angular.module('myApp.controllers', [])
                 $scope.active.sort.reverse = false;
             }
 
-            $scope.updateGrid($scope.active.variable, $scope.active.docIndex, true);
+            $scope.updateGrid(variable, $scope.active.docIndex, true);
 
         }
 
