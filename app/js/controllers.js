@@ -891,7 +891,9 @@ angular.module('myApp.controllers', [])
                 }, function() { 
                     backend.putLogEvent("Error", "Unable to send feedback.");
                     alert("Unable to send feedback."); 
-                    $scope.retrainData.loading = false; 
+                    $scope.retrainData.loading = false;
+                    $scope.retrainData.status = "Fail";
+                    $scope.retrainData.message ="Unable to send feedback!" 
                 });
         };
 
