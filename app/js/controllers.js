@@ -955,7 +955,7 @@ angular.module('myApp.controllers', [])
             $scope.modal.isCollapsed = true;
             $scope.setSearchFilter(null);
             setModelAndDataset($scope.modal.selectedModel, $scope.modal.selectedDataset);
-            $scope.loadWordTree($scope.active.wordTreeQuery);
+            $scope.tabs.wordTreeView = false;
         }
 
         $scope.resetDB = function(empty) {
