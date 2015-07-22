@@ -502,7 +502,7 @@
                     <span ng-if="feedback.kind == 'TYPE_WORDTREE'">
                       "<em>{{feedback.selected}}</em>" indicates 
                       <strong>{{$root.config.variableMapping[feedback.variable]}}</strong> 
-                      to be <strong>{{$root.config.classificationName[feedback.classification] | lowercase}}</strong> (<a href="#" ng-click="searchWordTree(feedback.span)">{{feedback.docList.length}}</a>).
+                      to be <strong>{{$root.config.classificationName[feedback.classification] | lowercase}}</strong> (<a href="#" ng-click="searchWordTree(feedback.span)">{{feedback.docList.length}}</a> doc).
                     </span>
                   </span>
                 </alert>
