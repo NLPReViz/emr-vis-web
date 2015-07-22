@@ -394,24 +394,24 @@ angular.module('myApp.controllers', [])
             //report
             backend.getReport(activeDoc).then(function(data) {
                 $scope.records.report.text = data.reportText;
-                    $scope.records.report.exists = true;
+                $scope.records.report.exists = true;
 
-                    //pathology
-                    if (data.pathologyText) {
-                        $scope.records.pathology.text = data.pathologyText;
-                        $scope.records.pathology.exists = true;
-                    }
+                //pathology
+                if (data.pathologyText) {
+                    $scope.records.pathology.text = data.pathologyText;
+                    $scope.records.pathology.exists = true;
+                }
 
-                    backend.putLogEvent("getReport", activeDoc);
-                    stopLoading();
-                    $scope.feedbackText = null;
+                backend.putLogEvent("getReport", activeDoc);
+                stopLoading();
+                $scope.feedbackText = null;
 
-                    //Highlight WordTree
-                    if($scope.wordTreeData.spanText) {
+                //Highlight WordTree
+                if($scope.wordTreeData.spanText && $scope.tabs.docView) {
                     var search = $scope.wordTreeData.spanText.replace(/\s*\.$/, "");
 
                     search = search.replace(/[^\w\s]|_/g, function ($1) { return ' ' + $1 + ' ';})
-                                    .split(' ').join("[\\s\\'\\\"]*"); //Insert flexible spaces
+                                    .split(' ').join("[\\W]*"); //Insert flexible spaces
 
                     setTimeout(function() {
                         var range = rangy.createRange();
