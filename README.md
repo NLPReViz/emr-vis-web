@@ -44,7 +44,7 @@ To get started, install the pre-requisites and then clone emr-vis-web as describ
     This would run the following steps:
     
     * Get the tools we depend upon via `npm` - the [node package manager][npm].
-    * Download the angular code and javascript dependencies via `bower` - a [client-side code package manager][bower]. Our project dependes on the javascript libraries listed in [bower.json](bower.json).
+    * Download the angular code and javascript dependencies via `bower` - a [client-side code package manager][bower].
     * And set the config variables using `grunt` - a [javascript task runner][grunt].
 
 3. (Skip this step to leave default settings as it is.) 
@@ -68,7 +68,7 @@ Now browse to the app at `http://localhost:8080/emr-vis-web/app/index.html` or `
 --
 ### Notes
 
-The wordtree is adapted from the library by silverasm, available at https://github.com/silverasm/wordtree.
+The wordtree is adapted from the library by silverasm, available at https://github.com/silverasm/wordtree. Our project depends on the javascript libraries listed in [bower.json](bower.json).
 
 [git]: http://git-scm.com/
 [bower]: http://bower.io
