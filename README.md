@@ -76,3 +76,7 @@ The wordtree is adapted from the library by silverasm, available at https://gith
 [node]: http://nodejs.org
 [grunt]: http://gruntjs.com/
 [homebrew]: http://brew.sh/
+
+--
+### License 
+This project is released under the GPL 3 license. Take a look at the [LICENSE](LICENSE.md) file in the source for more information.
