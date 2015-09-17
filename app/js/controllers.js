@@ -217,7 +217,10 @@ angular.module('myApp.controllers', [])
 
             // });
 
-            $scope.active.variable = $rootScope.config.variables[0];
+            if(!$scope.active.variable){
+              $scope.active.variable = $rootScope.config.variables[0];
+            };
+            
             backend.putLogEvent("setActiveVariable", $scope.active.variable);
 
             $scope.loadVarStats($scope.active.variable);
