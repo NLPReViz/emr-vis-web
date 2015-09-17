@@ -65,10 +65,9 @@ If you haven't built the backend project as yet, please do so now. Refer to the 
 
 Now browse to the app at `http://localhost:8080/emr-vis-web/app/index.html` or `<your-localhost-root>/emr-vis-web/app`.
 
---
-### Notes
+## Notes
 
-The wordtree is adapted from the library by silverasm, available at https://github.com/silverasm/wordtree.
+The wordtree is adapted from the library by silverasm, available at https://github.com/silverasm/wordtree. Our project depends on the javascript libraries listed in [bower.json](bower.json).
 
 [git]: http://git-scm.com/
 [bower]: http://bower.io
@@ -76,3 +75,6 @@ The wordtree is adapted from the library by silverasm, available at https://gith
 [node]: http://nodejs.org
 [grunt]: http://gruntjs.com/
 [homebrew]: http://brew.sh/
+
+## License 
+This project is released under the GPL 3 license. Take a look at the [LICENSE](LICENSE.md) file in the source for more information.
