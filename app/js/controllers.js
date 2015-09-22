@@ -837,6 +837,12 @@ angular.module('myApp.controllers', [])
 
             $scope.retrainData.loading = true;
 
+            $scope.feedbackList.sort(function(a, b) {
+                var textA = a.kind;
+                var textB = b.kind;
+                return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+            });
+
             //assign ids to feedback list
             for (var i=0; i < $scope.feedbackList.length; i++) {
                 $scope.feedbackList[i].$hidden_id = i.toString();
