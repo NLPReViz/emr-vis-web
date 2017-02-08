@@ -2,7 +2,7 @@
 
 ![Screenshot](https://github.com/trivedigaurav/emr-vis-web/raw/master/screenshot.png)
 
-emr-vis-web is the web port for the [emr-vis-nlp](https://github.com/trivedigaurav/emr-vis-nlp) project. It provides the frontend view for [emr-nlp-server](https://github.com/trivedigaurav/emr-nlp-server).
+emr-vis-web provides the frontend view for [emr-nlp-server](https://github.com/trivedigaurav/emr-nlp-server).
 
 ## Getting Started
 
