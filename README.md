@@ -1,4 +1,4 @@
-# emr-vis-web 
+# NLPVis
 
 ![Screenshot](https://github.com/trivedigaurav/emr-vis-web/raw/master/screenshot.png)
 
