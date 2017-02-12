@@ -1,4 +1,4 @@
-# NLPReViz: emr-nlp-web
+# NLPReViz: emr-vis-web
 
 ![Screenshot](https://github.com/trivedigaurav/emr-vis-web/raw/master/screenshot.png)
 
