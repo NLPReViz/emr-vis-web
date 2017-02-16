@@ -1,8 +1,8 @@
 # NLPReViz: emr-vis-web
 
-![Screenshot](https://github.com/trivedigaurav/emr-vis-web/raw/master/screenshot.png)
+![Screenshot](https://github.com/NLPReViz/emr-vis-web/raw/master/screenshot.png)
 
-emr-vis-web provides the frontend view for [emr-nlp-server](https://github.com/trivedigaurav/emr-nlp-server).
+emr-vis-web provides the frontend view for [emr-nlp-server](https://github.com/NLPReViz/emr-nlp-server).
 
 ## Getting Started
 
@@ -17,7 +17,7 @@ To get started, install the pre-requisites and then clone emr-vis-web as describ
 
 3. We use the [Apache Tomcat](http://tomcat.apache.org/) server to deploy the app. On a Mac with [homebrew][homebrew] you may use `$ brew install tomcat` to get it.
 
-4. We have separate repository for our backend service. Visit [emr-nlp-server](https://github.com/trivedigaurav/emr-nlp-server) for more. 
+4. We have separate repository for our backend service. Visit [emr-nlp-server](https://github.com/NLPReViz/emr-nlp-server) for more. 
 
 ### Clone emr-vis-web
 
@@ -27,7 +27,7 @@ To get started, install the pre-requisites and then clone emr-vis-web as describ
 
     ```
     cd webapps
-    git clone https://github.com/trivedigaurav/emr-vis-web.git
+    git clone https://github.com/NLPReViz/emr-vis-web.git
     cd emr-vis-web
     ```
 
@@ -61,7 +61,7 @@ To get started, install the pre-requisites and then clone emr-vis-web as describ
 
 ### Run the Application
 
-If you haven't built the backend project as yet, please do so now. Refer to the readme on  [emr-nlp-server](https://github.com/trivedigaurav/emr-nlp-server) for more information. Remember to go through step 3 to set the correct path to the backend service if you plan to modify the defaults.
+If you haven't built the backend project as yet, please do so now. Refer to the readme on  [emr-nlp-server](https://github.com/NLPReViz/emr-nlp-server) for more information. Remember to go through step 3 to set the correct path to the backend service if you plan to modify the defaults.
 
 Now browse to the app at `http://localhost:8080/emr-vis-web/app/index.html` or `<your-localhost-root>/emr-vis-web/app`.
 
