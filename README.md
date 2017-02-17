@@ -66,7 +66,13 @@ If you haven't built the backend project as yet, please do so now. Refer to the 
 Now browse to the app at `http://localhost:8080/emr-vis-web/app/index.html` or `<your-localhost-root>/emr-vis-web/app`.
 
 ## Defining custom variables:
-The tool is currently configured to make predictions for 14 colonoscopy quality variables. It also does specific format parsing for colonoscopy and pathology reports in the data provided with the release. We have a more generic version of the tool in the [alaska](/tree/alaska) branch. You can refer to 2bf1f862744eff32dba1ec7919b893ba097fb54c, 40f5a2a9549ecc01a69a020846bef9ddd0b5b6f9, and 7d0c303c7d0752368fc85dce72ccf4aec39ee44a to follow the changes to be made. This project will be updated to make this configuration easier in the near future.
+The tool is currently configured to make predictions for 14 colonoscopy quality variables. To define your own variables, you will need to edit [app/js/controllers.js](app/js/controllers.js) as follows:
+
+```
+    $rootScope.config.variables = ["newVar"]
+
+    $rootScope.config.variableMapping = { "newVar": "newVar-display-name" }
+```
 
 Remember to follow the instructions in [emr-nlp-server](https://github.com/NLPReViz/emr-nlp-server) as well.
 
