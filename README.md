@@ -66,7 +66,7 @@ If you haven't built the backend project as yet, please do so now. Refer to the 
 Now browse to the app at `http://localhost:8080/emr-vis-web/app/index.html` or `<your-localhost-root>/emr-vis-web/app`.
 
 ## Defining custom variables:
-The tool is currently configured to make predictions for 14 colonoscopy quality variables. To define your own variables, you will need to edit [app/js/controllers.js](app/js/controllers.js) as follows:
+The tool is currently configured to make predictions for pre-defined colonoscopy quality variables. To define your own variables, you will need to edit [app/js/controllers.js](app/js/controllers.js) as follows:
 
 ```
     $rootScope.config.variables = ["newVar"]
