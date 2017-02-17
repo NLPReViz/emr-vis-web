@@ -65,6 +65,16 @@ If you haven't built the backend project as yet, please do so now. Refer to the 
 
 Now browse to the app at `http://localhost:8080/emr-vis-web/app/index.html` or `<your-localhost-root>/emr-vis-web/app`.
 
+## Defining custom variables:
+The tool is currently configured to make predictions for 14 colonoscopy quality variables. To define your own variables, you will need to edit [app/js/controllers.js](app/js/controllers.js) as follows:
+
+```
+    $rootScope.config.variables = ["newVar"]
+
+    $rootScope.config.variableMapping = { "newVar": "newVar-display-name" }
+```
+Remember to follow the instructions in [emr-nlp-server](https://github.com/NLPReViz/emr-nlp-server) as well.
+
 ## Notes
 
 The wordtree is adapted from the library by silverasm, available at https://github.com/silverasm/wordtree. Our project depends on the javascript libraries listed in [bower.json](bower.json).
