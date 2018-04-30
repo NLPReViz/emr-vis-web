@@ -135,6 +135,7 @@
               <a href="#resetDB" confirm-click="This will reset all models. This action doesn't have any undo. Do you wish to continue?" on-confirm-click="resetDB()">Restart with initial training</a> <br />
               <a href="#resetDBEmpty" confirm-click="This will reset all models. This action doesn't have any undo. Do you wish to continue?" on-confirm-click="resetDB(true)">Restart with zero training</a>
             </p> -->
+            <button class="btn btn-danger" ng-click="resetDB()">Reset</button>
             <button class="btn btn-default" ng-click="modal.toggle()">Cancel</button>
             <button class="btn btn-primary" ng-click="modal.confirm()">Load</button>
         </div>
