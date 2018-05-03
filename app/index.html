@@ -192,13 +192,13 @@
                         ng-repeat="var in $root.config.variables" 
                         ng-click="updateGrid(var, $parent.$index)" 
                         ng-class="{selected: $parent.$index==active.docIndex && var==active.variable}" 
-                        data-custom-tooltip="{{doc[var].confidence}}" 
+                        data-custom-tooltip="{{doc[var].confidence | number: 4}}" 
                         cell-modified="doc[var].classification"
                         >
                       
                       <div class="cell-feedback" ng-if="trackFeedback[doc.id][var]"></div>
                       
-                      {{$root.config.classificationName[ doc[var].classification ]}}
+                      {{$root.config.classificationName[ doc[var].classification ]}} {{doc[var].confidence | number:2}}
 
                       <span class="cell-visited glyphicon glyphicon-asterisk" ng-class="{hidden: trackVisited[doc.id][var] != true}"></span>
                       <!-- <span class="cellfeedback glyphicon glyphicon-pencil" ng-class="{hidden: trackFeedback[$parent.$index][var] != true}"></span> -->

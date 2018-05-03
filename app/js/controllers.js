@@ -14,8 +14,8 @@ angular.module('myApp.controllers', [])
 
         $rootScope.config = Object();
         $rootScope.config.classificationName = {
-            "positive": "True",
-            "negative": "False",
+            "positive": "T",
+            "negative": "F",
             "unclassified": "?"
         };
 
@@ -25,20 +25,20 @@ angular.module('myApp.controllers', [])
                   "prep-adequateYes", "proc-aborted", "withdraw-time"]
 
         $rootScope.config.variableMapping =
-        {   "any-adenoma": "any-adenoma",
-            "appendiceal-orifice": "appendiceal-orifice",
-            "asa": "asa",
-            "biopsy": "biopsy",
-            "cecum": "cecum",
-            "ileo-cecal-valve": "ileocecal-valve",
-            "indication-type": "indication-type",
-            "informed-consent": "informed-consent",
-            "nursing-report": "nursing-report",
-            "prep-adequateNo": "no-prep-adequate",
-            "prep-adequateNot": "not-prep-adequate",
-            "prep-adequateYes": "yes-prep-adequate",
-            "proc-aborted": "proc-aborted",
-            "withdraw-time": "withdraw-time"
+        {   "any-adenoma":"ABDOMINAL",
+            "appendiceal-orifice": "ADVANCED-CAD",
+            "asa": "ALCOHOL-ABUSE",
+            "biopsy": "ASP-FOR-MI",
+            "cecum": "CREATININE",
+            "ileo-cecal-valve": "DIETSUPP-2MOS",
+            "indication-type": "DRUG-ABUSE",
+            "informed-consent": "ENGLISH",
+            "nursing-report": "HBA1C",
+            "prep-adequateNo": "KETO-1YR",
+            "prep-adequateNot": "MAJOR-DIABETES",
+            "prep-adequateYes": "MAKES-DECISIONS",
+            "proc-aborted": "MI-6MOS",
+            "withdraw-time": "none"
         }
 
         $scope.active = {
