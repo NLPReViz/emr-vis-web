@@ -192,7 +192,7 @@
                         ng-repeat="var in $root.config.variables" 
                         ng-click="updateGrid(var, $parent.$index)" 
                         ng-class="{selected: $parent.$index==active.docIndex && var==active.variable}" 
-                        data-custom-tooltip="{{doc[var].confidence | number: 4}}" 
+                        data-custom-tooltip="{{doc[var].confidence | number: 2}}" 
                         cell-modified="doc[var].classification"
                         >
                       
