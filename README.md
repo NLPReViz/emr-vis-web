@@ -69,9 +69,9 @@ Now browse to the app at `http://localhost:8080/emr-vis-web/app/index.html` or `
 The tool is currently configured to make predictions for pre-defined colonoscopy quality variables. To define your own variables, you will need to edit [app/js/controllers.js](app/js/controllers.js) as follows:
 
 ```
-    $rootScope.config.variables = ["newVar"]
+    $rootScope.config.variables = ["any-adenoma", "biopsy"....]
 
-    $rootScope.config.variableMapping = { "newVar": "newVar-display-name" }
+    $rootScope.config.variableMapping = { "any-adenoma": "newVar-display-name", "biopsy": "newVar2"... }
 ```
 
 Remember to follow the instructions in [emr-nlp-server](https://github.com/NLPReViz/emr-nlp-server) as well.
