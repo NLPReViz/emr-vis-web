@@ -1106,6 +1106,10 @@ body {
     margin-bottom: 20px;
 }
 
+#feedbackList {
+    width: 90%;
+}
+
 #feedbackList .alert-default{
     background-color: #eee;
     padding: 2px;
