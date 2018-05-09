@@ -1111,6 +1111,10 @@ body {
     padding: 2px;
 }
 
+#feedbackList {
+    width: 90%;
+}
+
 @media all and (max-width: 1180px) {
     .report-feedback {
       display: none;
