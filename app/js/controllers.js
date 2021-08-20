@@ -967,6 +967,36 @@ angular.module('myApp.controllers', [])
             $scope.tabs.wordTreeView = false;
         }
 
+        $scope.exportGrid = function() {
+            $scope.modal.isCollapsed = true;
+            // console.log($scope.gridData);
+
+            //Convert JSON Array to string.
+            var json = JSON.stringify($scope.gridData);
+ 
+            //Convert JSON string to BLOB.
+            json = [json];
+            var blob = new Blob(json, { type: "text/plain;charset=utf-8" });
+
+            var link = document.createElement("a");
+            var url = URL.createObjectURL(blob);
+            var isSafariBrowser = navigator.userAgent.indexOf('Safari') != -1 
+                                && navigator.userAgent.indexOf('Chrome') == -1;
+            
+            //if Safari open in new window to save file with random filename.
+            if (isSafariBrowser) { 
+                link.setAttribute("target", "_blank");
+            }
+            
+            link.setAttribute("href", url);
+            link.setAttribute("download", "table.json");
+            link.style.visibility = "hidden";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+ 
+        }
+
         $scope.resetDB = function(empty) {
             startLoading();
             $scope.modal.isCollapsed = true;
